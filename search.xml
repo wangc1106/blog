@@ -40,49 +40,49 @@
 <h2 id="设置页面文章的篇数"><a class="markdownIt-Anchor" href="#设置页面文章的篇数"></a> 设置页面文章的篇数√</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">`npm install --save hexo-generator-indexnpm install --save hexo-generator-archivenpm install --save hexo-generator-tag`</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">index_generator:</span><br><span class="line">  path: &#x27;&#x27;</span><br><span class="line">  per_page: 8</span><br><span class="line">  order_by: -date</span><br><span class="line"></span><br><span class="line">archive_generator:</span><br><span class="line">  per_page: 0</span><br><span class="line">  yearly: true</span><br><span class="line">  monthly: false</span><br><span class="line"></span><br><span class="line">tag_generator:</span><br><span class="line">  per_page: 10</span><br></pre></td></tr></table></figure>
-<h3 id="置顶文章"><a class="markdownIt-Anchor" href="#置顶文章"></a> 置顶文章</h3>
+<h2 id="置顶文章"><a class="markdownIt-Anchor" href="#置顶文章"></a> 置顶文章</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
 <p>文章开头 top: true</p>
-<h3 id="改变-markdown-渲染器-ing"><a class="markdownIt-Anchor" href="#改变-markdown-渲染器-ing"></a> 改变 Markdown 渲染器 ing</h3>
+<h2 id="改变-markdown-渲染器-ing"><a class="markdownIt-Anchor" href="#改变-markdown-渲染器-ing"></a> 改变 Markdown 渲染器 ing</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save # 卸载原有渲染器</span><br><span class="line">npm i hexo-renderer-markdown-it-plus --save    # 安装新的</span><br></pre></td></tr></table></figure>
 <p>编辑站点的 <code>_config.yml</code>，配置插件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># hexo-renderer-markdown-it-plus config</span><br><span class="line">## Docs: https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus</span><br><span class="line">markdown_it_plus:</span><br><span class="line">    highlight: true</span><br><span class="line">    html: true</span><br><span class="line">    xhtmlOut: true</span><br><span class="line">    breaks: true</span><br><span class="line">    langPrefix:</span><br><span class="line">    linkify: true</span><br><span class="line">    typographer:</span><br><span class="line">    quotes: “”‘’</span><br><span class="line">    pre_class: highlight</span><br><span class="line">    plugins:</span><br><span class="line">        - plugin:</span><br><span class="line">            name: markdown-it-mark</span><br><span class="line">            enable: true</span><br></pre></td></tr></table></figure>
-<h3 id="选择-scheme"><a class="markdownIt-Anchor" href="#选择-scheme"></a> 选择 Scheme</h3>
+<h2 id="选择-scheme"><a class="markdownIt-Anchor" href="#选择-scheme"></a> 选择 Scheme</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Scheme Settings</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">## Schemes</span><br><span class="line">#scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
-<h3 id="侧栏菜单"><a class="markdownIt-Anchor" href="#侧栏菜单"></a> 侧栏菜单 √</h3>
+<h2 id="侧栏菜单"><a class="markdownIt-Anchor" href="#侧栏菜单"></a> 侧栏菜单 √</h2>
 <p>主题next的configyml</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  categories: /categories/ || th</span><br><span class="line">  tags: /tags/ || tags</span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  about: https://yiweiniu.github.io/ || user</span><br></pre></td></tr></table></figure>
-<h3 id="添加头像"><a class="markdownIt-Anchor" href="#添加头像"></a> 添加头像√</h3>
+<h2 id="添加头像"><a class="markdownIt-Anchor" href="#添加头像"></a> 添加头像√</h2>
 <p>主题next的configyml</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">url: /images/banner.png</span><br></pre></td></tr></table></figure>
-<h3 id="侧边栏社交链接"><a class="markdownIt-Anchor" href="#侧边栏社交链接"></a> 侧边栏社交链接√</h3>
+<h2 id="侧边栏社交链接"><a class="markdownIt-Anchor" href="#侧边栏社交链接"></a> 侧边栏社交链接√</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">social:</span><br><span class="line">  E-Mail: mailto:@qq.com || envelope</span><br><span class="line">  GitHub: https://github.com/user || github</span><br></pre></td></tr></table></figure>
-<h3 id="阅读更多"><a class="markdownIt-Anchor" href="#阅读更多"></a> 阅读更多 √</h3>
+<h2 id="阅读更多"><a class="markdownIt-Anchor" href="#阅读更多"></a> 阅读更多 √</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br><span class="line">#设置自动不起作用 用的 &lt;!-- more --&gt;手动</span><br></pre></td></tr></table></figure>
-<h3 id="显示文章字数统计阅读时长"><a class="markdownIt-Anchor" href="#显示文章字数统计阅读时长"></a> 显示文章字数统计,阅读时长 √</h3>
+<h2 id="显示文章字数统计阅读时长"><a class="markdownIt-Anchor" href="#显示文章字数统计阅读时长"></a> 显示文章字数统计,阅读时长 √</h2>
 <p>站点目录blog下 npm install hexo-symbols-count-time --save</p>
 <p>站点配置</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># word count</span><br><span class="line"># Dependencies: https://github.com/theme-next/hexo-symbols-count-time</span><br><span class="line">symbols_count_time:</span><br><span class="line">  symbols: true</span><br><span class="line">  time: true</span><br><span class="line">  total_symbols: false</span><br><span class="line">  total_time: false</span><br></pre></td></tr></table></figure>
 <p>主题配置</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Post wordcount display settings</span><br><span class="line"># Dependencies: https://github.com/theme-next/hexo-symbols-count-time</span><br><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: false</span><br><span class="line">  item_text_post: false</span><br><span class="line">  item_text_total: false</span><br><span class="line">  awl: 5</span><br><span class="line">  wpm: 200</span><br></pre></td></tr></table></figure>
-<h3 id="修改网页底部-ing-part"><a class="markdownIt-Anchor" href="#修改网页底部-ing-part"></a> 修改网页底部 ing, part</h3>
+<h2 id="修改网页底部-ing-part"><a class="markdownIt-Anchor" href="#修改网页底部-ing-part"></a> 修改网页底部 ing, part</h2>
 <p>在图标库中找到你自己喜欢的图标，打开 <code>themes/next</code> 下的 <code>_config.yml</code>，搜索关键字 <code>authoricon</code>，替换图标名。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">footer:</span><br><span class="line">  # Specify the date when the site was setup.</span><br><span class="line">  # If not defined, current year will be used.</span><br><span class="line">  since: 2017</span><br><span class="line"></span><br><span class="line">  # Icon between year and copyright info.</span><br><span class="line">  icon:</span><br><span class="line">    # Icon name in fontawesome, see: https://fontawesome.com/v4.7.0/icons</span><br><span class="line">    # `heart` is recommended with animation in red (#ff0000).</span><br><span class="line">    name: mars</span><br><span class="line">    # If you want to animate the icon, set it to true.</span><br><span class="line">    animated: true</span><br><span class="line">    # Change the color of icon, using Hex Code.</span><br><span class="line">    color: &quot;#808080&quot;</span><br><span class="line"></span><br><span class="line">  # If not defined, will be used `author` from Hexo main config.</span><br><span class="line">  copyright:</span><br><span class="line">  # -------------------------------------------------------------</span><br><span class="line">  # Hexo link (Powered by Hexo).</span><br><span class="line">  powered: false</span><br><span class="line"></span><br><span class="line">  theme:</span><br><span class="line">    # Theme &amp; scheme info link (Theme - NexT.scheme).</span><br><span class="line">    enable: false</span><br><span class="line">    # Version info of NexT after scheme info (vX.X.X).</span><br><span class="line">    version: false</span><br><span class="line">  # -------------------------------------------------------------</span><br><span class="line">  # Any custom text can be defined here.</span><br><span class="line">  #custom_text: Hosted by &lt;a target=&quot;_blank&quot; href=&quot;https://pages.github.com&quot;&gt;GitHub Pages&lt;/a&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="开启版权声明-没啥用"><a class="markdownIt-Anchor" href="#开启版权声明-没啥用"></a> 开启版权声明 √ 没啥用</h3>
+<h2 id="开启版权声明-没啥用"><a class="markdownIt-Anchor" href="#开启版权声明-没啥用"></a> 开启版权声明 √ 没啥用</h2>
 <p>主题配置文件下,搜索关键字 <code>creative_commons</code></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
-<h3 id="浏览进度"><a class="markdownIt-Anchor" href="#浏览进度"></a> 浏览进度</h3>
+<h2 id="浏览进度"><a class="markdownIt-Anchor" href="#浏览进度"></a> 浏览进度</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Scroll percent label in b2t button.</span><br><span class="line">scrollpercent: true</span><br></pre></td></tr></table></figure>
-<h3 id="评论系统-disqus-no"><a class="markdownIt-Anchor" href="#评论系统-disqus-no"></a> 评论系统 DISQUS： NO</h3>
-<h3 id="本地搜索"><a class="markdownIt-Anchor" href="#本地搜索"></a> 本地搜索 √</h3>
+<h2 id="评论系统-disqus-no"><a class="markdownIt-Anchor" href="#评论系统-disqus-no"></a> 评论系统 DISQUS： NO</h2>
+<h2 id="本地搜索"><a class="markdownIt-Anchor" href="#本地搜索"></a> 本地搜索 √</h2>
 <p>添加百度/谷歌/本地 自定义站点内容搜索</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
 <p>编辑 站点配置文件，新增以下内容到任意位置：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
 <p>主题配置文件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Local search</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-<h3 id="添加谷歌统计-no"><a class="markdownIt-Anchor" href="#添加谷歌统计-no"></a> 添加谷歌统计 NO</h3>
-<h3 id="阅读次数统计leancloud"><a class="markdownIt-Anchor" href="#阅读次数统计leancloud"></a> 阅读次数统计（LeanCloud)√</h3>
+<h2 id="添加谷歌统计-no"><a class="markdownIt-Anchor" href="#添加谷歌统计-no"></a> 添加谷歌统计 NO</h2>
+<h2 id="阅读次数统计leancloud"><a class="markdownIt-Anchor" href="#阅读次数统计leancloud"></a> 阅读次数统计（LeanCloud)√</h2>
 <p>安装插件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-leancloud-counter-security --save</span><br></pre></td></tr></table></figure>
 <p>站点文件</p>
@@ -91,7 +91,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Show number of visitors to each article.</span><br><span class="line"># You can visit https://leancloud.cn get AppID and AppKey.</span><br><span class="line">leancloud_visitors:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: #&lt;app_id&gt;</span><br><span class="line">  app_key: #&lt;app_key&gt;</span><br><span class="line">  # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security</span><br><span class="line">  # If you don&#x27;t care about security in lc counter and just want to use it directly</span><br><span class="line">  # (without hexo-leancloud-counter-security plugin), set the `security` to `false`.</span><br><span class="line">  security: true</span><br><span class="line">  betterPerformance: false</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">leancloud_visitors:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: sxYNFK15bXIJqayGqYdiJNsw-gzGzoHsz</span><br><span class="line">  app_key: inuUVGRl3VjbS7oJLrS8uYMe</span><br></pre></td></tr></table></figure>
 <p><a href="https://console.leancloud.cn/apps/UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz/settings/keys">https://console.leancloud.cn/apps/UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz/settings/keys</a></p>
-<h3 id="修改超链接样式-no"><a class="markdownIt-Anchor" href="#修改超链接样式-no"></a> 修改超链接样式 no</h3>
+<h2 id="修改超链接样式-no"><a class="markdownIt-Anchor" href="#修改超链接样式-no"></a> 修改超链接样式 NO</h2>
 <p>在 <code>/theme/next/source/css/_custom/custom.styl</code> 中修改，添加如下代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.post-body a &#123;</span><br><span class="line">    color: #428BCA;</span><br><span class="line">    text-decoration: none;</span><br><span class="line">    border-bottom: 1px dashed #6465a5;</span><br><span class="line">    background-color: transparent;</span><br><span class="line">    word-wrap: break-word;</span><br><span class="line">&#125;</span><br><span class="line">.post-body a: hover&#123;</span><br><span class="line">    color:#f15838;</span><br><span class="line">    border-bottom: 1px dashed #f28a31;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中 <code>a</code> 定义了超链接的基本样式，<code>a:hover</code> 定义了超链接在鼠标悬停时颜色的变化。<code>.post-body</code> 使得改变的样式只作用与文章内部，否则你会发现文章标题下面的分类等等样式都会被改变。</p>
