@@ -1,70 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/blog/2021/10/07/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Testing</category>
-      </categories>
-      <tags>
-        <tag>Testing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>My-New—Post</title>
-    <url>/blog/2021/10/08/My-New%E2%80%94Post/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Testing</category>
-      </categories>
-      <tags>
-        <tag>Testing</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo-build</title>
     <url>/blog/2021/10/08/hexo_build/</url>
-    <content><![CDATA[<p>参考：<a href="https://yiweiniu.github.io/blog/2018/02/Hexo-%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/#more">https://yiweiniu.github.io/blog/2018/02/Hexo-建站记录/#more</a></p>
+    <content><![CDATA[<p>借鉴前人的经验，建立自己的小小博客。<br />
+参考：<a href="https://yiweiniu.github.io/blog/2018/02/Hexo-%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/#more">https://yiweiniu.github.io/blog/2018/02/Hexo-建站记录/#more</a></p>
 <hr />
 <span id="more"></span>
 <h2 id="前提"><a class="markdownIt-Anchor" href="#前提"></a> 前提</h2>
 <p>安装git和npm</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line"># 查看版本</span><br><span class="line">$ hexo -v</span><br><span class="line"></span><br><span class="line"># 建站</span><br><span class="line">hexo init hexo</span><br><span class="line">cd hexo</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">#local:/Users/wangchen/blog</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line"># 查看版本</span><br><span class="line">$ hexo -v</span><br><span class="line"></span><br><span class="line"># 建站</span><br><span class="line">hexo init hexo</span><br><span class="line">cd hexo</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">#local:/Users/minedir/blog</span><br></pre></td></tr></table></figure>
 <h2 id="配置站点_configyml"><a class="markdownIt-Anchor" href="#配置站点_configyml"></a> 配置站点_config.yml</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: WANGC blog</span><br><span class="line">subtitle: &#x27;dream big work hard&#x27;</span><br><span class="line">description: &#x27;today&#x27;</span><br><span class="line">keywords: Bioinformatics</span><br><span class="line">author: Wang Chen</span><br><span class="line">language: en</span><br><span class="line">timezone: Asia/Shanghai</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://wangc1106.github.io</span><br><span class="line">root: /blog/</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="主题"><a class="markdownIt-Anchor" href="#主题"></a> 主题</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
 <p>将 <code>_config.yml</code> 中 <code>theme</code> 设置为 next。</p>
+<h3 id="clean-important-step"><a class="markdownIt-Anchor" href="#clean-important-step"></a> !clean! important step</h3>
+<p><code>hexo clean</code></p>
 <h3 id="生成"><a class="markdownIt-Anchor" href="#生成"></a> !生成!</h3>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
 <h2 id="github部署"><a class="markdownIt-Anchor" href="#github部署"></a> ！github部署！</h2>
