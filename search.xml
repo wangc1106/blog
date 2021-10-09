@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>my very special work record</title>
-    <url>/blog/2021/10/08/veryverystrange/</url>
+    <title>Hexo-build</title>
+    <url>/blog/2021/10/08/hexo_build/</url>
     <content><![CDATA[<p>借鉴前人的经验，建立自己的小小博客。<br />
 参考：<a href="https://yiweiniu.github.io/blog/2018/02/Hexo-%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/#more">https://yiweiniu.github.io/blog/2018/02/Hexo-建站记录/#more</a></p>
 <hr />
@@ -104,8 +104,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo-build</title>
-    <url>/blog/2021/10/08/hexo_build/</url>
+    <title>my very special work record</title>
+    <url>/blog/2021/10/08/veryverystrange/</url>
     <content><![CDATA[<p>借鉴前人的经验，建立自己的小小博客。<br />
 参考：<a href="https://yiweiniu.github.io/blog/2018/02/Hexo-%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/#more">https://yiweiniu.github.io/blog/2018/02/Hexo-建站记录/#more</a></p>
 <hr />
