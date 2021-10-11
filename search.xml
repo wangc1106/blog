@@ -3,7 +3,8 @@
   <entry>
     <title>title</title>
     <url>/blog/2021/10/11/title/</url>
-    <content><![CDATA[<p><img src="/blog/.io//test.png" alt="test"></p>
+    <content><![CDATA[<img src="/blog/.io//2021/10/11/title/wcao.jpg" class title="这是一张图片">
+<p><img src="/blog/.io//test.png" alt="test"></p>
 <p><img src="/blog/.io//wcao.jpg" alt="wcao"></p>
 ]]></content>
   </entry>
