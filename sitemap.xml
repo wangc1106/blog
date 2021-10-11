@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wangc1106.github.io/blog/2021/10/11/title/</loc>
+    <loc>https://wangc1106.github.io/blog/2021/10/11/ATAC-seq-background/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -39,6 +39,13 @@
 
   
   <url>
+    <loc>https://wangc1106.github.io/blog/tags/ATAC-seq/</loc>
+    <lastmod>2021-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/tags/Testing/</loc>
     <lastmod>2021-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -46,6 +53,13 @@
   </url>
   
 
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
+    <lastmod>2021-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Testing/</loc>
