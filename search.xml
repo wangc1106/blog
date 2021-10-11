@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>title</title>
+    <url>/blog/2021/10/11/title/</url>
+    <content><![CDATA[<p><img src="/blog/.io//wangchen/blog/source/_posts/title/%E6%88%AA%E5%B1%8F2021-10-11%E4%B8%8A%E5%8D%888.53.46.png" alt="截屏2021-10-11上午8.53.46"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Hexo-build</title>
     <url>/blog/2021/10/08/hexo_build/</url>
-    <content><![CDATA[<p>借鉴前人的经验，建立自己的小小博客。<br />
+    <content><![CDATA[<p>借鉴前人的经验，建立自己的小小博客。<br>
 参考：<a href="https://yiweiniu.github.io/blog/2018/02/Hexo-%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/#more">https://yiweiniu.github.io/blog/2018/02/Hexo-建站记录/#more</a></p>
-<hr />
+<hr>
 <span id="more"></span>
 <h2 id="前提"><a class="markdownIt-Anchor" href="#前提"></a> 前提</h2>
 <p>安装git和npm</p>
