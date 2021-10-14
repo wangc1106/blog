@@ -21,31 +21,37 @@
     var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Make more time">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Banner&#39;s Blog">
-<meta property="og:url" content="https://wangc1106.github.io/blog/index.html">
+  <meta name="description" content="ATAC-seq数据质量评估注意ENCODE的ATACseq数据标准。 Uniform Processing Pipeline Restrictions The read length prior to any trimming should be a minimum of 45 base pairs. Sequencing may be paired- or single-ended,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ATAC-seq-2【Harvard FAS Informatics】">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2021/10/14/ATAC-seq-2/index.html">
 <meta property="og:site_name" content="Banner&#39;s Blog">
-<meta property="og:description" content="Make more time">
+<meta property="og:description" content="ATAC-seq数据质量评估注意ENCODE的ATACseq数据标准。 Uniform Processing Pipeline Restrictions The read length prior to any trimming should be a minimum of 45 base pairs. Sequencing may be paired- or single-ended,">
 <meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e2669cfa1a184ec2b7026fe528f9c97a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9f961cf3106f4c99b6e85bd1c3f6e373.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/abb30e7406834c91b7e456ff14e23742.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2021-10-14T10:20:27.591Z">
+<meta property="article:modified_time" content="2021-10-14T10:20:27.591Z">
 <meta property="article:author" content="Wang C">
-<meta property="article:tag" content="Bioinformatics">
+<meta property="article:tag" content="ATAC-seq">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/e2669cfa1a184ec2b7026fe528f9c97a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16">
 
-<link rel="canonical" href="https://wangc1106.github.io/blog/">
+<link rel="canonical" href="https://wangc1106.github.io/blog/2021/10/14/ATAC-seq-2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-Hans'
   };
 </script>
 
-  <title>Banner's Blog</title>
+  <title>ATAC-seq-2【Harvard FAS Informatics】 | Banner's Blog</title>
   
 
 
@@ -178,9 +184,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
@@ -196,10 +203,9 @@
       <meta itemprop="name" content="Banner's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/10/14/ATAC-seq-2/" class="post-title-link" itemprop="url">ATAC-seq-2【Harvard FAS Informatics】</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          ATAC-seq-2【Harvard FAS Informatics】
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -250,7 +256,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
+        <span id="more"></span>
 
 
 
@@ -372,222 +378,50 @@
 <li>The most useful file is <code>NAME_peaks.narrowPeak</code>, a plain-text <code>BED</code> file that lists the <code>genomic coordinates of each peak called</code>, along with various <code>statistics</code> (fold-change, p- and q-values, etc.).</li>
 </ul>
 
-      
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2021/10/11/ATAC-seq-background/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/banner.png">
-      <meta itemprop="name" content="Wang C">
-      <meta itemprop="description" content="Make more time">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Banner's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/10/11/ATAC-seq-background/" class="post-title-link" itemprop="url">ATAC-seq-1 背景</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-11 10:56:31" itemprop="dateCreated datePublished" datetime="2021-10-11T10:56:31+08:00">2021-10-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-14 18:17:20" itemprop="dateModified" datetime="2021-10-14T18:17:20+08:00">2021-10-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/ATAC-seq/" itemprop="url" rel="index"><span itemprop="name">ATAC-seq</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/blog/2021/10/11/ATAC-seq-background/" class="post-meta-item leancloud_visitors" data-flag-title="ATAC-seq-1 背景" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>6.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>6 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="ATAC-seq意义"><a href="#ATAC-seq意义" class="headerlink" title="ATAC-seq意义"></a>ATAC-seq意义</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2021/10/11/ATAC-seq-background/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2021/10/14/ATAC-seq-2/" title="ATAC-seq-2【Harvard FAS Informatics】">https://wangc1106.github.io/blog/2021/10/14/ATAC-seq-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/blog/tags/ATAC-seq/" rel="tag"># ATAC-seq</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2021/10/08/hexo_build/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/banner.png">
-      <meta itemprop="name" content="Wang C">
-      <meta itemprop="description" content="Make more time">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Banner's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/10/08/hexo_build/" class="post-title-link" itemprop="url">Hexo-build</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-08 15:02:12" itemprop="dateCreated datePublished" datetime="2021-10-08T15:02:12+08:00">2021-10-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-09 14:47:18" itemprop="dateModified" datetime="2021-10-09T14:47:18+08:00">2021-10-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Testing/" itemprop="url" rel="index"><span itemprop="name">Testing</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/blog/2021/10/08/hexo_build/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo-build" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>6.2k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>6 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>借鉴前人的经验，建立自己的小小博客。<br>参考：<a target="_blank" rel="noopener" href="https://yiweiniu.github.io/blog/2018/02/Hexo-%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/#more">https://yiweiniu.github.io/blog/2018/02/Hexo-建站记录/#more</a></p>
-<hr>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2021/10/08/hexo_build/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2021/10/11/ATAC-seq-background/" rel="prev" title="ATAC-seq-1 背景">
+      <i class="fa fa-chevron-left"></i> ATAC-seq-1 背景
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -640,6 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ATAC-seq%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0%E6%B3%A8%E6%84%8F"><span class="nav-number">1.</span> <span class="nav-text">ATAC-seq数据质量评估注意</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Uniform-Processing-Pipeline-Restrictions"><span class="nav-number">1.1.</span> <span class="nav-text">Uniform Processing Pipeline Restrictions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Current-Standards"><span class="nav-number">1.2.</span> <span class="nav-text">Current Standards</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ATACseq-%E4%B8%BB%E5%B9%B2%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">ATACseq 主干分析流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Harvard-FAS-Informatics-ATAC-seq-Guidelines"><span class="nav-number">3.</span> <span class="nav-text">Harvard FAS Informatics - ATAC-seq Guidelines</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Experimental-design"><span class="nav-number">3.1.</span> <span class="nav-text">Experimental design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quality-control"><span class="nav-number">3.2.</span> <span class="nav-text">Quality control</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FastQC"><span class="nav-number">3.2.1.</span> <span class="nav-text">FastQC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adapter-removal"><span class="nav-number">3.2.2.</span> <span class="nav-text">Adapter removal</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Cutadapt"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">Cutadapt</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NGmerge"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">NGmerge</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Just-adapter-removal"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">Just adapter removal</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alignment"><span class="nav-number">3.3.</span> <span class="nav-text">Alignment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Genome-indexing"><span class="nav-number">3.3.1.</span> <span class="nav-text">Genome indexing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alignment-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">Alignment</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Peak-calling"><span class="nav-number">3.4.</span> <span class="nav-text">Peak calling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E6%96%B0%E7%9A%84Generich"><span class="nav-number">3.4.1.</span> <span class="nav-text">推荐新的Generich???</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Genrich"><span class="nav-number">3.4.2.</span> <span class="nav-text">Genrich</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NEXT-Steps"><span class="nav-number">3.5.</span> <span class="nav-text">NEXT Steps</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Visualization"><span class="nav-number">3.5.1.</span> <span class="nav-text">Visualization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparing-peak-files"><span class="nav-number">3.5.2.</span> <span class="nav-text">Comparing peak files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Annotation"><span class="nav-number">3.5.3.</span> <span class="nav-text">Annotation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Motif-finding"><span class="nav-number">3.5.4.</span> <span class="nav-text">Motif finding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alignment%EF%BC%88same%EF%BC%89"><span class="nav-number">3.5.5.</span> <span class="nav-text">Alignment（same）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alignment-adjustments"><span class="nav-number">3.5.6.</span> <span class="nav-text">Alignment adjustments</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Mitochondrial-reads"><span class="nav-number">3.5.6.1.</span> <span class="nav-text">Mitochondrial reads</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PCR-duplicates"><span class="nav-number">3.5.6.2.</span> <span class="nav-text">PCR duplicates</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Non-unique-alignments"><span class="nav-number">3.5.6.3.</span> <span class="nav-text">Non-unique alignments</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Peak-calling-1"><span class="nav-number">3.5.7.</span> <span class="nav-text">Peak calling</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Alignments-to-analyze"><span class="nav-number">3.5.7.1.</span> <span class="nav-text">Alignments to analyze</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Other-arguments"><span class="nav-number">3.5.7.2.</span> <span class="nav-text">Other arguments</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Output-files"><span class="nav-number">3.5.7.3.</span> <span class="nav-text">Output files</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
