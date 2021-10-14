@@ -3,11 +3,8 @@
   <entry>
     <title>ATAC-seq-2【Harvard FAS Informatics】</title>
     <url>/blog/2021/10/14/ATAC-seq-2/</url>
-    <content><![CDATA[<span id="more"></span>
-
-
-
-<h2 id="ATAC-seq数据质量评估注意"><a href="#ATAC-seq数据质量评估注意" class="headerlink" title="ATAC-seq数据质量评估注意"></a>ATAC-seq数据质量评估注意</h2><p><code>ENCODE</code>的ATACseq<a href="https://www.encodeproject.org/atac-seq/">数据标准</a>。</p>
+    <content><![CDATA[<h2 id="ATAC-seq数据质量评估注意"><a href="#ATAC-seq数据质量评估注意" class="headerlink" title="ATAC-seq数据质量评估注意"></a>ATAC-seq数据质量评估注意</h2><span id="more"></span>
+<p><code>ENCODE</code>的ATACseq<a href="https://www.encodeproject.org/atac-seq/">数据标准</a>。</p>
 <h3 id="Uniform-Processing-Pipeline-Restrictions"><a href="#Uniform-Processing-Pipeline-Restrictions" class="headerlink" title="Uniform Processing Pipeline Restrictions"></a>Uniform Processing Pipeline Restrictions</h3><ul>
 <li>The <code>read length</code> prior to any trimming should be a minimum of <code>45 base pairs</code>.</li>
 <li>Sequencing may be <code>paired</code>- or <code>single</code>-ended, <code>sequencing type</code> is specified and <code>paired sequences</code> are indicated.</li>
