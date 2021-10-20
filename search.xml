@@ -1,71 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>单倍型基因组组装算法hifiasm</title>
+    <url>/blog/2021/10/20/hifiasm/</url>
+    <content><![CDATA[<h2 id="nat-methods等位基因组组装算法hifiasm20210202"><a class="markdownIt-Anchor" href="#nat-methods等位基因组组装算法hifiasm20210202"></a> Nat. Methods|等位基因组组装算法hifiasm（20210202）</h2>
+<p>paper：	<a href="https://pubmed.ncbi.nlm.nih.gov/33526886/">Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm</a><br>
+该研究提出一种全新的单倍型基因组组装算法hifiasm，能够有效地对<font color="red">大型复杂基因组生成高质量的单倍型组装结果</font>。</p>
+<span id="more"></span>
+<h3 id="单倍型组装难点"><a class="markdownIt-Anchor" href="#单倍型组装难点"></a> 单倍型组装难点</h3>
+<p>单倍型基因组组装是研究基因组结构与变异的最理想方式。由于技术的局限，大多数组装算法倾向于将不同单倍型有损的压缩成一条混合的代表性序列。对于自然界中主流的二倍体和多倍体样本而言，这类方法损失了大量的单倍型信息。这使得长久以来，研究人员难以对高杂合、高重复的基因组进行深入的分析。</p>
+<p>为了解决这个难题，一些组装算法首先生成混合的代表性序列，接着从代表性序列中恢复出不同的单倍型信息。但是，由于代表性序列本身已经丢失了大量的信息，这类方法难以获得高质量的单倍型组装结果。</p>
+<p>近期的组装算法通过额外的信息，如家系(Trio binning)或者Hi-C等数据，预先全局性的将待组装的测序读段划分到不同单倍型，再进行分别组装，从而试图获得高质量的单倍型组装结果。但是对于低杂合的样本而言，这种方法难以做到完美的预先划分，因此容易产生组装错误。</p>
+<h3 id="hifiasm-算法"><a class="markdownIt-Anchor" href="#hifiasm-算法"></a> Hifiasm 算法</h3>
+<p>在本研究中，研究人员提出了一种全新的针对PacBio HiFi (High-Fidelity reads) 数据的单倍型组装算法hifiasm。该算法有两项重要创新。</p>
+<p>第一，提出了单倍型敏感的组装思路，使得在组装的全过程中能够无损的保留单倍型信息，同时也极大的提升了对基因组高重复和复杂区域的解析能力。</p>
+<p>第二，提出了Graph-binning的分型策略，其利用组装图的结构信息对全局分型结果进行校正，从而极大地提高了单倍型组装的质量。Graph-binning不对待组装的测序读段进行预先全局划分，因此能够克服划分错误带来组装问题。</p>
+<h3 id="组装结果"><a class="markdownIt-Anchor" href="#组装结果"></a> 组装结果</h3>
+<p>研究人员在不同的数据集上测试了hifiasm算法。对于不同大小，不同杂合度和不同单倍型数量的动物和植物基因组，hifiasm能够产生质量最高的组装结果。尤其值得注意的是，hifiasm仅用三天时间，就完成27Gb超大加州红杉基因组的组装，并且组装结果的连续性7倍于其他算法。</p>
+<p>对于人类基因组，hifiasm也能取得最好的效果。相比于现有算法，hifiasm所产生的组装结果连续性最高，同时也正确解析了最多的复杂和高重复区域，如MHC (主要组织相容性复合体)和centromere (着丝端粒)。尤其对于人类二倍体样本HG002和HG00733，hifiasm产生的组装结果的连续性3倍于其他算法，并成功保留了最多的变异信息。</p>
+<p><a href="http://www.evolution.ynu.edu.cn/info/1016/1208.htm">http://www.evolution.ynu.edu.cn/info/1016/1208.htm</a></p>
+]]></content>
+      <categories>
+        <category>papers</category>
+      </categories>
+      <tags>
+        <tag>assemble</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ATAC-seq-2【Harvard FAS Informatics】</title>
     <url>/blog/2021/10/14/ATAC-seq-2/</url>
-    <content><![CDATA[<h2 id="ATAC-seq数据质量评估注意"><a href="#ATAC-seq数据质量评估注意" class="headerlink" title="ATAC-seq数据质量评估注意"></a>ATAC-seq数据质量评估注意</h2><span id="more"></span>
-
+    <content><![CDATA[<h2 id="atac-seq数据质量评估注意"><a class="markdownIt-Anchor" href="#atac-seq数据质量评估注意"></a> ATAC-seq数据质量评估注意</h2>
+<span id="more"></span>
 <p><code>ENCODE</code>的ATACseq<a href="https://www.encodeproject.org/atac-seq/">数据标准</a>。</p>
-<h3 id="Uniform-Processing-Pipeline-Restrictions"><a href="#Uniform-Processing-Pipeline-Restrictions" class="headerlink" title="Uniform Processing Pipeline Restrictions"></a>Uniform Processing Pipeline Restrictions</h3><ul>
+<h3 id="uniform-processing-pipeline-restrictions"><a class="markdownIt-Anchor" href="#uniform-processing-pipeline-restrictions"></a> Uniform Processing Pipeline Restrictions</h3>
+<ul>
 <li>The <code>read length</code> prior to any trimming should be a minimum of <code>45 base pairs</code>.</li>
 <li>Sequencing may be <code>paired</code>- or <code>single</code>-ended, <code>sequencing type</code> is specified and <code>paired sequences</code> are indicated.</li>
-<li>All <code>Illumina platforms</code> are supported for use in the uniform pipeline, though <code>data from different platforms should be processed separately</code>; colorspace (<code>SOLiD</code>) reads are <code>not</code> supported. </li>
+<li>All <code>Illumina platforms</code> are supported for use in the uniform pipeline, though <code>data from different platforms should be processed separately</code>; colorspace (<code>SOLiD</code>) reads are <code>not</code> supported.</li>
 <li><code>Barcodes</code>, if present in the fastq, must be <code>indicated</code>.</li>
-<li><code>Library insert size</code> range must be <code>indicated</code>. <h3 id="Current-Standards"><a href="#Current-Standards" class="headerlink" title="Current Standards"></a>Current Standards</h3></li>
+<li><code>Library insert size</code> range must be <code>indicated</code>.</li>
 </ul>
+<h3 id="current-standards"><a class="markdownIt-Anchor" href="#current-standards"></a> Current Standards</h3>
 <ol>
 <li>必须有两次或更多次<code>生物学重复</code>（稀有样本也必须做两次<code>技术重复</code>）</li>
 <li>每次重复要有25million非冗余，非线粒体，能够回帖的fragment（单端25 million reads，<code>双端50 million reads</code>=25 million fragment）</li>
 <li>回帖率&gt;95%, &gt;80%可接受。</li>
 <li>用<code>IDR(Irreproducible Discovery Rate)</code>计算重复一致性，rescue和self consisty ratios 都&gt;2</li>
 <li>用以下指标控制PCR扩增对文库复杂性的影响： <code>Non-Redundant Fraction (NRF)</code> and PCR Bottlenecking Coefficients 1 and 2, or PBC1 and PBC2：NRF&gt;0.9, PBC1&gt;0.9, PBC2&gt;3</li>
-<li>peak文件必须满足如下要求：<blockquote>
-<p>每个重复peak数&gt;150000，&gt;100000可接受（ENCODE的ATAC-seq的peak file没法用）<br>IDR peak&gt;70000,&gt;50000可接受<br>要存在无核小体区NFR<br>存在单核小体峰，好的ATACseq数据应包含核小体，既能看开放染色质，又能看核小体</p>
+<li>peak文件必须满足如下要求：</li>
+</ol>
+<blockquote>
+<p>每个重复peak数&gt;150000，&gt;100000可接受（ENCODE的ATAC-seq的peak file没法用）<br>
+IDR peak&gt;70000,&gt;50000可接受<br>
+要存在无核小体区NFR<br>
+存在单核小体峰，好的ATACseq数据应包含核小体，既能看开放染色质，又能看核小体</p>
 </blockquote>
-</li>
+<ol start="7">
 <li>The fraction of reads in called peak regions(FRip score)&gt;0.3,&gt;0.2 可以接受。对于稀有样本不要求FRiP但TSS富集还是要作为关键的衡量信噪比的指标。</li>
 <li>TSS富集分数阈值与参考基因组相关。</li>
 </ol>
-<h2 id="ATACseq-主干分析流程"><a href="#ATACseq-主干分析流程" class="headerlink" title="ATACseq 主干分析流程"></a>ATACseq 主干分析流程</h2><p>reference：<br><strong>1.文章</strong>：<a href="https://peerj.com/articles/4040/">https://peerj.com/articles/4040/</a><br><strong>2.CHIPseq课程</strong>：<a href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons</a><br><strong>3.Harvard FAS Informatics - ATAC-seq Guidelines</strong>：<a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">https://informatics.fas.harvard.edu/atac-seq-guidelines.html</a></p>
-<h2 id="Harvard-FAS-Informatics-ATAC-seq-Guidelines"><a href="#Harvard-FAS-Informatics-ATAC-seq-Guidelines" class="headerlink" title="Harvard FAS Informatics - ATAC-seq Guidelines"></a><a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">Harvard FAS Informatics - ATAC-seq Guidelines</a></h2><h3 id="Experimental-design"><a href="#Experimental-design" class="headerlink" title="Experimental design"></a>Experimental design</h3><p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4374986/">Detailed protocol</a></p>
+<h2 id="atacseq-主干分析流程"><a class="markdownIt-Anchor" href="#atacseq-主干分析流程"></a> ATACseq 主干分析流程</h2>
+<p>reference：<br>
+<strong>1.文章</strong>：<a href="https://peerj.com/articles/4040/">https://peerj.com/articles/4040/</a><br>
+<strong>2.CHIPseq课程</strong>：<a href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons</a><br>
+<strong>3.Harvard FAS Informatics - ATAC-seq Guidelines</strong>：<a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">https://informatics.fas.harvard.edu/atac-seq-guidelines.html</a></p>
+<h2 id="harvard-fas-informatics-atac-seq-guidelines"><a class="markdownIt-Anchor" href="#harvard-fas-informatics-atac-seq-guidelines"></a> <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">Harvard FAS Informatics - ATAC-seq Guidelines</a></h2>
+<h3 id="experimental-design"><a class="markdownIt-Anchor" href="#experimental-design"></a> Experimental design</h3>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4374986/">Detailed protocol</a></p>
 <ul>
 <li>Replicates</li>
 <li>Controls：一般<code>不设置对照</code>。作用有限，费用。没有转座酶处理的样本测序</li>
 <li>PCR amplification：<code>尽可能少</code>地使用<code>PCR循环</code>来扩增样本，减少干扰</li>
 <li>Sequencing depth：最佳测序深度取决于<code>参考基因组的大小</code>和<code>预期染色质的开放程度</code>。人类样本的研究推荐每个样本超过5000万个reads。</li>
-<li>Sequencing mode：(1) ATACseq推荐使用paired-end。paired-end sequencing, helps to <code>reduce these alignment ambiguities</code>. (2) we are interested in <code>knowing both ends of the DNA fragments generated by the assay</code>, since the ends indicate where the transposase inserted. (3) <strong><code>PCR duplicates are identified more accurately</code></strong>.  PCR duplicates are <code>artifacts of the procedure</code>, and they should be removed as part of the analysis pipeline . <code>Computational programs that remove PCR duplicates typically identify duplicates based on comparing ends of aligned reads</code>. With <strong><code>single-end reads</code></strong>, there is <code>only one position to compare</code>, and so any <code>reads whose 5&#39; ends match are considered duplicates</code>. Thus, <code>many false positives</code> may result, and perfectly <code>good reads are removed</code> from further analysis. <strong><code>Paired-end sequencing</code></strong>, <code>both ends of the original DNA fragments are defined</code>. <code>To be declared a duplicate, both ends of one fragment need to match both ends of another fragment</code>, which is far <code>less likely to occur by chance</code>. Therefore, paired-end sequencing leads to <code>fewer false positives</code>.</li>
+<li>Sequencing mode：(1) ATACseq推荐使用paired-end。paired-end sequencing, helps to <code>reduce these alignment ambiguities</code>. (2) we are interested in <code>knowing both ends of the DNA fragments generated by the assay</code>, since the ends indicate where the transposase inserted. (3) <strong><code>PCR duplicates are identified more accurately</code></strong>.  PCR duplicates are <code>artifacts of the procedure</code>, and they should be removed as part of the analysis pipeline . <code>Computational programs that remove PCR duplicates typically identify duplicates based on comparing ends of aligned reads</code>. With <strong><code>single-end reads</code></strong>, there is <code>only one position to compare</code>, and so any <code>reads whose 5' ends match are considered duplicates</code>. Thus, <code>many false positives</code> may result, and perfectly <code>good reads are removed</code> from further analysis. <strong><code>Paired-end sequencing</code></strong>, <code>both ends of the original DNA fragments are defined</code>. <code>To be declared a duplicate, both ends of one fragment need to match both ends of another fragment</code>, which is far <code>less likely to occur by chance</code>. Therefore, paired-end sequencing leads to <code>fewer false positives</code>.</li>
 <li>Mitochondria: 众所周知ATAC-seq数据通常包含很大比例的<code>来自线粒体DNA的reads</code>（<em>线粒体DNA是裸露的，也可以被Tn5酶识别切割，植物叶绿体</em>）。线粒体基因组中没有ATAC-seq感兴趣的峰，这些reads在计算中被丢弃，浪费测序资源。可在测序前使用洗涤剂<a href="https://www.nature.com/articles/nmeth.4396">去除样本中的线粒体</a>。</li>
 </ul>
-<h3 id="Quality-control"><a href="#Quality-control" class="headerlink" title="Quality control"></a>Quality control</h3><h4 id="FastQC"><a href="#FastQC" class="headerlink" title="FastQC"></a>FastQC</h4><p>Process a file of <code>20 million reads</code> in about <code>5 minutes</code> with less than <code>250MB memory</code> used. Quality scores, GC levels, PCR duplicates, and adapter content.</p>
-<h4 id="Adapter-removal"><a href="#Adapter-removal" class="headerlink" title="Adapter removal"></a>Adapter removal</h4><p>For reads derived from <code>short DNA fragments</code>, the <code>3&#39; ends may contain portions of the Illumina sequencing adapter</code>.  </p>
-<h5 id="Cutadapt"><a href="#Cutadapt" class="headerlink" title="Cutadapt"></a><a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a></h5><h5 id="NGmerge"><a href="#NGmerge" class="headerlink" title="NGmerge"></a><a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2579-2">NGmerge</a></h5><p>Unlike cutadapt, NGmerge <code>does not require</code> that the <code>adapter sequences</code> be provided, <code>nor</code> does it <code>require a parameter for the minimum length of adapter to match</code> (in fact, it <code>does not perform adapter matching</code> at all).For input files of <code>20 million paired reads</code>, NGmerge should run in <code>less than one hour on a single core</code>, with minimal memory usage.<br><img src="https://img-blog.csdnimg.cn/e2669cfa1a184ec2b7026fe528f9c97a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
-<h5 id="Just-adapter-removal"><a href="#Just-adapter-removal" class="headerlink" title="Just adapter removal"></a>Just adapter removal</h5><p>Other than adapter removal, we <code>do not recommend any trimming of the reads.</code> Such adjustments can complicate later steps, such as the identification of PCR duplicates.</p>
-<h3 id="Alignment"><a href="#Alignment" class="headerlink" title="Alignment"></a>Alignment</h3><p>Two of the most popular alignment program are BWA and <code>Bowtie2</code>.</p>
-<h4 id="Genome-indexing"><a href="#Genome-indexing" class="headerlink" title="Genome indexing"></a>Genome indexing</h4><p>For many model organisms, the genome and pre-built reference indexes are available from <a href="https://support.illumina.com/sequencing/sequencing_software/igenome.html">iGenomes</a>.<br>Otherwise, Bowtie2 indexes are made from a FASTA genome file using the program <code>bowtie2-build</code>:</p>
+<h3 id="quality-control"><a class="markdownIt-Anchor" href="#quality-control"></a> Quality control</h3>
+<h4 id="fastqc"><a class="markdownIt-Anchor" href="#fastqc"></a> FastQC</h4>
+<p>Process a file of <code>20 million reads</code> in about <code>5 minutes</code> with less than <code>250MB memory</code> used. Quality scores, GC levels, PCR duplicates, and adapter content.</p>
+<h4 id="adapter-removal"><a class="markdownIt-Anchor" href="#adapter-removal"></a> Adapter removal</h4>
+<p>For reads derived from <code>short DNA fragments</code>, the <code>3' ends may contain portions of the Illumina sequencing adapter</code>.</p>
+<h5 id="cutadapt"><a class="markdownIt-Anchor" href="#cutadapt"></a> <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a></h5>
+<h5 id="ngmerge"><a class="markdownIt-Anchor" href="#ngmerge"></a> <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2579-2">NGmerge</a></h5>
+<p>Unlike cutadapt, NGmerge <code>does not require</code> that the <code>adapter sequences</code> be provided, <code>nor</code> does it <code>require a parameter for the minimum length of adapter to match</code> (in fact, it <code>does not perform adapter matching</code> at all).For input files of <code>20 million paired reads</code>, NGmerge should run in <code>less than one hour on a single core</code>, with minimal memory usage.<br>
+<img src="https://img-blog.csdnimg.cn/e2669cfa1a184ec2b7026fe528f9c97a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
+<h5 id="just-adapter-removal"><a class="markdownIt-Anchor" href="#just-adapter-removal"></a> Just adapter removal</h5>
+<p>Other than adapter removal, we <code>do not recommend any trimming of the reads.</code> Such adjustments can complicate later steps, such as the identification of PCR duplicates.</p>
+<h3 id="alignment"><a class="markdownIt-Anchor" href="#alignment"></a> Alignment</h3>
+<p>Two of the most popular alignment program are BWA and <code>Bowtie2</code>.</p>
+<h4 id="genome-indexing"><a class="markdownIt-Anchor" href="#genome-indexing"></a> Genome indexing</h4>
+<p>For many model organisms, the genome and pre-built reference indexes are available from <a href="https://support.illumina.com/sequencing/sequencing_software/igenome.html">iGenomes</a>.<br>
+Otherwise, Bowtie2 indexes are made from a FASTA genome file using the program <code>bowtie2-build</code>:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bowtie2-build  &lt;genome.fa&gt;  &lt;genomeIndexName&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="Alignment-1"><a href="#Alignment-1" class="headerlink" title="Alignment"></a>Alignment</h4><p><a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml">Bowtie2 parameters</a>. Here are a few that <code>may benefit the alignment of an ATAC-seq dataset</code> :</p>
-<p><code>-X &lt;int&gt;</code> : Maximum DNA fragment length (<code>default 500bp</code>). If you anticipate that you may have DNA fragments <code>longer than</code> the default value, you should <code>increase</code> this parameter accordingly; otherwise, alignments from such fragments are considered not properly paired (see Fig. 3B below).<br><code>--very-sensitive</code> : Bowtie2 has a number of alignment and effort parameters that interact in complex (and sometimes unexpected) ways. Preset collections of these parameters are provided for convenience; the default is –sensitive, but <code>better alignment results</code> are frequently achieved with –very-sensitive.<br><code>-k &lt;int&gt;</code> : Maximum number of alignments to report per read. By default, Bowtie2 reports at most one alignment per read, and if multiple equivalent alignments exist, it chooses one randomly.<br><code>-p &lt;int&gt;</code> : Number of <code>cores</code> on which to run</p>
+<h4 id="alignment-2"><a class="markdownIt-Anchor" href="#alignment-2"></a> Alignment</h4>
+<p><a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml">Bowtie2 parameters</a>. Here are a few that <code>may benefit the alignment of an ATAC-seq dataset</code> :</p>
+<p><code>-X &lt;int&gt;</code> : Maximum DNA fragment length (<code>default 500bp</code>). If you anticipate that you may have DNA fragments <code>longer than</code> the default value, you should <code>increase</code> this parameter accordingly; otherwise, alignments from such fragments are considered not properly paired (see Fig. 3B below).<br>
+<code>--very-sensitive</code> : Bowtie2 has a number of alignment and effort parameters that interact in complex (and sometimes unexpected) ways. Preset collections of these parameters are provided for convenience; the default is --sensitive, but <code>better alignment results</code> are frequently achieved with --very-sensitive.<br>
+<code>-k &lt;int&gt;</code> : Maximum number of alignments to report per read. By default, Bowtie2 reports at most one alignment per read, and if multiple equivalent alignments exist, it chooses one randomly.<br>
+<code>-p &lt;int&gt;</code> : Number of <code>cores</code> on which to run</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bowtie2  --very-sensitive  -k 10  -x &lt;genomeIndexName&gt;  -1 &lt;name&gt;_1.fastq.gz  -2 &lt;name&gt;_2.fastq.gz  \</span><br><span class="line">  |  samtools view  -u  -  \</span><br><span class="line">  |  samtools sort  -n  -o &lt;BAM&gt;  -</span><br></pre></td></tr></table></figure>
 <ul>
-<li>For input files of <code>20 million</code> paired reads, this command takes around <code>five hours</code> on Cannon(1 core too slow). One could specify eight cores for Bowtie2 with <code>-p 8</code> and adjust the request in the <code>SLURM script</code> to <code>#SBATCH -n 10</code> (that is, <code>eight</code> cores for <code>Bowtie2</code> and <code>one each</code> for <code>SAMtools view</code> and <code>sort</code>). </li>
+<li>For input files of <code>20 million</code> paired reads, this command takes around <code>five hours</code> on Cannon(1 core too slow). One could specify eight cores for Bowtie2 with <code>-p 8</code> and adjust the request in the <code>SLURM script</code> to <code>#SBATCH -n 10</code> (that is, <code>eight</code> cores for <code>Bowtie2</code> and <code>one each</code> for <code>SAMtools view</code> and <code>sort</code>).</li>
 <li>Bowtie2 also provides (via stderr) a summary of the mapping results, separated according to uniqueness and alignment type.</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/9f961cf3106f4c99b6e85bd1c3f6e373.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br> Alignment types for paired-end reads. <strong>A</strong>: Properly paired alignments (“<code>concordant</code>“) have the reads <code>aligned in opposite orientations</code> on the <code>same reference</code> sequence (chromosome). The reads <code>may overlap</code> to some extent (bottom). <strong>B</strong>: A read alignment (for <code>R1</code>) can be <code>unpaired</code> for several reasons: if the read’s mate (<code>R2</code>) is <code>unaligned</code> (<code>upper left</code>), <code>aligns to a different chromosome</code> (<code>upper right</code>), aligns in the <code>incorrect orientation</code> (<code>middle</code> cases), or aligns in the correct orientation but at an <code>invalid distance</code> (<code>bottom</code>). In all cases except the upper left, the R2 read alignment is also unpaired, and the read pair align discordantly (though Bowtie2 also requires uniqueness for such alignments to be counted as discordant).</p>
+<p><img src="https://img-blog.csdnimg.cn/9f961cf3106f4c99b6e85bd1c3f6e373.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br>
+Alignment types for paired-end reads. <strong>A</strong>: Properly paired alignments (&quot;<code>concordant</code>&quot;) have the reads <code>aligned in opposite orientations</code> on the <code>same reference</code> sequence (chromosome). The reads <code>may overlap</code> to some extent (bottom). <strong>B</strong>: A read alignment (for <code>R1</code>) can be <code>unpaired</code> for several reasons: if the read’s mate (<code>R2</code>) is <code>unaligned</code> (<code>upper left</code>), <code>aligns to a different chromosome</code> (<code>upper right</code>), aligns in the <code>incorrect orientation</code> (<code>middle</code> cases), or aligns in the correct orientation but at an <code>invalid distance</code> (<code>bottom</code>). In all cases except the upper left, the R2 read alignment is also unpaired, and the read pair align discordantly (though Bowtie2 also requires uniqueness for such alignments to be counted as discordant).</p>
 <p>Generich 版本</p>
-<h3 id="Peak-calling"><a href="#Peak-calling" class="headerlink" title="Peak calling"></a>Peak calling</h3><h4 id="推荐新的Generich"><a href="#推荐新的Generich" class="headerlink" title="推荐新的Generich???"></a>推荐新的<a href="https://github.com/jsh58/Genrich"><code>Generich</code></a>???</h4><p>Genrich was designed to be able to <code>run all of the post-alignment steps</code> through <code>peak-calling with one command</code>. It also possesses a few <code>novel features</code>. Consider the following attributes:</p>
+<h3 id="peak-calling"><a class="markdownIt-Anchor" href="#peak-calling"></a> Peak calling</h3>
+<h4 id="推荐新的generich"><a class="markdownIt-Anchor" href="#推荐新的generich"></a> 推荐新的<a href="https://github.com/jsh58/Genrich"><code>Generich</code></a>???</h4>
+<p>Genrich was designed to be able to <code>run all of the post-alignment steps</code> through <code>peak-calling with one command</code>. It also possesses a few <code>novel features</code>. Consider the following attributes:</p>
 <ul>
 <li><strong>Removal of mitochondrial reads</strong>. Genrich <code>disregards all alignments to the mitochondrial</code> chromosome with <code>-e chrM</code>.</li>
-<li><strong>Removal of PCR duplicates</strong>. Genrich follows a <code>systematic procedure</code> to <code>remove PCR duplicates</code> with <code>-r</code>. Note that this evaluation <code>takes into account multimapping reads</code> (see next), which is <code>not provided by other alignment-based duplicate-removal programs</code>, such as <code>Picard&#39;s MarkDuplicates</code>.</li>
+<li><strong>Removal of PCR duplicates</strong>. Genrich follows a <code>systematic procedure</code> to <code>remove PCR duplicates</code> with <code>-r</code>. Note that this evaluation <code>takes into account multimapping reads</code> (see next), which is <code>not provided by other alignment-based duplicate-removal programs</code>, such as <code>Picard's MarkDuplicates</code>.<br>
+<strong>Analysis of multimapping reads</strong>. 重复区域多的基因组可能导致非唯一mapping。 Non-uniquely aligned reads can be removed by filtering based on MAPQ scores with <code>samtools</code>, but this effectively renders certain genomic regions inaccessible to the assay. With Genrich, <code>reads with multiple alignments are analyzed</code> by adding a fractional count to each location. Genrich’s <code>statistical model</code> accommodates these values.<br>
+Along these same lines, Genrich considers the entire reference genome to be part of the assay. If there are chromosomes or genomic regions that should be excluded from analysis, these can be specified by <code>-e or -E</code>, and Genrich will adjust the <code>genome length calculation</code> accordingly. There is no need to <code>guesstimate an &quot;effective&quot; genome size</code> like with MACS2.<br>
+<strong>Analysis of multiple replicates</strong>. When alignment files for multiple replicates are provided to Genrich, it <code>calls peaks for the replicates collectively</code>. <code>No more IDR</code>. Done.<br>
+<strong>Interpretation of alignments suitable for ATAC-seq</strong>. Genrich provides an ATAC-seq analysis mode (-j) in which, rather than inferring the full fragments from the alignments, intervals are interpreted that are centered on transposase cut sites (the ends of each DNA fragment). Only properly paired alignments are analyzed by default, but there is an option to consider unpaired alignments as well (-y) (Fig. 4).</li>
 </ul>
-<p><strong>Analysis of multimapping reads</strong>. 重复区域多的基因组可能导致非唯一mapping。 Non-uniquely aligned reads can be removed by filtering based on MAPQ scores with <code>samtools</code>, but this effectively renders certain genomic regions inaccessible to the assay. With Genrich, <code>reads with multiple alignments are analyzed</code> by adding a fractional count to each location. Genrich’s <code>statistical model</code> accommodates these values.<br>Along these same lines, Genrich considers the entire reference genome to be part of the assay. If there are chromosomes or genomic regions that should be excluded from analysis, these can be specified by <code>-e or -E</code>, and Genrich will adjust the <code>genome length calculation</code> accordingly. There is no need to <code>guesstimate an &quot;effective&quot; genome size</code> like with MACS2.<br><strong>Analysis of multiple replicates</strong>. When alignment files for multiple replicates are provided to Genrich, it <code>calls peaks for the replicates collectively</code>. <code>No more IDR</code>. Done.<br><strong>Interpretation of alignments suitable for ATAC-seq</strong>. Genrich provides an ATAC-seq analysis mode (-j) in which, rather than inferring the full fragments from the alignments, intervals are interpreted that are centered on transposase cut sites (the ends of each DNA fragment). Only properly paired alignments are analyzed by default, but there is an option to consider unpaired alignments as well (-y) (Fig. 4).</p>
 <p><img src="https://img-blog.csdnimg.cn/abb30e7406834c91b7e456ff14e23742.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
 <ul>
-<li>Our previous recommendation was to run <code>MACS2</code> with <code>-f BAMPE</code>, which is similar to the <code>default analysis mode of Genrich</code> (<strong>inferring full fragments, rather than cut site intervals</strong>). Others have attempted to interpret cut site intervals with MACS2 by using the <code>--shif</code>t and <code>--extsize</code> arguments, but these arguments are ignored in <code>BAMPE</code> mode. They do work in the default (<code>BAM</code>) mode, but then, with paired-end reads, <code>most of the alignments are automatically discarded</code> (half of the properly paired alignments and all of the unpaired alignments; secondary alignments are never considered). Is it worse to interpret full fragments that may be less informative biologically, or to disregard more than half of the sequence data? A complicated question. The correct answer is: <strong>use Genrich.</strong><h4 id="Genrich"><a href="#Genrich" class="headerlink" title="Genrich"></a>Genrich</h4></li>
+<li>Our previous recommendation was to run <code>MACS2</code> with <code>-f BAMPE</code>, which is similar to the <code>default analysis mode of Genrich</code> (<strong>inferring full fragments, rather than cut site intervals</strong>). Others have attempted to interpret cut site intervals with MACS2 by using the <code>--shif</code>t and <code>--extsize</code> arguments, but these arguments are ignored in <code>BAMPE</code> mode. They do work in the default (<code>BAM</code>) mode, but then, with paired-end reads, <code>most of the alignments are automatically discarded</code> (half of the properly paired alignments and all of the unpaired alignments; secondary alignments are never considered). Is it worse to interpret full fragments that may be less informative biologically, or to disregard more than half of the sequence data? A complicated question. The correct answer is: <strong>use Genrich.</strong></li>
 </ul>
-<p><strong>most important parameters and options of Genrich for analyzing ATAC-seq：</strong> </p>
-<p><code>-j</code> : ATAC-seq mode (<strong>must</strong> be specified)<br><code>-d &lt;int&gt;</code> : Expand cut sites to the given length (default 100bp)<br><code>-y</code> : Analyze <strong>unpaired</strong> alignments<br><code>-r</code> : Remove PCR duplicates<br><code>-e &lt;arg&gt;</code> : Chromosomes (reference sequences) to exclude. Can be a comma-separated list, e.g. <code>-e chrM,chrY</code>.<br><code>-E &lt;file&gt;</code> : Input BED file(s) of genomic regions to exclude, such as ‘N’ homopolymers or high mappability regions<br><code>-q &lt;float&gt;</code> : Maximum q-value (FDR-adjusted p-value) for peak calling (default 0.05). An unadjusted p-value threshold can be used instead with <code>-p &lt;float&gt;</code>.<br><code>-a &lt;float&gt;</code> : Minimum area under the curve (total significance) for a peak (default 20.0). <code>Increasing</code> this value results in <code>fewer</code> but <code>higher confidence</code> peaks.<br><code>-v</code> : Verbose mode</p>
+<h4 id="genrich"><a class="markdownIt-Anchor" href="#genrich"></a> Genrich</h4>
+<p><strong>most important parameters and options of Genrich for analyzing ATAC-seq：</strong></p>
+<p><code>-j</code> : ATAC-seq mode (<strong>must</strong> be specified)<br>
+<code>-d &lt;int&gt;</code> : Expand cut sites to the given length (default 100bp)<br>
+<code>-y</code> : Analyze <strong>unpaired</strong> alignments<br>
+<code>-r</code> : Remove PCR duplicates<br>
+<code>-e &lt;arg&gt;</code> : Chromosomes (reference sequences) to exclude. Can be a comma-separated list, e.g. <code>-e chrM,chrY</code>.<br>
+<code>-E &lt;file&gt;</code> : Input BED file(s) of genomic regions to exclude, such as ‘N’ homopolymers or high mappability regions<br>
+<code>-q &lt;float&gt;</code> : Maximum q-value (FDR-adjusted p-value) for peak calling (default 0.05). An unadjusted p-value threshold can be used instead with <code>-p &lt;float&gt;</code>.<br>
+<code>-a &lt;float&gt;</code> : Minimum area under the curve (total significance) for a peak (default 20.0). <code>Increasing</code> this value results in <code>fewer</code> but <code>higher confidence</code> peaks.<br>
+<code>-v</code> : Verbose mode</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Genrich  -t &lt;BAM&gt;  -o &lt;OUT&gt;  -j  -y  -r  -e chrM  -v</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>对于重复data,  <code>-t &lt;BAM1&gt;,&lt;BAM2&gt;</code>.</li>
 <li>The output file produced by Genrich is in <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format12"><code>ENCODE narrowPeak format</code></a>, listing the genomic coordinates of each peak called and various statistics.</li>
@@ -73,49 +141,71 @@
 <li>Those who wish to explore the results of varying the <code>peak-calling parameters (-q/-p, -a, -l, -g)</code> should consider having Genrich produce a log file when it parses the SAM/BAM files (for example, with <code>-f &lt;LOG&gt;</code> added to the above command). Then, Genrich can call peaks directly from the log file with the <code>-P</code> option（调参数使用此法节省内存和时间）:</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Genrich  -P  -f &lt;LOG&gt;  -o &lt;OUT2&gt;  -p 0.01  -a 200  -v</span><br></pre></td></tr></table></figure>
-
-<h3 id="NEXT-Steps"><a href="#NEXT-Steps" class="headerlink" title="NEXT Steps"></a>NEXT Steps</h3><h4 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h4><p>For ATAC-seq in model organisms, the <code>peak file produced by Genrich</code> can be <code>uploaded</code> directly to the <a href="https://genome.ucsc.edu/cgi-bin/hgCustom">UCSC genome browser</a>. Add header.</p>
+<h3 id="next-steps"><a class="markdownIt-Anchor" href="#next-steps"></a> NEXT Steps</h3>
+<h4 id="visualization"><a class="markdownIt-Anchor" href="#visualization"></a> Visualization</h4>
+<p>For ATAC-seq in model organisms, the <code>peak file produced by Genrich</code> can be <code>uploaded</code> directly to the <a href="https://genome.ucsc.edu/cgi-bin/hgCustom">UCSC genome browser</a>. Add header.</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">track type=narrowPeak</span><br></pre></td></tr></table></figure>
 <p>An alternative visualization tool is the <a href="http://software.broadinstitute.org/software/igv/">Integrative Genomics Viewer (IGV)</a>. Peak files can be loaded directly (File → Load from File). <strong>Viewing BAM files with IGV requires that they be sorted by coordinate and indexed</strong> using <a href="http://www.htslib.org/doc/samtools.html">SAMtools</a>. However, the BAMs show the read alignments, <code>not the full fragments generated by the ATAC</code> <code>nor the cut site intervals</code> analyzed by Genrich. To view the intervals, one can use the optional output <code>BED file</code> produced by Genrich with <code>-b</code>.</p>
-<h4 id="Comparing-peak-files"><a href="#Comparing-peak-files" class="headerlink" title="Comparing peak files"></a>Comparing peak files</h4><p>Determining genomic regions that are <code>common or different to a set of peak files</code> is best accomplished with <a href="http://bedtools.readthedocs.io/en/latest/index.html">BEDTools</a>, a suite of software tools that enables “genome arithmetic.”<br>For example, <a href="http://bedtools.readthedocs.io/en/latest/content/tools/intersect.html">bedtools intersect</a> determines regions that are <strong><code>common</code></strong> to two peak files. Finding <strong><code>differences</code></strong> between two peak files, such as control vs. experimental groups, is accomplished via <a href="http://bedtools.readthedocs.io/en/latest/content/tools/subtract.html">bedtools subtract</a>.</p>
-<h4 id="Annotation"><a href="#Annotation" class="headerlink" title="Annotation"></a>Annotation</h4><p>It is helpful to know <code>what genomic features are near the peaks</code> called by Genrich. One program that is commonly used to annotate peaks is <a href="https://bioconductor.org/packages/release/bioc/html/ChIPseeker.html">ChIPseeker</a>. ChIPseeker was originally designed to be used in the analysis of ChIP-seq, but it works just <code>as well with ATAC-seq.</code><br>ChIPseeker <strong>requires</strong> that the <code>genome of interest be annotated with locations of genes and other features</code>. The <a href="https://bioconductor.org/packages/release/bioc/vignettes/ChIPseeker/inst/doc/ChIPseeker.html">ChIPseeker user guide</a> is extremely helpful in using this R/Bioconductor package.</p>
-<h4 id="Motif-finding"><a href="#Motif-finding" class="headerlink" title="Motif finding"></a>Motif finding</h4><p><a href="http://homer.ucsd.edu/homer/introduction/basics.html">HOMER</a> is a suite of software designed for <a href="http://homer.ucsd.edu/homer/ngs/peakMotifs.html">motif discovery</a>. It takes a <code>peak file as input</code> and <code>checks for the enrichment</code> of both <code>known sequence motifs</code> and <code>de novo motifs</code>.</p>
+<h4 id="comparing-peak-files"><a class="markdownIt-Anchor" href="#comparing-peak-files"></a> Comparing peak files</h4>
+<p>Determining genomic regions that are <code>common or different to a set of peak files</code> is best accomplished with <a href="http://bedtools.readthedocs.io/en/latest/index.html">BEDTools</a>, a suite of software tools that enables “genome arithmetic.”<br>
+For example, <a href="http://bedtools.readthedocs.io/en/latest/content/tools/intersect.html">bedtools intersect</a> determines regions that are <strong><code>common</code></strong> to two peak files. Finding <strong><code>differences</code></strong> between two peak files, such as control vs. experimental groups, is accomplished via <a href="http://bedtools.readthedocs.io/en/latest/content/tools/subtract.html">bedtools subtract</a>.</p>
+<h4 id="annotation"><a class="markdownIt-Anchor" href="#annotation"></a> Annotation</h4>
+<p>It is helpful to know <code>what genomic features are near the peaks</code> called by Genrich. One program that is commonly used to annotate peaks is <a href="https://bioconductor.org/packages/release/bioc/html/ChIPseeker.html">ChIPseeker</a>. ChIPseeker was originally designed to be used in the analysis of ChIP-seq, but it works just <code>as well with ATAC-seq.</code><br>
+ChIPseeker <strong>requires</strong> that the <code>genome of interest be annotated with locations of genes and other features</code>. The <a href="https://bioconductor.org/packages/release/bioc/vignettes/ChIPseeker/inst/doc/ChIPseeker.html">ChIPseeker user guide</a> is extremely helpful in using this R/Bioconductor package.</p>
+<h4 id="motif-finding"><a class="markdownIt-Anchor" href="#motif-finding"></a> Motif finding</h4>
+<p><a href="http://homer.ucsd.edu/homer/introduction/basics.html">HOMER</a> is a suite of software designed for <a href="http://homer.ucsd.edu/homer/ngs/peakMotifs.html">motif discovery</a>. It takes a <code>peak file as input</code> and <code>checks for the enrichment</code> of both <code>known sequence motifs</code> and <code>de novo motifs</code>.</p>
 <p>MACS2版本</p>
-<h4 id="Alignment（same）"><a href="#Alignment（same）" class="headerlink" title="Alignment（same）"></a>Alignment（same）</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bowtie2  --very-sensitive  -x &lt;genomeIndexName&gt;  -1 &lt;name&gt;_1.fastq.gz  -2 &lt;name&gt;_2.fastq.gz \</span><br><span class="line"> |  samtools view -u -  \</span><br><span class="line"> |  samtools sort -  &gt;  &lt;BAM&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Alignment-adjustments"><a href="#Alignment-adjustments" class="headerlink" title="Alignment adjustments"></a>Alignment adjustments</h4><h5 id="Mitochondrial-reads"><a href="#Mitochondrial-reads" class="headerlink" title="Mitochondrial reads"></a>Mitochondrial reads</h5><ul>
+<h4 id="alignmentsame"><a class="markdownIt-Anchor" href="#alignmentsame"></a> Alignment（same）</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bowtie2  --very-sensitive  -x &lt;genomeIndexName&gt;  -1 &lt;name&gt;_1.fastq.gz  -2 &lt;name&gt;_2.fastq.gz \</span><br><span class="line"> |  samtools view -u -  \</span><br><span class="line"> |  samtools sort -  &gt;  &lt;BAM&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="alignment-adjustments"><a class="markdownIt-Anchor" href="#alignment-adjustments"></a> Alignment adjustments</h4>
+<h5 id="mitochondrial-reads"><a class="markdownIt-Anchor" href="#mitochondrial-reads"></a> Mitochondrial reads</h5>
+<ul>
 <li>ATAC-seq datasets usually contain a large percentage of reads that are derived from mitochondrial DNA (<a href="http://seqanswers.com/forums/showthread.php?t=35318">discussion</a>). Using <a href="https://www.nature.com/articles/s41598-017-02547-w">CRISPR to reduce mitochondrial contamination</a>. Or recently <a href="https://www.nature.com/articles/nmeth.4396">Omni-ATAC method</a> uses detergents[洗涤剂] to remove mitochondria and is likely to be more accessible for most researchers ( <a href="https://www.biorxiv.org/content/10.1101/496521v1">bad computational workflow</a>).</li>
-<li>Method 1 : <strong>Remove the mitochondrial genome from the reference genome before aligning the reads</strong>. In human/mouse genome builds, the mitochondrial genome is labeled ‘<code>chrM</code>‘. That sequence can be deleted from the reference prior to building the genome indexes. The downside of this approach is that the alignment numbers will look much worse; all of the mitochondrial reads will count as unaligned. [植物？]</li>
+<li>Method 1 : <strong>Remove the mitochondrial genome from the reference genome before aligning the reads</strong>. In human/mouse genome builds, the mitochondrial genome is labeled ‘<code>chrM</code>’. That sequence can be deleted from the reference prior to building the genome indexes. The downside of this approach is that the alignment numbers will look much worse; all of the mitochondrial reads will count as unaligned. [植物？]</li>
 <li>Method 2 : <strong>Remove the mitochondrial reads after alignment</strong>. A python script, creatively named removeChrom, is available in the ATAC-seq module to accomplish this. For example, to remove all ‘chrM’ reads from a BAM file, one would run this:</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">samtools view -h  &lt;inBAM&gt;  |  removeChrom - - chrM  |  samtools view -b -  &gt;  &lt;outBAM&gt;</span><br></pre></td></tr></table></figure>
-<h5 id="PCR-duplicates"><a href="#PCR-duplicates" class="headerlink" title="PCR duplicates"></a>PCR duplicates</h5><p> Picard’s <a href="http://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates">MarkDuplicates</a>. The output file specified by <code>M=</code> lists counts of alignments analyzed and duplicates identified.</p>
+<h5 id="pcr-duplicates"><a class="markdownIt-Anchor" href="#pcr-duplicates"></a> PCR duplicates</h5>
+<p>Picard’s <a href="http://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates">MarkDuplicates</a>. The output file specified by <code>M=</code> lists counts of alignments analyzed and duplicates identified.</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar $PICARD_TOOLS_HOME/picard.jar MarkDuplicates I=&lt;inBAM&gt; O=&lt;outBAM&gt; M=dups.txt REMOVE_DUPLICATES=true</span><br></pre></td></tr></table></figure>
-<h5 id="Non-unique-alignments"><a href="#Non-unique-alignments" class="headerlink" title="Non-unique alignments"></a>Non-unique alignments</h5><p>重复区域多的参考序列可能导致reads多处mapping. 用samtools view的-q <code>去除非唯一比对</code>. For reads with multiple alignments, <code>Bowtie2</code> (or <code>BWA</code>) will <code>report only one alignment</code> (by <code>default</code>) and will assign it a low mapping quality (MAPQ) score, which is defined as -10 * log10Pr{mapping position is wrong}. To eliminate alignments with <code>MAPQ &lt; 10</code> (i.e., where <code>Bowtie2</code> has determined <code>Pr&#123;mapping position is wrong&#125; &gt; 0.1</code>), one would run the following:</p>
+<h5 id="non-unique-alignments"><a class="markdownIt-Anchor" href="#non-unique-alignments"></a> Non-unique alignments</h5>
+<p>重复区域多的参考序列可能导致reads多处mapping. 用samtools view的-q <code>去除非唯一比对</code>. For reads with multiple alignments, <code>Bowtie2</code> (or <code>BWA</code>) will <code>report only one alignment</code> (by <code>default</code>) and will assign it a low mapping quality (MAPQ) score, which is defined as -10 * log10Pr{mapping position is wrong}. To eliminate alignments with <code>MAPQ &lt; 10</code> (i.e., where <code>Bowtie2</code> has determined <code>Pr&#123;mapping position is wrong&#125; &gt; 0.1</code>), one would run the following:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">samtools view -b  -q 10  &lt;inBAM&gt;  &gt;  &lt;outBAM&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Peak-calling-1"><a href="#Peak-calling-1" class="headerlink" title="Peak calling"></a>Peak calling</h4><ul>
+<h4 id="peak-calling-2"><a class="markdownIt-Anchor" href="#peak-calling-2"></a> Peak calling</h4>
+<ul>
 <li>Model-based Analysis of ChIP-Seq (<a href="https://github.com/taoliu/MACS">MACS2</a>) is a program for detecting regions of <code>genomic enrichment</code>. Though designed for ChIP-seq, it works just <code>as well on ATAC-seq and other genome-wide enrichment assays that have narrow peaks</code>. The main program in MACS2 is <code>callpeak</code>, and its options are described below. (Note that the latest version of MACS2 on Odyssey (v2.1.2_dev) is different from the updated official MACS2 release (v2.1.2), although the latter does incorporate many of the bug fixes made in the Odyssey <code>version？</code>.)</li>
-<li>It is important to remember that the <code>read alignments indicate only a portion of the DNA fragments generated by the ATAC？</code>. Therefore, one must consider how one wants MACS2 to interpret the alignments.<h5 id="Alignments-to-analyze"><a href="#Alignments-to-analyze" class="headerlink" title="Alignments to analyze"></a>Alignments to analyze</h5></li>
-<li>alignments分为两类：”<strong>properly paired</strong>“ and “<strong>singletons</strong>“ 。<code>-f</code> 选择其类型。</li>
+<li>It is important to remember that the <code>read alignments indicate only a portion of the DNA fragments generated by the ATAC？</code>. Therefore, one must consider how one wants MACS2 to interpret the alignments.</li>
+</ul>
+<h5 id="alignments-to-analyze"><a class="markdownIt-Anchor" href="#alignments-to-analyze"></a> Alignments to analyze</h5>
+<ul>
+<li>alignments分为两类：“<strong>properly paired</strong>” and “<strong>singletons</strong>” 。<code>-f</code> 选择其类型。</li>
 <li><strong>Analyze only properly paired alignments, but ignore R2 reads and treat R1 reads as singletons</strong>. This is the default option (<code>-f AUTO</code>). MACS2 creates a model of the fragment lengths and extends the 3’ ends of the R1 reads to the calculated average length. An alternative is to skip this model building and instead extend each read to a specified length (e.g., <code>--nomodel --extsize 300</code> for 300bp fragments). The value of the length parameter is usually determined from the average size during library preparation (the default value is 200bp if no value is specified). However, <code>neither of these approaches utilizes the value of paired-end sequencing</code>, which defines both fragment ends.</li>
 <li><strong>Analyze only properly paired alignments with <code>-f BAMPE</code></strong>. Here, the fragments are defined by the paired alignments’ ends, and there is <code>no modeling or artificial extension</code>. Singleton alignments are ignored. This is the <code>preferred option</code> for using only properly paired alignments.</li>
-<li><strong>Analyze all alignments</strong>. For this approach, a python script, SAMtoBED, is available in the ATAC-seq module. This script converts the read alignments to BED intervals, treating the properly paired alignments as such and extending the singleton alignments as specified. There are <code>four options for the singletons</code>: ignore them, keep them as is, extend them to an arbitrary length (similar to the <code>--extsize</code> option of MACS2), or extend them to the average length calculated from the properly paired alignments. </li>
+<li><strong>Analyze all alignments</strong>. For this approach, a python script, SAMtoBED, is available in the ATAC-seq module. This script converts the read alignments to BED intervals, treating the properly paired alignments as such and extending the singleton alignments as specified. There are <code>four options for the singletons</code>: ignore them, keep them as is, extend them to an arbitrary length (similar to the <code>--extsize</code> option of MACS2), or extend them to the average length calculated from the properly paired alignments.</li>
 <li>Here is an example command, using the “extend to average length” option (<code>-x</code>):</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">samtools view -h  &lt;BAM&gt;  |  SAMtoBED  -i -  -o &lt;BED&gt;  -x  -v</span><br></pre></td></tr></table></figure>
-<p>The output from SAMtoBED is a <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED file</a> that should be analyzed by MACS2 with <code>-f BEDPE</code>.<br>(Note that the BEDTools program <a href="http://bedtools.readthedocs.io/en/latest/content/tools/bamtobed.html">
+<p>The output from SAMtoBED is a <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED file</a> that should be analyzed by MACS2 with <code>-f BEDPE</code>.<br>
+(Note that the BEDTools program <a href="http://bedtools.readthedocs.io/en/latest/content/tools/bamtobed.html"><br>
 </a> cannot be used here, since its output is in a nonstandard BED format that MACS2 cannot analyze.)</p>
 <ul>
-<li>In deciding among these analysis options, it may help to consider the counts produced by Bowtie2, which indicate <code>how many alignments fall into each category</code>. For example, if most of the reads are aligned in proper pairs, it may be sufficient to use <code>option #2</code>. On the other hand, <code>option #3</code> is preferred if a substantial fraction of the reads consists of singletons.<h5 id="Other-arguments"><a href="#Other-arguments" class="headerlink" title="Other arguments"></a>Other arguments</h5></li>
+<li>In deciding among these analysis options, it may help to consider the counts produced by Bowtie2, which indicate <code>how many alignments fall into each category</code>. For example, if most of the reads are aligned in proper pairs, it may be sufficient to use <code>option #2</code>. On the other hand, <code>option #3</code> is preferred if a substantial fraction of the reads consists of singletons.</li>
+</ul>
+<h5 id="other-arguments"><a class="markdownIt-Anchor" href="#other-arguments"></a> Other arguments</h5>
+<ul>
 <li>MACS2 is <code>not multithreaded</code></li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">macs2 callpeak  -t &lt;BED&gt;  -f BEDPE  -n NAME  -g ce  --keep-dup all</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p><code>-n &lt;str&gt;</code>    Name of the sample. The output files  name prefix.<br><code>-g &lt;int&gt;</code>    Effective genome size, the size of the organism’s genome that can be analyzed (not including Ns, repetitive sequences, etc.). This will be less than the actual genome size. Parameters are provided for some model organisms, and the <code>default value is hs</code> (for Homo sapiens), which corresponds to a value of 2.7e9.<br><code>-q &lt;float&gt;</code>    <code>Maximum q-value</code> (FDR-adjusted p-value) for peak calling (default <code>0.05</code>). Reducing this threshold will decrease the number of peaks identified by MACS2 but increase the confidence in the called peaks.<br><code>--keep-dup &lt;arg&gt;</code>    How to handle PCR duplicates (default: –keep-dup 1, i.e. remove all potential duplicates). If PCR duplicates have been removed by another program, such as Picard’s MarkDuplicates, then specify <code>--keep-dup all</code>.<br><code>--max-gap &lt;int&gt;</code>    Maximum gap between significant sites to cluster them together (default 50bp). (v2.1.2_dev only)<br><code>--min-length &lt;int&gt;</code>    Minimum length of a peak (default 100bp). (v2.1.2_dev only)</p>
+<p><code>-n &lt;str&gt;</code>	Name of the sample. The output files  name prefix.<br>
+<code>-g &lt;int&gt;</code>	Effective genome size, the size of the organism’s genome that can be analyzed (not including Ns, repetitive sequences, etc.). This will be less than the actual genome size. Parameters are provided for some model organisms, and the <code>default value is hs</code> (for Homo sapiens), which corresponds to a value of 2.7e9.<br>
+<code>-q &lt;float&gt;</code>	<code>Maximum q-value</code> (FDR-adjusted p-value) for peak calling (default <code>0.05</code>). Reducing this threshold will decrease the number of peaks identified by MACS2 but increase the confidence in the called peaks.<br>
+<code>--keep-dup &lt;arg&gt;</code>	How to handle PCR duplicates (default: --keep-dup 1, i.e. remove all potential duplicates). If PCR duplicates have been removed by another program, such as Picard’s MarkDuplicates, then specify <code>--keep-dup all</code>.<br>
+<code>--max-gap &lt;int&gt;</code>	Maximum gap between significant sites to cluster them together (default 50bp). (v2.1.2_dev only)<br>
+<code>--min-length &lt;int&gt;</code>	Minimum length of a peak (default 100bp). (v2.1.2_dev only)</p>
 </blockquote>
-<h5 id="Output-files"><a href="#Output-files" class="headerlink" title="Output files"></a>Output files</h5><ul>
+<h5 id="output-files"><a class="markdownIt-Anchor" href="#output-files"></a> Output files</h5>
+<ul>
 <li>NAME_peaks.xls</li>
 <li>NAME_peaks.narrowPeak</li>
 <li>NAME_summits.bed</li>
@@ -132,14 +222,16 @@
   <entry>
     <title>ATAC-seq-1 背景</title>
     <url>/blog/2021/10/11/ATAC-seq-background/</url>
-    <content><![CDATA[<h3 id="ATAC-seq意义"><a href="#ATAC-seq意义" class="headerlink" title="ATAC-seq意义"></a>ATAC-seq意义</h3><span id="more"></span>
-
+    <content><![CDATA[<h3 id="atac-seq意义"><a class="markdownIt-Anchor" href="#atac-seq意义"></a> ATAC-seq意义</h3>
+<span id="more"></span>
 <p><img src="https://img-blog.csdnimg.cn/2eb44c70d00b45bab31b0eb915e91cac.png" alt="在这里插入图片描述"></p>
 <ul>
-<li>为何同样DNA序列的细胞的表型会不同，为何肝细胞是肝细胞，神经细胞是神经细胞？是什么造成了他们生产蛋白不同，决定蛋白生成的RNA不同呢？原因可以用<code>表观遗传</code>来解释。<br><img src="https://img-blog.csdnimg.cn/9bf2e2d5d25a4e2eab27321b99b0b0b8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li>为何同样DNA序列的细胞的表型会不同，为何肝细胞是肝细胞，神经细胞是神经细胞？是什么造成了他们生产蛋白不同，决定蛋白生成的RNA不同呢？原因可以用<code>表观遗传</code>来解释。<br>
+<img src="https://img-blog.csdnimg.cn/9bf2e2d5d25a4e2eab27321b99b0b0b8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 <li>DNA转录成RNA过程复杂，包括：<code>染色质可及性</code>，<code>DNA修饰</code>，<code>组蛋白修饰</code>等等（选择性表达）。</li>
 <li><code>染色质可及性即DNA开放区域</code>，尤为重要。<code>核小体</code>由<code>8个组蛋白</code>组成复合物，每个核小体约<code>147bpDNA</code>。转录时DNA将从核小体复合物松开。许多因素，如<code>染色质结构</code>、<code>核小体位置</code>和<code>组蛋白修饰</code>，在染色质的组织和可及性起重要作用。致密核小体结构被破坏后，<code>启动子、增强子、绝缘子、沉默子</code>等<code>顺式调控元件和反式作用因子可以接近</code>的特性，叫<code>染色质的可及性</code>，也叫<code>染色质开放性</code>(chromatin accessibility ），这段区域叫开放染色质（open chromatin） 。</li>
-<li>什么是组蛋白修饰<ul>
+<li>什么是组蛋白修饰
+<ul>
 <li>定义：组蛋白包含5个部分，按分子量大小分别称为<code>H1，H3，H2A，H2B和H4</code>。组蛋白在相关酶作用下发生<code>甲基化，乙酰化，磷酸化，腺苷酸化，泛素化，ADP核糖基化</code>等修饰</li>
 <li><code>H3·H4乙酰化</code>形成<code>开放染色质结构</code>，<code>增加基因表达</code></li>
 <li>组蛋白<code>甲基化</code>修饰多发生在<code>H3H4</code>，与基因<code>抑制及激活</code>相关，取决于被<code>修饰位置和程度</code></li>
@@ -154,61 +246,98 @@
 <li>开放染色质的研究方法除了ATAC-seq，还有DNase-Seq，FAIRE-seq，MNase-seq 等。ATAC-Seq<code>所需样本少，建库快，重复性更高</code></li>
 <li>技术：制备细胞悬液-&gt;裂解细胞膜，获取细胞核-&gt;采用Tn5进行酶切-&gt;回收DNA片段，PCR扩增建库-&gt;高通量测序-&gt;生信分析</li>
 <li><img src="https://img-blog.csdnimg.cn/00f06cb4758b44c7a35b8c5c3ff74eda.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-<li><code>ATAC-seq</code>与<code>Chip-seq</code> call出来的<code>peak</code>代表的<code>意义不同</code>。<code>Chip-seq</code> peak是被<code>目的蛋白结合拉下来的DNA</code>，一般只有<code>一个峰</code>，而<code>ATAC-seq</code>是被<code>Tn5转座酶切开</code>、没有被组蛋白结合、染色质开放的DNA位点，<code>如果是TF结合的区域，一般会有一个山谷般的存在</code>。ChIP-seq和ATAC-seq在TF或者Tn5结合区域<code>都会形成一个双峰的reads结合模式</code>，但<code>判断peak的时会有不同的标准</code>。chip-seq是由于<code>TF一起沉淀下来的DNA fragment一般会大于TF的结合区域</code>，<code>read的位置并不是真实TF结合位置</code>，需要<code>向内shift</code>；而<code>ATAC-seq一般是往两边shift</code>。<br><img src="https://img-blog.csdnimg.cn/e501e5a398b34d0e8fd514fba8333cdb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li><code>ATAC-seq</code>与<code>Chip-seq</code> call出来的<code>peak</code>代表的<code>意义不同</code>。<code>Chip-seq</code> peak是被<code>目的蛋白结合拉下来的DNA</code>，一般只有<code>一个峰</code>，而<code>ATAC-seq</code>是被<code>Tn5转座酶切开</code>、没有被组蛋白结合、染色质开放的DNA位点，<code>如果是TF结合的区域，一般会有一个山谷般的存在</code>。ChIP-seq和ATAC-seq在TF或者Tn5结合区域<code>都会形成一个双峰的reads结合模式</code>，但<code>判断peak的时会有不同的标准</code>。chip-seq是由于<code>TF一起沉淀下来的DNA fragment一般会大于TF的结合区域</code>，<code>read的位置并不是真实TF结合位置</code>，需要<code>向内shift</code>；而<code>ATAC-seq一般是往两边shift</code>。<br>
+<img src="https://img-blog.csdnimg.cn/e501e5a398b34d0e8fd514fba8333cdb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 <li><code>ATAC-seq</code>与<code>Chip-seq</code>应用上的区别:</li>
 <li>ATAC-Seq可<code>检测全基因组DNA结合蛋白</code>，<code>转录结合位点</code> ，一般用于<code>不知道特定的转录因子</code>，用此方法与其他方法结合<code>筛查感兴趣的特定调控因子</code>；</li>
 <li>ChIP-Seq是已知转录因子，根据<code>感兴趣的转录因子设计抗体</code>去做ChIP实验<code>富集结合的DNA片段</code>。在测定转录因子的 ChIP-seq 中<code>独有的峰可能是先驱转录因子</code>，其<code>先结合到封闭染色质</code>，然后<code>招募染色质重塑因子或其他转录因子起始转录</code>。这些转录因子 <code>ATAC-seq检测不到</code>。</li>
 <li>得到DNA片段后，为测序准备建库，包括<code>用完整的NextEra接头</code>和<code>纯化</code>、<code>PCR扩增</code>等。基于上述原因，<code>ATAC-Seq推荐使用双端配对</code>的方法。</li>
 </ul>
-<h3 id="ATACseq应用"><a href="#ATACseq应用" class="headerlink" title="ATACseq应用"></a>ATACseq应用</h3><ul>
-<li><p>染色质<code>开放性图谱绘制</code>，表观基因组图谱</p>
+<h3 id="atacseq应用"><a class="markdownIt-Anchor" href="#atacseq应用"></a> ATACseq应用</h3>
+<ul>
+<li>
+<p>染色质<code>开放性图谱绘制</code>，表观基因组图谱</p>
 </li>
-<li><p>找<code>调控</code>生物学过程的<code>关键转录因子</code></p>
+<li>
+<p>找<code>调控</code>生物学过程的<code>关键转录因子</code></p>
 </li>
-<li><p>找<code>哪个转录因子</code>调控了研究的基因</p>
+<li>
+<p>找<code>哪个转录因子</code>调控了研究的基因</p>
 </li>
-<li><p>找转录因子调控的<code>靶基因</code></p>
+<li>
+<p>找转录因子调控的<code>靶基因</code></p>
 </li>
-<li><p>得到<code>不同组织或不同条件下对应可及性区域</code>。</p>
+<li>
+<p>得到<code>不同组织或不同条件下对应可及性区域</code>。</p>
 </li>
-<li><p>得到核小体位置</p>
+<li>
+<p>得到核小体位置</p>
 </li>
-<li><p>生成转录因子结合区域的特征(footprinting)</p>
-<h3 id="技术限制"><a href="#技术限制" class="headerlink" title="技术限制"></a>技术限制</h3></li>
-<li><p>Tn5通过<code>插入剪断DNA 并将测序接头连接到剪断的两个DNA 片段的末端</code>，因此对于一个DNA 片段而言，其两端的接头连接是随机的，导致<code>同一片段两端的接头有50%的概率是同一接头</code>。而<code>只有连接不同接头的片段才可用于富集扩增及测序</code>，因此<code>一半的片段无法利用</code>； </p>
+<li>
+<p>生成转录因子结合区域的特征(footprinting)</p>
+<h3 id="技术限制"><a class="markdownIt-Anchor" href="#技术限制"></a> 技术限制</h3>
 </li>
-<li><p><code>大量剪断的DNA 由于片段过大，无法进行PCR富集</code>; </p>
+<li>
+<p>Tn5通过<code>插入剪断DNA 并将测序接头连接到剪断的两个DNA 片段的末端</code>，因此对于一个DNA 片段而言，其两端的接头连接是随机的，导致<code>同一片段两端的接头有50%的概率是同一接头</code>。而<code>只有连接不同接头的片段才可用于富集扩增及测序</code>，因此<code>一半的片段无法利用</code>；</p>
 </li>
-<li><p>Tn5 的<code>活性</code>受反应溶液的组成及反应条件<code>影响</code>，仍然需要优化以便提高剪切效果； </p>
+<li>
+<p><code>大量剪断的DNA 由于片段过大，无法进行PCR富集</code>;</p>
 </li>
-<li><p>ATAC-seq在<code>植物细胞存在以下难点</code>：<code>细胞壁</code>，<code>叶绿体线粒体等细胞器污染</code>，<code>缺少稳定遗传的细胞系</code>; </p>
+<li>
+<p>Tn5 的<code>活性</code>受反应溶液的组成及反应条件<code>影响</code>，仍然需要优化以便提高剪切效果；</p>
+</li>
+<li>
+<p>ATAC-seq在<code>植物细胞存在以下难点</code>：<code>细胞壁</code>，<code>叶绿体线粒体等细胞器污染</code>，<code>缺少稳定遗传的细胞系</code>;</p>
 </li>
 </ul>
-<h3 id="ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq"><a href="#ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq" class="headerlink" title="ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq"></a>ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq</h3><ul>
+<h3 id="atac-seq-dnase-seq-mnase-seq-faire-seq"><a class="markdownIt-Anchor" href="#atac-seq-dnase-seq-mnase-seq-faire-seq"></a> ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq</h3>
+<ul>
 <li>整体的分析思路一致，<code>找富集区域</code>，对富集区域进行功能分析。</li>
 <li>ChIP-Seq是<code>揭示特定转录因子</code>或<code>蛋白复合物</code>的结合区域，实际是<code>研究DNA和蛋白质的相互作用</code>，利用<code>抗体将蛋白质和DNA一起富集</code>，并对<code>富集的DNA测序</code>。</li>
 <li>DNase-Seq、ATAC-Seq、FAIRE-Seq都<code>研究开放染色质区域</code>：</li>
 <li>DNase-Seq用<code>DNase I内切酶识别</code>开放染色质区域，</li>
 <li>ATAC-seq用<code>Tn5转座酶</code>，随后进行<code>富集扩增</code>；</li>
 <li>FAIRE-Seq先超声裂解，后用酚-氯仿富集；</li>
-<li>MNase-Seq鉴定核小体区域。 </li>
+<li>MNase-Seq鉴定核小体区域。</li>
 </ul>
 <p>下图是不同测序方法获取的峰形：</p>
-<p><img src="https://img-blog.csdnimg.cn/aea5161044eb40e1a1cc4c1a65d63cbb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>检测染色质可及性的方法中，ATAC-seq尤其受欢迎。<br><img src="https://img-blog.csdnimg.cn/96808dfcce9446298f1d0d4cc0db6eee.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_10,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/aea5161044eb40e1a1cc4c1a65d63cbb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
+检测染色质可及性的方法中，ATAC-seq尤其受欢迎。<br>
+<img src="https://img-blog.csdnimg.cn/96808dfcce9446298f1d0d4cc0db6eee.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_10,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <ul>
 <li>ATAC-seq的优点：<code>Tn5转座酶的高活性</code>使ATAC-seq简单，省时，而且只需500-50,000个细胞。灵敏度特异性与DNase-seq相当，优于FAIRE-seq。</li>
 </ul>
-<h3 id="整合分析"><a href="#整合分析" class="headerlink" title="整合分析"></a>整合分析</h3><ul>
-<li>由于开放染色质是大多数TF结合的先决条件，因此<code>ATAC-seq峰通常与TF ChIP-seq峰重叠，但通常更宽</code>。因此，<code>TF ChIP-seq和ATAC-seq可以在同一实验系统中相互验证</code>彼此的质量和可靠性。 </li>
-<li>ATAC-seq与 histone marker ChIP-seq集成，发现与活跃染色质标 H3K4me3，H3K4me1，H3K27ac等正相关，与不活跃的染色质标记 H3K27me3 负相关。 <code>？</code></li>
-<li><code>ATAC-seq+RNA-seq</code>： 一般RNA-seq会优先于ATAC-seq先测，但<code>差异基因富集的基因通路只是一种相关性</code>。要分析出其中谁调控目的基因，可通过<code>ATAC-seq做motif分析</code>，<code>寻找潜在的调控因子</code>，然后再后续的<code>实验验证</code>或者<code>chip-seq验证</code>。/ 看ATAC上丰度高的DNA序列区域是否对应转录本表达量增加，找到对应转录本相关基因的上游调控序列，整体分析转录。对基因功能分析，结合实验表型，推测表达调控-表达-功能-表型。<br><img src="https://img-blog.csdnimg.cn/4a3016bfa5c74598a5b7d660fe1cfe84.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-<li><code>ATAC-seq+HiC</code>： 对于一些想了解<code>染色质高级结构对生命行为的作用</code>的时候，通常会需要用到ATAC-seq等技术，因为<code>Hi-C分析</code>得到高级结构compartmentA/B、TADs、Loops等信息，通常只是相关性，但通过ATAC-seq，可以<code>获得promoter、enhancer等信息</code>，更能知道高级结构是如何影响启动子、增强子从而影响基因表达的。<br><img src="https://img-blog.csdnimg.cn/e38ba32597a14ca7a5d4d6b2f36c1b73.png" alt="在这里插入图片描述"></li>
-<li><code>ATAC-seq+组蛋白修饰</code>： ATAC-seq预测一个位点的开放程度以及可能有某种转录因子的结合，但<code>不知道</code>该因子是<code>促进</code>基因表达，还是<code>抑制</code>，只通过<code>基因层面鉴定</code>来判断转录因子对基因的促进或者是不够的，它只是一种<code>相关性</code>。而这时候如果能提供像<code>H3K27ac这类激活型组蛋白</code>、<code>H3K27me3这类抑制型组蛋白</code>将能使数据结果可信。国内较早研究iPSCs的学者如裴端卿的工作可以看到，在解析iPSCs重编程中的染色质可及性的时候，不仅用到ATAC-seq来描述细胞的身份转变，还<code>通过H3K27ac指征该区域的激活</code>。其中一篇还通过<code>调控成纤维细胞关键基因启动子区去乙酰化修饰</code>，达到了促进重编程的进程。<br><img src="https://img-blog.csdnimg.cn/abb3dc6c3bb0476985a9f1b2e77c4fcc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-<li><code>scATAC-seq+scRNA-seq</code>： 更前沿的技术一个细胞里同时进行RNA-seq和ATAC-seq，并且是单细胞水平的检测。SHARE-seq，能够实现在单细胞中同时高质量，高通量的检测基因表达和染色质可及性。该技术可以使用<code>染色质潜力算法</code>（chromatin potential），<code>用ATAC和RNA的差异来预测细胞的变化方向</code>。<code>相对于以往仅依赖于RNA的预测手段，染色质潜力能够大大提前预测的时间</code>。<br><img src="https://img-blog.csdnimg.cn/df76c6e5f3184d58a00a1fa53a398cd5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-</ul>
+<h3 id="整合分析"><a class="markdownIt-Anchor" href="#整合分析"></a> 整合分析</h3>
 <ul>
-<li><a href="https://pubmed.ncbi.nlm.nih.gov/27374332/">ATAC-seq与ChIP联合分析</a><br>研究课题为人小细胞肺癌促进癌症扩散转移的背景机制。主要比较原发性和肝转移性的小细胞肺癌细胞之间的差异。利用ATAC-seq，发现NFI家族转录因子富集在具有差异的染色质开放位点中，预示着NFI家族转录因子在调控肿瘤细胞转移中扮演着重要角色。在染色质高开放性位点区域伴随着Nfib拷贝数量增多，且Nfib在侵袭性原发性肿瘤和转移性肿瘤内高表达，Nfib表现出维持染色质及远端调控区域开放和促进神经基因表达的功能，说明了Nfib对促进癌细胞增殖和迁移具有重要的作用。</li>
-<li><a href="https://pubmed.ncbi.nlm.nih.gov/25679813/">motif分析转录因子结合蛋白</a>。对处于发育过程中的黑腹果蝇眼睛及其通过遗传诱导的肿瘤模型，利用ATAC-seq技术分析染色质开放区域已在活体中发现驱动肿瘤发育的转录因子及调控区域。然后对找到的染色质活性开放区域进行转录因子预测分析，发现了两个关键的转录因子，猜测它们可能与染色质图谱的变化有关。通过对候选的一个转录因子进行功能验证和靶标分析，发现其为肿瘤转录组中的一个关键的转录调控因子。</li>
+<li>
+<p>由于开放染色质是大多数TF结合的先决条件，因此<code>ATAC-seq峰通常与TF ChIP-seq峰重叠，但通常更宽</code>。因此，<code>TF ChIP-seq和ATAC-seq可以在同一实验系统中相互验证</code>彼此的质量和可靠性。</p>
+</li>
+<li>
+<p>ATAC-seq与 histone marker ChIP-seq集成，发现与活跃染色质标 H3K4me3，H3K4me1，H3K27ac等正相关，与不活跃的染色质标记 H3K27me3 负相关。 <code>？</code></p>
+</li>
+<li>
+<p><code>ATAC-seq+RNA-seq</code>： 一般RNA-seq会优先于ATAC-seq先测，但<code>差异基因富集的基因通路只是一种相关性</code>。要分析出其中谁调控目的基因，可通过<code>ATAC-seq做motif分析</code>，<code>寻找潜在的调控因子</code>，然后再后续的<code>实验验证</code>或者<code>chip-seq验证</code>。/ 看ATAC上丰度高的DNA序列区域是否对应转录本表达量增加，找到对应转录本相关基因的上游调控序列，整体分析转录。对基因功能分析，结合实验表型，推测表达调控-表达-功能-表型。<br>
+<img src="https://img-blog.csdnimg.cn/4a3016bfa5c74598a5b7d660fe1cfe84.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><code>ATAC-seq+HiC</code>： 对于一些想了解<code>染色质高级结构对生命行为的作用</code>的时候，通常会需要用到ATAC-seq等技术，因为<code>Hi-C分析</code>得到高级结构compartmentA/B、TADs、Loops等信息，通常只是相关性，但通过ATAC-seq，可以<code>获得promoter、enhancer等信息</code>，更能知道高级结构是如何影响启动子、增强子从而影响基因表达的。<br>
+<img src="https://img-blog.csdnimg.cn/e38ba32597a14ca7a5d4d6b2f36c1b73.png" alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><code>ATAC-seq+组蛋白修饰</code>： ATAC-seq预测一个位点的开放程度以及可能有某种转录因子的结合，但<code>不知道</code>该因子是<code>促进</code>基因表达，还是<code>抑制</code>，只通过<code>基因层面鉴定</code>来判断转录因子对基因的促进或者是不够的，它只是一种<code>相关性</code>。而这时候如果能提供像<code>H3K27ac这类激活型组蛋白</code>、<code>H3K27me3这类抑制型组蛋白</code>将能使数据结果可信。国内较早研究iPSCs的学者如裴端卿的工作可以看到，在解析iPSCs重编程中的染色质可及性的时候，不仅用到ATAC-seq来描述细胞的身份转变，还<code>通过H3K27ac指征该区域的激活</code>。其中一篇还通过<code>调控成纤维细胞关键基因启动子区去乙酰化修饰</code>，达到了促进重编程的进程。<br>
+<img src="https://img-blog.csdnimg.cn/abb3dc6c3bb0476985a9f1b2e77c4fcc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><code>scATAC-seq+scRNA-seq</code>： 更前沿的技术一个细胞里同时进行RNA-seq和ATAC-seq，并且是单细胞水平的检测。SHARE-seq，能够实现在单细胞中同时高质量，高通量的检测基因表达和染色质可及性。该技术可以使用<code>染色质潜力算法</code>（chromatin potential），<code>用ATAC和RNA的差异来预测细胞的变化方向</code>。<code>相对于以往仅依赖于RNA的预测手段，染色质潜力能够大大提前预测的时间</code>。<br>
+<img src="https://img-blog.csdnimg.cn/df76c6e5f3184d58a00a1fa53a398cd5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/27374332/">ATAC-seq与ChIP联合分析</a><br>
+研究课题为人小细胞肺癌促进癌症扩散转移的背景机制。主要比较原发性和肝转移性的小细胞肺癌细胞之间的差异。利用ATAC-seq，发现NFI家族转录因子富集在具有差异的染色质开放位点中，预示着NFI家族转录因子在调控肿瘤细胞转移中扮演着重要角色。在染色质高开放性位点区域伴随着Nfib拷贝数量增多，且Nfib在侵袭性原发性肿瘤和转移性肿瘤内高表达，Nfib表现出维持染色质及远端调控区域开放和促进神经基因表达的功能，说明了Nfib对促进癌细胞增殖和迁移具有重要的作用。</p>
+</li>
+<li>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/25679813/">motif分析转录因子结合蛋白</a>。对处于发育过程中的黑腹果蝇眼睛及其通过遗传诱导的肿瘤模型，利用ATAC-seq技术分析染色质开放区域已在活体中发现驱动肿瘤发育的转录因子及调控区域。然后对找到的染色质活性开放区域进行转录因子预测分析，发现了两个关键的转录因子，猜测它们可能与染色质图谱的变化有关。通过对候选的一个转录因子进行功能验证和靶标分析，发现其为肿瘤转录组中的一个关键的转录调控因子。</p>
+</li>
 </ul>
 <hr>
 <ul>
@@ -220,34 +349,53 @@
 <li>样本间的差异怎么分析？</li>
 <li>怎么对peaks进行功能注释分析？</li>
 <li>如何找motif?</li>
-<li>ATAC-Seq和ChIP-Seq和RNA-Seq的整合分析怎么做？<br><img src="https://img-blog.csdnimg.cn/0920f7a6c41148b2825b189e709a5fbc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="ATAC-seq/CHIP-seq流程"></li>
+<li>ATAC-Seq和ChIP-Seq和RNA-Seq的整合分析怎么做？<br>
+<img src="https://img-blog.csdnimg.cn/0920f7a6c41148b2825b189e709a5fbc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="ATAC-seq/CHIP-seq流程"></li>
 </ul>
 <p>待学习内容：</p>
 <ol>
-<li><p>ATAC-seq data analysis: from FASTQ to peaks</p>
+<li>
+<p>ATAC-seq data analysis: from FASTQ to peaks</p>
 </li>
-<li><p>ATAC-seq Data Standards and Processing Pipeline in ENCODE</p>
+<li>
+<p>ATAC-seq Data Standards and Processing Pipeline in ENCODE</p>
 </li>
-<li><p>ATAC-seq数据分析实战</p>
+<li>
+<p>ATAC-seq数据分析实战</p>
 </li>
-<li><p>Harvard FAS Informatics - ATAC-seq Guidelines</p>
+<li>
+<p>Harvard FAS Informatics - ATAC-seq Guidelines</p>
 </li>
-<li><p>Harvard Chan Bioinformatics Core (HBC)深度NGS数据分析课程，第5部分关于ChIP-Seq，整体思路和绝大部分分析方法适合ATAC-seq。</p>
-<p>HBC深度NGS数据分析课程：<br><a href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course</a><br>第五部分ChIP-Seq课程：</p>
+<li>
+<p>Harvard Chan Bioinformatics Core (HBC)深度NGS数据分析课程，第5部分关于ChIP-Seq，整体思路和绝大部分分析方法适合ATAC-seq。</p>
+<p>HBC深度NGS数据分析课程：<br>
+<a href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course</a><br>
+第五部分ChIP-Seq课程：</p>
 <p><a href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons</a></p>
 </li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">参考文献：</span><br><span class="line">https://mp.weixin.qq.com/s?src=11&amp;timestamp=1633159169&amp;ver=3349&amp;signature=*MwqLr1J-qdZoNiKVxF32vEKh5-6TRystOXAJ3UOZ3Pl8XTBIB8Ly95IJM0L2EzGFVWOM-TdKnuhnb0gfMfsUTfahWJ5i3hcM2TcR9UDFSVWuyYw7CONzMjsMaYQG2Ca&amp;new=1</span><br><span class="line">https://mp.weixin.qq.com/s?src=11&amp;timestamp=1633159169&amp;ver=3349&amp;signature=rtYw5NsC62rUZvctQsUg3*w*NFFDdOHgSMu0pcp0HTQdCyqxpgril8yx7GWlJaID*lfd2HRLUWs59zuszSEFeean0jEwdRs4PzYy*T5b7nSpZRWqCs4SHcEQ2jyjDtwQ&amp;new=1</span><br></pre></td></tr></table></figure>
-
 <hr>
 <blockquote>
-<p>1：ATAC-seq的背景介绍以及与ChIP-Seq的异同<br>2：原始数据的质控、比对和过滤<br>3：用MACS2软件call peaks<br>4：对ATAC-Seq/ChIP-seq的质量评估（一）——phantompeakqualtools<br>5：对ATAC-Seq/ChIP-seq的质量评估（二）——ChIPQC<br>6：重复样本的处理——IDR<br>7：用Y叔的ChIPseeker做功能注释<br>8：用网页版工具进行motif分析<br>9：差异peaks分析——DiffBind<br>10：ATAC-Seq、ChIP-Seq、RNA-Seq整合分析</p>
+<p>1：ATAC-seq的背景介绍以及与ChIP-Seq的异同<br>
+2：原始数据的质控、比对和过滤<br>
+3：用MACS2软件call peaks<br>
+4：对ATAC-Seq/ChIP-seq的质量评估（一）——phantompeakqualtools<br>
+5：对ATAC-Seq/ChIP-seq的质量评估（二）——ChIPQC<br>
+6：重复样本的处理——IDR<br>
+7：用Y叔的ChIPseeker做功能注释<br>
+8：用网页版工具进行motif分析<br>
+9：差异peaks分析——DiffBind<br>
+10：ATAC-Seq、ChIP-Seq、RNA-Seq整合分析</p>
 </blockquote>
-<h3 id="简洁版ATACseq分析流程"><a href="#简洁版ATACseq分析流程" class="headerlink" title="简洁版ATACseq分析流程"></a>简洁版ATACseq分析流程</h3><ul>
-<li>数据预处理<ul>
+<h3 id="简洁版atacseq分析流程"><a class="markdownIt-Anchor" href="#简洁版atacseq分析流程"></a> 简洁版ATACseq分析流程</h3>
+<ul>
+<li>数据预处理
+<ul>
 <li>（1）比对前质量控制FastQC</li>
-<li>（2）原始序列比对 </li>
-<li>（3）比对后处理和质量控制：去除重复序列，细胞器序列<ul>
+<li>（2）原始序列比对</li>
+<li>（3）比对后处理和质量控制：去除重复序列，细胞器序列
+<ul>
 <li>序列比对后，Picard/SAMtools收集unique mapping reads/rate，duplicated rate百分比和片段大小分布</li>
 <li>成功的ATACseq实验应生成<code>片段大小分布图</code>（从<code>bam文件</code>得到），具有递减性和周期性的峰，对应于<code>无核小体区域</code>（NFR）（&lt;100bp）和<code>单核双核和三核</code>小体（200，400，600bp）。大多数Linker DNA大小介于10-80bp间，故大多数片段都会是<code>小于100bp</code>。每个Nucleosome的DNA大小为180bp，加上两边插入的冗余，会得到大约<code>200bp</code>长度的mono-nucleosome的DNA。</li>
 <li><code>无核小体区域的片段应该在基因的转录起始位点（TSS）周围富集</code>，而<code>核小体结合区域片段TSS处形成低谷</code>，TSS周围<code>侧翼区域稍微富集</code>。<code>ATACseqQC评估</code>。</li>
@@ -256,7 +404,8 @@
 </ul>
 </li>
 <li>Peak-calling：从比对得到的bam文件找出reads覆盖区，就是峰出现的位置。</li>
-<li>高级分析<ul>
+<li>高级分析
+<ul>
 <li>（1）peak 差异分析：寻找不同分组差异peaks</li>
 <li>（2）peak注释：峰的注释可将染色质的可及性与基因调控联系。通常峰会被注释到最接近的基因或调控原件。获得最接近的基因列表后，使用GOKEGGReactome等数据库功能富集分析</li>
 <li>（3）motif富集分析：得到每个peak region里motif的位置和频率，再和随机背景或其他条件比较，可做motif富集分析</li>
@@ -276,124 +425,97 @@
   <entry>
     <title>Hexo-build</title>
     <url>/blog/2021/10/08/hexo_build/</url>
-    <content><![CDATA[<p>借鉴前人的经验，建立自己的小小博客。<br>参考：<a href="https://yiweiniu.github.io/blog/2018/02/Hexo-%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/#more">https://yiweiniu.github.io/blog/2018/02/Hexo-建站记录/#more</a></p>
+    <content><![CDATA[<p>借鉴前人的经验，建立自己的小小博客。<br>
+参考：<a href="https://yiweiniu.github.io/blog/2018/02/Hexo-%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/#more">https://yiweiniu.github.io/blog/2018/02/Hexo-建站记录/#more</a></p>
 <hr>
 <span id="more"></span>
-
-<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>安装git和npm</p>
+<h2 id="前提"><a class="markdownIt-Anchor" href="#前提"></a> 前提</h2>
+<p>安装git和npm</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line"># 查看版本</span><br><span class="line">$ hexo -v</span><br><span class="line"></span><br><span class="line"># 建站</span><br><span class="line">hexo init hexo</span><br><span class="line">cd hexo</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">#local:/Users/minedir/blog</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置站点-config-yml"><a href="#配置站点-config-yml" class="headerlink" title="配置站点_config.yml"></a>配置站点_config.yml</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: WANGC blog</span><br><span class="line">subtitle: &#x27;dream big work hard&#x27;</span><br><span class="line">description: &#x27;today&#x27;</span><br><span class="line">keywords: Bioinformatics</span><br><span class="line">author: Wang Chen</span><br><span class="line">language: en</span><br><span class="line">timezone: Asia/Shanghai</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://wangc1106.github.io</span><br><span class="line">root: /blog/</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-
+<h2 id="配置站点_configyml"><a class="markdownIt-Anchor" href="#配置站点_configyml"></a> 配置站点_config.yml</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: WANGC blog</span><br><span class="line">subtitle: &#x27;dream big work hard&#x27;</span><br><span class="line">description: &#x27;today&#x27;</span><br><span class="line">keywords: Bioinformatics</span><br><span class="line">author: Wang Chen</span><br><span class="line">language: en</span><br><span class="line">timezone: Asia/Shanghai</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://wangc1106.github.io</span><br><span class="line">root: /blog/</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="主题"><a class="markdownIt-Anchor" href="#主题"></a> 主题</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
 <p>将 <code>_config.yml</code> 中 <code>theme</code> 设置为 next。</p>
-<h3 id="clean-important-step"><a href="#clean-important-step" class="headerlink" title="!clean! important step"></a>!clean! important step</h3><p><code>hexo clean</code></p>
-<h3 id="生成"><a href="#生成" class="headerlink" title="!生成!"></a>!生成!</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-
-<h2 id="！github部署！"><a href="#！github部署！" class="headerlink" title="！github部署！"></a>！github部署！</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/wangc1106/wangc1106.github.com.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
+<h3 id="clean-important-step"><a class="markdownIt-Anchor" href="#clean-important-step"></a> !clean! important step</h3>
+<p><code>hexo clean</code></p>
+<h3 id="生成"><a class="markdownIt-Anchor" href="#生成"></a> !生成!</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<h2 id="github部署"><a class="markdownIt-Anchor" href="#github部署"></a> ！github部署！</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/wangc1106/wangc1106.github.com.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 <p>配置 ssh 公钥</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;@qq.com&quot;(一路回车)</span><br></pre></td></tr></table></figure>
-
 <p>git网站setting加key，~/.ssh/id_rsa.pub</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"># 部署</span><br><span class="line">hexo -d</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="！本地调试！"><a href="#！本地调试！" class="headerlink" title="！本地调试！"></a>！本地调试！</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">npm install hexo-server --save</span><br><span class="line"># 运行本地服务器</span><br><span class="line">hexo s [-p 4000]</span><br><span class="line">#服务器默认运行在 0.0.0.0，您可以覆盖默认的 IP 设置。默认端口为 4000，可以用 -p 设置端口。</span><br><span class="line">hexo server -i 192.168.1.1 ？</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="添加标签√"><a href="#添加标签√" class="headerlink" title="添加标签√"></a>添加标签√</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 标签的文章的例子 顶部说明</span><br><span class="line">title: 标签测试文章</span><br><span class="line">tags:</span><br><span class="line">  - Testing</span><br><span class="line">  - Another Tag</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
+<h2 id="本地调试"><a class="markdownIt-Anchor" href="#本地调试"></a> ！本地调试！</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">npm install hexo-server --save</span><br><span class="line"># 运行本地服务器</span><br><span class="line">hexo s [-p 4000]</span><br><span class="line">#服务器默认运行在 0.0.0.0，您可以覆盖默认的 IP 设置。默认端口为 4000，可以用 -p 设置端口。</span><br><span class="line">hexo server -i 192.168.1.1 ？</span><br></pre></td></tr></table></figure>
+<h2 id="添加标签"><a class="markdownIt-Anchor" href="#添加标签"></a> 添加标签√</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 标签的文章的例子 顶部说明</span><br><span class="line">title: 标签测试文章</span><br><span class="line">tags:</span><br><span class="line">  - Testing</span><br><span class="line">  - Another Tag</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 <p>终端窗口定位到 Hexo 站点目录blog下。使用 <code>hexo new page</code> 新建一个页面，命名为 <code>tags</code> ：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
-
-<p>编辑tags文件夹内的index.md，页面type设置为 <code>tags</code> ，主题自动为这个页面显示标签云。内容：</p>
+<p><a href="http://xn--tagsindex-877nf9td0z7r0byy1cb40ayd9c.md">编辑tags文件夹内的index.md</a>，页面type设置为 <code>tags</code> ，主题自动为这个页面显示标签云。内容：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2018-02-07 17:14:22</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="分类-同-tags-√"><a href="#分类-同-tags-√" class="headerlink" title="分类 同 tags √"></a>分类 同 tags √</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: 分类测试文章</span><br><span class="line">categories: Testing</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
+<h2 id="分类-同-tags"><a class="markdownIt-Anchor" href="#分类-同-tags"></a> 分类 同 tags √</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: 分类测试文章</span><br><span class="line">categories: Testing</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2018-02-07 17:14:06</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="设置页面文章的篇数√"><a href="#设置页面文章的篇数√" class="headerlink" title="设置页面文章的篇数√"></a>设置页面文章的篇数√</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">`npm install --save hexo-generator-indexnpm install --save hexo-generator-archivenpm install --save hexo-generator-tag`</span><br></pre></td></tr></table></figure>
-
+<h2 id="设置页面文章的篇数"><a class="markdownIt-Anchor" href="#设置页面文章的篇数"></a> 设置页面文章的篇数√</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">`npm install --save hexo-generator-indexnpm install --save hexo-generator-archivenpm install --save hexo-generator-tag`</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">index_generator:</span><br><span class="line">  path: &#x27;&#x27;</span><br><span class="line">  per_page: 8</span><br><span class="line">  order_by: -date</span><br><span class="line"></span><br><span class="line">archive_generator:</span><br><span class="line">  per_page: 0</span><br><span class="line">  yearly: true</span><br><span class="line">  monthly: false</span><br><span class="line"></span><br><span class="line">tag_generator:</span><br><span class="line">  per_page: 10</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="置顶文章"><a href="#置顶文章" class="headerlink" title="置顶文章"></a>置顶文章</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
-
-
-
+<h2 id="置顶文章"><a class="markdownIt-Anchor" href="#置顶文章"></a> 置顶文章</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
 <p>文章开头 top: true</p>
-<h2 id="改变-Markdown-渲染器-ing"><a href="#改变-Markdown-渲染器-ing" class="headerlink" title="改变 Markdown 渲染器 ing"></a>改变 Markdown 渲染器 ing</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save # 卸载原有渲染器</span><br><span class="line">npm i hexo-renderer-markdown-it-plus --save    # 安装新的</span><br></pre></td></tr></table></figure>
-
+<h2 id="改变-markdown-渲染器-ing"><a class="markdownIt-Anchor" href="#改变-markdown-渲染器-ing"></a> 改变 Markdown 渲染器 ing</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save # 卸载原有渲染器</span><br><span class="line">npm i hexo-renderer-markdown-it-plus --save    # 安装新的</span><br></pre></td></tr></table></figure>
 <p>编辑站点的 <code>_config.yml</code>，配置插件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># hexo-renderer-markdown-it-plus config</span><br><span class="line">## Docs: https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus</span><br><span class="line">markdown_it_plus:</span><br><span class="line">    highlight: true</span><br><span class="line">    html: true</span><br><span class="line">    xhtmlOut: true</span><br><span class="line">    breaks: true</span><br><span class="line">    langPrefix:</span><br><span class="line">    linkify: true</span><br><span class="line">    typographer:</span><br><span class="line">    quotes: “”‘’</span><br><span class="line">    pre_class: highlight</span><br><span class="line">    plugins:</span><br><span class="line">        - plugin:</span><br><span class="line">            name: markdown-it-mark</span><br><span class="line">            enable: true</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="选择-Scheme"><a href="#选择-Scheme" class="headerlink" title="选择 Scheme"></a>选择 Scheme</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Scheme Settings</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">## Schemes</span><br><span class="line">#scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
-
-<h2 id="侧栏菜单-√"><a href="#侧栏菜单-√" class="headerlink" title="侧栏菜单 √"></a>侧栏菜单 √</h2><p>主题next的configyml</p>
+<h2 id="选择-scheme"><a class="markdownIt-Anchor" href="#选择-scheme"></a> 选择 Scheme</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Scheme Settings</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">## Schemes</span><br><span class="line">#scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
+<h2 id="侧栏菜单"><a class="markdownIt-Anchor" href="#侧栏菜单"></a> 侧栏菜单 √</h2>
+<p>主题next的configyml</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  categories: /categories/ || th</span><br><span class="line">  tags: /tags/ || tags</span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  about: https://yiweiniu.github.io/ || user</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加头像√"><a href="#添加头像√" class="headerlink" title="添加头像√"></a>添加头像√</h2><p>主题next的configyml</p>
+<h2 id="添加头像"><a class="markdownIt-Anchor" href="#添加头像"></a> 添加头像√</h2>
+<p>主题next的configyml</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">url: /images/banner.png</span><br></pre></td></tr></table></figure>
-
-<h2 id="侧边栏社交链接√"><a href="#侧边栏社交链接√" class="headerlink" title="侧边栏社交链接√"></a>侧边栏社交链接√</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">social:</span><br><span class="line">  E-Mail: mailto:@qq.com || envelope</span><br><span class="line">  GitHub: https://github.com/user || github</span><br></pre></td></tr></table></figure>
-
-<h2 id="阅读更多-√"><a href="#阅读更多-√" class="headerlink" title="阅读更多 √"></a>阅读更多 √</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br><span class="line">#设置自动不起作用 用的 &lt;!-- more --&gt;手动</span><br></pre></td></tr></table></figure>
-
-<h2 id="显示文章字数统计-阅读时长-√"><a href="#显示文章字数统计-阅读时长-√" class="headerlink" title="显示文章字数统计,阅读时长 √"></a>显示文章字数统计,阅读时长 √</h2><p>站点目录blog下 npm install hexo-symbols-count-time –save</p>
+<h2 id="侧边栏社交链接"><a class="markdownIt-Anchor" href="#侧边栏社交链接"></a> 侧边栏社交链接√</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">social:</span><br><span class="line">  E-Mail: mailto:@qq.com || envelope</span><br><span class="line">  GitHub: https://github.com/user || github</span><br></pre></td></tr></table></figure>
+<h2 id="阅读更多"><a class="markdownIt-Anchor" href="#阅读更多"></a> 阅读更多 √</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br><span class="line">#设置自动不起作用 用的 &lt;!-- more --&gt;手动</span><br></pre></td></tr></table></figure>
+<h2 id="显示文章字数统计阅读时长"><a class="markdownIt-Anchor" href="#显示文章字数统计阅读时长"></a> 显示文章字数统计,阅读时长 √</h2>
+<p>站点目录blog下 npm install hexo-symbols-count-time --save</p>
 <p>站点配置</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># word count</span><br><span class="line"># Dependencies: https://github.com/theme-next/hexo-symbols-count-time</span><br><span class="line">symbols_count_time:</span><br><span class="line">  symbols: true</span><br><span class="line">  time: true</span><br><span class="line">  total_symbols: false</span><br><span class="line">  total_time: false</span><br></pre></td></tr></table></figure>
-
 <p>主题配置</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Post wordcount display settings</span><br><span class="line"># Dependencies: https://github.com/theme-next/hexo-symbols-count-time</span><br><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: false</span><br><span class="line">  item_text_post: false</span><br><span class="line">  item_text_total: false</span><br><span class="line">  awl: 5</span><br><span class="line">  wpm: 200</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改网页底部-ing-part"><a href="#修改网页底部-ing-part" class="headerlink" title="修改网页底部 ing, part"></a>修改网页底部 ing, part</h2><p>在图标库中找到你自己喜欢的图标，打开 <code>themes/next</code> 下的 <code>_config.yml</code>，搜索关键字 <code>authoricon</code>，替换图标名。</p>
+<h2 id="修改网页底部-ing-part"><a class="markdownIt-Anchor" href="#修改网页底部-ing-part"></a> 修改网页底部 ing, part</h2>
+<p>在图标库中找到你自己喜欢的图标，打开 <code>themes/next</code> 下的 <code>_config.yml</code>，搜索关键字 <code>authoricon</code>，替换图标名。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">footer:</span><br><span class="line">  # Specify the date when the site was setup.</span><br><span class="line">  # If not defined, current year will be used.</span><br><span class="line">  since: 2017</span><br><span class="line"></span><br><span class="line">  # Icon between year and copyright info.</span><br><span class="line">  icon:</span><br><span class="line">    # Icon name in fontawesome, see: https://fontawesome.com/v4.7.0/icons</span><br><span class="line">    # `heart` is recommended with animation in red (#ff0000).</span><br><span class="line">    name: mars</span><br><span class="line">    # If you want to animate the icon, set it to true.</span><br><span class="line">    animated: true</span><br><span class="line">    # Change the color of icon, using Hex Code.</span><br><span class="line">    color: &quot;#808080&quot;</span><br><span class="line"></span><br><span class="line">  # If not defined, will be used `author` from Hexo main config.</span><br><span class="line">  copyright:</span><br><span class="line">  # -------------------------------------------------------------</span><br><span class="line">  # Hexo link (Powered by Hexo).</span><br><span class="line">  powered: false</span><br><span class="line"></span><br><span class="line">  theme:</span><br><span class="line">    # Theme &amp; scheme info link (Theme - NexT.scheme).</span><br><span class="line">    enable: false</span><br><span class="line">    # Version info of NexT after scheme info (vX.X.X).</span><br><span class="line">    version: false</span><br><span class="line">  # -------------------------------------------------------------</span><br><span class="line">  # Any custom text can be defined here.</span><br><span class="line">  #custom_text: Hosted by &lt;a target=&quot;_blank&quot; href=&quot;https://pages.github.com&quot;&gt;GitHub Pages&lt;/a&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="开启版权声明-√-没啥用"><a href="#开启版权声明-√-没啥用" class="headerlink" title="开启版权声明 √ 没啥用"></a>开启版权声明 √ 没啥用</h2><p>主题配置文件下,搜索关键字 <code>creative_commons</code></p>
+<h2 id="开启版权声明-没啥用"><a class="markdownIt-Anchor" href="#开启版权声明-没啥用"></a> 开启版权声明 √ 没啥用</h2>
+<p>主题配置文件下,搜索关键字 <code>creative_commons</code></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
-
-<h2 id="浏览进度"><a href="#浏览进度" class="headerlink" title="浏览进度"></a>浏览进度</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Scroll percent label in b2t button.</span><br><span class="line">scrollpercent: true</span><br></pre></td></tr></table></figure>
-
-<h2 id="评论系统-DISQUS：-NO"><a href="#评论系统-DISQUS：-NO" class="headerlink" title="评论系统 DISQUS： NO"></a>评论系统 DISQUS： NO</h2><h2 id="本地搜索-√"><a href="#本地搜索-√" class="headerlink" title="本地搜索 √"></a>本地搜索 √</h2><p>添加百度/谷歌/本地 自定义站点内容搜索</p>
+<h2 id="浏览进度"><a class="markdownIt-Anchor" href="#浏览进度"></a> 浏览进度</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Scroll percent label in b2t button.</span><br><span class="line">scrollpercent: true</span><br></pre></td></tr></table></figure>
+<h2 id="评论系统-disqus-no"><a class="markdownIt-Anchor" href="#评论系统-disqus-no"></a> 评论系统 DISQUS： NO</h2>
+<h2 id="本地搜索"><a class="markdownIt-Anchor" href="#本地搜索"></a> 本地搜索 √</h2>
+<p>添加百度/谷歌/本地 自定义站点内容搜索</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-
 <p>编辑 站点配置文件，新增以下内容到任意位置：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
-
 <p>主题配置文件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Local search</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加谷歌统计-NO"><a href="#添加谷歌统计-NO" class="headerlink" title="添加谷歌统计 NO"></a>添加谷歌统计 NO</h2><h2 id="阅读次数统计（LeanCloud-√"><a href="#阅读次数统计（LeanCloud-√" class="headerlink" title="阅读次数统计（LeanCloud)√"></a>阅读次数统计（LeanCloud)√</h2><p>安装插件</p>
+<h2 id="添加谷歌统计-no"><a class="markdownIt-Anchor" href="#添加谷歌统计-no"></a> 添加谷歌统计 NO</h2>
+<h2 id="阅读次数统计leancloud"><a class="markdownIt-Anchor" href="#阅读次数统计leancloud"></a> 阅读次数统计（LeanCloud)√</h2>
+<p>安装插件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-leancloud-counter-security --save</span><br></pre></td></tr></table></figure>
-
 <p>站点文件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">leancloud_counter_security:</span><br><span class="line">  enable_sync: true</span><br><span class="line">  app_id: &lt;&lt;your app id&gt;&gt;</span><br><span class="line">  app_key: &lt;&lt;your app key&gt;&gt;</span><br><span class="line">  username: &lt;&lt;your username&gt;&gt; # Will be asked while deploying if is left blank</span><br><span class="line">  password: &lt;&lt;your password&gt;&gt; # Recommmended to be left blank. Will be asked while deploying if is left blank</span><br></pre></td></tr></table></figure>
-
 <p>配置主题文件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Show number of visitors to each article.</span><br><span class="line"># You can visit https://leancloud.cn get AppID and AppKey.</span><br><span class="line">leancloud_visitors:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: #&lt;app_id&gt;</span><br><span class="line">  app_key: #&lt;app_key&gt;</span><br><span class="line">  # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security</span><br><span class="line">  # If you don&#x27;t care about security in lc counter and just want to use it directly</span><br><span class="line">  # (without hexo-leancloud-counter-security plugin), set the `security` to `false`.</span><br><span class="line">  security: true</span><br><span class="line">  betterPerformance: false</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">leancloud_visitors:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: sxYNFK15bXIJqayGqYdiJNsw-gzGzoHsz</span><br><span class="line">  app_key: inuUVGRl3VjbS7oJLrS8uYMe</span><br></pre></td></tr></table></figure>
-
 <p><a href="https://console.leancloud.cn/apps/UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz/settings/keys">https://console.leancloud.cn/apps/UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz/settings/keys</a></p>
-<h2 id="修改超链接样式-NO"><a href="#修改超链接样式-NO" class="headerlink" title="修改超链接样式 NO"></a>修改超链接样式 NO</h2><p>在 <code>/theme/next/source/css/_custom/custom.styl</code> 中修改，添加如下代码：</p>
+<h2 id="修改超链接样式-no"><a class="markdownIt-Anchor" href="#修改超链接样式-no"></a> 修改超链接样式 NO</h2>
+<p>在 <code>/theme/next/source/css/_custom/custom.styl</code> 中修改，添加如下代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.post-body a &#123;</span><br><span class="line">    color: #428BCA;</span><br><span class="line">    text-decoration: none;</span><br><span class="line">    border-bottom: 1px dashed #6465a5;</span><br><span class="line">    background-color: transparent;</span><br><span class="line">    word-wrap: break-word;</span><br><span class="line">&#125;</span><br><span class="line">.post-body a: hover&#123;</span><br><span class="line">    color:#f15838;</span><br><span class="line">    border-bottom: 1px dashed #f28a31;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p>其中 <code>a</code> 定义了超链接的基本样式，<code>a:hover</code> 定义了超链接在鼠标悬停时颜色的变化。<code>.post-body</code> 使得改变的样式只作用与文章内部，否则你会发现文章标题下面的分类等等样式都会被改变。</p>
 ]]></content>
       <categories>
