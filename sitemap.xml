@@ -46,29 +46,29 @@
 
   <url>
     <loc>https://wangc1106.github.io/blog</loc>
-    <lastmod>2021-10-20</lastmod>
+    <lastmod>2021-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/Testing/</loc>
-    <lastmod>2021-10-20</lastmod>
+    <loc>https://wangc1106.github.io/blog/tags/ATAC-seq/</loc>
+    <lastmod>2021-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/ATAC-seq/</loc>
-    <lastmod>2021-10-20</lastmod>
+    <loc>https://wangc1106.github.io/blog/tags/Testing/</loc>
+    <lastmod>2021-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/assemble/</loc>
-    <lastmod>2021-10-20</lastmod>
+    <lastmod>2021-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -76,22 +76,22 @@
 
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/Testing/</loc>
-    <lastmod>2021-10-20</lastmod>
+    <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
+    <lastmod>2021-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
-    <lastmod>2021-10-20</lastmod>
+    <loc>https://wangc1106.github.io/blog/categories/Testing/</loc>
+    <lastmod>2021-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/papers/</loc>
-    <lastmod>2021-10-20</lastmod>
+    <lastmod>2021-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
