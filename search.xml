@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ATAC-seq【Harvard FAS Informatics】</title>
-    <url>/blog/2021/10/26/ATAC-seq-3/</url>
+    <title>ATAC-seq【hbctraining_pipeline】</title>
+    <url>/blog/2021/10/26/ATAC-seq-3-hbctraining/</url>
     <content><![CDATA[<h2 id="https-github-com-hbctraining-In-depth-NGS-Data-Analysis-Course-tree-master-sessionV-lessons"><a href="#https-github-com-hbctraining-In-depth-NGS-Data-Analysis-Course-tree-master-sessionV-lessons" class="headerlink" title="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons"></a><a href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons</a></h2><span id="more"></span>
 
 <p>算法，参数，输出。</p>
@@ -107,17 +107,6 @@
 <p>R作图the first plot illustrates the distance between the modes from which the shift size was determined？<br><img src="https://img-blog.csdnimg.cn/3d941b11b37c4b7687b11e6766a9daff.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_13,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>The second plot is the cross-correlation plot. This is a graphical representation of the Pearson correlation of positive- and negative- strand tag densities, shifting the strands relative to each other by increasing distance？</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xls文件</span><br><span class="line">文件包含信息还是比较多的，和narrowPeak唯一不同的是peak的起始位置需要减1才是bed格式的文件，另外还包含fold_enrichment 和narrowPeak的fold change 对应，-log10pvalue,-log10qvalue,peak长度，peak 峰值位置等。</span><br><span class="line">narrowPeak文件</span><br><span class="line">和xls文件信息类似</span><br><span class="line">summits.bed文件</span><br><span class="line">包含峰的位置信息和-log10pvalue</span><br><span class="line">bdg文件</span><br><span class="line">bdg文件适合导入UCSC或IGV进行谱图可视化，或者转换为bigwig格式再进行可视化。</span><br></pre></td></tr></table></figure>
 ]]></content>
-      <categories>
-        <category>ATAC-seq</category>
-      </categories>
-      <tags>
-        <tag>ATAC-seq</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ATAC-seq【Harvard FAS Informatics】</title>
-    <url>/blog/2021/10/26/ATAC-seq-3-hbctraning/</url>
-    <content><![CDATA[<h2 id="ATAC-seq数据质量评估注意"><a href="#ATAC-seq数据质量评估注意" class="headerlink" title="ATAC-seq数据质量评估注意"></a>ATAC-seq数据质量评估注意</h2><span id="more"></span>]]></content>
       <categories>
         <category>ATAC-seq</category>
       </categories>
