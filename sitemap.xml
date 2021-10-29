@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangc1106.github.io/blog/2021/10/20/hifiasm/</loc>
+    
+    <lastmod>2021-10-29</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/2021/10/29/macs3-install/</loc>
     
     <lastmod>2021-10-29</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://wangc1106.github.io/blog/2021/10/26/ATAC-seq-3-hbctraining/</loc>
     
     <lastmod>2021-10-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/2021/10/20/hifiasm/</loc>
-    
-    <lastmod>2021-10-20</lastmod>
     
   </url>
   
@@ -67,7 +67,14 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/assemble/</loc>
+    <loc>https://wangc1106.github.io/blog/tags/Assemble/</loc>
+    <lastmod>2021-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/tags/Debug/</loc>
     <lastmod>2021-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -83,14 +90,14 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/papers/</loc>
+    <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
     <lastmod>2021-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/software/</loc>
+    <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
     <lastmod>2021-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
