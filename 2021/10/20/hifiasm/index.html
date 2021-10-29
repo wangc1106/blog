@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Nat. Methods|等位基因组组装算法hifiasm（20210202）paper：    Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm该研究提出一种全新的单倍型基因组组装算法hifiasm，能够有效地对大型复杂基因组生成高质量的单倍型组装结果。">
+  <meta name="description" content="Nat. Methods|等位基因组组装算法hifiasm（20210202） paper：	Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm 该研究提出一种全新的单倍型基因组组装算法hifiasm，能够有效地对大型复杂基因组生成高质量的单倍型组装结果。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单倍型基因组组装算法hifiasm">
 <meta property="og:url" content="https://wangc1106.github.io/blog/2021/10/20/hifiasm/index.html">
 <meta property="og:site_name" content="Banner&#39;s Blog">
-<meta property="og:description" content="Nat. Methods|等位基因组组装算法hifiasm（20210202）paper：    Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm该研究提出一种全新的单倍型基因组组装算法hifiasm，能够有效地对大型复杂基因组生成高质量的单倍型组装结果。">
+<meta property="og:description" content="Nat. Methods|等位基因组组装算法hifiasm（20210202） paper：	Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm 该研究提出一种全新的单倍型基因组组装算法hifiasm，能够有效地对大型复杂基因组生成高质量的单倍型组装结果。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-10-20T07:59:31.542Z">
 <meta property="article:modified_time" content="2021-10-20T08:35:17.323Z">
@@ -253,16 +253,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Nat-Methods-等位基因组组装算法hifiasm（20210202）"><a href="#Nat-Methods-等位基因组组装算法hifiasm（20210202）" class="headerlink" title="Nat. Methods|等位基因组组装算法hifiasm（20210202）"></a>Nat. Methods|等位基因组组装算法hifiasm（20210202）</h2><p>paper：    <a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/33526886/">Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm</a><br>该研究提出一种全新的单倍型基因组组装算法hifiasm，能够有效地对<font color="red">大型复杂基因组生成高质量的单倍型组装结果</font>。</p>
+        <h2 id="nat-methods等位基因组组装算法hifiasm20210202"><a class="markdownIt-Anchor" href="#nat-methods等位基因组组装算法hifiasm20210202"></a> Nat. Methods|等位基因组组装算法hifiasm（20210202）</h2>
+<p>paper：	<a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/33526886/">Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm</a><br>
+该研究提出一种全新的单倍型基因组组装算法hifiasm，能够有效地对<font color="red">大型复杂基因组生成高质量的单倍型组装结果</font>。</p>
 <span id="more"></span>
-
-<h3 id="单倍型组装难点"><a href="#单倍型组装难点" class="headerlink" title="单倍型组装难点"></a>单倍型组装难点</h3><p>单倍型基因组组装是研究基因组结构与变异的最理想方式。由于技术的局限，大多数组装算法倾向于将不同单倍型有损的压缩成一条混合的代表性序列。对于自然界中主流的二倍体和多倍体样本而言，这类方法损失了大量的单倍型信息。这使得长久以来，研究人员难以对高杂合、高重复的基因组进行深入的分析。</p>
+<h3 id="单倍型组装难点"><a class="markdownIt-Anchor" href="#单倍型组装难点"></a> 单倍型组装难点</h3>
+<p>单倍型基因组组装是研究基因组结构与变异的最理想方式。由于技术的局限，大多数组装算法倾向于将不同单倍型有损的压缩成一条混合的代表性序列。对于自然界中主流的二倍体和多倍体样本而言，这类方法损失了大量的单倍型信息。这使得长久以来，研究人员难以对高杂合、高重复的基因组进行深入的分析。</p>
 <p>为了解决这个难题，一些组装算法首先生成混合的代表性序列，接着从代表性序列中恢复出不同的单倍型信息。但是，由于代表性序列本身已经丢失了大量的信息，这类方法难以获得高质量的单倍型组装结果。</p>
 <p>近期的组装算法通过额外的信息，如家系(Trio binning)或者Hi-C等数据，预先全局性的将待组装的测序读段划分到不同单倍型，再进行分别组装，从而试图获得高质量的单倍型组装结果。但是对于低杂合的样本而言，这种方法难以做到完美的预先划分，因此容易产生组装错误。</p>
-<h3 id="Hifiasm-算法"><a href="#Hifiasm-算法" class="headerlink" title="Hifiasm 算法"></a>Hifiasm 算法</h3><p>在本研究中，研究人员提出了一种全新的针对PacBio HiFi (High-Fidelity reads) 数据的单倍型组装算法hifiasm。该算法有两项重要创新。</p>
+<h3 id="hifiasm-算法"><a class="markdownIt-Anchor" href="#hifiasm-算法"></a> Hifiasm 算法</h3>
+<p>在本研究中，研究人员提出了一种全新的针对PacBio HiFi (High-Fidelity reads) 数据的单倍型组装算法hifiasm。该算法有两项重要创新。</p>
 <p>第一，提出了单倍型敏感的组装思路，使得在组装的全过程中能够无损的保留单倍型信息，同时也极大的提升了对基因组高重复和复杂区域的解析能力。</p>
 <p>第二，提出了Graph-binning的分型策略，其利用组装图的结构信息对全局分型结果进行校正，从而极大地提高了单倍型组装的质量。Graph-binning不对待组装的测序读段进行预先全局划分，因此能够克服划分错误带来组装问题。</p>
-<h3 id="组装结果"><a href="#组装结果" class="headerlink" title="组装结果"></a>组装结果</h3><p>研究人员在不同的数据集上测试了hifiasm算法。对于不同大小，不同杂合度和不同单倍型数量的动物和植物基因组，hifiasm能够产生质量最高的组装结果。尤其值得注意的是，hifiasm仅用三天时间，就完成27Gb超大加州红杉基因组的组装，并且组装结果的连续性7倍于其他算法。</p>
+<h3 id="组装结果"><a class="markdownIt-Anchor" href="#组装结果"></a> 组装结果</h3>
+<p>研究人员在不同的数据集上测试了hifiasm算法。对于不同大小，不同杂合度和不同单倍型数量的动物和植物基因组，hifiasm能够产生质量最高的组装结果。尤其值得注意的是，hifiasm仅用三天时间，就完成27Gb超大加州红杉基因组的组装，并且组装结果的连续性7倍于其他算法。</p>
 <p>对于人类基因组，hifiasm也能取得最好的效果。相比于现有算法，hifiasm所产生的组装结果连续性最高，同时也正确解析了最多的复杂和高重复区域，如MHC (主要组织相容性复合体)和centromere (着丝端粒)。尤其对于人类二倍体样本HG002和HG00733，hifiasm产生的组装结果的连续性3倍于其他算法，并成功保留了最多的变异信息。</p>
 <p><a target="_blank" rel="noopener" href="http://www.evolution.ynu.edu.cn/info/1016/1208.htm">http://www.evolution.ynu.edu.cn/info/1016/1208.htm</a></p>
 
@@ -365,7 +369,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nat-Methods-%E7%AD%89%E4%BD%8D%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%BB%84%E8%A3%85%E7%AE%97%E6%B3%95hifiasm%EF%BC%8820210202%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Nat. Methods|等位基因组组装算法hifiasm（20210202）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%80%8D%E5%9E%8B%E7%BB%84%E8%A3%85%E9%9A%BE%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">单倍型组装难点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hifiasm-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Hifiasm 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E8%A3%85%E7%BB%93%E6%9E%9C"><span class="nav-number">1.3.</span> <span class="nav-text">组装结果</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nat-methods%E7%AD%89%E4%BD%8D%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%BB%84%E8%A3%85%E7%AE%97%E6%B3%95hifiasm20210202"><span class="nav-number">1.</span> <span class="nav-text"> Nat. Methods|等位基因组组装算法hifiasm（20210202）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%80%8D%E5%9E%8B%E7%BB%84%E8%A3%85%E9%9A%BE%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text"> 单倍型组装难点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hifiasm-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text"> Hifiasm 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E8%A3%85%E7%BB%93%E6%9E%9C"><span class="nav-number">1.3.</span> <span class="nav-text"> 组装结果</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -380,14 +384,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
