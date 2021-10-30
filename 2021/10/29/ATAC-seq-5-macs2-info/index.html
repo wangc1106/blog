@@ -21,20 +21,24 @@
     var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="macs2&#x2F;3 installation">
+  <meta name="description" content="MACS2 detail">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Macs2&#x2F;3 Installation Debug Record">
-<meta property="og:url" content="https://wangc1106.github.io/blog/2021/10/29/macs3-install/index.html">
+<meta property="og:title" content="ATAC-seq-5【PeakCalling-MACS2】">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/index.html">
 <meta property="og:site_name" content="Banner&#39;s Blog">
-<meta property="og:description" content="macs2&#x2F;3 installation">
+<meta property="og:description" content="MACS2 detail">
 <meta property="og:locale">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/1.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/2.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/3.png">
 <meta property="article:published_time" content="2021-10-29T07:58:55.043Z">
-<meta property="article:modified_time" content="2021-10-29T08:33:16.493Z">
+<meta property="article:modified_time" content="2021-10-30T07:44:35.647Z">
 <meta property="article:author" content="Wang C">
-<meta property="article:tag" content="Debug">
+<meta property="article:tag" content="software">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/1.png">
 
-<link rel="canonical" href="https://wangc1106.github.io/blog/2021/10/29/macs3-install/">
+<link rel="canonical" href="https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/">
 
 
 <script id="page-configurations">
@@ -47,7 +51,7 @@
   };
 </script>
 
-  <title>Macs2/3 Installation Debug Record | Banner's Blog</title>
+  <title>ATAC-seq-5【PeakCalling-MACS2】 | Banner's Blog</title>
   
 
 
@@ -187,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2021/10/29/macs3-install/">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/banner.png">
@@ -200,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Macs2/3 Installation Debug Record
+          ATAC-seq-5【PeakCalling-MACS2】
         </h1>
 
         <div class="post-meta">
@@ -209,10 +213,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-10-29 15:58:55 / Modified: 16:33:16" itemprop="dateCreated datePublished" datetime="2021-10-29T15:58:55+08:00">2021-10-29</time>
+              <time title="Created: 2021-10-29 15:58:55" itemprop="dateCreated datePublished" datetime="2021-10-29T15:58:55+08:00">2021-10-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-30 15:44:35" itemprop="dateModified" datetime="2021-10-30T15:44:35+08:00">2021-10-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -228,7 +238,7 @@
             </span>
 
           
-            <span id="/blog/2021/10/29/macs3-install/" class="post-meta-item leancloud_visitors" data-flag-title="Macs2/3 Installation Debug Record" title="Views">
+            <span id="/blog/2021/10/29/ATAC-seq-5-macs2-info/" class="post-meta-item leancloud_visitors" data-flag-title="ATAC-seq-5【PeakCalling-MACS2】" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -239,13 +249,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>3.9k</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>4 mins.</span>
+              <span>3 mins.</span>
             </span>
 
         </div>
@@ -257,23 +267,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="macs2-3-installation"><a href="#macs2-3-installation" class="headerlink" title="macs2/3 installation"></a>macs2/3 installation</h3><span id="more"></span>
+        <h3 id="MACS2-detail"><a href="#MACS2-detail" class="headerlink" title="MACS2 detail"></a>MACS2 detail</h3><span id="more"></span>
 
-<p>macs2 installation record<br>install conda<br>creat work environment<br>install numpy1.17<br>python setup.py install –prefix …./software/MACS</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">####################################ERROR1#############################################</span><br><span class="line">#MACS3/fermi-lite/ksw.c:31:26: fatal error: lib/x86/sse2.h: No such file or directory</span><br><span class="line"># #include &quot;lib/x86/sse2.h&quot;                      ^</span><br><span class="line">#compilation terminated.</span><br><span class="line">#error: command &#x27;gcc&#x27; failed with exit status 1</span><br><span class="line">######################################################################################</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://github.com/macs3-project/MACS/issues/473">https://github.com/macs3-project/MACS/issues/473</a><br>zip downloaded from github zip is not complete in the deep dir<br>git clone <a target="_blank" rel="noopener" href="https://github.com/macs3-project/MACS.git">https://github.com/macs3-project/MACS.git</a> –recursive<br>or download absent files</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">####################################ERROR2#############################################</span><br><span class="line">Checking .pth file support in ..../software/MACS2/lib/python3.8/site-packages/</span><br><span class="line">..../.conda/envs/atacseq/bin/python -E -c pass</span><br><span class="line">TEST FAILED: ..../software/MACS2/lib/python3.8/site-packages/ does NOT support .pth files</span><br><span class="line">bad install directory or PYTHONPATH</span><br><span class="line"></span><br><span class="line">You are attempting to install a package to a directory that is not</span><br><span class="line">on PYTHONPATH and which Python does not read &quot;.pth&quot; files from.  The</span><br><span class="line">installation directory you specified (via --install-dir, --prefix, or</span><br><span class="line">the distutils default setting) was:</span><br><span class="line"></span><br><span class="line">    ..../software/MACS2/lib/python3.8/site-packages/</span><br><span class="line"></span><br><span class="line">and your PYTHONPATH environment variable currently contains:</span><br><span class="line"></span><br><span class="line">    &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">Here are some of your options for correcting the problem:</span><br><span class="line"></span><br><span class="line">* You can choose a different installation directory, i.e., one that is</span><br><span class="line">  on PYTHONPATH or supports .pth files</span><br><span class="line"></span><br><span class="line">* You can add the installation directory to the PYTHONPATH environment</span><br><span class="line">  variable.  (It must then also be on PYTHONPATH whenever you run</span><br><span class="line">  Python and want to use the package(s) you are installing.)</span><br><span class="line"></span><br><span class="line">* You can set up the installation directory to support &quot;.pth&quot; files by</span><br><span class="line">  using one of the approaches described here:</span><br><span class="line"></span><br><span class="line">  https://setuptools.readthedocs.io/en/latest/deprecated/easy_install.html#custom-installation-locations</span><br></pre></td></tr></table></figure>
 
-<p>[ok]export PYTHONPATH=${PYTHONPATH}:…./software/MACS2/lib/python3.9/site-packages/</p>
-<p>directly set PYTHONPATH=…./software/MACS2/lib/python3.9/site-packages/ in ~/.bashrc was failed.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">####################################ERROR3#############################################</span><br><span class="line">error: package directory &#x27;MACS2&#x27; does not exist</span><br><span class="line">#######################################################################################</span><br></pre></td></tr></table></figure>
-<p>zip Dir was not complete, tried .tar.gz </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">####################################ERROR4#############################################</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;..../software/MACS3/bin/macs3&quot;, line 4, in &lt;module&gt;</span><br><span class="line">    __import__(&#x27;pkg_resources&#x27;).run_script(&#x27;MACS3==3.0.0a6&#x27;, &#x27;macs3&#x27;)</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 3243, in &lt;module&gt;</span><br><span class="line">    def _initialize_master_working_set():</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 3226, in _call_aside</span><br><span class="line">    f(*args, **kwargs)</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 3255, in _initialize_master_working_set</span><br><span class="line">    working_set = WorkingSet._build_master()</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 568, in _build_master</span><br><span class="line">    ws.require(__requires__)</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 886, in require</span><br><span class="line">    needed = self.resolve(parse_requirements(requirements))</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 772, in resolve</span><br><span class="line">    raise DistributionNotFound(req, requirers)</span><br><span class="line">pkg_resources.DistributionNotFound: The &#x27;Cython&gt;=0.29&#x27; distribution was not found and is required by MACS3``</span><br></pre></td></tr></table></figure>
-
-<p><code>conda install Cython=0.29</code></p>
-<p><a target="_blank" rel="noopener" href="https://pypi.org/project/cykhash/">https://pypi.org/project/cykhash/</a><br><code>pip install cykhash</code><br>Collecting cykhash<br>  Using cached cykhash-1.0.2-cp39-cp39-linux_x86_64.whl<br>Installing collected packages: cykhash<br>Successfully installed cykhash-1.0.2</p>
-<p>python setup.py install –prefix …./software/MACS2</p>
-<p>success</p>
+<p>一、粗略介绍MACS基本原理。</p>
+<p>TF在基因组上的结合是随机过程，基因组的每个位置都有机会结合某个TF，只是概率不一样，peak出现的位置，是TF结合热点，而peak-calling就为了找这些热点。</p>
+<p>如何定义热点？通俗讲，热点是这样一些位置，这些位置多次被测得的read所覆盖（我们测的是一个细胞群体，read出现次数多，说明该位置被TF结合的几率大）。read数达到多少才叫多？就要用到统计检验。假设TF在基因组上的分布没有任何规律，那么测序得到的read在基因组上的分布也必然是随机的，某个碱基上覆盖的read的数目应该服从二项分布。这其实和高中大学课本上抽小球的过程是类似的。当n很大，p很小时，二项分布可以近似用泊松分布替代，在这里：<br><img src="/blog/2021/10/29/ATAC-seq-5-macs2-info/1.png"></p>
+<p>拉姆达是泊松分布唯一参数，n是测序得到的read总数目，l是单个read的长度，s是基因组的大小。有了分布，可以算出在某个置信概率（如0.00001）下，随机情况下，某个碱基上可以覆盖的read的数目的最小值，当实际观察到的read数目超过这个值（单侧检验）时，认为该碱基是TF的一个结合热点。反过来，针对每一个read数目，我们也可以算出对应的置信概率P。</p>
+<p>但是，这只是一个简化的模型，实际情况要复杂好多。比如，由于测序、mapping过程内在的偏好性，以及不同染色质间的差异性，相比全基因组，某些碱基可能内在地会被更多的read所覆盖，这种情况得到的很多peak可能都是假的。MACS考虑到了这一点，当对某个碱基进行假设检验时，MACS只考虑该碱基附近的染色质区段（如10k），此时，上述公式中n表示附近10k区间内的read数目，s被置为10k。当有对照组实验（Control，相比实验组，没有用抗体捕获TF，或用了一个通用抗体）存在时，利用Control组的数据构建泊松分布，当没有Control时，利用实验组，稍大一点的局部区间（比如50k）的数据构建泊松分布。</p>
+<p>这儿还有一个问题，read只是跟随着TF一起沉淀下来的DNA fragment的末端，read的位置并不是真实的TF结合的位置。所以在peak-calling之前，延伸read是必须的。不同TF大小不一样，对read延伸的长度也理应不同。我们知道，测得的read最终其实会近似地平均分配到正负链上，这样，对于一个TF结合热点而言，read在附近正负链上会近似地形成“双峰”。MACS会以某个window size扫描基因组，统计每个window里面read的富集程度，然后抽取（比如1000个）合适的（read富集程度适中，过少，无法建立模型，过大，可能反映的只是某种偏好性）window作样本，建立“双峰模型”。最后，两个峰之间的距离就被认为是TF的长度D，每个read将延伸D/2的长度。见下图：</p>
+<p><img src="/blog/2021/10/29/ATAC-seq-5-macs2-info/2.png"></p>
+<p>当有对照组实验存在时，MACS会进行两次peak calling。第一次以实验组（Treatment）为实验组，对照组为对照组，第二次颠倒，以实验组为对照组，对照组为实验组。之后，MACS对每一个P计算了相应的FDR（False Discovery Rate）值：</p>
+<p><img src="/blog/2021/10/29/ATAC-seq-5-macs2-info/3.png"></p>
+<p>表示第二次peak calling（颠倒的）得到的置信概率小于P的peak的个数。表示第一次peak calling得到的置信概率小于P的peak的个数。FDR综合利用了实验组和对照组的信息，显然，FDR越小越好。</p>
+<p>二、MACS peak-calling pipeline：</p>
+<p>MACS有两个版本，分别是MACS14和MACS2。MACS2在很多方面都对MACS14做了重大改进，但目前还在测试阶段。我们依然以MACS14为例进行说明。</p>
+<p>在某些情况下，比如，对组蛋白修饰的ChIP-seq数据peak-calling时，“双峰模型”会建立失败，这是因为组蛋白修饰往往并不是孤立存在的，可能很长一段染色质区间都被同一个组蛋白修饰占据，换句话说，组蛋白修饰的peak并不典型。这时，只要多加一个参数：</p>
+<p>–nomodel –shiftsize=number</p>
+<p>–nomodel将略过“双峰模型”建立的过程，而–shiftsize将人为指定reads延伸的长度。因为我们知道一个核小体上大概缠绕着147bp长的DNA，在对组蛋白修饰做peak-calling时我们可以指定：</p>
+<p>–nomodel –shiftsize=73</p>
+<p>CTCF_peaks.bed详细列出了每一个peak的位置信息和可信度（最后一列：)，BED文件格式详见：<a target="_blank" rel="noopener" href="http://genome.ucsc.edu/FAQ/FAQformat.html#format1">http://genome.ucsc.edu/FAQ/FAQformat.html#format1</a></p>
+<p>CTCF_peaks.xls相比CTCF_peaks.bed包含了更多信息，包括本次程序运行的详细参数，每个peak的summit（覆盖最多延伸后reads的那个位置）信息等。</p>
+<p>当我们有对照组实验数据时（Control.sam)：macs14 -t CTCF.sam  -c Control.sam -n CTCF –g mm输出文件类似，不过多出一个CTCF_negative_peaks.xls，顾名思义，是互换对照组实验组后得到的peak。</p>
+<p>其他常用参数：-bw number 建立“双峰模型”过程中window size的一半，默认300bp.-p Pvalue 设定peak置信概率的临界值（threshold），默认0.00001，对于H3k36me3、H3k27me3、H3k9me3等具有“非常规”特征的peak（broad peak）而言，此参数可以稍微设大一点，比如0.001。</p>
+<p>-m number1,number2 建立“双峰模型”用到，设定挑选的window上reads的富集程度（fold enrichment，相对全基因组而言），默认10,30。</p>
+<p>-slocal=number -llocal=number 共同确定MACS动态计算时所考察的局部区间的长度。默认参数，-slocal=1000 -llocal=10000。这儿多说几句，除了建立“双峰模型”，在寻找peak过程中，MACS依然会以2倍于-bw的window扫描基因组，对于当前window而言（-slocal,-llocal取默认参数）：</p>
+<p>其中，是基于全基因组的（实验组），基于当前window（默认参数下600bp）。当Control组存在时，均是基于Control组数据估算，当Control组不存在时，将不考虑，只考虑。</p>
+<p>-w/-B 建立wig或BED格式的raw signal（最高精确到每个碱基上reads的覆盖情况）文件，默认每条染色体建一个。</p>
+<p>-S 只建立一个raw signal文件。</p>
+<p>-space 与-w搭配使用，确定wig文件的分辨率，默认10bp。</p>
+<hr>
+<p>link：<a target="_blank" rel="noopener" href="https://www.plob.org/article/7227.html">https://www.plob.org/article/7227.html</a></p>
 
     </div>
 
@@ -289,7 +313,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://wangc1106.github.io/blog/2021/10/29/macs3-install/" title="Macs2&#x2F;3 Installation Debug Record">https://wangc1106.github.io/blog/2021/10/29/macs3-install/</a>
+    <a href="https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/" title="ATAC-seq-5【PeakCalling-MACS2】">https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -300,7 +324,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/Debug/" rel="tag"># Debug</a>
+              <a href="/blog/tags/software/" rel="tag"># software</a>
           </div>
 
         
@@ -309,10 +333,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2021/10/26/ATAC-seq-3-hbctraining/" rel="prev" title="ATAC-seq【hbctraining_pipeline】">
-      <i class="fa fa-chevron-left"></i> ATAC-seq【hbctraining_pipeline】
+    <a href="/blog/2021/10/26/ATAC-seq-3-hbctraining/" rel="prev" title="ATAC-seq-3【hbctraining_pipeline】">
+      <i class="fa fa-chevron-left"></i> ATAC-seq-3【hbctraining_pipeline】
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/blog/2021/10/29/ATAC-seq-4-macs3-install/" rel="next" title="ATAC-seq-4【Macs2/3 Installation】">
+      ATAC-seq-4【Macs2/3 Installation】 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -371,7 +398,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#macs2-3-installation"><span class="nav-number">1.</span> <span class="nav-text">macs2&#x2F;3 installation</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MACS2-detail"><span class="nav-number">1.</span> <span class="nav-text">MACS2 detail</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -386,7 +413,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -399,7 +426,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/</loc>
+    
+    <lastmod>2021-10-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2021/10/11/ATAC-seq-1-background/</loc>
+    
+    <lastmod>2021-10-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-4-macs3-install/</loc>
+    
+    <lastmod>2021-10-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2021/10/26/ATAC-seq-3-hbctraining/</loc>
+    
+    <lastmod>2021-10-30</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/2021/10/20/hifiasm/</loc>
     
     <lastmod>2021-10-29</lastmod>
@@ -9,28 +37,7 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/2021/10/29/macs3-install/</loc>
-    
-    <lastmod>2021-10-29</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/2021/10/26/ATAC-seq-3-hbctraining/</loc>
-    
-    <lastmod>2021-10-26</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wangc1106.github.io/blog/2021/10/14/ATAC-seq-2-harvard/</loc>
-    
-    <lastmod>2021-10-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/2021/10/11/ATAC-seq-1-background/</loc>
     
     <lastmod>2021-10-14</lastmod>
     
@@ -53,7 +60,7 @@
 
   <url>
     <loc>https://wangc1106.github.io/blog</loc>
-    <lastmod>2021-10-29</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -61,21 +68,28 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/ATAC-seq/</loc>
-    <lastmod>2021-10-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/tags/Assemble/</loc>
-    <lastmod>2021-10-29</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Debug/</loc>
-    <lastmod>2021-10-29</lastmod>
+    <lastmod>2021-10-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/tags/software/</loc>
+    <lastmod>2021-10-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/tags/Assemble/</loc>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -84,21 +98,21 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
-    <lastmod>2021-10-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
-    <lastmod>2021-10-29</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
-    <lastmod>2021-10-29</lastmod>
+    <lastmod>2021-10-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

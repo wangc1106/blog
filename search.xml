@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Macs2/3 Installation Debug Record</title>
-    <url>/blog/2021/10/29/macs3-install/</url>
-    <content><![CDATA[<h3 id="macs2-3-installation"><a href="#macs2-3-installation" class="headerlink" title="macs2/3 installation"></a>macs2/3 installation</h3><span id="more"></span>
+    <title>ATAC-seq-4【Macs2/3 Installation】</title>
+    <url>/blog/2021/10/29/ATAC-seq-4-macs3-install/</url>
+    <content><![CDATA[<h3 id="Macs2-3-installation-Debug-Record"><a href="#Macs2-3-installation-Debug-Record" class="headerlink" title="Macs2/3 installation Debug Record"></a>Macs2/3 installation Debug Record</h3><span id="more"></span>
 
 <p>macs2 installation record<br>install conda<br>creat work environment<br>install numpy1.17<br>python setup.py install –prefix …./software/MACS</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">####################################ERROR1#############################################</span><br><span class="line">#MACS3/fermi-lite/ksw.c:31:26: fatal error: lib/x86/sse2.h: No such file or directory</span><br><span class="line"># #include &quot;lib/x86/sse2.h&quot;                      ^</span><br><span class="line">#compilation terminated.</span><br><span class="line">#error: command &#x27;gcc&#x27; failed with exit status 1</span><br><span class="line">######################################################################################</span><br></pre></td></tr></table></figure>
@@ -30,7 +30,50 @@
       </tags>
   </entry>
   <entry>
-    <title>ATAC-seq【hbctraining_pipeline】</title>
+    <title>ATAC-seq-5【PeakCalling-MACS2】</title>
+    <url>/blog/2021/10/29/ATAC-seq-5-macs2-info/</url>
+    <content><![CDATA[<h3 id="MACS2-detail"><a href="#MACS2-detail" class="headerlink" title="MACS2 detail"></a>MACS2 detail</h3><span id="more"></span>
+
+
+<p>一、粗略介绍MACS基本原理。</p>
+<p>TF在基因组上的结合是随机过程，基因组的每个位置都有机会结合某个TF，只是概率不一样，peak出现的位置，是TF结合热点，而peak-calling就为了找这些热点。</p>
+<p>如何定义热点？通俗讲，热点是这样一些位置，这些位置多次被测得的read所覆盖（我们测的是一个细胞群体，read出现次数多，说明该位置被TF结合的几率大）。read数达到多少才叫多？就要用到统计检验。假设TF在基因组上的分布没有任何规律，那么测序得到的read在基因组上的分布也必然是随机的，某个碱基上覆盖的read的数目应该服从二项分布。这其实和高中大学课本上抽小球的过程是类似的。当n很大，p很小时，二项分布可以近似用泊松分布替代，在这里：<br><img src="/blog/2021/10/29/ATAC-seq-5-macs2-info/1.png"></p>
+<p>拉姆达是泊松分布唯一参数，n是测序得到的read总数目，l是单个read的长度，s是基因组的大小。有了分布，可以算出在某个置信概率（如0.00001）下，随机情况下，某个碱基上可以覆盖的read的数目的最小值，当实际观察到的read数目超过这个值（单侧检验）时，认为该碱基是TF的一个结合热点。反过来，针对每一个read数目，我们也可以算出对应的置信概率P。</p>
+<p>但是，这只是一个简化的模型，实际情况要复杂好多。比如，由于测序、mapping过程内在的偏好性，以及不同染色质间的差异性，相比全基因组，某些碱基可能内在地会被更多的read所覆盖，这种情况得到的很多peak可能都是假的。MACS考虑到了这一点，当对某个碱基进行假设检验时，MACS只考虑该碱基附近的染色质区段（如10k），此时，上述公式中n表示附近10k区间内的read数目，s被置为10k。当有对照组实验（Control，相比实验组，没有用抗体捕获TF，或用了一个通用抗体）存在时，利用Control组的数据构建泊松分布，当没有Control时，利用实验组，稍大一点的局部区间（比如50k）的数据构建泊松分布。</p>
+<p>这儿还有一个问题，read只是跟随着TF一起沉淀下来的DNA fragment的末端，read的位置并不是真实的TF结合的位置。所以在peak-calling之前，延伸read是必须的。不同TF大小不一样，对read延伸的长度也理应不同。我们知道，测得的read最终其实会近似地平均分配到正负链上，这样，对于一个TF结合热点而言，read在附近正负链上会近似地形成“双峰”。MACS会以某个window size扫描基因组，统计每个window里面read的富集程度，然后抽取（比如1000个）合适的（read富集程度适中，过少，无法建立模型，过大，可能反映的只是某种偏好性）window作样本，建立“双峰模型”。最后，两个峰之间的距离就被认为是TF的长度D，每个read将延伸D/2的长度。见下图：</p>
+<p><img src="/blog/2021/10/29/ATAC-seq-5-macs2-info/2.png"></p>
+<p>当有对照组实验存在时，MACS会进行两次peak calling。第一次以实验组（Treatment）为实验组，对照组为对照组，第二次颠倒，以实验组为对照组，对照组为实验组。之后，MACS对每一个P计算了相应的FDR（False Discovery Rate）值：</p>
+<p><img src="/blog/2021/10/29/ATAC-seq-5-macs2-info/3.png"></p>
+<p>表示第二次peak calling（颠倒的）得到的置信概率小于P的peak的个数。表示第一次peak calling得到的置信概率小于P的peak的个数。FDR综合利用了实验组和对照组的信息，显然，FDR越小越好。</p>
+<p>二、MACS peak-calling pipeline：</p>
+<p>MACS有两个版本，分别是MACS14和MACS2。MACS2在很多方面都对MACS14做了重大改进，但目前还在测试阶段。我们依然以MACS14为例进行说明。</p>
+<p>在某些情况下，比如，对组蛋白修饰的ChIP-seq数据peak-calling时，“双峰模型”会建立失败，这是因为组蛋白修饰往往并不是孤立存在的，可能很长一段染色质区间都被同一个组蛋白修饰占据，换句话说，组蛋白修饰的peak并不典型。这时，只要多加一个参数：</p>
+<p>–nomodel –shiftsize=number</p>
+<p>–nomodel将略过“双峰模型”建立的过程，而–shiftsize将人为指定reads延伸的长度。因为我们知道一个核小体上大概缠绕着147bp长的DNA，在对组蛋白修饰做peak-calling时我们可以指定：</p>
+<p>–nomodel –shiftsize=73</p>
+<p>CTCF_peaks.bed详细列出了每一个peak的位置信息和可信度（最后一列：)，BED文件格式详见：<a href="http://genome.ucsc.edu/FAQ/FAQformat.html#format1">http://genome.ucsc.edu/FAQ/FAQformat.html#format1</a></p>
+<p>CTCF_peaks.xls相比CTCF_peaks.bed包含了更多信息，包括本次程序运行的详细参数，每个peak的summit（覆盖最多延伸后reads的那个位置）信息等。</p>
+<p>当我们有对照组实验数据时（Control.sam)：macs14 -t CTCF.sam  -c Control.sam -n CTCF –g mm输出文件类似，不过多出一个CTCF_negative_peaks.xls，顾名思义，是互换对照组实验组后得到的peak。</p>
+<p>其他常用参数：-bw number 建立“双峰模型”过程中window size的一半，默认300bp.-p Pvalue 设定peak置信概率的临界值（threshold），默认0.00001，对于H3k36me3、H3k27me3、H3k9me3等具有“非常规”特征的peak（broad peak）而言，此参数可以稍微设大一点，比如0.001。</p>
+<p>-m number1,number2 建立“双峰模型”用到，设定挑选的window上reads的富集程度（fold enrichment，相对全基因组而言），默认10,30。</p>
+<p>-slocal=number -llocal=number 共同确定MACS动态计算时所考察的局部区间的长度。默认参数，-slocal=1000 -llocal=10000。这儿多说几句，除了建立“双峰模型”，在寻找peak过程中，MACS依然会以2倍于-bw的window扫描基因组，对于当前window而言（-slocal,-llocal取默认参数）：</p>
+<p>其中，是基于全基因组的（实验组），基于当前window（默认参数下600bp）。当Control组存在时，均是基于Control组数据估算，当Control组不存在时，将不考虑，只考虑。</p>
+<p>-w/-B 建立wig或BED格式的raw signal（最高精确到每个碱基上reads的覆盖情况）文件，默认每条染色体建一个。</p>
+<p>-S 只建立一个raw signal文件。</p>
+<p>-space 与-w搭配使用，确定wig文件的分辨率，默认10bp。</p>
+<hr>
+<p>link：<a href="https://www.plob.org/article/7227.html">https://www.plob.org/article/7227.html</a></p>
+]]></content>
+      <categories>
+        <category>ATAC-seq</category>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>software</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ATAC-seq-3【hbctraining_pipeline】</title>
     <url>/blog/2021/10/26/ATAC-seq-3-hbctraining/</url>
     <content><![CDATA[<h2 id="https-github-com-hbctraining-In-depth-NGS-Data-Analysis-Course-tree-master-sessionV-lessons"><a href="#https-github-com-hbctraining-In-depth-NGS-Data-Analysis-Course-tree-master-sessionV-lessons" class="headerlink" title="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons"></a><a href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons</a></h2><span id="more"></span>
 
@@ -296,7 +339,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ATAC-seq-1 背景</title>
+    <title>ATAC-seq-1【Background】</title>
     <url>/blog/2021/10/11/ATAC-seq-1-background/</url>
     <content><![CDATA[<h3 id="ATAC-seq意义"><a href="#ATAC-seq意义" class="headerlink" title="ATAC-seq意义"></a>ATAC-seq意义</h3><span id="more"></span>
 
