@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="1osTo_gOe1SW9Hevqtz8vl8HfSgTO4DSMZ0DiMPMX6w">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="监督学习 无监督学习：数据无标注甚至非结构化。KMeans…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMeans">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/index.html">
+<meta property="og:site_name" content="Banner&#39;s Blog">
+<meta property="og:description" content="监督学习 无监督学习：数据无标注甚至非结构化。KMeans…">
+<meta property="og:locale">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/1.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/4.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/2.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/3.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/5.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/6.png">
+<meta property="article:published_time" content="2021-11-15T12:21:47.691Z">
+<meta property="article:modified_time" content="2021-11-15T14:27:24.836Z">
+<meta property="article:author" content="Wang C">
+<meta property="article:tag" content="algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/1.png">
+
+<link rel="canonical" href="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>KMeans | Banner's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Banner's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream big work hard</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://wangc1106.github.io/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/banner.png">
+      <meta itemprop="name" content="Wang C">
+      <meta itemprop="description" content="Make more time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Banner's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          KMeans
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-11-15 20:21:47 / Modified: 22:27:24" itemprop="dateCreated datePublished" datetime="2021-11-15T20:21:47+08:00">2021-11-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/blog/2021/11/15/2021-11-15-kmeans/" class="post-meta-item leancloud_visitors" data-flag-title="KMeans" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>监督学习</p>
+<p>无监督学习：数据无标注甚至非结构化。KMeans…</p>
+<span id="more"></span>
+<h1 id="kmeans"><a class="markdownIt-Anchor" href="#kmeans"></a> KMeans</h1>
+<h2 id="简介-聚类与kmeans"><a class="markdownIt-Anchor" href="#简介-聚类与kmeans"></a> 简介-聚类与KMeans</h2>
+<blockquote>
+<ul>
+<li><strong>聚类（Clustering）</strong>：将数据对象分为多个类或者簇 (Cluster)，使同一簇对象间较高相似度，不同簇对象差别较大。</li>
+<li><strong>划分（Partitioning）</strong>：聚类可基于划分，也可基于分层。划分即将对象划分成不同簇，而分层将对象分等级。</li>
+<li><strong>排他（Exclusive）</strong>：一个数据对象，只能被划分到一个簇。如果一个数据对象可被划分到多个簇，则称为可重叠（Overlapping）。</li>
+<li><strong>距离（Distance）</strong>：基于距离的聚类将距离近的相似对象聚在一起。基于<font color="red">概率分布模型的聚类？</font>在一组对象中，找到符合特定分布模型的对象的集合，不一定是距离最近的或者最相似的，而是能完美的呈现出概率分布模型所描述的模型。</li>
+<li>欧氏距离：欧几里得度量二维和三维空间中的欧氏距离就是两点之间的实际距离</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p>与分类、序列标注不同，聚类事先并不知道任何样本标签，通过数据之间内在关系把样本划分为若干类别，使得同类别样本之间的相似度高，不同类别相似度低（增大类内聚，减少类间距）。</p>
+</li>
+<li>
+<p>聚类属于非监督学习，K均值聚类最基础常用。基本思想，<font color="green">通过迭代寻找K个簇（Cluster），使聚类结果对应的损失函数最小</font>。终止条件是没有（或最小数目）对象被重新分配给不同的聚类，没有（或最小数目）聚类中心再发生变化，误差平方和局部最小。<font color="red">损失函数定义为各个样本距离所属簇中心点的误差平方和</font>：</p>
+</li>
+</ul>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/1.png" alt></p>
+<p>xi代表第i个样本，ci是xi所属的簇，uci代表簇对应中心点，M是样本总数。</p>
+<ul>
+<li>
+<p>？损失函数本质是衡量模型的拟合效果，有求解参数需求的算法，才会有损失函数。Kmeans 不求解什么参数，它的模型本质也没有在拟合数据，而是在对数据进行一 种探索。在决策树中有衡量分类效果的指标准确度<code>accuracy</code>，准确度所对应的损失叫做泛化误差，但不能通过最小化泛化误差来求解某个模型中需要的信息，只是希望模型的效果上表现出来的泛化误差 很小。因此决策树，KNN 等算法，是绝对没有损失函数的。</p>
+</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>距离度量对比</th>
+<th>质心</th>
+<th>Inertia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欧几里得距离</td>
+<td>均值</td>
+<td>最小化每个样本点到质心的欧式距离之和</td>
+</tr>
+<tr>
+<td>曼哈顿距离</td>
+<td>中位数</td>
+<td>最小化每个样本点到质心的曼哈顿距离之和</td>
+</tr>
+<tr>
+<td>余弦距离</td>
+<td>均值</td>
+<td>最小化每个样本点到质心的余弦距离之和</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>上述问题是<font color="green">NP-Hard</font>问题。一般是采用坐标下降（Coordinate Decendet）方法求解。坐标下降法属于非梯度优化方法，每一步迭代中沿着一个坐标轴方向探索，通过循环使用不同的坐标达到求解目标函数的局部最小值。</p>
+</li>
+</ul>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/4.png" alt></p>
+<p>如上图，假设两维度x，y：</p>
+<ol>
+<li>首先选择初始位置(x,y)，假设x未知将y的值代入目标函数中，令目标函数导数0，求得此时最佳x值。</li>
+<li>又假设y未知将刚求得x的值代入目标函数，令目标函数导数0，求得此时最佳y。</li>
+<li>重复执行第1步第2步，目标函数逐渐接近极小值点，直到达到了极小值点停止。</li>
+</ol>
+<p>收敛的过程如红色箭头所示。更多维度时，同理，一次只对一个维度最优化。</p>
+<p>坐标下降法一般要求目标函数是可微的凸函数(局部最小值即全局最小值?)，此时求得的极小值才能是全局最小值。</p>
+<p>使用K-Means前，可先用PCA使各个变量间尽可能独立。否则如两变量间有较强关联性，函数收敛速度会非常慢。</p>
+<h2 id="步骤"><a class="markdownIt-Anchor" href="#步骤"></a> 步骤</h2>
+<p>KMeans的核心目标是将给定的数据集划分成K个簇（K是超参），并给出每个样本数据对应的中心点。具体步骤非常简单，可以分为4步：</p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/2.png" alt></p>
+<p><strong>KMeans最核心的部分就是先固定中心点，调整每个样本所属的类别来减少J；再固定每个样本的类别，调整中心点继续减小J 。两个过程交替循环， J 单调递减直到最（极）小值，中心点和样本划分的类别同时收敛。</strong></p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/3.png" alt></p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/5.png" alt></p>
+<h1 id="优缺点优化策略"><a class="markdownIt-Anchor" href="#优缺点优化策略"></a> 优缺点优化策略</h1>
+<p>KMenas优点：</p>
+<ul>
+<li>高效可伸缩，计算复杂度 为<font color="green">O(NKt)</font>接近于线性（N是数据量，K是聚类总数，t是迭代轮数）。</li>
+<li><font color="green">收敛速度快</font>，原理通俗易懂，可解释性强。</li>
+</ul>
+<p>KMeans明显缺点：</p>
+<ul>
+<li>受<font color="green">初始值</font>和<font color="green">异常</font>影响，聚类结果可能不是全局最优而是<font color="green">局部最优</font>。</li>
+<li><font color="green">K</font>是超参数，按<font color="green">经验选择</font></li>
+<li><font color="green">样本点只能划分到单一的类中</font></li>
+<li>只能发现球状的簇。</li>
+<li>初始值对结果影响较大，可能每次聚类结果都不一样。</li>
+</ul>
+<p>根据以上特点，我们可以从下面几个角度对算法做调优</p>
+<ol>
+<li><strong>数据预处理：归一化和异常点过滤</strong></li>
+</ol>
+<p><strong>KMeans本质是基于欧式距离度量的数据划分方法，均值和方差大的维度将对数据聚类结果产生决定性影响。<strong>聚类前对数据（<strong>具体的说是每一个维度的特征</strong>）做<font color="green">归一化</font>和<font color="green">单位统一</font>至关重要。<font color="green">异常值</font>会对均值计算产生较大影响，导致</strong>中心偏移</strong>，<font color="green">噪声点最好能提前过滤</font>。</p>
+<p><strong>2.合理选择K值</strong></p>
+<p>K值的选择一般基于实验和多次实验结果。例如采用<strong>手肘法</strong>，尝试不同K值并将对应的损失函数画成折线。手肘法认为图上的<strong>拐点就是K的最佳值</strong>（上图对应K=3）。</p>
+<p><strong>Gap Statistic方法</strong>。只需要找到最大的Gap Statistic对应的K(自动)。</p>
+<p>沿用第一节中<font color="green">损失函数</font>记为 Dk，当分为K类时，Gap Statistic定义为： Gap(k)=E(logDk)-logDk 。 E(logDk)是logDk的期望，一般由<font color="green">蒙特卡洛模拟</font>产生。在<font color="green">样本所在的区域内按照均匀分布随机地产生和原始样本数一样多的随机样本</font>，对这个<font color="green">随机样本做KMeans</font>，得到一个<font color="green">Dk</font>，<font color="green">重复多次</font>计算出 E(logDk)的近似值。</p>
+<p><strong>Gap(K) 的物理含义是<font color="green">随机样本的损失与实际样本的损失之差</font>。Gap越<font color="green">大</font>说明聚类的效果越好</strong>。随着K的变化Gap(K)几乎维持一条直线保持不变。说明这些样本间没有明显的类别关系，<font color="green">数据分布几乎和均匀分布一致</font>，近似随机。此时聚类没有意义。</p>
+<p><strong>3.改进初始值的选择</strong></p>
+<p>采取随机选择K个中心，<font color="green">可能导致不同中心点距离很近</font>，需<font color="green">更多的迭代次数才能收敛</font>。如在选择初始中心点时<strong>不同的中心尽可能远离</strong>，效果更好。这类算法中，以K-Means++算法最具影响力。</p>
+<p><strong>4.采用核函数?</strong></p>
+<p>主要思想是通过一个非线性映射，将输入空间中的数据点映射到高位的特征空间中，并在新的空间进行聚类。非线性映射增加了数据点线性可分的概率（与SVM中使用核函数思想类似）对于非凸的数据分布可以达到更为准确的聚类结果。</p>
+<ol start="5">
+<li>从EM算法解释KMeans</li>
+</ol>
+<p>EM（Expectation-Maximum）算法即期望最大化算法，是最常见的隐变量估计方法。EM算法是一种迭代优化策略，每一次迭代都分为两步：期望步（E）、极大步（M）。<strong>EM算法的提出最初是为了解决数据缺失情况下的参数估计问题</strong>，基本思想是首先根据已有的观测数据，通过极大似然估计估计出模型的参数；再根据上一步估计出的参数值估计缺失数据的值；最后根据估计出的缺失数据和原有的观测数据重新对参数值进行估计，反复迭代直到收敛。</p>
+<hr>
+<p>K均值聚类是使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%80%E5%A4%A7%E6%9C%9F%E6%9C%9B%E7%AE%97%E6%B3%95/10180861">最大期望算法</a>（Expectation-Maximization algorithm）求解的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/8878468">高斯混合模型</a>（Gaussian Mixture Model, GMM）在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/829892">正态分布</a>的协方差为单位矩阵，且隐变量的后验分布为一组<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%8B%84%E6%8B%89%E5%85%8B%CE%B4%E5%87%BD%E6%95%B0/5760582">狄拉克δ函数</a>时所得到的特例?</p>
+<p>Python</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KMeansClusterer</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,ndarray,cluster_num</span>):</span></span><br><span class="line">        self.ndarray = ndarray</span><br><span class="line">        self.cluster_num = cluster_num</span><br><span class="line">        self.points=self.__pick_start_point(ndarray,cluster_num)</span><br><span class="line">         </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cluster</span>(<span class="params">self</span>):</span></span><br><span class="line">        result = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.cluster_num):</span><br><span class="line">            result.append([])</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.ndarray:</span><br><span class="line">            distance_min = sys.maxsize</span><br><span class="line">            index=-<span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(self.points)):                </span><br><span class="line">                distance = self.__distance(item,self.points[i])</span><br><span class="line">                <span class="keyword">if</span> distance &lt; distance_min:</span><br><span class="line">                    distance_min = distance</span><br><span class="line">                    index = i</span><br><span class="line">            result[index] = result[index] + [item.tolist()]</span><br><span class="line">        new_center=[]</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result:</span><br><span class="line">            new_center.append(self.__center(item).tolist())</span><br><span class="line">        <span class="comment"># 中心点未改变，说明达到稳态，结束递归</span></span><br><span class="line">        <span class="keyword">if</span> (self.points==new_center).<span class="built_in">all</span>():</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">         </span><br><span class="line">        self.points=np.array(new_center)</span><br><span class="line">        <span class="keyword">return</span> self.cluster()</span><br><span class="line">             </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__center</span>(<span class="params">self,<span class="built_in">list</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;计算一组坐标的中心点</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 计算每一列的平均值</span></span><br><span class="line">        <span class="keyword">return</span> np.array(<span class="built_in">list</span>).mean(axis=<span class="number">0</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__distance</span>(<span class="params">self,p1,p2</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;计算两点间距</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        tmp=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(p1)):</span><br><span class="line">            tmp += <span class="built_in">pow</span>(p1[i]-p2[i],<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">pow</span>(tmp,<span class="number">0.5</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__pick_start_point</span>(<span class="params">self,ndarray,cluster_num</span>):</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> cluster_num &lt;<span class="number">0</span> <span class="keyword">or</span> cluster_num &gt; ndarray.shape[<span class="number">0</span>]:</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">&quot;簇数设置有误&quot;</span>)</span><br><span class="line">      </span><br><span class="line">        <span class="comment"># 随机点的下标</span></span><br><span class="line">        indexes=random.sample(np.arange(<span class="number">0</span>,ndarray.shape[<span class="number">0</span>],step=<span class="number">1</span>).tolist(),cluster_num)</span><br><span class="line">        points=[]</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> indexes:</span><br><span class="line">            points.append(ndarray[index].tolist())</span><br><span class="line">        <span class="keyword">return</span> np.array(points)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="kmeans-and-gaussian-mixture-model"><a class="markdownIt-Anchor" href="#kmeans-and-gaussian-mixture-model"></a> KMeans and gaussian mixture model</h2>
+<p>数据表示：kmeans单个点对cluster建模（假设各clus数据是圆形或高位球形）。GMM，使用高斯分布表示</p>
+<p>数据先验：kmeans，假设各clus先验概率一样，实际clus数据量可能不均匀。clusA10000，B100，新样本不考虑与AB相似度，属于A概率大。GMM对数据先验进行建模。</p>
+<p>相似度衡量：Kmeans的欧式距离假设各个维度对相似度衡量作用一样。GMM相似度衡量使用后验概率通过引入协方差矩阵，对各个维度数据的不同重要性建模。</p>
+<p>数据分配：kmeans各样本只属于相似度最高clus（hard clusting），GMM使用后验概率对各个clus按比例分配（fuzzy clustering？）。</p>
+<hr>
+<h2 id="k-means聚类算法"><a class="markdownIt-Anchor" href="#k-means聚类算法"></a> k-means++聚类算法</h2>
+<p><code>KMeans</code>算法，<code>KMeans</code>在聚类之前首先需初始化k个簇中心，因此 <code>KMeans</code> 算法对初值敏感，对于不同的初始值，会导致不同聚类结果。若初始化随机，很有可能 k簇中心都在同一个簇，这种情况 <code>KMeans</code> 很大程度上都不会收敛到全局最小。</p>
+<p>为优化选择初始质心的方法，2007 年 Arthur,等 三人发表了论文“k-means++: <code>The advantages of careful seeding</code>，<code>sklearn.cluster.KMeans</code> 中默认参数为 <code>init='k-means++'</code> ，其算法原理为在初始化簇中心时，逐个选取 k个簇中心，且离其他簇中心越远的样本越有可能被选为下个簇中心。</p>
+<p>算法步骤：</p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/6.png" alt></p>
+<hr>
+<p>ref：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/184686598">https://zhuanlan.zhihu.com/p/184686598</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gaochundong/p/kmeans_clustering.html">https://www.cnblogs.com/gaochundong/p/kmeans_clustering.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31296149">https://www.zhihu.com/question/31296149</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/342052190#:~:text=KMeans%20">https://zhuanlan.zhihu.com/p/342052190#:~:text=KMeans </a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/" title="KMeans">https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/algorithm/" rel="tag"># algorithm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2021/10/29/ATAC-seq-4-macs3-install/" rel="prev" title="ATAC-seq-4【Macs2/3 Installation】">
+      <i class="fa fa-chevron-left"></i> ATAC-seq-4【Macs2/3 Installation】
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kmeans"><span class="nav-number">1.</span> <span class="nav-text"> KMeans</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-%E8%81%9A%E7%B1%BB%E4%B8%8Ekmeans"><span class="nav-number">1.1.</span> <span class="nav-text"> 简介-聚类与KMeans</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.</span> <span class="nav-text"> 步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text"> 优缺点优化策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#kmeans-and-gaussian-mixture-model"><span class="nav-number">2.1.</span> <span class="nav-text"> KMeans and gaussian mixture model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> k-means++聚类算法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang C"
+      src="/blog/images/banner.png">
+  <p class="site-author-name" itemprop="name">Wang C</p>
+  <div class="site-description" itemprop="description">Make more time</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangc1106" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangc1106" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangchen116@126.com" title="E-Mail → mailto:wangchen116@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-dna"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang C</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz","app_key":"iYpeWQcmNqpHwr2uVlnJYVji","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+      <div style="height: 200px">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5knf34gs07t&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
