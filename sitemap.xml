@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangc1106.github.io/blog/2021/12/16/2021_12_16_osa_GO_KEGG/</loc>
+    
+    <lastmod>2021-12-17</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2021/12/17/2021_12_17_Linux_xargs_command/</loc>
+    
+    <lastmod>2021-12-17</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2021/12/17/2021_12_17_Linux_awk_command/</loc>
+    
+    <lastmod>2021-12-17</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/2021/10/29/ATAC-seq-5-macs2-info/</loc>
     
     <lastmod>2021-11-15</lastmod>
@@ -67,43 +88,57 @@
 
   <url>
     <loc>https://wangc1106.github.io/blog</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>https://wangc1106.github.io/blog/tags/O-Sativa/</loc>
+    <lastmod>2021-12-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/tags/Linux/</loc>
+    <lastmod>2021-12-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/tags/algorithm/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/ATAC-seq/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Debug/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/software/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Assemble/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -111,29 +146,50 @@
 
   
   <url>
+    <loc>https://wangc1106.github.io/blog/categories/GO/</loc>
+    <lastmod>2021-12-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/Linux/</loc>
+    <lastmod>2021-12-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/categories/algorithm/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/KEGG/</loc>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
-    <lastmod>2021-11-15</lastmod>
+    <lastmod>2021-12-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
