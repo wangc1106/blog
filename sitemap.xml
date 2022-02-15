@@ -109,14 +109,14 @@
 
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/O-Sativa/</loc>
+    <loc>https://wangc1106.github.io/blog/tags/algorithm/</loc>
     <lastmod>2022-02-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/algorithm/</loc>
+    <loc>https://wangc1106.github.io/blog/tags/O-Sativa/</loc>
     <lastmod>2022-02-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -167,13 +167,6 @@
 
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/GO/</loc>
-    <lastmod>2022-02-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://wangc1106.github.io/blog/categories/algorithm/</loc>
     <lastmod>2022-02-15</lastmod>
     <changefreq>daily</changefreq>
@@ -181,14 +174,14 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/Linux/</loc>
+    <loc>https://wangc1106.github.io/blog/categories/GO/</loc>
     <lastmod>2022-02-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/KEGG/</loc>
+    <loc>https://wangc1106.github.io/blog/categories/Linux/</loc>
     <lastmod>2022-02-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -203,6 +196,13 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
+    <lastmod>2022-02-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/KEGG/</loc>
     <lastmod>2022-02-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
