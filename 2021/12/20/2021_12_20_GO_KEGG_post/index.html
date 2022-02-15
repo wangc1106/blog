@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="1osTo_gOe1SW9Hevqtz8vl8HfSgTO4DSMZ0DiMPMX6w">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Oryza Sativa 【Gene ID】【GO】【KEGG】">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【GO】【KEGG】">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2021/12/20/2021_12_20_GO_KEGG_post/index.html">
+<meta property="og:site_name" content="Banner&#39;s Blog">
+<meta property="og:description" content="Oryza Sativa 【Gene ID】【GO】【KEGG】">
+<meta property="og:locale">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2021/12/20/2021_12_20_GO_KEGG_post/selectDEG.png">
+<meta property="article:published_time" content="2021-12-20T06:05:02.967Z">
+<meta property="article:modified_time" content="2022-02-15T06:40:41.274Z">
+<meta property="article:author" content="Wang C">
+<meta property="article:tag" content="O_Sativa">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/2021/12/20/2021_12_20_GO_KEGG_post/selectDEG.png">
+
+<link rel="canonical" href="https://wangc1106.github.io/blog/2021/12/20/2021_12_20_GO_KEGG_post/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>【GO】【KEGG】 | Banner's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Banner's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream big work hard</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://wangc1106.github.io/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2021/12/20/2021_12_20_GO_KEGG_post/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/banner.png">
+      <meta itemprop="name" content="Wang C">
+      <meta itemprop="description" content="Make more time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Banner's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【GO】【KEGG】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-20 14:05:02" itemprop="dateCreated datePublished" datetime="2021-12-20T14:05:02+08:00">2021-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-15 14:40:41" itemprop="dateModified" datetime="2022-02-15T14:40:41+08:00">2022-02-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/GO/" itemprop="url" rel="index"><span itemprop="name">GO</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/KEGG/" itemprop="url" rel="index"><span itemprop="name">KEGG</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/blog/2021/12/20/2021_12_20_GO_KEGG_post/" class="post-meta-item leancloud_visitors" data-flag-title="【GO】【KEGG】" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Oryza-Sativa-【Gene-ID】【GO】【KEGG】"><a href="#Oryza-Sativa-【Gene-ID】【GO】【KEGG】" class="headerlink" title="Oryza Sativa 【Gene ID】【GO】【KEGG】"></a>Oryza Sativa 【Gene ID】【GO】【KEGG】</h2><span id="more"></span>
+
+<p><strong>GO分析</strong>：基因-&gt;功能类群</p>
+<p>**KEGG(Pathway)**：基因-&gt;代谢网络</p>
+<p><strong>GO/KEGG选取目标基因</strong></p>
+<ul>
+<li><p>指标：Enrichment score，p值，FDR</p>
+</li>
+<li><p>pathway：p和FDR越小越好，问题是有时本就不易富集出，如何取舍</p>
+</li>
+<li><p>GO：p，FDR，Enrichmentscore（越大越容易受到影响）</p>
+</li>
+<li><p><font color="green">fold change较大的基因</font>（up，down）</p>
+</li>
+<li><p>可能有用的蛋白，PPI？</p>
+</li>
+</ul>
+<p>GO: 研究的基因哪些通路？是否变化</p>
+<p><strong>KEGG筛选方法：</strong></p>
+<ul>
+<li>先看KEGG的聚类分析结果（感兴趣研究方向有关的基因是不是有差异）→ GO分为三个分枝，先看BP分枝（感兴趣研究方向有关的基因是不是有差异）→挑选和我们研究比较相关的→后期验证：选FC比较大，验证成功率会高一些</li>
+<li>根据Rich factor值、Qvalue值或<font color="green">富集到此通路上的基因个数来衡量KEGG的富集程度</font>，找到富集最显著的通路</li>
+<li>找自己感兴趣的：高原反应-&gt;呼吸功能相关通路，免疫系统-&gt;炎症因子、TNF相关通路</li>
+<li>从通路中去找到<font color="green">表达倍数显著的基因进行验证</font>，进一步解释相关分子表达机制</li>
+</ul>
+<p><strong>目标表示</strong></p>
+<p>HOTAIR出没于胞核（CC），参与了组蛋白甲基化调控引发癌基因沉默（BP），具体是结合PRC2复合物以及LSD1（MF）</p>
+<hr>
+<p><strong>转录组数据中筛选关键基因</strong></p>
+<p>筛选关键基因的方法有3类：</p>
+<p>1.表达量﹢功能富集</p>
+<p>2.表达量﹢实验</p>
+<p>3.表达量﹢序列</p>
+<p>上面的三种方法不难看出，筛选关键基因的<font color="green">核心</font>是<font color="green">表达量</font>，其实转录组的核心就是以表达量为核心展开其他分析的，然后再附加其他一些信息，找出目标基因；最后将分析结果与研究目的巧妙融合，如果再做一些基因功能实验验证（高分必备，可不做），一篇高质量的文章就ok了。</p>
+<p><strong>1.表达量﹢功能富集</strong></p>
+<p>Zhu T, Wang X, Xu Z, Xu J, Li R, et al. (2020) Screening of key genes responsible for Pennisetum setaceum ‘Rubrum’ leaf color using tranome sequencing. PLOS ONE 15(11): e0242618.</p>
+<p>该文研究对象狼尾草观赏草植物，<font color="green">高光</font>环产紫色叶子，<font color="green">低光</font>产浅紫色或绿色叶子。该文鉴定与<font color="green">叶片着色相关的关键基因</font>，并阐明参与狼尾草叶子的颜色变化的分子机制。</p>
+<p>差异表达基因分析总共鉴定了19043个DEGs，与T0（未处理阶段的叶子）阶段的表达相比，在T1（遮阴12天后新叶子完全变绿的阶段）阶段上调和下调的基因分别为10761和8642。<font color="green">KEGG富集分析发现，显著富集的通路主要有类黄酮的生物合成，黄酮和黄酮醇的生物合成以及类胡萝卜素的生物合成</font>。<font color="red">基因筛选(显著KEGG内的基因筛选？)</font>发现存在与<strong>叶绿素代谢</strong>有关的31个差异表达基因，其中21个与叶绿素的生物<strong>合成</strong>有关，有10个与叶绿素的<strong>降解</strong>有关，以及3个与叶绿素<strong>降解调控</strong>有关的转录因子，<strong>花青素的合成和积</strong>累有31个关键酶基因，4个可能参与<strong>花色苷代谢调控</strong>的转录因子（图1所示） 。</p>
+<p><img src="/blog/2021/12/20/2021_12_20_GO_KEGG_post/selectDEG.png" alt="selectDEG"></p>
+<p>快速筛选出感兴趣的基因：基因长度、基因在样品中的表达量、<strong>差异倍数</strong>、<strong>注释信息</strong>等。</p>
+<p><font color="green">找显著通路里的基因。做一个信息表。</font></p>
+<p><strong>2.表达量﹢实验</strong></p>
+<p>Wang A, Chao T, Ji Z, Xuan R, Liu S, Guo M, Wang G, Wang J. 2020. Tranome analysis reveals potential immune function-related regulatory genes/pathways of female Lubo goat submandibular glands at different developmental stages. PeerJ 8:e9947.</p>
+<p>课题组前期的基因功能实验或文献查阅来借助别人的已经验证过的基因功能结果，之后再根据表达量筛选关键基因。</p>
+<p>转录组研究的目的就是寻找与实验设计相关的关键基因，一般来说研究某生理现象都先要阅读大量文献来判断该实验的可行性。如转录组分析揭示了雌性鲁波<strong>山羊下颌腺</strong>在<strong>不同发育阶段</strong>的潜在<strong>免疫功能相关调节基因</strong>或途径</p>
+<p>该文研究的目的是通过<strong>转录组测序</strong>来<strong>定位</strong>差异表达基因（DEG）在<strong>三个不同阶段的表达谱</strong>，预测在<strong>不同发育阶段</strong>的<strong>下颌下腺的免疫功能</strong>。由于<strong>人、小鼠、大鼠、牛</strong>的下颌腺都检测到了<strong>相关抗体</strong>，并且研究发现了下颌腺中的<strong>类红细胞分化因子、内皮素、肝细胞生长因子（HGF）、转移性生长因子（MGF）、转化生长因子-α（TGF-α）和其他因子</strong>。所以在<strong>后续的基因筛选中会重点关注相关因子的表达基因</strong>。</p>
+<p>从上面例子中可以发现一个<strong>套路</strong>，先查阅模式生物中该方面的研究结果，然后再结合自己的研究项目筛选出基因，并且<strong>重点关注模式生物中已知的功能基因有没有较大的差异倍数</strong>。</p>
+<hr>
+<p>ref：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78093534">https://zhuanlan.zhihu.com/p/78093534</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.sohu.com/a/437865907_278730">https://www.sohu.com/a/437865907_278730</a></p>
+<hr>
+<h1 id="转录组图形专题之差异基因相关图形"><a href="#转录组图形专题之差异基因相关图形" class="headerlink" title="转录组图形专题之差异基因相关图形"></a>转录组图形专题之差异基因相关图形</h1><p>雷达图、热图、柱状图、韦恩图、火山图</p>
+<p><a target="_blank" rel="noopener" href="https://www.sohu.com/a/428207189_278730">https://www.sohu.com/a/428207189_278730</a></p>
+<h1 id="全套的富集分析相关图形详解"><a href="#全套的富集分析相关图形详解" class="headerlink" title="全套的富集分析相关图形详解"></a>全套的富集分析相关图形详解</h1><p>柱形图，气泡图，圈图，z-score图，网络图</p>
+<p><a target="_blank" rel="noopener" href="https://www.sohu.com/a/436470973_278730">https://www.sohu.com/a/436470973_278730</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2021/12/20/2021_12_20_GO_KEGG_post/" title="【GO】【KEGG】">https://wangc1106.github.io/blog/2021/12/20/2021_12_20_GO_KEGG_post/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/O-Sativa/" rel="tag"># O_Sativa</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2021/12/17/2021_12_17_Linux_awk_command/" rel="prev" title="Linux command awk">
+      <i class="fa fa-chevron-left"></i> Linux command awk
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/2022/02/15/2022-02-15-CTCF/" rel="next" title="CTCF">
+      CTCF <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Oryza-Sativa-%E3%80%90Gene-ID%E3%80%91%E3%80%90GO%E3%80%91%E3%80%90KEGG%E3%80%91"><span class="nav-number">1.</span> <span class="nav-text">Oryza Sativa 【Gene ID】【GO】【KEGG】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E5%BD%95%E7%BB%84%E5%9B%BE%E5%BD%A2%E4%B8%93%E9%A2%98%E4%B9%8B%E5%B7%AE%E5%BC%82%E5%9F%BA%E5%9B%A0%E7%9B%B8%E5%85%B3%E5%9B%BE%E5%BD%A2"><span class="nav-number"></span> <span class="nav-text">转录组图形专题之差异基因相关图形</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A8%E5%A5%97%E7%9A%84%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%9B%BE%E5%BD%A2%E8%AF%A6%E8%A7%A3"><span class="nav-number"></span> <span class="nav-text">全套的富集分析相关图形详解</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang C"
+      src="/blog/images/banner.png">
+  <p class="site-author-name" itemprop="name">Wang C</p>
+  <div class="site-description" itemprop="description">Make more time</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangc1106" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangc1106" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangchen116@126.com" title="E-Mail → mailto:wangchen116@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-dna"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang C</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz","app_key":"iYpeWQcmNqpHwr2uVlnJYVji","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+      <div style="height: 200px">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5knf34gs07t&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
