@@ -1,6 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>染色质三维结构图谱 Hi-C</title>
+    <url>/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/</url>
+    <content><![CDATA[<h1 id="Hi-C技术，以高通量测序为手段，以3C技术为基础的染色质构象捕捉技术。-三维基因组。"><a href="#Hi-C技术，以高通量测序为手段，以3C技术为基础的染色质构象捕捉技术。-三维基因组。" class="headerlink" title="Hi-C技术，以高通量测序为手段，以3C技术为基础的染色质构象捕捉技术。-三维基因组。"></a>Hi-C技术，以高通量测序为手段，以3C技术为基础的染色质构象捕捉技术。-三维基因组。</h1><span id="more"></span>
+
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/0.png" alt="img"></p>
+<h1 id="1-C技术"><a href="#1-C技术" class="headerlink" title="1. C技术"></a>1. C技术</h1><h2 id="1-1-3C（一对一）"><a href="#1-1-3C（一对一）" class="headerlink" title="1.1 3C（一对一）"></a>1.1 3C（一对一）</h2><ul>
+<li><p>基因组捕获技术（Chromosome conformation capture，3C）是最早研究三维基因组的技术，需要<font color="green">提前知道互作区域</font>，才能<font color="green">量化一对基因组基因座之间的互作</font>。</p>
+</li>
+<li><p>3C技术2002年Deker提出，目的捕获染色体的interaction，假设染色体中的interaction以蛋白为介导。通过限制酶酶切，补平，连接，打断，PCR后，若染色体A，B两点相互作用，根据这两点特异序列的引物能PCR出产物，验证interaction。每<font color="green">一对位点的验证</font>需要<font color="green">设计一对特异性引物</font>。</p>
+</li>
+</ul>
+<h2 id="1-2-4C（一对多）"><a href="#1-2-4C（一对多）" class="headerlink" title="1.2 4C（一对多）"></a>1.2 4C（一对多）</h2><ul>
+<li><p>染色体构象捕获芯片（Chromosome conformation capture-on-chip，4C ），可以捕获<font color="green">一个基因区域</font>和其他区域间的互相作用。该技术不需要知道作用区域的先验知识就可以使用。</p>
+</li>
+<li><p>3C较麻烦，后设计双酶切位点，然后<font color="green">成环</font>，保证只需要设计一对引物就可以检测一个位点对多个位点的相互作用，4C有circle的意思。</p>
+</li>
+</ul>
+<h2 id="1-3-5C（多对多）"><a href="#1-3-5C（多对多）" class="headerlink" title="1.3 5C（多对多）"></a>1.3 5C（多对多）</h2><p>染色体构象捕获碳拷贝（Chromosome conformation capture carbon copy，5C） ，可以检测<font color="green">某段区域内所有的互作</font>，但是该<font color="red">区域一般&lt;1 Mb</font>。覆盖度问题造成该技术<font color="green">不适用于全基因组测序</font>。</p>
+<h2 id="1-4-Hi-C（全部互作）"><a href="#1-4-Hi-C（全部互作）" class="headerlink" title="1.4 Hi-C（全部互作）"></a>1.4 <font color="red">Hi-C（全部互作）</font></h2><ul>
+<li><p>高通量基因组捕获技术（High-throughput/resolution chromosome conformation capture），基本解决了上述技术的缺点，可以实现<font color="green">全基因组覆盖</font>检测<font color="green">全部未知互作区域</font>。</p>
+</li>
+<li><p>Hi-C基本步骤，甲醛交联，限制酶切，末端补平加biotin，平末端连接，超声破碎，biotin富集，建库测序。整个过程没有特异引物存在。</p>
+</li>
+<li><p>将线性距离远，空间结构近的DNA片段进行交联，并将交联的DNA片段富集，高通量测序，对测序数据分析可以揭示染色质的远程互作，推导出基因组的三维空间结构的可能的记忆之间的调控关系。</p>
+</li>
+<li><p>\1. 通过Scaffold间的交互频率大小，可以对已组装的基因组序列进行纠错（基因组更准确）。</p>
+<p>\2. 基因信息不再仅仅是contig片段，而是被划分至染色体上，成为染色体水平。</p>
+<p>\3. 无需辛苦的构建群体，单一一个体就能实现染色体定位。</p>
+<p>\4. 相比遗传图谱，标记密度更大，序列定位更完整（能把更多的contig挂至染色体上!信息更全面！）</p>
+<p>\5. 染色体重排等结构变异研究可以开展啦~(研究可以更深入！）</p>
+<p>\6. QTL、GWAS可以定位区间到某个染色体啦~（追踪变异！）</p>
+<p>\7. 该物种的三维基因结构、染色体互作及动态变化可以解析啦~（从基因到表观！全方位解析）</p>
+</li>
+</ul>
+<h2 id="1-5-ChIP-loop-基于免疫沉淀"><a href="#1-5-ChIP-loop-基于免疫沉淀" class="headerlink" title="1.5 ChIP-loop (基于免疫沉淀)"></a>1.5 ChIP-loop (基于免疫沉淀)</h2><p>该技术将 3C 与 ChIP-seq 结合，可以检测<font color="red">目的蛋白质介导</font>的<font color="red">两个目的基因区域互作</font>。</p>
+<h2 id="1-6-ChIA-PET-基于免疫沉淀"><a href="#1-6-ChIA-PET-基于免疫沉淀" class="headerlink" title="1.6 ChIA-PET (基于免疫沉淀)"></a>1.6 ChIA-PET (基于免疫沉淀)</h2><p>该技术将 HiC 与 ChIP-seq 结合，可以检测<font color="red">目的蛋白质的所有互相作用</font>。 用特异性抗体富集interaction信息，比如CTCF，pol II抗体，类似步骤建库测序。<font color="red">ChIA-PET数据是Hi-C数据的子集</font>。</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>互作</th>
+<th>覆盖</th>
+<th>作用</th>
+<th>研究应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3C</td>
+<td>单对单</td>
+<td>&lt;1Mb</td>
+<td>检测已知<font color="red">基因组基因区域之间</font>的互作</td>
+<td>确定已知启动子和增强子之间的互作</td>
+</tr>
+<tr>
+<td>4C</td>
+<td>一对多</td>
+<td>全基因组</td>
+<td>确定<font color="red">基因某组区域</font>与<font color="red">其他区域的互作</font></td>
+<td>与已知LCR(locus control regions)区互作的全部基因和元件</td>
+</tr>
+<tr>
+<td>5C</td>
+<td>多对多</td>
+<td>&lt;1Mb</td>
+<td>确定<font color="red">染色体特定区域</font>的全部高级结构</td>
+<td>确定染色体特定区域的全部高级结构</td>
+</tr>
+<tr>
+<td>Hi-C</td>
+<td>全部互作</td>
+<td>全基因组</td>
+<td>检测<font color="red">全基因组</font>范围的<font color="red">全部高级结构</font></td>
+<td>全基因组范围所有染色体互作</td>
+</tr>
+<tr>
+<td>ChIP-loop</td>
+<td>一对一</td>
+<td>&lt;1Mb</td>
+<td>检测目的蛋白介导的<font color="red">两个目的基因区域互作</font></td>
+<td></td>
+</tr>
+<tr>
+<td>ChIA-PET</td>
+<td>全部互作</td>
+<td>全基因组</td>
+<td>检测<font color="red">目的蛋白质的所有互作</font></td>
+<td>构建已知转录因子介导的染色质互作</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="2-技术原理"><a href="#2-技术原理" class="headerlink" title="2. 技术原理"></a>2. 技术原理</h1><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/1.png" alt="img"></p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/8.png" alt="img"></p>
+<h2 id="2-1-甲醛固定"><a href="#2-1-甲醛固定" class="headerlink" title="2.1 甲醛固定"></a>2.1 甲醛固定</h2><p>先加入甲醛将基因组中参与<font color="red">染色质互作的蛋白质凝固</font>。一般将活体样本在室温用 1-3%的甲醛处理 10-30min，但是此步骤会<font color="green">减少限制内切酶</font>对DNA序列的消化<font color="green">效率</font>，需要严格控制。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/2.png" alt="img"></p>
+<h2 id="2-2-酶切序列"><a href="#2-2-酶切序列" class="headerlink" title="2.2 酶切序列"></a>2.2 酶切序列</h2><p>用限制性内切酶切割基因组，打断后的片段大小会影响测序分辨率，一般有两种酶可供选择：6bp 的限制性内切酶，4bp 的限制性内切酶。后者具有更高的分辨率。EcoR1 或 HindIII 用于每4000bp切割一次基因组，在人类基因组中产生约100万个片段。<br><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/3.png" alt="img"></p>
+<h2 id="2-3-末端修复"><a href="#2-3-末端修复" class="headerlink" title="2.3 末端修复"></a>2.3 末端修复</h2><p>得到的片段具有平末端或粘性末端，然后将<font color="red">末端补平修复，加入生物素</font>。【生物素pull-down保证只有连接的部分用于分析。读长reads被定位到基因组上，当这一对读长发现在不同片段上的时候，对<font color="red">互作片段进行相应评分</font>。一个包含基因组所有片段的<font color="red">连接频率矩阵被构建</font>。】</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/4.png" alt="img"></p>
+<h2 id="2-4-连接及解交联"><a href="#2-4-连接及解交联" class="headerlink" title="2.4 连接及解交联"></a>2.4 连接及解交联</h2><p>使用 <font color="red">T4 DNA连接酶连接互作片段形成环状</font>。将连接DNA片段的<font color="red">蛋白质消化掉</font>，得到交联片段。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/5.png" alt="img"></p>
+<h2 id="2-5-序列打断"><a href="#2-5-序列打断" class="headerlink" title="2.5 序列打断"></a>2.5 序列打断</h2><p>使用超声波或其他方式，再次打断片段。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/6.png" alt="img"></p>
+<h2 id="2-6-上机测序"><a href="#2-6-上机测序" class="headerlink" title="2.6 上机测序"></a>2.6 上机测序</h2><p>用<font color="red">磁珠将带生物素的捕获</font>，制作文库，上机测序。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/7.png" alt="img"></p>
+<h1 id="3-Hi-C应用"><a href="#3-Hi-C应用" class="headerlink" title="3. Hi-C应用"></a>3. Hi-C应用</h1><ul>
+<li><font color="red">量化</font>在三维空间中基因组的<font color="red">染色质间交联</font>（cross-linked chromatin ）</li>
+<li>解析<font color="red">全基因组互作<strong>模式</strong></font>，如<font color="red">启动子和增强子互作</font></li>
+<li>构建<font color="red">三维空间结构<strong>模型</strong></font>，如研究基因组三维结构特征：<strong>compartment，TAD，loop</strong>等</li>
+<li>构建<font color="red">全基因组互作<strong>图谱</strong></font></li>
+<li><font color="red">辅助提升<strong>基因组组装</strong></font></li>
+<li>构建<font color="red">基因组<strong>单体型图谱</strong></font></li>
+</ul>
+<h1 id="4-分析流程"><a href="#4-分析流程" class="headerlink" title="4. 分析流程"></a>4. 分析流程</h1><h2 id="4-1-基本分析"><a href="#4-1-基本分析" class="headerlink" title="4.1 基本分析"></a>4.1 基本分析</h2><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/9.png" alt="img"></p>
+<p>Ferhat Ay et al;2015</p>
+<ul>
+<li>(a)首先是<font color="green">质控</font>，过滤后高质量的FASTQ数据（PE，150bp），如果比对软件<font color="red">不支持split mapping</font>，一般选用<font color="red">迭代比对</font>，因为连接处由于是基因组外的碱基，可能比对不上。<strong>从序列左端25bp开始比对，如果有唯一比对，则停止，如果多个比对位置，则再继续延伸5bp，直到出现唯一比对</strong>。或选择<strong>支持split mapping的软件进行比对</strong>，可以通过<strong>分段比对处理</strong>。</li>
+<li>(b)选择高质量的比对数据</li>
+<li>(c)HiC特异的<font color="green">比对标准</font></li>
+<li>(d)对Vaild pairs进行<font color="green">矫正</font>。矫正完可以得到<font color="green">互作矩阵</font>。</li>
+</ul>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/10.png" alt="img"></p>
+<p>Bryan R. Lajoie et al;2014</p>
+<h2 id="4-2-Hi-C可视化"><a href="#4-2-Hi-C可视化" class="headerlink" title="4.2 Hi-C可视化"></a>4.2 Hi-C可视化</h2><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/11.png" alt="img"></p>
+<h2 id="4-3-序列过滤"><a href="#4-3-序列过滤" class="headerlink" title="4.3 序列过滤"></a>4.3 序列过滤</h2><p>​    <img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/12.png" alt="img"></p>
+<h2 id="4-4-数据矫正"><a href="#4-4-数据矫正" class="headerlink" title="4.4 数据矫正"></a>4.4 数据矫正</h2><p>​    <img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/13.png" alt="img"></p>
+<p>Eitan Yaffe &amp; Amos Tanay；2011</p>
+<p>​    <img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/14.png" alt="img"></p>
+<h1 id="5-分析"><a href="#5-分析" class="headerlink" title="5. 分析"></a>5. 分析</h1><h2 id="5-1-cis-trans互作比例"><a href="#5-1-cis-trans互作比例" class="headerlink" title="5.1 cis/trans互作比例"></a>5.1 cis/trans互作比例</h2><p>​    <img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/15.png" alt="img"></p>
+<h2 id="5-2-互作频率与距离有关"><a href="#5-2-互作频率与距离有关" class="headerlink" title="5.2 互作频率与距离有关"></a>5.2 互作频率与距离有关</h2><p>​    <img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/16.png" alt="img"></p>
+<h2 id="5-3-compartment分析"><a href="#5-3-compartment分析" class="headerlink" title="5.3 compartment分析"></a>5.3 compartment分析</h2><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/17.png" alt="img"></p>
+<h2 id="5-4-TAD分析"><a href="#5-4-TAD分析" class="headerlink" title="5.4 TAD分析"></a>5.4 TAD分析</h2><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/18.png" alt="img"></p>
+<p>Hi-C辅助TAD结构研究（<em>Wang et al</em>., Nature Commuications 2018）</p>
+<h2 id="5-5-显著互作分析"><a href="#5-5-显著互作分析" class="headerlink" title="5.5 显著互作分析"></a>5.5 显著互作分析</h2><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/19.png" alt="img"></p>
+<h1 id="6-应用"><a href="#6-应用" class="headerlink" title="6. 应用"></a>6. 应用</h1><h2 id="6-1-解析全基因组互作模式"><a href="#6-1-解析全基因组互作模式" class="headerlink" title="6.1 解析全基因组互作模式"></a>6.1 解析全基因组互作模式</h2><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/20.png" alt="img"></p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/21.png" alt="img"></p>
+<h2 id="6-2-辅助提升基因组组装"><a href="#6-2-辅助提升基因组组装" class="headerlink" title="6.2 辅助提升基因组组装"></a>6.2 辅助提升基因组组装</h2><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/22.png" alt="img"></p>
+<ul>
+<li><p>Hi-C辅助陆地棉与海岛棉基因组染色体水平组装（<em>Wang et al</em>.,Nature Genetics 2018）</p>
+</li>
+<li><p>Hi-C无需群体，单一个体就能实现染色体定位。很多物种都无法构建遗传群体，包括大部分高等动物、野生动植物、林木、果树等等。Hi-C是通过染色体上空间距离、线性距离的不同而导致的交互频率的不同来完成染色体的定位，所以不需要构建群体。</p>
+</li>
+<li><p>标记密度更大，序列定位更完整。相比遗传图谱，染色质之间的交互频率具有更高的标记密度，如此高密度的图谱不仅可以挂载上长的Scaffold，较短的Scaffold也可以被定位，所以通过Hi-C技术，一般可以将90%以上基因组序列定位到染色体。</p>
+</li>
+<li><p>可以对已组装的基因组进行纠错。通过Scaffold间的交互频率大小，可以对已组装的基因组序列进行纠错。</p>
+</li>
+</ul>
+<h3 id="6-2-1-数据统计和过滤；"><a href="#6-2-1-数据统计和过滤；" class="headerlink" title="6.2.1 数据统计和过滤；"></a>6.2.1 数据统计和过滤；</h3><h3 id="6-2-2-Hi-C文库评估；"><a href="#6-2-2-Hi-C文库评估；" class="headerlink" title="6.2.2 Hi-C文库评估；"></a>6.2.2 Hi-C文库评估；</h3><h3 id="6-2-3Hi-C染色体定位；"><a href="#6-2-3Hi-C染色体定位；" class="headerlink" title="6.2.3Hi-C染色体定位；"></a>6.2.3Hi-C染色体定位；</h3><p>​    ✓ 组装序列染色体群组划分；</p>
+<p>   ✓  组装序列各群组内排序；</p>
+<p>   ✓  组装序列各群组内定向；</p>
+<h3 id="6-2-4-Hi-C定位后统计评估；"><a href="#6-2-4-Hi-C定位后统计评估；" class="headerlink" title="6.2.4 Hi-C定位后统计评估；"></a>6.2.4 Hi-C定位后统计评估；</h3><p>​    ✓  近缘物种参考基因组评估；</p>
+<p>​    ✓  遗传标记评估；</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/24.png" alt="img"></p>
+<h2 id="6-3-构建基因组单体型图谱"><a href="#6-3-构建基因组单体型图谱" class="headerlink" title="6.3 构建基因组单体型图谱"></a>6.3 构建基因组单体型图谱</h2><p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/23.png" alt="img"></p>
+<h1 id="7-文献案例"><a href="#7-文献案例" class="headerlink" title="7. 文献案例"></a>7. 文献案例</h1><h2 id="7-1"><a href="#7-1" class="headerlink" title="7.1"></a>7.1</h2><p><strong>物种：棉花</strong></p>
+<p><strong>题目：</strong>Genome sequence of<em>Gossypium herbaceum</em>and genome updates of<em>Gossypium arboreum</em>and<em>Gossypium hirsutum</em>provide insights into cotton A-genome evolution</p>
+<p><strong>期刊：</strong>Nature genetics</p>
+<p><strong>影响因子：</strong>25.455</p>
+<p><strong>研究单位：</strong>武汉大学</p>
+<p><strong>主要研究内容：</strong></p>
+<p>2020年4月13日，武汉大学朱玉贤院士团队关于草棉、亚洲棉和陆地棉基因组研究成果发表在国际著名期刊Nature genetics。该研究利用了PacBio三代分子测序和北京百迈客生物技术有限公司的Hi-C技术绘制了三个高质量棉花基因图谱，发现了三种棉花中多个染色体易位与倒位事件，解决了围绕A基因组起源的现有争议性概念，确定了与棉花纤维长度这一重要农艺性状相关的丰富的候选基因，并为棉花遗传改良提供了宝贵的基因组资源。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/25.png" alt="草棉与亚洲棉基因组Hi-C热图"></p>
+<h2 id="7-2"><a href="#7-2" class="headerlink" title="7.2"></a>7.2</h2><p><strong>物种：珙桐</strong></p>
+<p><strong>题目：</strong><a href="https://link.zhihu.com/?target=http://tour.biocloud.net/article/v1/into/articleDetail/31970919">Genomic analyses of a “living fossil”: The endangered dove-tree</a></p>
+<p><strong>期刊：</strong>Molecular Ecology Resources</p>
+<p><strong>影响因子：</strong>7.049</p>
+<p><strong>研究单位：</strong>四川大学</p>
+<p><strong>主要研究内容：</strong>2020年1月四川大学刘建全团队破译了中国特有的濒危物种珙桐（<em>Davidia involucrata</em>）基因组，相关成果发表在著名期刊Molecular Ecology Resources上。四川大学刘建全教授和杨勇志博士为该论文的通讯作者，陈阳和马涛教授为并列一作。该研究利用单分子实时测序SMRT和北京百迈客生物技术有限公司的Hi-C技术组装了一个高质量、染色体体水平的珙桐基因组，研究发现苞片中光合作用相关基因几乎缺失或表达减少，而抗菌、抗冷、抗水等抗逆相关基因在苞片中高度表达，突出了苞片在保护花和吸引授粉者中的重要作用。有效群体大小等研究分析了珙桐的生存机制和濒危原因。在未来气候持续变暖的背景下，研究结果为保护这独特的濒危物种提供了依据。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/26.png" alt="珙桐基因组Hi-C热图"></p>
+<h2 id="7-3"><a href="#7-3" class="headerlink" title="7.3"></a>7.3</h2><p><strong>物种：二倍体草莓</strong></p>
+<p><strong>题目：</strong><a href="https://link.zhihu.com/?target=http://tour.biocloud.net/article/v1/into/articleDetail/32003918">The high-quality genome of diploid strawberry (Fragaria nilgerrensis) provides new insights into anthocyanin accumulation</a></p>
+<p><strong>期刊：</strong>Plant Biotechnology Journal</p>
+<p><strong>影响因子：</strong>6.84</p>
+<p><strong>研究单位：</strong>沈阳农业大学</p>
+<p><strong>主要研究内容：</strong></p>
+<p>2020年1月31日沈阳农业大学张志宏研究团队与北京百迈客生物科技有限公司合作，基于单分子实时测序PacBio和染色体构象捕获Hi-C技术，成功构建亚洲东部和东南部地区特有的野生二倍体草莓——黄毛草莓（<em>Fragaria nilgerrensis</em>）高质量基因图谱，相关研究成果发表在知名期刊Plant Biotechnology Journal上。文中通过比较基因组学等系列分析找寻到可能与黄毛草莓特异表型以及环境适应性相关的扩张基因，以及可能与其白色果实相关的变异。该研究为草莓属物种的生物学以及比较基因组学研究提供了宝贵的遗传资源。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/27.png" alt="黄毛草莓基因组Hi-C热图"></p>
+<h2 id="7-4"><a href="#7-4" class="headerlink" title="7.4"></a>7.4</h2><p><strong>物种：油桐</strong></p>
+<p><strong>题目：</strong><a href="https://link.zhihu.com/?target=http://tour.biocloud.net/article/v1/into/articleDetail/32224189">Tung Tree (Vernicia fordii) Genome Provides A Resource for Understanding Genome Evolution and Improved Oil Production</a></p>
+<p><strong>期刊：</strong>Genomics Proteomics &amp; Bioinformatics</p>
+<p><strong>影响因子：</strong>6.597</p>
+<p><strong>研究单位：</strong>中南林业科技大学</p>
+<p><strong>主要研究内容：</strong></p>
+<p>2020年4月7日，Genomics Proteomics &amp; Bioinformatics 在线发表了由中南林业科技大学谭晓风团队牵头完成的油桐基因组研究论文。该研究利用Illumina+PacBio组装了1.12Gb油桐基因组，并通过北京百迈客生物技术有限公司的Hi-C技术将95.15%的序列挂载到11条染色体上。基于比较基因组等系列相关研究解析了油桐基因组进化和桐油生物合成的分子机制。该研究为理解基因组演化、以及油脂产量的分子育种与遗传改良都提供了宝贵的遗传资源，为油桐种质资源保护、分子遗传学研究、良种选育及加工利用，奠定了重要的科学基础。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/28.png" alt="油桐基因组circos图"></p>
+<h2 id="7-5"><a href="#7-5" class="headerlink" title="7.5"></a>7.5</h2><p><strong>物种：亚麻</strong></p>
+<p><strong>题目：</strong><a href="https://link.zhihu.com/?target=http://tour.biocloud.net/article/v1/into/articleDetail/32240956">Genomic Comparison and Population Diversity Analysis Provide Insights into the Domestication and Improvement of Flax</a></p>
+<p><strong>期刊：</strong>iScience</p>
+<p><strong>影响因子：</strong>——</p>
+<p><strong>研究单位：</strong>甘肃省农业科学院</p>
+<p><strong>主要研究内容：</strong></p>
+<p>2020年4月24日，由甘肃省农科院和北京百迈客等单位合作的亚麻基因组研究成果荣登iScience, 其中张建平研究员，党占海研究员，刘头明研究员，百迈客CEO郑洪坤为本文通讯作者。该研究使用Illumina技术对油用亚麻品种Longya-10、纤维亚麻品种Heiya-14和pale flax分别进行测序与组装，后期利用HiC技术与遗传图谱辅助Longya-10基因组组装，将434 scaffolds组装至染色体水平。通过比较基因组及群体进化等研究探索油用及纤维用亚麻在驯化中受到的选择作用，以及可能在重塑亚麻形态结构中起着至关重要作用的相关基因。该研究揭示了对亚麻驯化和改良有重要影响的基因，这将有助于今后的分子育种。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/29.png" alt="亚麻基因组Hi-C热图"></p>
+<h2 id="7-6"><a href="#7-6" class="headerlink" title="7.6"></a>7.6</h2><p><strong>物种：枇杷</strong></p>
+<p><strong>题目：</strong><a href="https://link.zhihu.com/?target=http://tour.biocloud.net/article/v1/into/articleDetail/32141509">Chromosome-level genome assembly and annotation of the loquat (Eriobotrya japonica) genome</a></p>
+<p><strong>期刊</strong>：Gigascience</p>
+<p><strong>影响因子：</strong>4.688</p>
+<p><strong>研究单位：</strong>上海市农业科学院</p>
+<p><strong>主要研究内容：</strong></p>
+<p>2020年2月6日，上海市农业科学院张学英研究员团队于知名期刊Gigascience上首次发表枇杷基因组相关研究论文，该研究中基于北京百迈客生物科技有限公司的Nanopore测序和Hi-C染色体构象捕获技术，构建了高质量的枇杷基因组。文中通过与苹果、水蜜桃、梨、覆盆莓、月季和野草莓的蛋白质序列比较，探索了枇杷的全基因组复制与进化事件，并进行了染色体重排分析。该研究提供了宝贵的染色体水平基因组数据，为研究枇杷性状提供了重要的基因组数据。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/30.png" alt="枇杷基因组circos图"></p>
+<h2 id="7-7"><a href="#7-7" class="headerlink" title="7.7"></a>7.7</h2><p><strong>物种：板蓝根（菘蓝）</strong></p>
+<p><strong>题目：</strong><a href="https://link.zhihu.com/?target=http://tour.biocloud.net/article/v1/into/articleDetail/32025321">A chromosome-scale genome assembly of Isatis indigotica, an important medicinal plant used in traditional Chinese medicine</a></p>
+<p><strong>期刊：</strong> Horticulture Research</p>
+<p><strong>影响因子：</strong>3.640</p>
+<p><strong>研究单位：</strong>四川大学</p>
+<p><strong>主要研究内：</strong></p>
+<p>2020年2 月1日，四川大学生命科学学院刘建全课题组与华中农业大学作物遗传改良国家重点实验室李再云课题组首次完成了菘蓝（<em>Isatis indigotica</em>，2n=14）染色体级别基因组图谱绘制。该研究利用Pacbio测序(140X)结合北京百迈客生物技术有限公司的Hi-C技术（284X）组装得到294Mb高质量基因组（contigN50=1.2Mb）。基于同源搜索和功能注释，确定了该物种主要化合物（如吲哚类、萜类、黄酮、木脂素等物质）的可能生物合成通路和相关的候选基因。该研究强调了基因组测序在鉴定药用植物代谢产物合成候选基因中的重要性，为今后十字花科植物比较基因组等研究提供了重要遗传信息。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/31.png" alt="菘蓝基因组Hi-C热图"></p>
+<hr>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Hi-C/32.png" alt="其他"></p>
+<p>北京百迈客自启动Hi-C技术研究以来，自主开发Hi-C排图软件，具有实验+生物信息分析专利双保护，也是中国市场上能独立完成Hi-C实验——数据分析的测序企业之一！并完成上千个物种，近万个文库构建；文库含酶切位点有效数据比例最高达93%以上，针对物种推出定制化内切酶服务；实现多倍体物种的Hi-C辅助基因组组装，<strong>挂载效率最高达100%。</strong></p>
+<p>另外为了让更多科研工作者体验Hi-C建库，百迈客在成功构建多种物种Hi-C建库测序的经验上，正式推出了Biomarker Hi-C Library Prep Kit for Illumina。</p>
+<p>Biomarker Hi-C Library Prep Kit for Illumina涵盖了Hi-C实验全部环节，包括甲醛交联、Hi-C提取和Hi-C文库构建，适用于细胞系、动物和植物组织样本。1套Hi-C试剂盒包含5个反应，1个反应构建的文库可用于200Gb数据量的测序，试剂盒构建的文库适用于Illumina测序平台。</p>
+<hr>
+<p>Ref:<a href="https://www.zhihu.com/question/48308074">https://www.zhihu.com/question/48308074</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1625366">https://cloud.tencent.com/developer/article/1625366</a></p>
+<p><a href="http://www.biomarker.com.cn/technology-services/hi-c">http://www.biomarker.com.cn/technology-services/hi-c</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/140795830">https://zhuanlan.zhihu.com/p/140795830</a></p>
+]]></content>
+      <categories>
+        <category>biology</category>
+      </categories>
+      <tags>
+        <tag>technique</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>选择基因</title>
+    <url>/blog/2022/02/16/2022-0216-select-gene/</url>
+    <content><![CDATA[<h1 id="选择基因-selector-genes-是一类决定体节发育的基因。"><a href="#选择基因-selector-genes-是一类决定体节发育的基因。" class="headerlink" title="选择基因(selector genes)是一类决定体节发育的基因。"></a>选择基因(selector genes)是一类决定体节发育的基因。</h1><span id="more"></span>
+
+<p>有<font color="green">两簇选择基因</font>在控制<font color="green">果蝇外部结构</font>的正确发育途径中起关键作用：<font color="green">双胸复合物(bithorax complex,BX-C)</font>和<font color="green">触角足复合物(antennapedia complex,ANT-C)</font>。BX-C含有三个结构基因，分别是：<font color="green">Ultrabithorax(Ubx)、Abdominal A(abdA)和Abdominal B(abdB)</font>，它们<font color="green">各编码一种具有同源框的转录因子。这三个基因都含有很多内含子</font>，这些内含子对于调节这些基因在不同<a href="https://baike.baidu.com/item/%E5%89%AF%E8%8A%82">副节</a>进行不同的表达具有重要作用。ANT-C<a href="https://baike.baidu.com/item/%E5%9F%BA%E5%9B%A0%E7%B0%87">基因簇</a>含有5个基因：<font color="green">labial(lab)、proboscipedia(pb)、Deformed(Dfd)、Sex combs reduced(Scr)和antennapedia(Antp)</font>。这两簇基因都定位于<font color="green">3号染色体</font>。ANT-C簇编码的蛋白质控制<font color="green">0-5副节</font>的发育，BX-C基因簇编码的蛋白质控制<font color="green">5-14</font>副节的发育。</p>
+]]></content>
+      <categories>
+        <category>biology</category>
+      </categories>
+      <tags>
+        <tag>biology</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>染色质三维结构图谱 Micro-C</title>
+    <url>/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/</url>
+    <content><![CDATA[<h1 id="Micro-C"><a href="#Micro-C" class="headerlink" title="Micro-C"></a>Micro-C</h1><span id="more"></span>
+
+<h1 id="Micro-C-1"><a href="#Micro-C-1" class="headerlink" title="Micro-C"></a>Micro-C</h1><p>染色质结构与基因表达的调控密切相关（如<font color="green">常染色质/异染色质</font>）。随着近年<font color="green">染色质构象捕捉技术</font>的发展，了解到细胞核内的DNA存在着<font color="green">多重结构调节机制</font>，例如<font color="green">A/B染色质区室（compartment）</font>和<font color="green">拓扑结构域（TAD）</font>。大小分别在<font color="green">百万碱基</font>和<font color="green">十万碱基</font>左右。由于测序深度和技术条件限制，<font color="green">Hi-C很难达到更高分辨率</font>，<strong>限制</strong>了分析关于单个基因，以及启动子（P）、增强子（E）等<font color="green">调控元件之间相互作用</font>。</p>
+<p>Molecular Cell杂志发表背靠背文章Resolving the 3D Landscape of Transcription-Linked Mammalian Chromatin Folding和Ultrastructural Details of Mammalian Chromosome Architecture。<font color="green">一种新的染色质构象捕捉技术名为Micro-C</font>。Micro-C达到<strong>单核小体长度（～200bp）</strong>左右的<strong>分辨率</strong>，可以观察到更为精细的染色质结构。</p>
+<p>Micro-C和Hi-C在实验步骤上最大的不同，在于Micro-C先对核小体上缠绕的DNA做交联，而后用MNase切断核小体之间的连接DNA。以Tjian和Darzacq实验室的文章为例，他们对38个小鼠干细胞进行Micro-C测序，总共获得约26亿个reads。<strong>相似测序深度</strong>下<strong>20kb精度</strong>的<strong>Micro-C图谱与Hi-C结果相似</strong>，但在<strong>100至20kb的精度之间</strong>，<strong>Micro-C</strong>展示<strong>Hi-C不具备</strong>的<strong>精细</strong>结构，例如很多有关基因启动子和增强子的结构域、条带和点圈。从Hi-C可以得到约6000个DNA环（loop），即高度相互作用的一对区域。而Micro-C可以得到约30000个。</p>
+<p>在证实了Micro-C具备可重复性和高精度之后，进一步分析，<font color="green">相比Hi-C，Micro-C独特</font>的主要在于可探查<font color="green">调控元件之间相互作用</font>，如EP，PP等。其中有些相互作用形成了比传统TAD小的结构域。研究者通过隔离分值的分析得到了大约13万个这样的结构域边界。这些<font color="green">边界通常有着活跃转录的基因和动态的核小体结构</font>，而与之前所了解的，<font color="green">以CTCF和Cohesin为标志的TAD边界</font>有很大<font color="green">不同</font>。</p>
+<p>利用<strong>回归模型</strong>分析了这些<strong>结构域边界</strong>和<strong>表关遗传特征</strong>的<strong>关联性</strong>。<font color="green">CTCF</font>和<font color="green">Cohesin</font>在<font color="green">决定边界位置</font>最重要，然而决定<font color="green">边界强度</font>却主要是<font color="green">转录活跃的标志物</font>，如<font color="green">H3K4me3修饰和染色质开放度</font>等。进一步发现边界也存在很大差别，将其分为五类：<font color="red">转录相关</font>；<font color="red">干细胞特异性增强子</font>；<font color="red">一般增强子</font>；<font color="red">抑制型</font>；<font color="red">CTCF-Cohesin相关型</font>。各有不同的化学修饰。</p>
+<p>选取了一些代表性的区域发现，不仅<strong>启动子、增强子和CTCF之间相互作用</strong>，在<strong>聚梳抑制区</strong>还可以观察到显著的<strong>“巢状”环</strong>。<strong>CTCF相互作用范围较长</strong>，而<strong>Pol II</strong>介导的相互作用则<strong>较短</strong>。基因附近的相互作用越紧密，其转录活性也常常越高。进一步<strong>证明</strong><font color="green">转录对染色质折叠</font>的影响，利用<font color="green">药物抑制转录</font>。对比观察到，<font color="green">TAD等大尺度结构无变化</font>，然而<font color="green">基因附近的相互作用</font>条纹<font color="green">大大减弱</font>，证明了这些条纹团确实是由转录过程导致的。</p>
+<p>两篇文章显示了<strong>哺乳动物</strong>的<font color="green">染色质相互作用</font>还有<font color="green">更多的精细结构等待开发</font>。更高精度的数据能帮助人们理解这些<strong>结构的形成和对基因转录的影响</strong>。</p>
+<p>原文链接：<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzQyNjY1MQ==&amp;mid=2652482974&amp;idx=3&amp;sn=acc0381ecc6ab6779e335510b87de062&amp;chksm=84e23e2ab395b73">https://mp.weixin.qq.com/s?__biz=MzA3MzQyNjY1MQ==&amp;mid=2652482974&amp;idx=3&amp;sn=acc0381ecc6ab6779e335510b87de062&amp;chksm=84e23e2ab395b73</a></p>
+<hr>
+<p><font color="green">染色质高级结构</font>由不同层次的结构单元组成。从<font color="green">区块（compartment）</font>，<font color="green">拓扑结构域（TAD）</font>，到单个的<font color="green">环（loop）</font>，这些大小不同的单元各有特征，也对<strong>染色质功能</strong>和<strong>基因表达</strong>起到多种多样的<strong>调控</strong>。CTCF蛋白扮演了重要的角色。</p>
+<p><font color="red">CTCF</font>常常位于<strong>TAD和loop的边界</strong>，起到“<font color="red">隔离子</font>”的作用。近年来提出的loop extrusion模型也认为<font color="green">CTCF和cohesin的协调作用是loop形成的普遍机理</font>。虽然有假设，却一直不清楚CTCF<font color="red">如何作用</font>于染色质，并导致复杂结构形成。CTCF蛋白的各个结构域，除了同DNA结合的11-ZF外，其他结构域功能？</p>
+<p>2019年9月12日，Molecular Cell杂志发表背靠背文章“Distinct Classes of ChromatinLoops Revealed by Deletion of anRNA-Binding Region in CTCF”和“RNA Interactions Are Essentialfor CTCF-Mediated Genome Organization”<strong>，</strong>共同揭示<font color="green">CTCF与RNA的相互作用</font>对CTCF功能的重要意义。</p>
+<p>之前研究发现<font color="green">CTCF常在细胞中成簇聚集</font>。为研究聚集的<font color="green">机理</font>，在细胞中分别加入<font color="green">DNase和RNase</font>。结果吃惊，被认为是DNA结合蛋白的CTCF的聚合对<font color="green">DNase并不敏感</font>，而<font color="green">RNase却显著减少了CTCF的互相结合</font>。 结合之前研究，CTCF上的ZF10和ZF11结构域有一段具有RNA结合功能（<font color="red">RNA-binding region</font>，<strong>RBR</strong>），其中<strong>38个氨基酸</strong>对其结合是必不可少。研究者于是在<font color="red">小鼠干细胞</font>上将这段被称为<font color="red">RBRi的片段替换</font>，发现<font color="green">缺陷型细胞</font>的<strong>CTCF表达水平</strong>虽然<strong>无明显变化</strong>，<strong>生长却慢了2倍</strong>，显示<strong>RBRi</strong>可能具有重要的<strong>生理作用</strong>。RBRi缺陷的CTCF在细胞中和RNA的<font color="green">结合减少但却没有完全消失</font>。研究者接着对<strong>RBRi缺陷和不缺陷的CTCF</strong>分别做了荧光<strong>标记</strong>。结果<strong>野生型CTCF</strong>呈现了明显<strong>更高程度聚团</strong>。不过这些结果并<strong>不排除RBRi间接作用</strong>于其他因子的可能。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/1.png" alt="img"></p>
+<p>研究者接着分析了**<font color="red">RBRi片段功能和Compartment，TAD，Loop三大结构单元的关系</font><strong>。对</strong>RBRi缺陷<strong>和</strong>野生型<strong>细胞</strong>Micro-C测序<strong>。Micro-C是一种比Hi-C清晰度更高的研究基因组范围染色质相互作用的方法。RBRi的<font color="green">缺陷并不影响compartment形成</font>，但却</strong><font color="red">大范围改变了TAD和loop的结构</font>**。将RBRi<font color="green">替换后</font>，小鼠细胞内<font color="green">TAD的数目和强度都有所减少</font>，其中<font color="green">大部分同TAD边缘CTCF和Cohesin的ChIP-seq信号变化一致</font>。RBRi的替换也使得<font color="green"><strong>Micro-C</strong></font>热图上的<font color="green"><strong>条带（strip）变长</strong></font>，这符合loop extrusion模型的假设。而loop的改变更为有趣–有些loop完全明显削弱（38%～57%），而有些loop却完好无损甚至增强了。研究者于是<font color="green"><strong>将loop分成RBRi依赖和不依赖两类</strong></font>，并发现它们具有不同的转录因子结合特征。他们还据此假设，这两类loop同CTCF有不同的结合方式，因此稳定性也不同。这也许可以解释为什么不是所有的CTCF位点都会形成loop。最后，发现大约500个基因由于RBRi的替换产生了差异表达。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/2.png" alt="img"></p>
+<p>Danny Reinberg实验室则将目光集中在<strong>CTCF的ZF1和ZF10结构域</strong>上。他们发现对小鼠细胞的转录抑制在没有降低CTCF表达水平的前提下，减少了CTCF在全基因组范围的结合程度。<font color="red">ZF1或ZF10缺陷的CTCF与RNA的结合能力都大大减少，并且在一定程度导致CTCF结合位点和基因表达改变。而不同的是，ZF1缺陷使得大部分CTCF loop消失，而ZF10缺陷型细胞的loop却仍然保持完好。</font></p>
+<p><strong>这两篇背靠背文章共同揭示了CTCF的RNA结合域</strong>（RBR）<strong>在CTCF发挥正常功能中扮演着重要的角色。</strong></p>
+]]></content>
+      <categories>
+        <category>biology</category>
+      </categories>
+      <tags>
+        <tag>technique</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CTCF</title>
     <url>/blog/2022/02/15/2022-02-15-CTCF/</url>
     <content><![CDATA[<h1 id="【paper1】CTCF-the-protein-the-binding-partners-the-binding-sites-and-their-chromatin-loops"><a href="#【paper1】CTCF-the-protein-the-binding-partners-the-binding-sites-and-their-chromatin-loops" class="headerlink" title="【paper1】CTCF: the protein, the binding partners, the binding sites and their chromatin loops"></a>【paper1】CTCF: the protein, the binding partners, the binding sites and their chromatin loops</h1><span id="more"></span>

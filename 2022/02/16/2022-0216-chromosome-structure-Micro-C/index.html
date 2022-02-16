@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="1osTo_gOe1SW9Hevqtz8vl8HfSgTO4DSMZ0DiMPMX6w">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Micro-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="染色质三维结构图谱 Micro-C">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/index.html">
+<meta property="og:site_name" content="Banner&#39;s Blog">
+<meta property="og:description" content="Micro-C">
+<meta property="og:locale">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/1.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/2.png">
+<meta property="article:published_time" content="2022-02-16T08:09:20.624Z">
+<meta property="article:modified_time" content="2022-02-16T12:35:41.802Z">
+<meta property="article:author" content="Wang C">
+<meta property="article:tag" content="technique">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/1.png">
+
+<link rel="canonical" href="https://wangc1106.github.io/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>染色质三维结构图谱 Micro-C | Banner's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Banner's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream big work hard</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://wangc1106.github.io/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/banner.png">
+      <meta itemprop="name" content="Wang C">
+      <meta itemprop="description" content="Make more time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Banner's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          染色质三维结构图谱 Micro-C
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-02-16 16:09:20 / Modified: 20:35:41" itemprop="dateCreated datePublished" datetime="2022-02-16T16:09:20+08:00">2022-02-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/biology/" itemprop="url" rel="index"><span itemprop="name">biology</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/" class="post-meta-item leancloud_visitors" data-flag-title="染色质三维结构图谱 Micro-C" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Micro-C"><a href="#Micro-C" class="headerlink" title="Micro-C"></a>Micro-C</h1><span id="more"></span>
+
+<h1 id="Micro-C-1"><a href="#Micro-C-1" class="headerlink" title="Micro-C"></a>Micro-C</h1><p>染色质结构与基因表达的调控密切相关（如<font color="green">常染色质/异染色质</font>）。随着近年<font color="green">染色质构象捕捉技术</font>的发展，了解到细胞核内的DNA存在着<font color="green">多重结构调节机制</font>，例如<font color="green">A/B染色质区室（compartment）</font>和<font color="green">拓扑结构域（TAD）</font>。大小分别在<font color="green">百万碱基</font>和<font color="green">十万碱基</font>左右。由于测序深度和技术条件限制，<font color="green">Hi-C很难达到更高分辨率</font>，<strong>限制</strong>了分析关于单个基因，以及启动子（P）、增强子（E）等<font color="green">调控元件之间相互作用</font>。</p>
+<p>Molecular Cell杂志发表背靠背文章Resolving the 3D Landscape of Transcription-Linked Mammalian Chromatin Folding和Ultrastructural Details of Mammalian Chromosome Architecture。<font color="green">一种新的染色质构象捕捉技术名为Micro-C</font>。Micro-C达到<strong>单核小体长度（～200bp）</strong>左右的<strong>分辨率</strong>，可以观察到更为精细的染色质结构。</p>
+<p>Micro-C和Hi-C在实验步骤上最大的不同，在于Micro-C先对核小体上缠绕的DNA做交联，而后用MNase切断核小体之间的连接DNA。以Tjian和Darzacq实验室的文章为例，他们对38个小鼠干细胞进行Micro-C测序，总共获得约26亿个reads。<strong>相似测序深度</strong>下<strong>20kb精度</strong>的<strong>Micro-C图谱与Hi-C结果相似</strong>，但在<strong>100至20kb的精度之间</strong>，<strong>Micro-C</strong>展示<strong>Hi-C不具备</strong>的<strong>精细</strong>结构，例如很多有关基因启动子和增强子的结构域、条带和点圈。从Hi-C可以得到约6000个DNA环（loop），即高度相互作用的一对区域。而Micro-C可以得到约30000个。</p>
+<p>在证实了Micro-C具备可重复性和高精度之后，进一步分析，<font color="green">相比Hi-C，Micro-C独特</font>的主要在于可探查<font color="green">调控元件之间相互作用</font>，如EP，PP等。其中有些相互作用形成了比传统TAD小的结构域。研究者通过隔离分值的分析得到了大约13万个这样的结构域边界。这些<font color="green">边界通常有着活跃转录的基因和动态的核小体结构</font>，而与之前所了解的，<font color="green">以CTCF和Cohesin为标志的TAD边界</font>有很大<font color="green">不同</font>。</p>
+<p>利用<strong>回归模型</strong>分析了这些<strong>结构域边界</strong>和<strong>表关遗传特征</strong>的<strong>关联性</strong>。<font color="green">CTCF</font>和<font color="green">Cohesin</font>在<font color="green">决定边界位置</font>最重要，然而决定<font color="green">边界强度</font>却主要是<font color="green">转录活跃的标志物</font>，如<font color="green">H3K4me3修饰和染色质开放度</font>等。进一步发现边界也存在很大差别，将其分为五类：<font color="red">转录相关</font>；<font color="red">干细胞特异性增强子</font>；<font color="red">一般增强子</font>；<font color="red">抑制型</font>；<font color="red">CTCF-Cohesin相关型</font>。各有不同的化学修饰。</p>
+<p>选取了一些代表性的区域发现，不仅<strong>启动子、增强子和CTCF之间相互作用</strong>，在<strong>聚梳抑制区</strong>还可以观察到显著的<strong>“巢状”环</strong>。<strong>CTCF相互作用范围较长</strong>，而<strong>Pol II</strong>介导的相互作用则<strong>较短</strong>。基因附近的相互作用越紧密，其转录活性也常常越高。进一步<strong>证明</strong><font color="green">转录对染色质折叠</font>的影响，利用<font color="green">药物抑制转录</font>。对比观察到，<font color="green">TAD等大尺度结构无变化</font>，然而<font color="green">基因附近的相互作用</font>条纹<font color="green">大大减弱</font>，证明了这些条纹团确实是由转录过程导致的。</p>
+<p>两篇文章显示了<strong>哺乳动物</strong>的<font color="green">染色质相互作用</font>还有<font color="green">更多的精细结构等待开发</font>。更高精度的数据能帮助人们理解这些<strong>结构的形成和对基因转录的影响</strong>。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3MzQyNjY1MQ==&amp;mid=2652482974&amp;idx=3&amp;sn=acc0381ecc6ab6779e335510b87de062&amp;chksm=84e23e2ab395b73">https://mp.weixin.qq.com/s?__biz=MzA3MzQyNjY1MQ==&amp;mid=2652482974&amp;idx=3&amp;sn=acc0381ecc6ab6779e335510b87de062&amp;chksm=84e23e2ab395b73</a></p>
+<hr>
+<p><font color="green">染色质高级结构</font>由不同层次的结构单元组成。从<font color="green">区块（compartment）</font>，<font color="green">拓扑结构域（TAD）</font>，到单个的<font color="green">环（loop）</font>，这些大小不同的单元各有特征，也对<strong>染色质功能</strong>和<strong>基因表达</strong>起到多种多样的<strong>调控</strong>。CTCF蛋白扮演了重要的角色。</p>
+<p><font color="red">CTCF</font>常常位于<strong>TAD和loop的边界</strong>，起到“<font color="red">隔离子</font>”的作用。近年来提出的loop extrusion模型也认为<font color="green">CTCF和cohesin的协调作用是loop形成的普遍机理</font>。虽然有假设，却一直不清楚CTCF<font color="red">如何作用</font>于染色质，并导致复杂结构形成。CTCF蛋白的各个结构域，除了同DNA结合的11-ZF外，其他结构域功能？</p>
+<p>2019年9月12日，Molecular Cell杂志发表背靠背文章“Distinct Classes of ChromatinLoops Revealed by Deletion of anRNA-Binding Region in CTCF”和“RNA Interactions Are Essentialfor CTCF-Mediated Genome Organization”<strong>，</strong>共同揭示<font color="green">CTCF与RNA的相互作用</font>对CTCF功能的重要意义。</p>
+<p>之前研究发现<font color="green">CTCF常在细胞中成簇聚集</font>。为研究聚集的<font color="green">机理</font>，在细胞中分别加入<font color="green">DNase和RNase</font>。结果吃惊，被认为是DNA结合蛋白的CTCF的聚合对<font color="green">DNase并不敏感</font>，而<font color="green">RNase却显著减少了CTCF的互相结合</font>。 结合之前研究，CTCF上的ZF10和ZF11结构域有一段具有RNA结合功能（<font color="red">RNA-binding region</font>，<strong>RBR</strong>），其中<strong>38个氨基酸</strong>对其结合是必不可少。研究者于是在<font color="red">小鼠干细胞</font>上将这段被称为<font color="red">RBRi的片段替换</font>，发现<font color="green">缺陷型细胞</font>的<strong>CTCF表达水平</strong>虽然<strong>无明显变化</strong>，<strong>生长却慢了2倍</strong>，显示<strong>RBRi</strong>可能具有重要的<strong>生理作用</strong>。RBRi缺陷的CTCF在细胞中和RNA的<font color="green">结合减少但却没有完全消失</font>。研究者接着对<strong>RBRi缺陷和不缺陷的CTCF</strong>分别做了荧光<strong>标记</strong>。结果<strong>野生型CTCF</strong>呈现了明显<strong>更高程度聚团</strong>。不过这些结果并<strong>不排除RBRi间接作用</strong>于其他因子的可能。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/1.png" alt="img"></p>
+<p>研究者接着分析了**<font color="red">RBRi片段功能和Compartment，TAD，Loop三大结构单元的关系</font><strong>。对</strong>RBRi缺陷<strong>和</strong>野生型<strong>细胞</strong>Micro-C测序<strong>。Micro-C是一种比Hi-C清晰度更高的研究基因组范围染色质相互作用的方法。RBRi的<font color="green">缺陷并不影响compartment形成</font>，但却</strong><font color="red">大范围改变了TAD和loop的结构</font>**。将RBRi<font color="green">替换后</font>，小鼠细胞内<font color="green">TAD的数目和强度都有所减少</font>，其中<font color="green">大部分同TAD边缘CTCF和Cohesin的ChIP-seq信号变化一致</font>。RBRi的替换也使得<font color="green"><strong>Micro-C</strong></font>热图上的<font color="green"><strong>条带（strip）变长</strong></font>，这符合loop extrusion模型的假设。而loop的改变更为有趣–有些loop完全明显削弱（38%～57%），而有些loop却完好无损甚至增强了。研究者于是<font color="green"><strong>将loop分成RBRi依赖和不依赖两类</strong></font>，并发现它们具有不同的转录因子结合特征。他们还据此假设，这两类loop同CTCF有不同的结合方式，因此稳定性也不同。这也许可以解释为什么不是所有的CTCF位点都会形成loop。最后，发现大约500个基因由于RBRi的替换产生了差异表达。</p>
+<p><img src="/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/2.png" alt="img"></p>
+<p>Danny Reinberg实验室则将目光集中在<strong>CTCF的ZF1和ZF10结构域</strong>上。他们发现对小鼠细胞的转录抑制在没有降低CTCF表达水平的前提下，减少了CTCF在全基因组范围的结合程度。<font color="red">ZF1或ZF10缺陷的CTCF与RNA的结合能力都大大减少，并且在一定程度导致CTCF结合位点和基因表达改变。而不同的是，ZF1缺陷使得大部分CTCF loop消失，而ZF10缺陷型细胞的loop却仍然保持完好。</font></p>
+<p><strong>这两篇背靠背文章共同揭示了CTCF的RNA结合域</strong>（RBR）<strong>在CTCF发挥正常功能中扮演着重要的角色。</strong></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/" title="染色质三维结构图谱 Micro-C">https://wangc1106.github.io/blog/2022/02/16/2022-0216-chromosome-structure-Micro-C/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/technique/" rel="tag"># technique</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2022/02/15/2022-02-15-CTCF/" rel="prev" title="CTCF">
+      <i class="fa fa-chevron-left"></i> CTCF
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/2022/02/16/2022-0216-select-gene/" rel="next" title="选择基因">
+      选择基因 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Micro-C"><span class="nav-number">1.</span> <span class="nav-text">Micro-C</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Micro-C-1"><span class="nav-number">2.</span> <span class="nav-text">Micro-C</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang C"
+      src="/blog/images/banner.png">
+  <p class="site-author-name" itemprop="name">Wang C</p>
+  <div class="site-description" itemprop="description">Make more time</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangc1106" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangc1106" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangchen116@126.com" title="E-Mail → mailto:wangchen116@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-dna"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang C</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz","app_key":"iYpeWQcmNqpHwr2uVlnJYVji","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+      <div style="height: 200px">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5knf34gs07t&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
