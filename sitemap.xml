@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangc1106.github.io/blog/2022/02/19/20220219_assembly/</loc>
+    
+    <lastmod>2022-02-26</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/2022/02/24/2022-02-25-soapdenovo2/</loc>
     
     <lastmod>2022-02-26</lastmod>
@@ -23,7 +30,7 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/2022/02/24/2022-02-24-%E5%86%85%E5%AD%98/</loc>
+    <loc>https://wangc1106.github.io/blog/2022/02/24/2022-02-24-memory/</loc>
     
     <lastmod>2022-02-24</lastmod>
     
@@ -37,7 +44,7 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/2022/02/20/2022-02-20-%E4%B8%89%E4%BB%A3%E6%B5%8B%E5%BA%8F/</loc>
+    <loc>https://wangc1106.github.io/blog/2022/02/20/2022-02-20-Pacbio/</loc>
     
     <lastmod>2022-02-20</lastmod>
     
@@ -314,14 +321,14 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
+    <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
     <lastmod>2022-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
+    <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
     <lastmod>2022-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
