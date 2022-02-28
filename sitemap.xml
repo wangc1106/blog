@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wangc1106.github.io/blog/2022/02/19/20220219_assembly/</loc>
+    <loc>https://wangc1106.github.io/blog/2022/02/28/2022-02-28-genome-assemble/</loc>
+    
+    <lastmod>2022-02-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/02/19/2022-02-19_assembly/</loc>
     
     <lastmod>2022-02-26</lastmod>
     
@@ -179,7 +186,7 @@
 
   <url>
     <loc>https://wangc1106.github.io/blog</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -187,84 +194,91 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/algorithm/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/O-Sativa/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Linux/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/paper/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/technique/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/survey-kmer/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/sequence-tool/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/tags/assemble/</loc>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/biology/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/ATAC-seq/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Debug/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/software/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Assemble/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -273,63 +287,70 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/algorithm/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/GO/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Linux/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/biology/</loc>
-    <lastmod>2022-02-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/categories/KEGG/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/software/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/KEGG/</loc>
+    <lastmod>2022-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/%E4%B8%89%E4%BB%A3%E6%B5%8B%E5%BA%8F/</loc>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
-    <lastmod>2022-02-27</lastmod>
+    <lastmod>2022-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
