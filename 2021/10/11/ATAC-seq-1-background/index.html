@@ -271,14 +271,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="ATAC-seq意义"><a href="#ATAC-seq意义" class="headerlink" title="ATAC-seq意义"></a>ATAC-seq意义</h3><span id="more"></span>
-
+        <h3 id="atac-seq意义"><a class="markdownIt-Anchor" href="#atac-seq意义"></a> ATAC-seq意义</h3>
+<span id="more"></span>
 <p><img src="https://img-blog.csdnimg.cn/2eb44c70d00b45bab31b0eb915e91cac.png" alt="在这里插入图片描述"></p>
 <ul>
-<li>为何同样DNA序列的细胞的表型会不同，为何肝细胞是肝细胞，神经细胞是神经细胞？是什么造成了他们生产蛋白不同，决定蛋白生成的RNA不同呢？原因可以用<code>表观遗传</code>来解释。<br><img src="https://img-blog.csdnimg.cn/9bf2e2d5d25a4e2eab27321b99b0b0b8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li>为何同样DNA序列的细胞的表型会不同，为何肝细胞是肝细胞，神经细胞是神经细胞？是什么造成了他们生产蛋白不同，决定蛋白生成的RNA不同呢？原因可以用<code>表观遗传</code>来解释。<br>
+<img src="https://img-blog.csdnimg.cn/9bf2e2d5d25a4e2eab27321b99b0b0b8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 <li>DNA转录成RNA过程复杂，包括：<code>染色质可及性</code>，<code>DNA修饰</code>，<code>组蛋白修饰</code>等等（选择性表达）。</li>
 <li><code>染色质可及性即DNA开放区域</code>，尤为重要。<code>核小体</code>由<code>8个组蛋白</code>组成复合物，每个核小体约<code>147bpDNA</code>。转录时DNA将从核小体复合物松开。许多因素，如<code>染色质结构</code>、<code>核小体位置</code>和<code>组蛋白修饰</code>，在染色质的组织和可及性起重要作用。致密核小体结构被破坏后，<code>启动子、增强子、绝缘子、沉默子</code>等<code>顺式调控元件和反式作用因子可以接近</code>的特性，叫<code>染色质的可及性</code>，也叫<code>染色质开放性</code>(chromatin accessibility ），这段区域叫开放染色质（open chromatin） 。</li>
-<li>什么是组蛋白修饰<ul>
+<li>什么是组蛋白修饰
+<ul>
 <li>定义：组蛋白包含5个部分，按分子量大小分别称为<code>H1，H3，H2A，H2B和H4</code>。组蛋白在相关酶作用下发生<code>甲基化，乙酰化，磷酸化，腺苷酸化，泛素化，ADP核糖基化</code>等修饰</li>
 <li><code>H3·H4乙酰化</code>形成<code>开放染色质结构</code>，<code>增加基因表达</code></li>
 <li>组蛋白<code>甲基化</code>修饰多发生在<code>H3H4</code>，与基因<code>抑制及激活</code>相关，取决于被<code>修饰位置和程度</code></li>
@@ -293,61 +295,98 @@
 <li>开放染色质的研究方法除了ATAC-seq，还有DNase-Seq，FAIRE-seq，MNase-seq 等。ATAC-Seq<code>所需样本少，建库快，重复性更高</code></li>
 <li>技术：制备细胞悬液-&gt;裂解细胞膜，获取细胞核-&gt;采用Tn5进行酶切-&gt;回收DNA片段，PCR扩增建库-&gt;高通量测序-&gt;生信分析</li>
 <li><img src="https://img-blog.csdnimg.cn/00f06cb4758b44c7a35b8c5c3ff74eda.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-<li><code>ATAC-seq</code>与<code>Chip-seq</code> call出来的<code>peak</code>代表的<code>意义不同</code>。<code>Chip-seq</code> peak是被<code>目的蛋白结合拉下来的DNA</code>，一般只有<code>一个峰</code>，而<code>ATAC-seq</code>是被<code>Tn5转座酶切开</code>、没有被组蛋白结合、染色质开放的DNA位点，<code>如果是TF结合的区域，一般会有一个山谷般的存在</code>。ChIP-seq和ATAC-seq在TF或者Tn5结合区域<code>都会形成一个双峰的reads结合模式</code>，但<code>判断peak的时会有不同的标准</code>。chip-seq是由于<code>TF一起沉淀下来的DNA fragment一般会大于TF的结合区域</code>，<code>read的位置并不是真实TF结合位置</code>，需要<code>向内shift</code>；而<code>ATAC-seq一般是往两边shift</code>。<br><img src="https://img-blog.csdnimg.cn/e501e5a398b34d0e8fd514fba8333cdb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li><code>ATAC-seq</code>与<code>Chip-seq</code> call出来的<code>peak</code>代表的<code>意义不同</code>。<code>Chip-seq</code> peak是被<code>目的蛋白结合拉下来的DNA</code>，一般只有<code>一个峰</code>，而<code>ATAC-seq</code>是被<code>Tn5转座酶切开</code>、没有被组蛋白结合、染色质开放的DNA位点，<code>如果是TF结合的区域，一般会有一个山谷般的存在</code>。ChIP-seq和ATAC-seq在TF或者Tn5结合区域<code>都会形成一个双峰的reads结合模式</code>，但<code>判断peak的时会有不同的标准</code>。chip-seq是由于<code>TF一起沉淀下来的DNA fragment一般会大于TF的结合区域</code>，<code>read的位置并不是真实TF结合位置</code>，需要<code>向内shift</code>；而<code>ATAC-seq一般是往两边shift</code>。<br>
+<img src="https://img-blog.csdnimg.cn/e501e5a398b34d0e8fd514fba8333cdb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 <li><code>ATAC-seq</code>与<code>Chip-seq</code>应用上的区别:</li>
 <li>ATAC-Seq可<code>检测全基因组DNA结合蛋白</code>，<code>转录结合位点</code> ，一般用于<code>不知道特定的转录因子</code>，用此方法与其他方法结合<code>筛查感兴趣的特定调控因子</code>；</li>
 <li>ChIP-Seq是已知转录因子，根据<code>感兴趣的转录因子设计抗体</code>去做ChIP实验<code>富集结合的DNA片段</code>。在测定转录因子的 ChIP-seq 中<code>独有的峰可能是先驱转录因子</code>，其<code>先结合到封闭染色质</code>，然后<code>招募染色质重塑因子或其他转录因子起始转录</code>。这些转录因子 <code>ATAC-seq检测不到</code>。</li>
 <li>得到DNA片段后，为测序准备建库，包括<code>用完整的NextEra接头</code>和<code>纯化</code>、<code>PCR扩增</code>等。基于上述原因，<code>ATAC-Seq推荐使用双端配对</code>的方法。</li>
 </ul>
-<h3 id="ATACseq应用"><a href="#ATACseq应用" class="headerlink" title="ATACseq应用"></a>ATACseq应用</h3><ul>
-<li><p>染色质<code>开放性图谱绘制</code>，表观基因组图谱</p>
+<h3 id="atacseq应用"><a class="markdownIt-Anchor" href="#atacseq应用"></a> ATACseq应用</h3>
+<ul>
+<li>
+<p>染色质<code>开放性图谱绘制</code>，表观基因组图谱</p>
 </li>
-<li><p>找<code>调控</code>生物学过程的<code>关键转录因子</code></p>
+<li>
+<p>找<code>调控</code>生物学过程的<code>关键转录因子</code></p>
 </li>
-<li><p>找<code>哪个转录因子</code>调控了研究的基因</p>
+<li>
+<p>找<code>哪个转录因子</code>调控了研究的基因</p>
 </li>
-<li><p>找转录因子调控的<code>靶基因</code></p>
+<li>
+<p>找转录因子调控的<code>靶基因</code></p>
 </li>
-<li><p>得到<code>不同组织或不同条件下对应可及性区域</code>。</p>
+<li>
+<p>得到<code>不同组织或不同条件下对应可及性区域</code>。</p>
 </li>
-<li><p>得到核小体位置</p>
+<li>
+<p>得到核小体位置</p>
 </li>
-<li><p>生成转录因子结合区域的特征(footprinting)</p>
-<h3 id="技术限制"><a href="#技术限制" class="headerlink" title="技术限制"></a>技术限制</h3></li>
-<li><p>Tn5通过<code>插入剪断DNA 并将测序接头连接到剪断的两个DNA 片段的末端</code>，因此对于一个DNA 片段而言，其两端的接头连接是随机的，导致<code>同一片段两端的接头有50%的概率是同一接头</code>。而<code>只有连接不同接头的片段才可用于富集扩增及测序</code>，因此<code>一半的片段无法利用</code>； </p>
+<li>
+<p>生成转录因子结合区域的特征(footprinting)</p>
+<h3 id="技术限制"><a class="markdownIt-Anchor" href="#技术限制"></a> 技术限制</h3>
 </li>
-<li><p><code>大量剪断的DNA 由于片段过大，无法进行PCR富集</code>; </p>
+<li>
+<p>Tn5通过<code>插入剪断DNA 并将测序接头连接到剪断的两个DNA 片段的末端</code>，因此对于一个DNA 片段而言，其两端的接头连接是随机的，导致<code>同一片段两端的接头有50%的概率是同一接头</code>。而<code>只有连接不同接头的片段才可用于富集扩增及测序</code>，因此<code>一半的片段无法利用</code>；</p>
 </li>
-<li><p>Tn5 的<code>活性</code>受反应溶液的组成及反应条件<code>影响</code>，仍然需要优化以便提高剪切效果； </p>
+<li>
+<p><code>大量剪断的DNA 由于片段过大，无法进行PCR富集</code>;</p>
 </li>
-<li><p>ATAC-seq在<code>植物细胞存在以下难点</code>：<code>细胞壁</code>，<code>叶绿体线粒体等细胞器污染</code>，<code>缺少稳定遗传的细胞系</code>; </p>
+<li>
+<p>Tn5 的<code>活性</code>受反应溶液的组成及反应条件<code>影响</code>，仍然需要优化以便提高剪切效果；</p>
+</li>
+<li>
+<p>ATAC-seq在<code>植物细胞存在以下难点</code>：<code>细胞壁</code>，<code>叶绿体线粒体等细胞器污染</code>，<code>缺少稳定遗传的细胞系</code>;</p>
 </li>
 </ul>
-<h3 id="ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq"><a href="#ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq" class="headerlink" title="ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq"></a>ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq</h3><ul>
+<h3 id="atac-seq-dnase-seq-mnase-seq-faire-seq"><a class="markdownIt-Anchor" href="#atac-seq-dnase-seq-mnase-seq-faire-seq"></a> ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq</h3>
+<ul>
 <li>整体的分析思路一致，<code>找富集区域</code>，对富集区域进行功能分析。</li>
 <li>ChIP-Seq是<code>揭示特定转录因子</code>或<code>蛋白复合物</code>的结合区域，实际是<code>研究DNA和蛋白质的相互作用</code>，利用<code>抗体将蛋白质和DNA一起富集</code>，并对<code>富集的DNA测序</code>。</li>
 <li>DNase-Seq、ATAC-Seq、FAIRE-Seq都<code>研究开放染色质区域</code>：</li>
 <li>DNase-Seq用<code>DNase I内切酶识别</code>开放染色质区域，</li>
 <li>ATAC-seq用<code>Tn5转座酶</code>，随后进行<code>富集扩增</code>；</li>
 <li>FAIRE-Seq先超声裂解，后用酚-氯仿富集；</li>
-<li>MNase-Seq鉴定核小体区域。 </li>
+<li>MNase-Seq鉴定核小体区域。</li>
 </ul>
 <p>下图是不同测序方法获取的峰形：</p>
-<p><img src="https://img-blog.csdnimg.cn/aea5161044eb40e1a1cc4c1a65d63cbb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>检测染色质可及性的方法中，ATAC-seq尤其受欢迎。<br><img src="https://img-blog.csdnimg.cn/96808dfcce9446298f1d0d4cc0db6eee.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_10,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/aea5161044eb40e1a1cc4c1a65d63cbb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
+检测染色质可及性的方法中，ATAC-seq尤其受欢迎。<br>
+<img src="https://img-blog.csdnimg.cn/96808dfcce9446298f1d0d4cc0db6eee.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_10,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <ul>
 <li>ATAC-seq的优点：<code>Tn5转座酶的高活性</code>使ATAC-seq简单，省时，而且只需500-50,000个细胞。灵敏度特异性与DNase-seq相当，优于FAIRE-seq。</li>
 </ul>
-<h3 id="整合分析"><a href="#整合分析" class="headerlink" title="整合分析"></a>整合分析</h3><ul>
-<li>由于开放染色质是大多数TF结合的先决条件，因此<code>ATAC-seq峰通常与TF ChIP-seq峰重叠，但通常更宽</code>。因此，<code>TF ChIP-seq和ATAC-seq可以在同一实验系统中相互验证</code>彼此的质量和可靠性。 </li>
-<li>ATAC-seq与 histone marker ChIP-seq集成，发现与活跃染色质标 H3K4me3，H3K4me1，H3K27ac等正相关，与不活跃的染色质标记 H3K27me3 负相关。 <code>？</code></li>
-<li><code>ATAC-seq+RNA-seq</code>： 一般RNA-seq会优先于ATAC-seq先测，但<code>差异基因富集的基因通路只是一种相关性</code>。要分析出其中谁调控目的基因，可通过<code>ATAC-seq做motif分析</code>，<code>寻找潜在的调控因子</code>，然后再后续的<code>实验验证</code>或者<code>chip-seq验证</code>。/ 看ATAC上丰度高的DNA序列区域是否对应转录本表达量增加，找到对应转录本相关基因的上游调控序列，整体分析转录。对基因功能分析，结合实验表型，推测表达调控-表达-功能-表型。<br><img src="https://img-blog.csdnimg.cn/4a3016bfa5c74598a5b7d660fe1cfe84.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-<li><code>ATAC-seq+HiC</code>： 对于一些想了解<code>染色质高级结构对生命行为的作用</code>的时候，通常会需要用到ATAC-seq等技术，因为<code>Hi-C分析</code>得到高级结构compartmentA/B、TADs、Loops等信息，通常只是相关性，但通过ATAC-seq，可以<code>获得promoter、enhancer等信息</code>，更能知道高级结构是如何影响启动子、增强子从而影响基因表达的。<br><img src="https://img-blog.csdnimg.cn/e38ba32597a14ca7a5d4d6b2f36c1b73.png" alt="在这里插入图片描述"></li>
-<li><code>ATAC-seq+组蛋白修饰</code>： ATAC-seq预测一个位点的开放程度以及可能有某种转录因子的结合，但<code>不知道</code>该因子是<code>促进</code>基因表达，还是<code>抑制</code>，只通过<code>基因层面鉴定</code>来判断转录因子对基因的促进或者是不够的，它只是一种<code>相关性</code>。而这时候如果能提供像<code>H3K27ac这类激活型组蛋白</code>、<code>H3K27me3这类抑制型组蛋白</code>将能使数据结果可信。国内较早研究iPSCs的学者如裴端卿的工作可以看到，在解析iPSCs重编程中的染色质可及性的时候，不仅用到ATAC-seq来描述细胞的身份转变，还<code>通过H3K27ac指征该区域的激活</code>。其中一篇还通过<code>调控成纤维细胞关键基因启动子区去乙酰化修饰</code>，达到了促进重编程的进程。<br><img src="https://img-blog.csdnimg.cn/abb3dc6c3bb0476985a9f1b2e77c4fcc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-<li><code>scATAC-seq+scRNA-seq</code>： 更前沿的技术一个细胞里同时进行RNA-seq和ATAC-seq，并且是单细胞水平的检测。SHARE-seq，能够实现在单细胞中同时高质量，高通量的检测基因表达和染色质可及性。该技术可以使用<code>染色质潜力算法</code>（chromatin potential），<code>用ATAC和RNA的差异来预测细胞的变化方向</code>。<code>相对于以往仅依赖于RNA的预测手段，染色质潜力能够大大提前预测的时间</code>。<br><img src="https://img-blog.csdnimg.cn/df76c6e5f3184d58a00a1fa53a398cd5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-</ul>
+<h3 id="整合分析"><a class="markdownIt-Anchor" href="#整合分析"></a> 整合分析</h3>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/27374332/">ATAC-seq与ChIP联合分析</a><br>研究课题为人小细胞肺癌促进癌症扩散转移的背景机制。主要比较原发性和肝转移性的小细胞肺癌细胞之间的差异。利用ATAC-seq，发现NFI家族转录因子富集在具有差异的染色质开放位点中，预示着NFI家族转录因子在调控肿瘤细胞转移中扮演着重要角色。在染色质高开放性位点区域伴随着Nfib拷贝数量增多，且Nfib在侵袭性原发性肿瘤和转移性肿瘤内高表达，Nfib表现出维持染色质及远端调控区域开放和促进神经基因表达的功能，说明了Nfib对促进癌细胞增殖和迁移具有重要的作用。</li>
-<li><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/25679813/">motif分析转录因子结合蛋白</a>。对处于发育过程中的黑腹果蝇眼睛及其通过遗传诱导的肿瘤模型，利用ATAC-seq技术分析染色质开放区域已在活体中发现驱动肿瘤发育的转录因子及调控区域。然后对找到的染色质活性开放区域进行转录因子预测分析，发现了两个关键的转录因子，猜测它们可能与染色质图谱的变化有关。通过对候选的一个转录因子进行功能验证和靶标分析，发现其为肿瘤转录组中的一个关键的转录调控因子。</li>
+<li>
+<p>由于开放染色质是大多数TF结合的先决条件，因此<code>ATAC-seq峰通常与TF ChIP-seq峰重叠，但通常更宽</code>。因此，<code>TF ChIP-seq和ATAC-seq可以在同一实验系统中相互验证</code>彼此的质量和可靠性。</p>
+</li>
+<li>
+<p>ATAC-seq与 histone marker ChIP-seq集成，发现与活跃染色质标 H3K4me3，H3K4me1，H3K27ac等正相关，与不活跃的染色质标记 H3K27me3 负相关。 <code>？</code></p>
+</li>
+<li>
+<p><code>ATAC-seq+RNA-seq</code>： 一般RNA-seq会优先于ATAC-seq先测，但<code>差异基因富集的基因通路只是一种相关性</code>。要分析出其中谁调控目的基因，可通过<code>ATAC-seq做motif分析</code>，<code>寻找潜在的调控因子</code>，然后再后续的<code>实验验证</code>或者<code>chip-seq验证</code>。/ 看ATAC上丰度高的DNA序列区域是否对应转录本表达量增加，找到对应转录本相关基因的上游调控序列，整体分析转录。对基因功能分析，结合实验表型，推测表达调控-表达-功能-表型。<br>
+<img src="https://img-blog.csdnimg.cn/4a3016bfa5c74598a5b7d660fe1cfe84.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><code>ATAC-seq+HiC</code>： 对于一些想了解<code>染色质高级结构对生命行为的作用</code>的时候，通常会需要用到ATAC-seq等技术，因为<code>Hi-C分析</code>得到高级结构compartmentA/B、TADs、Loops等信息，通常只是相关性，但通过ATAC-seq，可以<code>获得promoter、enhancer等信息</code>，更能知道高级结构是如何影响启动子、增强子从而影响基因表达的。<br>
+<img src="https://img-blog.csdnimg.cn/e38ba32597a14ca7a5d4d6b2f36c1b73.png" alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><code>ATAC-seq+组蛋白修饰</code>： ATAC-seq预测一个位点的开放程度以及可能有某种转录因子的结合，但<code>不知道</code>该因子是<code>促进</code>基因表达，还是<code>抑制</code>，只通过<code>基因层面鉴定</code>来判断转录因子对基因的促进或者是不够的，它只是一种<code>相关性</code>。而这时候如果能提供像<code>H3K27ac这类激活型组蛋白</code>、<code>H3K27me3这类抑制型组蛋白</code>将能使数据结果可信。国内较早研究iPSCs的学者如裴端卿的工作可以看到，在解析iPSCs重编程中的染色质可及性的时候，不仅用到ATAC-seq来描述细胞的身份转变，还<code>通过H3K27ac指征该区域的激活</code>。其中一篇还通过<code>调控成纤维细胞关键基因启动子区去乙酰化修饰</code>，达到了促进重编程的进程。<br>
+<img src="https://img-blog.csdnimg.cn/abb3dc6c3bb0476985a9f1b2e77c4fcc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><code>scATAC-seq+scRNA-seq</code>： 更前沿的技术一个细胞里同时进行RNA-seq和ATAC-seq，并且是单细胞水平的检测。SHARE-seq，能够实现在单细胞中同时高质量，高通量的检测基因表达和染色质可及性。该技术可以使用<code>染色质潜力算法</code>（chromatin potential），<code>用ATAC和RNA的差异来预测细胞的变化方向</code>。<code>相对于以往仅依赖于RNA的预测手段，染色质潜力能够大大提前预测的时间</code>。<br>
+<img src="https://img-blog.csdnimg.cn/df76c6e5f3184d58a00a1fa53a398cd5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/27374332/">ATAC-seq与ChIP联合分析</a><br>
+研究课题为人小细胞肺癌促进癌症扩散转移的背景机制。主要比较原发性和肝转移性的小细胞肺癌细胞之间的差异。利用ATAC-seq，发现NFI家族转录因子富集在具有差异的染色质开放位点中，预示着NFI家族转录因子在调控肿瘤细胞转移中扮演着重要角色。在染色质高开放性位点区域伴随着Nfib拷贝数量增多，且Nfib在侵袭性原发性肿瘤和转移性肿瘤内高表达，Nfib表现出维持染色质及远端调控区域开放和促进神经基因表达的功能，说明了Nfib对促进癌细胞增殖和迁移具有重要的作用。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/25679813/">motif分析转录因子结合蛋白</a>。对处于发育过程中的黑腹果蝇眼睛及其通过遗传诱导的肿瘤模型，利用ATAC-seq技术分析染色质开放区域已在活体中发现驱动肿瘤发育的转录因子及调控区域。然后对找到的染色质活性开放区域进行转录因子预测分析，发现了两个关键的转录因子，猜测它们可能与染色质图谱的变化有关。通过对候选的一个转录因子进行功能验证和靶标分析，发现其为肿瘤转录组中的一个关键的转录调控因子。</p>
+</li>
 </ul>
 <hr>
 <ul>
@@ -359,34 +398,53 @@
 <li>样本间的差异怎么分析？</li>
 <li>怎么对peaks进行功能注释分析？</li>
 <li>如何找motif?</li>
-<li>ATAC-Seq和ChIP-Seq和RNA-Seq的整合分析怎么做？<br><img src="https://img-blog.csdnimg.cn/0920f7a6c41148b2825b189e709a5fbc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="ATAC-seq/CHIP-seq流程"></li>
+<li>ATAC-Seq和ChIP-Seq和RNA-Seq的整合分析怎么做？<br>
+<img src="https://img-blog.csdnimg.cn/0920f7a6c41148b2825b189e709a5fbc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYmFubmVyRHI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="ATAC-seq/CHIP-seq流程"></li>
 </ul>
 <p>待学习内容：</p>
 <ol>
-<li><p>ATAC-seq data analysis: from FASTQ to peaks</p>
+<li>
+<p>ATAC-seq data analysis: from FASTQ to peaks</p>
 </li>
-<li><p>ATAC-seq Data Standards and Processing Pipeline in ENCODE</p>
+<li>
+<p>ATAC-seq Data Standards and Processing Pipeline in ENCODE</p>
 </li>
-<li><p>ATAC-seq数据分析实战</p>
+<li>
+<p>ATAC-seq数据分析实战</p>
 </li>
-<li><p>Harvard FAS Informatics - ATAC-seq Guidelines</p>
+<li>
+<p>Harvard FAS Informatics - ATAC-seq Guidelines</p>
 </li>
-<li><p>Harvard Chan Bioinformatics Core (HBC)深度NGS数据分析课程，第5部分关于ChIP-Seq，整体思路和绝大部分分析方法适合ATAC-seq。</p>
-<p>HBC深度NGS数据分析课程：<br><a target="_blank" rel="noopener" href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course</a><br>第五部分ChIP-Seq课程：</p>
+<li>
+<p>Harvard Chan Bioinformatics Core (HBC)深度NGS数据分析课程，第5部分关于ChIP-Seq，整体思路和绝大部分分析方法适合ATAC-seq。</p>
+<p>HBC深度NGS数据分析课程：<br>
+<a target="_blank" rel="noopener" href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course</a><br>
+第五部分ChIP-Seq课程：</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons">https://github.com/hbctraining/In-depth-NGS-Data-Analysis-Course/tree/master/sessionV/lessons</a></p>
 </li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">参考文献：</span><br><span class="line">https://mp.weixin.qq.com/s?src=11&amp;timestamp=1633159169&amp;ver=3349&amp;signature=*MwqLr1J-qdZoNiKVxF32vEKh5-6TRystOXAJ3UOZ3Pl8XTBIB8Ly95IJM0L2EzGFVWOM-TdKnuhnb0gfMfsUTfahWJ5i3hcM2TcR9UDFSVWuyYw7CONzMjsMaYQG2Ca&amp;new=1</span><br><span class="line">https://mp.weixin.qq.com/s?src=11&amp;timestamp=1633159169&amp;ver=3349&amp;signature=rtYw5NsC62rUZvctQsUg3*w*NFFDdOHgSMu0pcp0HTQdCyqxpgril8yx7GWlJaID*lfd2HRLUWs59zuszSEFeean0jEwdRs4PzYy*T5b7nSpZRWqCs4SHcEQ2jyjDtwQ&amp;new=1</span><br></pre></td></tr></table></figure>
-
 <hr>
 <blockquote>
-<p>1：ATAC-seq的背景介绍以及与ChIP-Seq的异同<br>2：原始数据的质控、比对和过滤<br>3：用MACS2软件call peaks<br>4：对ATAC-Seq/ChIP-seq的质量评估（一）——phantompeakqualtools<br>5：对ATAC-Seq/ChIP-seq的质量评估（二）——ChIPQC<br>6：重复样本的处理——IDR<br>7：用Y叔的ChIPseeker做功能注释<br>8：用网页版工具进行motif分析<br>9：差异peaks分析——DiffBind<br>10：ATAC-Seq、ChIP-Seq、RNA-Seq整合分析</p>
+<p>1：ATAC-seq的背景介绍以及与ChIP-Seq的异同<br>
+2：原始数据的质控、比对和过滤<br>
+3：用MACS2软件call peaks<br>
+4：对ATAC-Seq/ChIP-seq的质量评估（一）——phantompeakqualtools<br>
+5：对ATAC-Seq/ChIP-seq的质量评估（二）——ChIPQC<br>
+6：重复样本的处理——IDR<br>
+7：用Y叔的ChIPseeker做功能注释<br>
+8：用网页版工具进行motif分析<br>
+9：差异peaks分析——DiffBind<br>
+10：ATAC-Seq、ChIP-Seq、RNA-Seq整合分析</p>
 </blockquote>
-<h3 id="简洁版ATACseq分析流程"><a href="#简洁版ATACseq分析流程" class="headerlink" title="简洁版ATACseq分析流程"></a>简洁版ATACseq分析流程</h3><ul>
-<li>数据预处理<ul>
+<h3 id="简洁版atacseq分析流程"><a class="markdownIt-Anchor" href="#简洁版atacseq分析流程"></a> 简洁版ATACseq分析流程</h3>
+<ul>
+<li>数据预处理
+<ul>
 <li>（1）比对前质量控制FastQC</li>
-<li>（2）原始序列比对 </li>
-<li>（3）比对后处理和质量控制：去除重复序列，细胞器序列<ul>
+<li>（2）原始序列比对</li>
+<li>（3）比对后处理和质量控制：去除重复序列，细胞器序列
+<ul>
 <li>序列比对后，Picard/SAMtools收集unique mapping reads/rate，duplicated rate百分比和片段大小分布</li>
 <li>成功的ATACseq实验应生成<code>片段大小分布图</code>（从<code>bam文件</code>得到），具有递减性和周期性的峰，对应于<code>无核小体区域</code>（NFR）（&lt;100bp）和<code>单核双核和三核</code>小体（200，400，600bp）。大多数Linker DNA大小介于10-80bp间，故大多数片段都会是<code>小于100bp</code>。每个Nucleosome的DNA大小为180bp，加上两边插入的冗余，会得到大约<code>200bp</code>长度的mono-nucleosome的DNA。</li>
 <li><code>无核小体区域的片段应该在基因的转录起始位点（TSS）周围富集</code>，而<code>核小体结合区域片段TSS处形成低谷</code>，TSS周围<code>侧翼区域稍微富集</code>。<code>ATACseqQC评估</code>。</li>
@@ -395,7 +453,8 @@
 </ul>
 </li>
 <li>Peak-calling：从比对得到的bam文件找出reads覆盖区，就是峰出现的位置。</li>
-<li>高级分析<ul>
+<li>高级分析
+<ul>
 <li>（1）peak 差异分析：寻找不同分组差异peaks</li>
 <li>（2）peak注释：峰的注释可将染色质的可及性与基因调控联系。通常峰会被注释到最接近的基因或调控原件。获得最接近的基因列表后，使用GOKEGGReactome等数据库功能富集分析</li>
 <li>（3）motif富集分析：得到每个peak region里motif的位置和频率，再和随机背景或其他条件比较，可做motif富集分析</li>
@@ -501,7 +560,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ATAC-seq%E6%84%8F%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">ATAC-seq意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ATACseq%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">ATACseq应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%99%90%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">技术限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ATAC-Seq%E3%80%81Dnase-Seq%E3%80%81MNase-Seq%E3%80%81FAIRE-Seq"><span class="nav-number">4.</span> <span class="nav-text">ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">整合分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E6%B4%81%E7%89%88ATACseq%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">简洁版ATACseq分析流程</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#atac-seq%E6%84%8F%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text"> ATAC-seq意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#atacseq%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text"> ATACseq应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%99%90%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text"> 技术限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#atac-seq-dnase-seq-mnase-seq-faire-seq"><span class="nav-number">4.</span> <span class="nav-text"> ATAC-Seq、Dnase-Seq、MNase-Seq、FAIRE-Seq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text"> 整合分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E6%B4%81%E7%89%88atacseq%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text"> 简洁版ATACseq分析流程</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -516,7 +575,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -529,7 +588,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

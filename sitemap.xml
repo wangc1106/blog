@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/02/2022-03-02-HiFi-3-software/</loc>
+    
+    <lastmod>2022-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2.html</loc>
+    
+    <lastmod>2022-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/02/20/2022-02-20-HiFi-2-SMRT/</loc>
+    
+    <lastmod>2022-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/02/20/2022-02-20-HiFi-1/</loc>
+    
+    <lastmod>2022-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/02/28/2022-02-28-genome-assemble/</loc>
+    
+    <lastmod>2022-03-02</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/2022/02/23/2022-02-21-Survey/</loc>
     
     <lastmod>2022-03-01</lastmod>
@@ -37,13 +72,6 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/2022/02/28/2022-02-28-genome-assemble/</loc>
-    
-    <lastmod>2022-03-01</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wangc1106.github.io/blog/2022/02/24/2022-02-24-Seqkit/</loc>
     
     <lastmod>2022-02-24</lastmod>
@@ -54,20 +82,6 @@
     <loc>https://wangc1106.github.io/blog/2022/02/24/2022-02-24-memory/</loc>
     
     <lastmod>2022-02-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/2022/02/20/2022-02-20-SMRT-sequencing/</loc>
-    
-    <lastmod>2022-02-20</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/2022/02/20/2022-02-20-Pacbio/</loc>
-    
-    <lastmod>2022-02-20</lastmod>
     
   </url>
   
@@ -284,6 +298,13 @@
   </url>
   
   <url>
+    <loc>https://wangc1106.github.io/blog/tags/denovo-III/</loc>
+    <lastmod>2022-03-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/tags/ATAC-seq/</loc>
     <lastmod>2022-03-02</lastmod>
     <changefreq>daily</changefreq>
@@ -363,6 +384,13 @@
   </url>
   
   <url>
+    <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
+    <lastmod>2022-03-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
     <lastmod>2022-03-02</lastmod>
     <changefreq>daily</changefreq>
@@ -371,13 +399,6 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
-    <lastmod>2022-03-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
     <lastmod>2022-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

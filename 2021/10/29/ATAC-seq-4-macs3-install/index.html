@@ -225,11 +225,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/ATAC-seq/" itemprop="url" rel="index"><span itemprop="name">ATAC-seq</span></a>
+                  <a href="/blog/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
+                  <a href="/blog/categories/ATAC-seq/" itemprop="url" rel="index"><span itemprop="name">ATAC-seq</span></a>
                 </span>
             </span>
 
@@ -263,22 +263,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="Macs2-3-installation-Debug-Record"><a href="#Macs2-3-installation-Debug-Record" class="headerlink" title="Macs2/3 installation Debug Record"></a>Macs2/3 installation Debug Record</h3><span id="more"></span>
-
-<p>macs2 installation record<br>install conda<br>creat work environment<br>install numpy1.17<br>python setup.py install –prefix …./software/MACS</p>
+        <h3 id="macs23-installation-debug-record"><a class="markdownIt-Anchor" href="#macs23-installation-debug-record"></a> Macs2/3 installation Debug Record</h3>
+<span id="more"></span>
+<p>macs2 installation record<br>
+install conda<br>
+creat work environment<br>
+install numpy1.17<br>
+python <a target="_blank" rel="noopener" href="http://setup.py">setup.py</a> install --prefix …/software/MACS</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">####################################ERROR1#############################################</span><br><span class="line">#MACS3/fermi-lite/ksw.c:31:26: fatal error: lib/x86/sse2.h: No such file or directory</span><br><span class="line"># #include &quot;lib/x86/sse2.h&quot;                      ^</span><br><span class="line">#compilation terminated.</span><br><span class="line">#error: command &#x27;gcc&#x27; failed with exit status 1</span><br><span class="line">######################################################################################</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://github.com/macs3-project/MACS/issues/473">https://github.com/macs3-project/MACS/issues/473</a><br>zip downloaded from github zip is not complete in the deep dir<br>git clone <a target="_blank" rel="noopener" href="https://github.com/macs3-project/MACS.git">https://github.com/macs3-project/MACS.git</a> –recursive<br>or download absent files</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/macs3-project/MACS/issues/473">https://github.com/macs3-project/MACS/issues/473</a><br>
+zip downloaded from github zip is not complete in the deep dir<br>
+git clone <a target="_blank" rel="noopener" href="https://github.com/macs3-project/MACS.git">https://github.com/macs3-project/MACS.git</a> --recursive<br>
+or download absent files</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">####################################ERROR2#############################################</span><br><span class="line">Checking .pth file support in ..../software/MACS2/lib/python3.8/site-packages/</span><br><span class="line">..../.conda/envs/atacseq/bin/python -E -c pass</span><br><span class="line">TEST FAILED: ..../software/MACS2/lib/python3.8/site-packages/ does NOT support .pth files</span><br><span class="line">bad install directory or PYTHONPATH</span><br><span class="line"></span><br><span class="line">You are attempting to install a package to a directory that is not</span><br><span class="line">on PYTHONPATH and which Python does not read &quot;.pth&quot; files from.  The</span><br><span class="line">installation directory you specified (via --install-dir, --prefix, or</span><br><span class="line">the distutils default setting) was:</span><br><span class="line"></span><br><span class="line">    ..../software/MACS2/lib/python3.8/site-packages/</span><br><span class="line"></span><br><span class="line">and your PYTHONPATH environment variable currently contains:</span><br><span class="line"></span><br><span class="line">    &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">Here are some of your options for correcting the problem:</span><br><span class="line"></span><br><span class="line">* You can choose a different installation directory, i.e., one that is</span><br><span class="line">  on PYTHONPATH or supports .pth files</span><br><span class="line"></span><br><span class="line">* You can add the installation directory to the PYTHONPATH environment</span><br><span class="line">  variable.  (It must then also be on PYTHONPATH whenever you run</span><br><span class="line">  Python and want to use the package(s) you are installing.)</span><br><span class="line"></span><br><span class="line">* You can set up the installation directory to support &quot;.pth&quot; files by</span><br><span class="line">  using one of the approaches described here:</span><br><span class="line"></span><br><span class="line">  https://setuptools.readthedocs.io/en/latest/deprecated/easy_install.html#custom-installation-locations</span><br></pre></td></tr></table></figure>
-
-<p>[ok]export PYTHONPATH=${PYTHONPATH}:…./software/MACS2/lib/python3.9/site-packages/</p>
-<p>directly set PYTHONPATH=…./software/MACS2/lib/python3.9/site-packages/ in ~/.bashrc was failed.</p>
+<p>[ok]export PYTHONPATH=${PYTHONPATH}:…/software/MACS2/lib/python3.9/site-packages/</p>
+<p>directly set PYTHONPATH=…/software/MACS2/lib/python3.9/site-packages/ in ~/.bashrc was failed.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">####################################ERROR3#############################################</span><br><span class="line">error: package directory &#x27;MACS2&#x27; does not exist</span><br><span class="line">#######################################################################################</span><br></pre></td></tr></table></figure>
-<p>zip Dir was not complete, tried .tar.gz </p>
+<p>zip Dir was not complete, tried .tar.gz</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">####################################ERROR4#############################################</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;..../software/MACS3/bin/macs3&quot;, line 4, in &lt;module&gt;</span><br><span class="line">    __import__(&#x27;pkg_resources&#x27;).run_script(&#x27;MACS3==3.0.0a6&#x27;, &#x27;macs3&#x27;)</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 3243, in &lt;module&gt;</span><br><span class="line">    def _initialize_master_working_set():</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 3226, in _call_aside</span><br><span class="line">    f(*args, **kwargs)</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 3255, in _initialize_master_working_set</span><br><span class="line">    working_set = WorkingSet._build_master()</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 568, in _build_master</span><br><span class="line">    ws.require(__requires__)</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 886, in require</span><br><span class="line">    needed = self.resolve(parse_requirements(requirements))</span><br><span class="line">  File &quot;..../miniconda3/lib/python3.9/site-packages/pkg_resources/__init__.py&quot;, line 772, in resolve</span><br><span class="line">    raise DistributionNotFound(req, requirers)</span><br><span class="line">pkg_resources.DistributionNotFound: The &#x27;Cython&gt;=0.29&#x27; distribution was not found and is required by MACS3``</span><br></pre></td></tr></table></figure>
-
 <p><code>conda install Cython=0.29</code></p>
-<p><a target="_blank" rel="noopener" href="https://pypi.org/project/cykhash/">https://pypi.org/project/cykhash/</a><br><code>pip install cykhash</code><br>Collecting cykhash<br>  Using cached cykhash-1.0.2-cp39-cp39-linux_x86_64.whl<br>Installing collected packages: cykhash<br>Successfully installed cykhash-1.0.2</p>
-<p>python setup.py install –prefix …./software/MACS2</p>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/project/cykhash/">https://pypi.org/project/cykhash/</a><br>
+<code>pip install cykhash</code><br>
+Collecting cykhash<br>
+Using cached cykhash-1.0.2-cp39-cp39-linux_x86_64.whl<br>
+Installing collected packages: cykhash<br>
+Successfully installed cykhash-1.0.2</p>
+<p>python <a target="_blank" rel="noopener" href="http://setup.py">setup.py</a> install --prefix …/software/MACS2</p>
 <p>success</p>
 
     </div>
@@ -380,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Macs2-3-installation-Debug-Record"><span class="nav-number">1.</span> <span class="nav-text">Macs2&#x2F;3 installation Debug Record</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#macs23-installation-debug-record"><span class="nav-number">1.</span> <span class="nav-text"> Macs2&#x2F;3 installation Debug Record</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -395,7 +405,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -408,7 +418,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

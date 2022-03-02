@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="1osTo_gOe1SW9Hevqtz8vl8HfSgTO4DSMZ0DiMPMX6w">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Hifiasm is a fast haplotype-resolved de novo assembler for PacBio HiFi reads(High Fidelity,high accuracy consensus reads). HiCanu, Hifiasm, Peregrine, minimap2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HiFi-3-assemble-software">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2022/03/02/2022-03-02-HiFi-3-software/index.html">
+<meta property="og:site_name" content="Banner&#39;s Blog">
+<meta property="og:description" content="Hifiasm is a fast haplotype-resolved de novo assembler for PacBio HiFi reads(High Fidelity,high accuracy consensus reads). HiCanu, Hifiasm, Peregrine, minimap2">
+<meta property="og:locale">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/02/2022-03-02-HiFi-3-software/1.png">
+<meta property="article:published_time" content="2022-03-02T01:08:25.090Z">
+<meta property="article:modified_time" content="2022-03-02T09:08:26.366Z">
+<meta property="article:author" content="Wang C">
+<meta property="article:tag" content="denovo-III">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/blog/2022/03/02/2022-03-02-HiFi-3-software/1.png">
+
+<link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/02/2022-03-02-HiFi-3-software/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>HiFi-3-assemble-software | Banner's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Banner's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream big work hard</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://wangc1106.github.io/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2022/03/02/2022-03-02-HiFi-3-software/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/banner.png">
+      <meta itemprop="name" content="Wang C">
+      <meta itemprop="description" content="Make more time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Banner's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HiFi-3-assemble-software
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-02 09:08:25 / Modified: 17:08:26" itemprop="dateCreated datePublished" datetime="2022-03-02T09:08:25+08:00">2022-03-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/blog/2022/03/02/2022-03-02-HiFi-3-software/" class="post-meta-item leancloud_visitors" data-flag-title="HiFi-3-assemble-software" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>7.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Hifiasm is a <font color="blue"><strong>fast haplotype-resolved de novo assembler</strong></font> for <font color="blue"><strong>PacBio HiFi reads(High Fidelity,high accuracy consensus reads)</strong></font>. HiCanu, Hifiasm, Peregrine, minimap2</p>
+<span id="more"></span>
+<h1 id="hifiasm-official-doc"><a class="markdownIt-Anchor" href="#hifiasm-official-doc"></a> <a target="_blank" rel="noopener" href="https://github.com/chhylp123/hifiasm">hifiasm Official doc</a></h1>
+<p><strong>install</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install hifiasm (requiring g++ and zlib)</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/chhylp123/hifiasm</span><br><span class="line"><span class="comment">#download zipfile unzip</span></span><br><span class="line"><span class="built_in">cd</span> hifiasm &amp;&amp; make</span><br></pre></td></tr></table></figure>
+<p><strong>simple use</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Run on test data (use -f0 for small datasets)?</span></span><br><span class="line">wget https://github.com/chhylp123/hifiasm/releases/download/v0.7/chr11-2M.fa.gz</span><br><span class="line">./hifiasm -o <span class="built_in">test</span> -t4 -f0 chr11-2M.fa.gz 2&gt; test.log</span><br><span class="line">awk <span class="string">&#x27;/^S/&#123;print &quot;&gt;&quot;$2;print $3&#125;&#x27;</span> test.bp.p_ctg.gfa &gt; test.p_ctg.fa  <span class="comment"># get primary contigs in FASTA</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Assemble inbred/homozygous genomes (-l0 disables duplication purging)</span></span><br><span class="line"><span class="comment">#?</span></span><br><span class="line">hifiasm -o CHM13.asm -t32 -l0 CHM13-HiFi.fa.gz 2&gt; CHM13.asm.log</span><br><span class="line"><span class="comment"># Assemble heterozygous genomes with built-in duplication purging</span></span><br><span class="line"><span class="comment">#?</span></span><br><span class="line">hifiasm -o HG002.asm -t32 HG002-file1.fq.gz HG002-file2.fq.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># Hi-C phasing with paired-end short reads in two FASTQ files</span></span><br><span class="line"><span class="comment">#?</span></span><br><span class="line">hifiasm -o HG002.asm --h1 read1.fq.gz --h2 read2.fq.gz HG002-HiFi.fq.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># Trio binning assembly (requiring https://github.com/lh3/yak)</span></span><br><span class="line"><span class="comment">#?</span></span><br><span class="line">yak count -b37 -t16 -o pat.yak &lt;(cat pat_1.fq.gz pat_2.fq.gz) &lt;(cat pat_1.fq.gz pat_2.fq.gz)</span><br><span class="line">yak count -b37 -t16 -o mat.yak &lt;(cat mat_1.fq.gz mat_2.fq.gz) &lt;(cat mat_1.fq.gz mat_2.fq.gz)</span><br><span class="line">hifiasm -o HG002.asm -t32 -1 pat.yak -2 mat.yak HG002-HiFi.fa.gz</span><br></pre></td></tr></table></figure>
+<h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> introduction</h2>
+<p>Hifiasm is a <font color="blue"><strong>fast haplotype-resolved de novo assembler</strong></font> for <font color="blue"><strong>PacBio HiFi reads</strong></font>. It can <strong>assemble a human genome in several hours</strong> and assemble a <strong>~30Gb</strong> California redwood genome in <strong>a few days</strong>. Hifiasm emits <font color="red"><strong>partially phased assemblies</strong></font> of quality competitive with the best assemblers. Given <font color="green"><strong>parental short reads</strong></font> or <font color="green"><strong>Hi-C data</strong></font>, it produces arguably <font color="red"><strong>the best haplotype-resolved assemblies</strong></font> so far.</p>
+<h2 id="why-hifiasm"><a class="markdownIt-Anchor" href="#why-hifiasm"></a> Why Hifiasm?</h2>
+<ul>
+<li>Hifiasm delivers high-quality assemblies. It tends to generate longer contigs and resolve more segmental duplications than other assemblers.</li>
+<li>Given Hi-C reads or short reads from the parents, hifiasm can produce overall the best haplotype-resolved assembly so far. It is the assembler of choice by the <a target="_blank" rel="noopener" href="https://humanpangenome.org/">Human Pangenome Project</a> for the first batch of samples.</li>
+<li>Hifiasm can purge duplications between haplotigs without relying on third-party tools such as purge_dups. Hifiasm does not need polishing tools like pilon or racon, either. This simplifies the assembly pipeline and saves running time.</li>
+<li>Hifiasm is fast. It can assemble a human genome in half a day and assemble a ~30Gb redwood genome in three days. No genome is too large for hifiasm.</li>
+<li>Hifiasm is trivial to install and easy to use. It does not required Python, R or C++11 compilers, and can be compiled into a single executable. The default setting works well with a variety of genomes.</li>
+</ul>
+<h1 id="hifiasm-paper"><a class="markdownIt-Anchor" href="#hifiasm-paper"></a> hifiasm paper</h1>
+<p>ref：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6d79690dce5d">https://www.jianshu.com/p/6d79690dce5d</a></p>
+<p><a target="_blank" rel="noopener" href="https://hifiasm.readthedocs.io/en/latest/index.html">https://hifiasm.readthedocs.io/en/latest/index.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fchhylp123%2Fhifiasm">https://github.com/chhylp123/hifiasm</a></p>
+<p><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.nature.com%2Farticles%2Fs41592-020-01056-5">https://www.nature.com/articles/s41592-020-01056-5</a></p>
+<p>hifiasm有效利用PacBio HiFi测序技术，在<font color="red"><strong>分型组装图(pahsed assembly gprah)</strong></font>中可靠的表示单倍体信息。</p>
+<p><strong>第一阶段</strong>：通过所有序列相互比对，对潜在测序错误纠正。如果<font color="red">一个位置只存在两种碱基类型</font>，且每个碱基类型<font color="red">至少有3条read支持</font>，那么这个位置会被当作<font color="red">杂合位点</font>，否则视作测序错误纠正。</p>
+<p><strong>第二阶段</strong>：根据<font color="red">序列之间重叠关系</font>，构建<font color="red">分型的字符串图(phased string graph)</font>。其中调整朝向的序列作为<font color="red">顶点(vertex)</font>，一致重叠作为<font color="red">边(edge)</font>。字符串图中的<font color="red">气泡(bubble)</font>则是<font color="red">杂合位点</font>。</p>
+<p><strong>第三阶段</strong>：如果没有额外的信息，hifiasm会<font color="red">随机选择气泡一边</font>构建primary assembly，另一边则是alternate assembly. 该策略和HiCanu，Falcon-Unzip一样。对于杂合基因组而言，由于存在一个以上的纯合haplotype，因此<font color="red">primary assembly可能还会包含haplotigs</font>。HiCanu依赖第三方的purge_dups, 而hifiasm内部实现purge_dups算法的变种，简化了流程。如果有<font color="red">额外信息</font>，hifiasm可正确的对<font color="red">haplotype进行分型</font>。</p>
+<p><img src="/blog/blog/2022/03/02/2022-03-02-HiFi-3-software/1.png" alt="img"></p>
+<h2 id="仅hifi数据模式"><a class="markdownIt-Anchor" href="#仅hifi数据模式"></a> 仅HiFi数据模式</h2>
+<p>最基本的用法，会得到两个部分分型的组装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/chhylp123/hifiasm/releases/download/v0.7/chr11-2M.fa.gz</span><br><span class="line">hifiasm -o <span class="built_in">test</span> -t 32 chr11-2M.fa.gz 2&gt; test.log</span><br><span class="line"><span class="comment">#-o输出文件前缀 -t线程</span></span><br></pre></td></tr></table></figure>
+<p>结果文件关注如下几项 (prefix为前缀）</p>
+<ul>
+<li><code>prefix.bp.r_utg.gfa</code>: haplotype-resolved raw unitig graph，记录所有的单倍型信息</li>
+<li><code>prefix.bp.p_utg.gfa</code>: 在raw unitig graph基础上过滤小的bubble，</li>
+<li><code>prefix.bp.p_ctg.gfa</code>: 主要contig的assembly graph</li>
+<li><code>prefix.bp.hap1.p_ctg.gfa</code>: haplotype1的部分分型的contig graph</li>
+<li><code>prefix.bp.hap2.p_ctg.gfa</code>: haplotype2的部分分型的contig graph</li>
+</ul>
+<p>如果并不需要部分分型的组装，只要primary和alternate的组装结果，可以在之前命令的基础上，加上 <code>--primary</code>参数。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hifiasm --primary -o <span class="built_in">test</span> -t 32 chr11-2M.fa.gz 2&gt; test.log2</span><br></pre></td></tr></table></figure>
+<p>由于hifiasm运行时会将步骤中纠错和相互比对的结果保存成 bin 文件，因此rerun速度很快(前缀名差异)。</p>
+<p>primay模式下输出的文件和之前的类似，唯一的不同在于没有 <strong>bp</strong></p>
+<p>prefix<code>.r_utg.gfa</code>: haplotype-resolved raw unitig graph: 保留了组装生成的所有单体型信息，包括体细胞突变和重复的测序错误。</p>
+<p>prefix<code>.p_utg.gfa</code>: haplotype-resolved processed unitig graph without small bubbles：无小气泡的单倍型解析；去掉由于体细胞突变和数据背景噪音引起的small bubbles（这个并不是真正的单体型信息），对于高度杂合基因组物种优先选择这个结果。</p>
+<p>prefix<code>.p_ctg.gfa</code>: assembly graph of primary contigs：对于低杂合度物种来说，优先选择该文件；对于高杂合度物种，该结果代表其中一个单倍型。</p>
+<p>prefix<code>.a_ctg.gfa</code>: assembly graph of alternate contigs：组装出来的另一套单体型基因组结果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#contig，通过awk提取</span></span><br><span class="line">awk <span class="string">&#x27;/^S/&#123;print &quot;&gt;&quot;$2;print $3&#125;&#x27;</span> test.p_ctg.gfa &gt; test.p_ctg.fa</span><br></pre></td></tr></table></figure>
+<h2 id="双亲二代测序trio-binning模式"><a class="markdownIt-Anchor" href="#双亲二代测序trio-binning模式"></a> 双亲二代测序Trio-binning模式</h2>
+<p>如果有双亲数据，则可使用trio-binning方法进行更可靠的分型。分为两步，<font color="red"><strong>先用yak统计k-mers， 然后用hifiasm进行组装</strong></font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yak count -k31 -b37 -t16 -o pat.yak paternal.fq.gz</span><br><span class="line">yak count -k31 -b37 -t16 -o mat.yak maternal.fq.gz</span><br><span class="line">hifiasm -o NA12878.asm -t 32 -1 pat.yak -2 mat.yak NA12878.fq.gz</span><br></pre></td></tr></table></figure>
+<p>输出和之前类似，主要关注文件名<font color="red">带 dip 的输出gfa文件</font></p>
+<ul>
+<li><strong>prefix.r_utg.gfa</strong>(Haplotype-resolved raw unitig graph in GFA format):保存了所有的单倍型信息。</li>
+</ul>
+<ul>
+<li><code>prefix.dip.hap1.p_ctg.gfa</code>: 完成分型的<font color="red"><strong>父源单倍体 contig图</strong></font>。(Phased paternal/haplotype1 contig graph):保留了阶段性父系/单倍型1组装。</li>
+<li><code>prefix.dip.hap2.p_ctg.gfa</code>: 完全分型的<font color="red"><strong>母源单倍体contig图</strong></font>。(Phased maternal/haplotype2 contig graph):保留了阶段性母系/单倍型2组装。</li>
+</ul>
+<h2 id="附加hi-c模式"><a class="markdownIt-Anchor" href="#附加hi-c模式"></a> 附加Hi-C模式</h2>
+<p>由于Hi-C数据能够提供<strong>远距信息</strong>，因此也能<strong>用于单倍体分型</strong>。需要加两个参数， h1为Hi-C的read1, h2 为Hi-C的read2</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hifiasm -o NA12878.asm -t 32 --h1 read1.fq.gz --h2 read2.fq.gz HiFi-reads.fq.gz</span><br></pre></td></tr></table></figure>
+<p>在该模式下，每个contig要么是来自于父亲，要么是来自于母亲。hifiasm将<font color="red">同一来源的contig放在同一个组装中</font>。需要注意的是，hifiasm未必能够处理好<font color="red">着丝粒附近区域</font>，另外<font color="red">hifiasm中Hi-C也不会用于进行scaffold</font>。</p>
+<p>输出结果重点关注带hic的文件</p>
+<ul>
+<li><code>prefix.hic.p_ctg.gfa</code>: 主要contig的组装图</li>
+<li><code>prefix.hic.hap1.p_ctg.gfa</code>: 完全分型的haplotype1的contig图</li>
+<li><code>prefix.hic.hap2.p_ctg.gfa</code>: 完全分型的haplotype2的contig图</li>
+<li><code>prefix.hic.a_ctg.gfa</code> : 如果设置了 <code>--primary</code>参数，还会输出该次要contig的组装图</li>
+</ul>
+<h2 id="日志和参数调整"><a class="markdownIt-Anchor" href="#日志和参数调整"></a> 日志和参数调整</h2>
+<p>绝大部分的时候，只需要使用默认参数即可得到相对比较好的结果。但是当默认参数无法达到目的，就需要检查日志信息，阅读相关参数从而优化结果。</p>
+<p>日志信息主要分三项</p>
+<ul>
+<li><font color="red">k-mer图</font>: 纯合样本一个peak，杂合样本2个peak。</li>
+<li><font color="red">纯合峰的覆盖度</font>: <code>[M::purge_dups] homozygous read coverage threshold: X</code> , 一般会由hifiasm自动推断。</li>
+<li><font color="red">杂合/纯合碱基数目（Hi-C模式）</font>: Hi-C模式下，如果纯合的碱基数超过杂合碱基数，那么hifiasm就不容易找对纯合read的所在峰。</li>
+</ul>
+<p>对于日志信息，最主要关注<font color="red">k-mer图</font>，从而判断hifiasm是否能够正确的找到纯合峰，杂合峰所在位置。如果hifiasm没有找对纯合峰所在的位置，就需要<font color="red">根据k-mer图手动指定?</font> <code>--hom-cov</code>。</p>
+<p>对于一个组装结果，最直接的<strong>评估标准</strong>就是<font color="red">基因组大小是否符合预期</font>，分型的<font color="red">两套基因组是否相差不大</font>，序列<strong>是否足够长</strong>，<strong>是否存在错误组装</strong>的情况。</p>
+<p>如果基因组<font color="red"><strong>大小不符合预期</strong></font>，一般都是hifiasm<strong>找错纯合峰的位置</strong>，需要手动指定 <code>--hom-cov</code>；</p>
+<p>如果分型的两套基因组<font color="red"><strong>差别过大</strong></font>，则通过降低 <code>-s</code> 调整。</p>
+<p>如果<font color="red"><strong>序列不够长，片段化明显</strong></font>，则可尝试<font color="red">增加</font>  <code>-D</code> 和  <code>-N</code>, 虽增加运行时间，但会<font color="red">提高重复区域的分辨率</font>。</p>
+<p>如果后续的Hi-C，或者BioNano发现hifiasm组装结果<font color="red"><strong>有比较多错误组装</strong></font>，则可以适当降低 <code>--purge-max</code>, <code>-s</code>和 <code>-O</code>。或者设置 <code>-u</code> 关闭post-join 步骤，hifiasm通过该步骤提高组装的连续性。</p>
+<h2 id="输入格式-fq还是fa"><a class="markdownIt-Anchor" href="#输入格式-fq还是fa"></a> 输入格式 fq还是fa</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># bam --&gt; fasta</span><br><span class="line">samtools view *.bam | awk &#x27;&#123;print &quot;&gt;&quot;$1&quot;\n&quot;$10&#125;&#x27; &gt; fasta</span><br><span class="line"># bam2fastq</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<p><strong>可识别单倍型的纠错</strong></p>
+<p>Hifiasm将所有hifi reads读取到内存中进行<font color="red"><strong>all-vs-all比对并纠错</strong></font>。基于reads间overlap信息，如果read上有一个碱基与其他碱基不同，并有<font color="red"><strong>至少3条reads支持</strong></font>，则认为它是<font color="red"><strong>SNP</strong></font>并保留，<strong>否则</strong>认为是错误并<strong>纠正</strong>。</p>
+<p><strong>组装图的构建</strong></p>
+<p>在校正之后，大多数错误被去除，同时<font color="red"><strong>杂合变异信息被保留</strong></font>。基于这些信息，Hifiasm构建了<font color="red"><strong>以reads为顶点、重叠区为边的定相string-graph</strong></font>。</p>
+<p><strong>组装序列的生成</strong></p>
+<ul>
+<li>
+<p>如果<font color="red">没有其他数据</font>，Hifiasm在输出序列时会<font color="red"><strong>任意选择</strong>每个气泡<strong>bubble</strong>的<strong>一侧输出</strong>类似<strong>Falcon unzip</strong>和<strong>HiCanu</strong>的主要组装结果</font>（primary contigs）。</p>
+</li>
+<li>
+<p>如果同时有<font color="red">父母本的测序数据</font>，Hifiasm可以通过<font color="red">亲本特有的kmer</font>在图上<font color="red">识别来自父母本的序列</font>，得到<font color="red"><strong>两套单倍体</strong>基因组</font>。</p>
+</li>
+<li>
+<p>当然HiFiasm文章中也提到：</p>
+<p>与其他基于图形的汇编程序不同，HiFiasm致力于<strong>保持所有单倍型的连续性。</strong><br>
+<font color="red"><strong>HiCanu</strong>只试图<strong>保持一个亲本单倍型</strong>的<strong>连续性</strong></font>，并且经常<font color="red">破坏另一个单倍型的连续性</font>，当分离亲本单倍型时，这些突变点将导致单倍型分解的碎片—HiCanu<font color="red">没有充分利用HiFi Reads</font><br>
+Hifiasm针对HiFi特点开发，在hifi数据的组装表现上较同类软件更为突出，在多个基因组上表现出了更高的<strong>准确性</strong>和组装的<strong>连续性</strong>。</p>
+<hr>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36416921/article/details/112277318">https://blog.csdn.net/weixin_36416921/article/details/112277318</a> ？？</p>
+<hr>
+<h1 id="hifi组装实例"><a class="markdownIt-Anchor" href="#hifi组装实例"></a> HiFI组装实例</h1>
+<p>Contiguity, Completeness, and Correctness</p>
+<h2 id="201810"><a class="markdownIt-Anchor" href="#201810"></a> 2018.10</h2>
+<p>PacBio公司 高保真 单分子 长读长 测序【HiFi】模式</p>
+<h2 id="201901"><a class="markdownIt-Anchor" href="#201901"></a> 2019.01</h2>
+<p>首篇利用HiFi数据进行人基因组 结构变异检测 和 基因组组装 文章发布</p>
+<h2 id="202001"><a class="markdownIt-Anchor" href="#202001"></a> 2020.01</h2>
+<p>HiFi在 四倍体玫瑰 燕麦 大麻 白蛉 等多个物种基因组组装</p>
+<h2 id="202003"><a class="markdownIt-Anchor" href="#202003"></a> 2020.03</h2>
+<p>PacBio科学家利用HiFi测序两周内完成基因组高达27Gb的六倍体加州红杉基因组组装</p>
+<h2 id="202005"><a class="markdownIt-Anchor" href="#202005"></a> 2020.05</h2>
+<p>HiFi助力同源四倍体紫花苜蓿基因组组装，NC发表</p>
+<p>Allele-aware chromosome-level genome assembly and efficient transgene-free genome editing for the autotetraploid cultivated alfalfa</p>
+<p>（1）使用Canu默认参数，利用CCS clean reads组装contigs。组装得到的Contig N50值为459kb，总长度为3.15GB。<br>
+（2）使用HiC-Pro将Hi-C reads与contigs 进行比对，产生比对BAM文件。<br>
+（3）使用注释的蒺藜苜蓿蛋白作为参考，完全基于同源的策略注释contigs。对138,729个同源基因进行了结构注释。用MCscan用于鉴定contigs和参考基因组之间的共线性。显示紫花苜蓿和蒺藜苜蓿之间的高共线性。<br>
+（4）使用内部脚本处理BAM文件，去除等位基因contigs之间的links。使用ALLHiC软件，提取、聚类和重排Contigs (Contigs syntenic与蒺藜苜蓿染色体一致)，得到原始的scaffolds。<br>
+（5）Juicebox用于以图形和交互方式微调组装的scaffolds。剪裁了40个总长度达1800Mb的scaffolds 。<br>
+（6） 基于组装的scaffold，通过Hi-C数据，每个unplaced contig被分配到互作最强的那些contig cluster里。<br>
+（7）使用ALLHiC对那些contig clusters再次进行重排和构建scaffold。<br>
+（8）使用Juicebox对scaffolds进行微调，并从scaffolds上去除不一致的contigs，产生最终的染色体基因组，其包含32条染色体(8个同源组，每个组中有4个等位基因染色体)，总长度为2738Mb，和419Mb未挂载到染色体水平的序列。</p>
+<h2 id="202007"><a class="markdownIt-Anchor" href="#202007"></a> 2020.07</h2>
+<p>加州大学HiFi组装人完整X染色体，Nature</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2022/03/02/2022-03-02-HiFi-3-software/" title="HiFi-3-assemble-software">https://wangc1106.github.io/blog/2022/03/02/2022-03-02-HiFi-3-software/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/denovo-III/" rel="tag"># denovo-III</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2022/03/01/2022-03-01-sequencing-data/" rel="prev" title="Sequencing data and fastq.gz">
+      <i class="fa fa-chevron-left"></i> Sequencing data and fastq.gz
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hifiasm-official-doc"><span class="nav-number">1.</span> <span class="nav-text"> hifiasm Official doc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.1.</span> <span class="nav-text"> introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-hifiasm"><span class="nav-number">1.2.</span> <span class="nav-text"> Why Hifiasm?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hifiasm-paper"><span class="nav-number">2.</span> <span class="nav-text"> hifiasm paper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%85hifi%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text"> 仅HiFi数据模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E4%BA%8C%E4%BB%A3%E6%B5%8B%E5%BA%8Ftrio-binning%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text"> 双亲二代测序Trio-binning模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%8A%A0hi-c%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text"> 附加Hi-C模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%92%8C%E5%8F%82%E6%95%B0%E8%B0%83%E6%95%B4"><span class="nav-number">2.4.</span> <span class="nav-text"> 日志和参数调整</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-fq%E8%BF%98%E6%98%AFfa"><span class="nav-number">2.5.</span> <span class="nav-text"> 输入格式 fq还是fa</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hifi%E7%BB%84%E8%A3%85%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text"> HiFI组装实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#201810"><span class="nav-number">3.1.</span> <span class="nav-text"> 2018.10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#201901"><span class="nav-number">3.2.</span> <span class="nav-text"> 2019.01</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#202001"><span class="nav-number">3.3.</span> <span class="nav-text"> 2020.01</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#202003"><span class="nav-number">3.4.</span> <span class="nav-text"> 2020.03</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#202005"><span class="nav-number">3.5.</span> <span class="nav-text"> 2020.05</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#202007"><span class="nav-number">3.6.</span> <span class="nav-text"> 2020.07</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang C"
+      src="/blog/images/banner.png">
+  <p class="site-author-name" itemprop="name">Wang C</p>
+  <div class="site-description" itemprop="description">Make more time</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangc1106" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangc1106" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangchen116@126.com" title="E-Mail → mailto:wangchen116@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-dna"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang C</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz","app_key":"iYpeWQcmNqpHwr2uVlnJYVji","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+      <div style="height: 200px">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5knf34gs07t&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

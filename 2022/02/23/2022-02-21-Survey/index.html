@@ -260,8 +260,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id><a href="#" class="headerlink" title></a></h1><span id="more"></span>
-
+        <h1 id><a class="markdownIt-Anchor" href="#"></a> </h1>
+<span id="more"></span>
 <p>基因组杂合度和重复序列对后续基因组组装有很大影响。</p>
 <p><strong>高杂合</strong>基因组往往无法合并姊妹染色体，导致组装结果<strong>偏大</strong>。</p>
 <p>而<strong>重复序列</strong>在组装中被折叠，使组装中出现缺口、错误，导致组装结果<strong>偏小</strong>。</p>
@@ -283,10 +283,16 @@
 <p><strong>分析内容</strong>：污染程度评估，基因组大小评估，杂合度评估，重复率评估，GC含量评估。【初步了解三代组装难度和预期大小】</p>
 <p><strong>基因组复杂度预估?</strong></p>
 <blockquote>
-<p>普通基因组的定义？<br>单倍体、纯合二倍体或者杂合度&lt;0.5%，且重复序列含量&lt;50%，GC含量为35%到65%之间的二倍体。</p>
-<p>复杂基因组的定义？<br>杂合度&gt;0.5%，重复序列含量&gt;50%，多倍体，GC含量处于异常的范围（GC含量&lt;35%或者GC含量&gt;65%的二倍体）。</p>
-<p><font color="red">二倍体复杂基因组进一步细分为</font><br><font color="red"> 微杂合基因组（0.5%&lt;杂合率&lt;=0.8%)</font><br><font color="red"> 高杂合基因组（杂合率&gt;0.8%)</font><br> <font color="red">高重复基因组（重复序列比例&gt;50%）</font></p>
-<p>基因组大小：<br> 基因组越大，测序花钱越多</p>
+<p>普通基因组的定义？<br>
+单倍体、纯合二倍体或者杂合度&lt;0.5%，且重复序列含量&lt;50%，GC含量为35%到65%之间的二倍体。</p>
+<p>复杂基因组的定义？<br>
+杂合度&gt;0.5%，重复序列含量&gt;50%，多倍体，GC含量处于异常的范围（GC含量&lt;35%或者GC含量&gt;65%的二倍体）。</p>
+<p><font color="red">二倍体复杂基因组进一步细分为</font><br>
+<font color="red"> 微杂合基因组（0.5%&lt;杂合率&lt;=0.8%)</font><br>
+<font color="red"> 高杂合基因组（杂合率&gt;0.8%)</font><br>
+<font color="red">高重复基因组（重复序列比例&gt;50%）</font></p>
+<p>基因组大小：<br>
+基因组越大，测序花钱越多</p>
 </blockquote>
 <blockquote>
 <ul>
@@ -296,45 +302,43 @@
 </ul>
 </blockquote>
 <hr>
-<h1 id="质控"><a href="#质控" class="headerlink" title="质控"></a>质控</h1><p><img src="https://upload-images.jianshu.io/upload_images/11004598-2ca590314cf3d635.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/374/format/webp" alt="img"></p>
+<h1 id="质控"><a class="markdownIt-Anchor" href="#质控"></a> 质控</h1>
+<p><img src="https://upload-images.jianshu.io/upload_images/11004598-2ca590314cf3d635.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/374/format/webp" alt="img"></p>
 <p>各提出10,000对比对到<strong>NT库</strong>，如果都比对到同源物种，说明无污染，如果比对到细菌真菌，可能数据有污染。</p>
-<h2 id="rawdata-qc"><a href="#rawdata-qc" class="headerlink" title="rawdata qc"></a>rawdata qc</h2><h2 id="trim"><a href="#trim" class="headerlink" title="trim"></a>trim</h2><h2 id="cleandata-qc"><a href="#cleandata-qc" class="headerlink" title="cleandata qc"></a>cleandata qc</h2><h2 id="NT数据库比对"><a href="#NT数据库比对" class="headerlink" title="NT数据库比对"></a>NT数据库比对</h2><p>Partially non-redundant nucleotide from all traditional divisions of GenBank, EMBL, and DDBJ excluding GSS,STS, PAT, EST, HTG, and WGS.</p>
+<h2 id="rawdata-qc"><a class="markdownIt-Anchor" href="#rawdata-qc"></a> rawdata qc</h2>
+<h2 id="trim"><a class="markdownIt-Anchor" href="#trim"></a> trim</h2>
+<h2 id="cleandata-qc"><a class="markdownIt-Anchor" href="#cleandata-qc"></a> cleandata qc</h2>
+<h2 id="nt数据库比对"><a class="markdownIt-Anchor" href="#nt数据库比对"></a> NT数据库比对</h2>
+<p>Partially non-redundant nucleotide from all traditional divisions of GenBank, EMBL, and DDBJ excluding GSS,STS, PAT, EST, HTG, and WGS.</p>
 <p><a target="_blank" rel="noopener" href="https://ftp.ncbi.nih.gov/blast/db/FASTA/">NT库</a></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">blastn \</span><br><span class="line">-query reads_2.fa \</span><br><span class="line">-db /local_data1/public_data/database/genome_DB/nt/20190417_all/nt \</span><br><span class="line">-out reads_2.csv \</span><br><span class="line">-outfmt <span class="string">&quot;10 evalue length qseqid qlen qstart qend sacc slen sstart send pident nident sstrand qcovs qseq sseq sgi stitle&quot;</span> \</span><br><span class="line">-num_threads 4 -evalue 1e-5 -max_target_seqs 1</span><br></pre></td></tr></table></figure>
-
-
-
 <hr>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012110870/article/details/82500748">https://blog.csdn.net/u012110870/article/details/82500748</a></p>
-<h1 id="k-mers"><a href="#k-mers" class="headerlink" title="k-mers"></a>k-mers</h1><p>最简单的策略就是基于k-mer对基因组做一个简单的了解, 使用jellyfish统计k-mers，然后作图</p>
+<h1 id="k-mers"><a class="markdownIt-Anchor" href="#k-mers"></a> k-mers</h1>
+<p>最简单的策略就是基于k-mer对基因组做一个简单的了解, 使用jellyfish统计k-mers，然后作图</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jellyfish count  -m 21 -s 20G -t 20 -o 21mer_out  -C --min-qual-char=? &lt;(zcat test_1.fq.gz) &lt;(zcat test_2.fq.gz)</span><br><span class="line"><span class="comment"># -m k-mers的K</span></span><br><span class="line"><span class="comment"># -s Hash大小, 根据文件大小确定</span></span><br><span class="line"><span class="comment"># -t 线程</span></span><br><span class="line"><span class="comment"># -o 输出前缀</span></span><br><span class="line"><span class="comment"># -C 统计正负链</span></span><br><span class="line"><span class="comment"># --min-qual-char 过滤低质量碱基。 在Phred+33中,?=30</span></span><br><span class="line">jellyfish histo -o 21mer_out.histo 21mer_out</span><br></pre></td></tr></table></figure>
-
 <p>用R作图</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pdf(&quot;21_mer.out.pdf&quot;)</span><br><span class="line">dataframe19 &lt;- read.table(&quot;21mer_out.histo&quot;)</span><br><span class="line">plot(dataframe19[1:200,], type=&quot;l&quot;)</span><br><span class="line">dev.off()</span><br></pre></td></tr></table></figure>
-
 <p>由于只有一个主峰，说明该物种的杂合度并不高，基本上也就是二倍体。如果图中出现多个峰，说明它可能是多倍体或者是基因组杂合度高。</p>
 <p>推荐文献: Genomic DNA k-mer spectra: models and modalities</p>
-<h1 id="基于组装"><a href="#基于组装" class="headerlink" title="基于组装"></a>基于组装</h1><p>基于K-mers可以较好的预测基因组大小，并定性的了解基因组的复杂情况，如果想更具体的了解基因组的复杂度，可以先将50X以上的段片段进行组装，然后进行分析。</p>
+<h1 id="基于组装"><a class="markdownIt-Anchor" href="#基于组装"></a> 基于组装</h1>
+<p>基于K-mers可以较好的预测基因组大小，并定性的了解基因组的复杂情况，如果想更具体的了解基因组的复杂度，可以先将50X以上的段片段进行组装，然后进行分析。</p>
 <p>组装的工具比较多，推荐用SOAPdenovo，因为速度快。abyss?</p>
 <p>新建一个contig.config, 增加如下内容</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">max_rd_len=150</span><br><span class="line">[LIB]</span><br><span class="line">avg_ins=200</span><br><span class="line">reverse_seq=0</span><br><span class="line">asm_flags=3</span><br><span class="line">rd_len_cutoff=100</span><br><span class="line">rank=1</span><br><span class="line">pair_num_cutoff=3</span><br><span class="line">map_len=32</span><br><span class="line">q1=read_1.fq</span><br><span class="line">q2=read_2.fq</span><br></pre></td></tr></table></figure>
-
 <p>组装出参考序列</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/opt/biosoft/SOAPdenovo2/SOAPdenovo-63mer all -s contig.config -R -K 63 -p 30 -o assembly/graph</span><br></pre></td></tr></table></figure>
-
 <p>最后graph.scafSeq是拼接后的序列, 提取出大于300bp的序列.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># adjust format</span><br><span class="line">bioawk -c fastx -v name=1 &#x27;&#123;if(length($seq)&gt;300) print &quot;&gt;&quot;name &quot;\n&quot; $seq;name+=1&#125;&#x27; assembly/graph.scafSeq &gt;contig.fa</span><br></pre></td></tr></table></figure>
-
-<h1 id="杂合度估计"><a href="#杂合度估计" class="headerlink" title="杂合度估计"></a>杂合度估计</h1><p>将原来的序列回贴到contig上，并用samtools+bcftools进行snp calling.统计变异的碱基占总体的比例。</p>
+<h1 id="杂合度估计"><a class="markdownIt-Anchor" href="#杂合度估计"></a> 杂合度估计</h1>
+<p>将原来的序列回贴到contig上，并用samtools+bcftools进行snp calling.统计变异的碱基占总体的比例。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p index</span><br><span class="line">bwa index contig.fa -p index/contig</span><br><span class="line">bwa mem -v 2 -t 10 index/contig read_1.fq read_2.fq | samtools sort -n &gt; align.bam</span><br><span class="line">samtools mpileup -f contig align.bam | bcftools call -mv -Oz -o variants.gz</span><br></pre></td></tr></table></figure>
-
 <p>一方面由于SOAPdenovo组装过程中会出错, 另一方面samtools在变异检测上也存在很高的假阳性, 所以总得先按照深度和质量过滤一批假阳性。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bcftools view -i &#x27; DP &gt; 30 &amp;&amp; MQ &gt; 30&#x27; -H variants.vcf.gz | wc -l</span><br><span class="line"># 325219, 无过滤是445113</span><br></pre></td></tr></table></figure>
-
 <p>变异数目占基因组大小的比例就是杂合度。我的contig大概是200M，找到0.3M左右的变异，也就是0.0015，即0.15%.</p>
-<h1 id="重复序列估计"><a href="#重复序列估计" class="headerlink" title="重复序列估计"></a>重复序列估计</h1><p>基于同源注释，用RepeatMasker寻找重复序列. 这里要注意分析的fasta的ID不能过长，也就是最好是<code>&gt;scaffold_1</code>这种形式，不然会报错。</p>
+<h1 id="重复序列估计"><a class="markdownIt-Anchor" href="#重复序列估计"></a> 重复序列估计</h1>
+<p>基于同源注释，用RepeatMasker寻找重复序列. 这里要注意分析的fasta的ID不能过长，也就是最好是<code>&gt;scaffold_1</code>这种形式，不然会报错。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/opt/biosoft/RepeatMsker/RepeatMasker -e ncbi -species arabidopsis -pa 10 -gff -dir ./ contig.fa</span><br><span class="line"># -e ncbi</span><br><span class="line"># -species 选择物种 用~/opt/biosoft/RepeatMasker/util/queryRepeatDatabase.pl -tree 了解</span><br><span class="line"># -pa 并行计算</span><br><span class="line"># -gff 输出gff注释</span><br><span class="line"># -dir 输出路径</span><br></pre></td></tr></table></figure>
-
 <p>输出结果中主要关注如下三个</p>
 <ul>
 <li>output.fa.masked, 将重复序列用N代替</li>
@@ -342,27 +346,36 @@
 <li>output.fa.tbl, 该文件记录着分类信息</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">==================================================</span><br><span class="line">file name: anno.fasta</span><br><span class="line">sequences:         62027</span><br><span class="line">total length:  273135210 bp  (273135210 bp excl N/X-runs)</span><br><span class="line">GC level:         36.80 %</span><br><span class="line">bases masked:   79642191 bp ( 29.16 %)</span><br><span class="line">==================================================</span><br></pre></td></tr></table></figure>
-
 <p>也就是说我们的物种有30%的重复序列，作为参考，拟南芥125Mb 14%重复序列, 水稻389M，36%重复</p>
 <hr>
-<h1 id="Grand-Omics"><a href="#Grand-Omics" class="headerlink" title="Grand Omics"></a><font color="green">Grand Omics</font></h1><p>快速：K-mer分析方法，可快速确定基因组特征</p>
+<h1 id="font-colorgreengrand-omicsfont"><a class="markdownIt-Anchor" href="#font-colorgreengrand-omicsfont"></a> <font color="green">Grand Omics</font></h1>
+<p>快速：K-mer分析方法，可快速确定基因组特征</p>
 <p>专业：简单基因组和复杂基因组（高杂合、多倍体等）采用不同算法软件</p>
 <p>建库：Illumina PE150普通文库；或MGI PE150 普通文库。总量 ≥ 1μg；推荐数据量 ≥ 50X</p>
 <p>分析内容：原始数据质控；数据污染检测；基因组大小预估；基因组杂合度预估</p>
-<h2 id="数据质控及污染评估"><a href="#数据质控及污染评估" class="headerlink" title="数据质控及污染评估"></a>数据质控及污染评估</h2><p>对原始数据质控过滤，然后对原始数据（Raw data）及过滤后数据（Clean data）进行质量统计。随机取100,000条质控后的reads，统计reads在<font color="red">nt库</font>中的分布情况及比对上的物种分布，以评估数据污染情况。</p>
-<h2 id="基因组大小和杂合度估计"><a href="#基因组大小和杂合度估计" class="headerlink" title="基因组大小和杂合度估计"></a>基因组大小和杂合度估计</h2><p>利用<font color="red">偏正态分布模型（skew normal distribution model）</font>，<font color="red">负二项式模型 (negative binomial model)</font> 对K-mer 数据进行拟合分析，进行基因组大小以及杂合度的评估，并生成最终基因组评估结果。</p>
-<p>一般选择<strong>17-mer</strong>评估基因组大小，ATCG四种碱基组成长度为17的核苷酸片段有4(17次方)<del>17G，足以覆盖一般的正常基因组；15mer</del>1G。对于正常基因组可能覆盖度不够，导致估计不准确。&gt;15G，采用19-mer或21-mer。K-mer越大，包含错误位点的K-mer越多。为了<strong>避免回文序列，K为奇数</strong>。</p>
-<h2 id="GC-depth-分析及污染评估"><a href="#GC-depth-分析及污染评估" class="headerlink" title="GC-depth 分析及污染评估"></a>GC-depth 分析及污染评估</h2><p>对<font color="red">组装的基因组序列</font>以<font color="red">5kb为windows</font>，无重复计算片段的<font color="red">平均GC含量和平均深度</font>并作图。基于每一个windows对应的平均GC和平均深度进行绘图。可以根据此图分析测序数据是否存在GC偏向性以及样本是否存在污染。</p>
-<h1 id="Biomarker"><a href="#Biomarker" class="headerlink" title="Biomarker"></a><font color="green">Biomarker</font></h1><p>基因组survey以测序技术为基础，基于小片段文库的低深度测序，通过K-mer分析，快速获得基因组大小、杂合度、重复序列比例等基本信息，为制定该物种的全基因组de novo测序策略提供有效依据。</p>
-<h2 id="调研图分析原理"><a href="#调研图分析原理" class="headerlink" title="调研图分析原理"></a>调研图分析原理</h2><p><img src="http://www.biomarker.com.cn/wp-content/uploads/2017/03/5-12.png" alt="5"></p>
+<h2 id="数据质控及污染评估"><a class="markdownIt-Anchor" href="#数据质控及污染评估"></a> 数据质控及污染评估</h2>
+<p>对原始数据质控过滤，然后对原始数据（Raw data）及过滤后数据（Clean data）进行质量统计。随机取100,000条质控后的reads，统计reads在<font color="red">nt库</font>中的分布情况及比对上的物种分布，以评估数据污染情况。</p>
+<h2 id="基因组大小和杂合度估计"><a class="markdownIt-Anchor" href="#基因组大小和杂合度估计"></a> 基因组大小和杂合度估计</h2>
+<p>利用<font color="red">偏正态分布模型（skew normal distribution model）</font>，<font color="red">负二项式模型 (negative binomial model)</font> 对K-mer 数据进行拟合分析，进行基因组大小以及杂合度的评估，并生成最终基因组评估结果。</p>
+<p>一般选择<strong>17-mer</strong>评估基因组大小，ATCG四种碱基组成长度为17的核苷酸片段有4(17次方)<sub>17G，足以覆盖一般的正常基因组；15mer</sub>1G。对于正常基因组可能覆盖度不够，导致估计不准确。&gt;15G，采用19-mer或21-mer。K-mer越大，包含错误位点的K-mer越多。为了<strong>避免回文序列，K为奇数</strong>。</p>
+<h2 id="gc-depth-分析及污染评估"><a class="markdownIt-Anchor" href="#gc-depth-分析及污染评估"></a> GC-depth 分析及污染评估</h2>
+<p>对<font color="red">组装的基因组序列</font>以<font color="red">5kb为windows</font>，无重复计算片段的<font color="red">平均GC含量和平均深度</font>并作图。基于每一个windows对应的平均GC和平均深度进行绘图。可以根据此图分析测序数据是否存在GC偏向性以及样本是否存在污染。</p>
+<h1 id="font-colorgreenbiomarkerfont"><a class="markdownIt-Anchor" href="#font-colorgreenbiomarkerfont"></a> <font color="green">Biomarker</font></h1>
+<p>基因组survey以测序技术为基础，基于小片段文库的低深度测序，通过K-mer分析，快速获得基因组大小、杂合度、重复序列比例等基本信息，为制定该物种的全基因组de novo测序策略提供有效依据。</p>
+<h2 id="调研图分析原理"><a class="markdownIt-Anchor" href="#调研图分析原理"></a> 调研图分析原理</h2>
+<p><img src="http://www.biomarker.com.cn/wp-content/uploads/2017/03/5-12.png" alt="5"></p>
 <p>k-mer，将核酸序列以滑窗分成包含k个碱基的短序列，“mer”这个单词的来源<font color="red">monomeric unit，单体单元</font>。K一般为奇数（避免正反链混淆?）。统计所有reads中所出现的k-mer类型及各类型k-mer的深度（或者频率），绘制特定k-mer下不同深度k-mer片段的频数统计图，通常选择K-mer分布最多的峰为主峰，从而得到<font color="red"><strong>基因组大小=K-mer总数/K-mer主峰深度值</strong></font>。</p>
 <p>由于基因组存在<font color="red">杂合位点和重复序列</font>，k-mer曲线不是标准泊松分布，在主峰前后出现其他的峰，如果存在一定<font color="red">杂合度</font>，会导致在<font color="red">主峰横坐标的二分之一处</font>出现<font color="red">杂合峰</font>，而一定的<font color="red">重复度</font>则会在<font color="red">主峰对应的横坐标整数倍</font>处出现<font color="red">重复峰</font>。</p>
-<h2 id="调研图分析内容"><a href="#调研图分析内容" class="headerlink" title="调研图分析内容"></a>调研图分析内容</h2><p>评估基因组<font color="red">大小</font>；评估基因组<font color="red">杂合</font>情况；评估<font color="red">重复序列</font>含量；评估基因组<font color="red">GC含量</font>；为后续精细图阶段的文库构建提供策略建议。</p>
-<h2 id="基因组调研图survey的意义"><a href="#基因组调研图survey的意义" class="headerlink" title="基因组调研图survey的意义"></a>基因组调研图survey的意义</h2><p>启动全基因组测序的<font color="red">必要前提</font></p>
+<h2 id="调研图分析内容"><a class="markdownIt-Anchor" href="#调研图分析内容"></a> 调研图分析内容</h2>
+<p>评估基因组<font color="red">大小</font>；评估基因组<font color="red">杂合</font>情况；评估<font color="red">重复序列</font>含量；评估基因组<font color="red">GC含量</font>；为后续精细图阶段的文库构建提供策略建议。</p>
+<h2 id="基因组调研图survey的意义"><a class="markdownIt-Anchor" href="#基因组调研图survey的意义"></a> 基因组调研图survey的意义</h2>
+<p>启动全基因组测序的<font color="red">必要前提</font></p>
 <p>了解与<font color="red"><strong>近缘物种间</strong>的<strong>基因组差异</strong>信息</font></p>
 <p>获得某<font color="red">物种基因组的基本信息及难易程度</font></p>
-<h1 id="Novogene"><a href="#Novogene" class="headerlink" title="Novogene"></a><font color="green">Novogene</font></h1><p>方案：DNA10 ug；文库350bp；PE150测序，测序深度为50X</p>
-<h2 id="分析内容"><a href="#分析内容" class="headerlink" title="分析内容"></a>分析内容</h2><ul>
+<h1 id="font-colorgreennovogenefont"><a class="markdownIt-Anchor" href="#font-colorgreennovogenefont"></a> <font color="green">Novogene</font></h1>
+<p>方案：DNA10 ug；文库350bp；PE150测序，测序深度为50X</p>
+<h2 id="分析内容"><a class="markdownIt-Anchor" href="#分析内容"></a> 分析内容</h2>
+<ul>
 <li>K-mer分析</li>
 <li>预估物种基因组大小</li>
 <li>GC含量和外源污染分析</li>
@@ -371,19 +384,24 @@
 <li>初步组装</li>
 <li>基于初步组装的版本，可以进行SSR标记开发和同源注释【highlevel】simple sequence repeats</li>
 </ul>
-<h1 id="BerryGenomics"><a href="#BerryGenomics" class="headerlink" title="BerryGenomics"></a><font color="green">BerryGenomics</font></h1><p>基于小片段文库低深度测序数据，通过K-mer分析，有效评估基因组大小、GC含量、杂合度高低及重复序列含量等信息，为后续的组装策略的制定提供理论依据。</p>
-<p><a target="_blank" rel="noopener" href="https://pdf.sciencedirectassets.com/272196/1-s2.0-S0092867419X0015X/1-s2.0-S0092867420306188/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOj//////////wEaCXVzLWVhc3QtMSJHMEUCIEP3b6JimIkwVtoSmPnQ7fbUGBl4eNBBDDnBn4Sgw6y2AiEA9ob5g/J4zQrFLsTKjhs51/F/1tP61OMYZBAruOkb0fgq+gMIQRAEGgwwNTkwMDM1NDY4NjUiDMQhUFOWJRI31LL0UyrXA4jlyI72DidSpx8zf2iw85fV3Vmv5GwQ6zAU0go3NjgbvnEQeGHSyjCD3bfuIdLxx9+JR3iu8nTJwgeiw9+Pub8vYWrjzALVOyDRYnN4C6P68gzwDtI75rViTKSOYGpm0LXGHIuNV3O6NG9GNYo9nKQUdsmQfjBcBVHGBhXgRhFbmvWhLVufPeyZIY/sw6wiX3diCmbAuE7tTj4O0tA4ht9m/9y/rMizkGh9ZPtbzZ7JDkZm0+cpNEzpq3cQrGGNFrTcYFMQLf9YYSiY5LNr+zDXEI/cud8Oj8u3J75X7AtKXVgDFx3WOLQId9J+kxO1tSZ5/glrj2Mrth4nSXKk2TcSj6sirRM7+QbGIcYbhUHe+97GuZSfy6tJSD8POUgAUJZwoh9mtVgEIgRBR3uHjlgquc2QL4w5HsPkDpKmCRjT5ZIlJKfBli2DLWB81D9uot9Aw5SNzZ+mx3uR2mpTibb5v54gw7HtVunol7a5sq4awm3L8KRSRvUwk+fwX38TdFUH7OxZaFWIlBk536NC4ceJTACy5V5Ae+f7lhfpLN5wHzi3JomqhWFjfqqDLY11VHUBE2hJ2MtKtSQwilpBH+qtouIVYoOLFsKgJGfh0HvzkymqMQdxizDUhM2QBjqlAa9D4CUBq0ExkdHUsNdoKZ3Mz+0m1f72NRgmttBXR/CcVH6PUnSta5nZU2WQy6dUTWTx6pl8YHzW/DDLcwdU82BkQOE1n6CSzHGjaKA75v3T4RWRU9wOiObTdjqpmmMKTp2xohm4N78+/ZejYhLhk1Tx/CnUl2ue4z1/Utn17JSca5oVGbePorLRmqyYs5F3oL08SP73vwHxeNaoI7f7ucpUWqEcHA==&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220221T081720Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTYYN624BKH/20220221/us-east-1/s3/aws4_request&X-Amz-Signature=16e8a26f9b71e59d421ff693fe49b021ce1222b688728bb93ce93ea82fb5968d&hash=ccc160836e462b394593db49a0b599b8a106fca7b355f59e9e05635b2a62f335&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S0092867420306188&tid=spdf-0c4aa40e-20ae-4f30-8d50-b9cee2090b93&sid=5071d2f0595c814bfc9b6e825f0c6315e333gxrqa&type=client&ua=570456075759005851&rr=6e0e89a71f5d7c4a">大豆高质量泛基因组图谱构建</a></p>
+<h1 id="font-colorgreenberrygenomicsfont"><a class="markdownIt-Anchor" href="#font-colorgreenberrygenomicsfont"></a> <font color="green">BerryGenomics</font></h1>
+<p>基于小片段文库低深度测序数据，通过K-mer分析，有效评估基因组大小、GC含量、杂合度高低及重复序列含量等信息，为后续的组装策略的制定提供理论依据。</p>
+<p><a target="_blank" rel="noopener" href="https://pdf.sciencedirectassets.com/272196/1-s2.0-S0092867419X0015X/1-s2.0-S0092867420306188/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEP3b6JimIkwVtoSmPnQ7fbUGBl4eNBBDDnBn4Sgw6y2AiEA9ob5g%2FJ4zQrFLsTKjhs51%2FF%2F1tP61OMYZBAruOkb0fgq%2BgMIQRAEGgwwNTkwMDM1NDY4NjUiDMQhUFOWJRI31LL0UyrXA4jlyI72DidSpx8zf2iw85fV3Vmv5GwQ6zAU0go3NjgbvnEQeGHSyjCD3bfuIdLxx9%2BJR3iu8nTJwgeiw9%2BPub8vYWrjzALVOyDRYnN4C6P68gzwDtI75rViTKSOYGpm0LXGHIuNV3O6NG9GNYo9nKQUdsmQfjBcBVHGBhXgRhFbmvWhLVufPeyZIY%2Fsw6wiX3diCmbAuE7tTj4O0tA4ht9m%2F9y%2FrMizkGh9ZPtbzZ7JDkZm0%2BcpNEzpq3cQrGGNFrTcYFMQLf9YYSiY5LNr%2BzDXEI%2Fcud8Oj8u3J75X7AtKXVgDFx3WOLQId9J%2BkxO1tSZ5%2Fglrj2Mrth4nSXKk2TcSj6sirRM7%2BQbGIcYbhUHe%2B97GuZSfy6tJSD8POUgAUJZwoh9mtVgEIgRBR3uHjlgquc2QL4w5HsPkDpKmCRjT5ZIlJKfBli2DLWB81D9uot9Aw5SNzZ%2Bmx3uR2mpTibb5v54gw7HtVunol7a5sq4awm3L8KRSRvUwk%2BfwX38TdFUH7OxZaFWIlBk536NC4ceJTACy5V5Ae%2Bf7lhfpLN5wHzi3JomqhWFjfqqDLY11VHUBE2hJ2MtKtSQwilpBH%2BqtouIVYoOLFsKgJGfh0HvzkymqMQdxizDUhM2QBjqlAa9D4CUBq0ExkdHUsNdoKZ3Mz%2B0m1f72NRgmttBXR%2FCcVH6PUnSta5nZU2WQy6dUTWTx6pl8YHzW%2FDDLcwdU82BkQOE1n6CSzHGjaKA75v3T4RWRU9wOiObTdjqpmmMKTp2xohm4N78%2B%2FZejYhLhk1Tx%2FCnUl2ue4z1%2FUtn17JSca5oVGbePorLRmqyYs5F3oL08SP73vwHxeNaoI7f7ucpUWqEcHA%3D%3D&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20220221T081720Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Credential=ASIAQ3PHCVTYYN624BKH%2F20220221%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Signature=16e8a26f9b71e59d421ff693fe49b021ce1222b688728bb93ce93ea82fb5968d&amp;hash=ccc160836e462b394593db49a0b599b8a106fca7b355f59e9e05635b2a62f335&amp;host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&amp;pii=S0092867420306188&amp;tid=spdf-0c4aa40e-20ae-4f30-8d50-b9cee2090b93&amp;sid=5071d2f0595c814bfc9b6e825f0c6315e333gxrqa&amp;type=client&amp;ua=570456075759005851&amp;rr=6e0e89a71f5d7c4a">大豆高质量泛基因组图谱构建</a></p>
 <p>我国大豆消费对外依赖严重，而提高大豆产量则必须对大豆种质的遗传多样性进行综合评价。中科院遗传与发育生物学研究所等单位与贝瑞基因合作，利用最新组装策略构建了高质量的基于图形的泛基因组。该研究利用Illumina平台对来自世界大豆主产国的2,898份大豆种质进行重测序（13×），利用PacBio（96×）、Bionano和Hi-C技术对26份代表性种质进行基因组组装和泛基因组构建。并以ZH13基因组为基准基因组，整合PAVs后构建基于基因组图谱。将重测序数据重新比对到该基因组进行SVs检测和GWAS分析。在开花的主效位点<em>E3</em>发现了5种不同的单倍型；种皮颜色相关基因<em>CHS</em>的<em>I</em>位点发现5种主要单倍型；14号染色体上的缺铁褪绿症QTL内存在一个调控Fe2+/Zn2+转运蛋白基因<em>SoyZH13_14G179600</em>。</p>
 <hr>
-<h1 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a><font color="green">Pipeline</font></h1><ul>
-<li><p><strong>K-mer analysis</strong> (genome size,  repetive seq, heterozygous)</p>
+<h1 id="font-colorgreenpipelinefont"><a class="markdownIt-Anchor" href="#font-colorgreenpipelinefont"></a> <font color="green">Pipeline</font></h1>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="http://www.cbcb.umd.edu/software/jellyfish/">JELLYFISH</a>是<a target="_blank" rel="noopener" href="http://www.cbcb.umd.edu/">CBCB(Center for Bioinformatics and Computational Biology)</a>的Guillaume Marçais 和 <a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~ckingsf/">Carl Kingsford</a> 研发的一款计数 DNA 的 k-mers 的软件。该软件运用 Hash 表来存储数据，同时能多线程运行，速度快，内存消耗小。该软件只能运行在64位的Linux系统下。其<a target="_blank" rel="noopener" href="http://bioinformatics.oxfordjournals.org/content/27/6/764">文章</a>于2011年发表在杂志 <a target="_blank" rel="noopener" href="http://bioinformatics.oxfordjournals.org/">Bioinformatics</a> 上。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhanmaomao/p/9285582.html">https://www.cnblogs.com/zhanmaomao/p/9285582.html</a>,  <a target="_blank" rel="noopener" href="https://github.com/gmarcais/Jellyfish#:~:text=Jellyfish%20Overview%20Jellyfish%20is%20a%20tool%20for%20fast%2C,central%20step%20in%20many%20analyses%20of%20DNA%20sequence">https://github.com/gmarcais/Jellyfish#:~:text=Jellyfish%20Overview%20Jellyfish%20is%20a%20tool%20for%20fast%2C,central%20step%20in%20many%20analyses%20of%20DNA%20sequence</a>.</p>
+<li>
+<p><strong>K-mer analysis</strong> (genome size,  repetive seq, heterozygous)</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="http://www.cbcb.umd.edu/software/jellyfish/">JELLYFISH</a>是<a target="_blank" rel="noopener" href="http://www.cbcb.umd.edu/">CBCB(Center for Bioinformatics and Computational Biology)</a>的Guillaume Marçais 和 <a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~ckingsf/">Carl Kingsford</a> 研发的一款计数 DNA 的 k-mers 的软件。该软件运用 Hash 表来存储数据，同时能多线程运行，速度快，内存消耗小。该软件只能运行在64位的Linux系统下。其<a target="_blank" rel="noopener" href="http://bioinformatics.oxfordjournals.org/content/27/6/764">文章</a>于2011年发表在杂志 <a target="_blank" rel="noopener" href="http://bioinformatics.oxfordjournals.org/">Bioinformatics</a> 上。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhanmaomao/p/9285582.html">https://www.cnblogs.com/zhanmaomao/p/9285582.html</a>,  <a target="_blank" rel="noopener" href="https://github.com/gmarcais/Jellyfish#:~:text=Jellyfish%20Overview%20Jellyfish%20is%20a%20tool%20for%20fast%2C,central%20step%20in%20many%20analyses%20of%20DNA%20sequence">https://github.com/gmarcais/Jellyfish#:~:text=Jellyfish Overview Jellyfish is a tool for fast%2C,central step in many analyses of DNA sequence</a>.</p>
 </li>
-<li><pre><code class="sh">$ wget 最新targz
+<li>
+<pre class="highlight"><code class="sh">$ wget 最新targz
 $ tar zxvf .tar.gz
 $ mkdir jellyfish
-$ cd jellyfish-2.3.0
+$ <span class="hljs-built_in">cd</span> jellyfish-2.3.0
 $ ./configure --prefix=Your/Path/to/jellyfish
 如果安装在当前目录中，会报错。
 $ make -j 8
@@ -407,7 +425,8 @@ $ make install
 <th>Size</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>[4]</td>
 <td>17</td>
 <td>30.29G</td>
@@ -485,25 +504,30 @@ $ make install
 <td><strong>89.2%</strong></td>
 <td>4159 M</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li>[6] : K-mer analysis:1.8G; flow cytometry: 8.50 ± 0.38 Gb. 巨大偏差？杂合度0.69%，重复ratio 91.05%</li>
 </ul>
 </li>
-<li><p><strong>assembly</strong></p>
+<li>
+<p><strong>assembly</strong></p>
 <ul>
-<li><p>[4] : soap devovo, abyss. </p>
+<li>
+<p>[4] : soap devovo, abyss.</p>
 <ul>
 <li>K-mer 31, 54, 63, 70, 77 ,83. 结果只有77，105 Kmer soapdenovo； AByss K43</li>
 <li>optimal k-mer size was selected from the N50 length</li>
-<li>usable reads &gt; 200 bases were selected to realign the contig </li>
+<li>usable reads &gt; 200 bases were selected to realign the contig</li>
 <li>paired-end relationship between reads was coincident between contigs</li>
 <li>scaffolds were constructed using insert size paired-ends</li>
 </ul>
 </li>
-<li><p>[5] :</p>
+<li>
+<p>[5] :</p>
 </li>
-<li><p>[8] :conduct de novo assembly. K-mer sizes of 20, 37, 55, 63, 71, 77, 83, and 95 were examined using default parameters. Assembly with k-mer 63 by SOAP de novo was selected because it has the optimal reading for N50</p>
+<li>
+<p>[8] :conduct de novo assembly. K-mer sizes of 20, 37, 55, 63, 71, 77, 83, and 95 were examined using default parameters. Assembly with k-mer 63 by SOAP de novo was selected because it has the optimal reading for N50</p>
 <table>
 <thead>
 <tr>
@@ -518,7 +542,8 @@ $ make install
 <th>Genome</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>[4]</td>
 <td>77</td>
 <td>1.48k</td>
@@ -584,11 +609,13 @@ $ make install
 <td>4.5G</td>
 <td>4159M</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
 </ul>
 </li>
-<li><p>GC</p>
+<li>
+<p>GC</p>
 <ul>
 <li>[4] mid GC: 38%,  too high (&gt;65%) and too low (&lt;25%)</li>
 <li>[4] GC depth two layer: only one of the two sets of homologous chromosomes in the diploid was assembled, which resulted in the emergence of the lower layer</li>
@@ -597,26 +624,31 @@ $ make install
 <li>[8] the GC depth was slightly blocked into 4 layers (Fig. 2), which was in part caused by the polyploidy and the 1.37% high heterozygosity rate. 自源四倍体</li>
 </ul>
 </li>
-<li><p><strong>Repetitive sequences</strong></p>
+<li>
+<p><strong>Repetitive sequences</strong></p>
 <ul>
-<li>[4] :<strong>LTR_FINDER, MITE-Hunter, RepeatScout, and PILER-DF, PASTEClassifier, Repeat Masker, SciRoKo</strong> <ul>
+<li>[4] :<strong>LTR_FINDER, MITE-Hunter, RepeatScout, and PILER-DF, PASTEClassifier, Repeat Masker, SciRoKo</strong>
+<ul>
 <li>repetitive sequences ~147.89 Mb, 47.55% of the genome,</li>
 <li>class I transposable element; class II transposable element</li>
 <li>SSR(167,859SSR);  motif types</li>
 </ul>
 </li>
-<li>[5] : total of 851,957 SSRs were identified,<strong>MISA</strong>. <ul>
+<li>[5] : total of 851,957 SSRs were identified,<strong>MISA</strong>.
+<ul>
 <li>245 motif types</li>
 </ul>
 </li>
-<li>[7] : <strong>MIcro-SAtellite(MISA)</strong><ul>
+<li>[7] : <strong>MIcro-SAtellite(MISA)</strong>
+<ul>
 <li>Identification and characterisation of SSR motifs.</li>
 <li>SSR marker verification</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><strong>Gene predition &amp; annotation</strong></p>
+<li>
+<p><strong>Gene predition &amp; annotation</strong></p>
 </li>
 </ul>
 <hr>
@@ -625,7 +657,7 @@ $ make install
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366933242">https://zhuanlan.zhihu.com/p/366933242</a></p>
 <p>[4] Genome Survey Sequencing for the Characterization of the Genetic Background of Rosa roxburghii Tratt and Leaf Ascorbate Metabolism Genes [Plos one]</p>
 <p>[5] Genome survey sequencing and genetic diversity of cultivated <em>Akebia trifoliata</em> assessed via phenotypes and SSR markers [Molecular Biology Reports <strong>2.3IF</strong>]</p>
-<p>[6] : Genome survey sequencing of red swamp crayfish <em>Procambarus clarkii</em> [<strong>2.3IF</strong>] </p>
+<p>[6] : Genome survey sequencing of red swamp crayfish <em>Procambarus clarkii</em> [<strong>2.3IF</strong>]</p>
 <p>[7] Genome survey sequencing and characterization of simple sequence repeat (SSR) markers in Platostoma palustre (Blume) A.J.Paton (Chinese mesona) [scientific reports <strong>4.3IF</strong>]</p>
 <p>[8] Genome survey sequencing of *Dioscorea zingiberensis [genome <strong>2.1IF</strong>]</p>
 <p>[9]Genome survey sequencing of Atractylodes lancea and identification of its SSR markers[Bioscience Reports, IF3.84]</p>
@@ -729,7 +761,7 @@ $ make install
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A8%E6%8E%A7"><span class="nav-number">2.</span> <span class="nav-text">质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rawdata-qc"><span class="nav-number">2.1.</span> <span class="nav-text">rawdata qc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trim"><span class="nav-number">2.2.</span> <span class="nav-text">trim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cleandata-qc"><span class="nav-number">2.3.</span> <span class="nav-text">cleandata qc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NT%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E5%AF%B9"><span class="nav-number">2.4.</span> <span class="nav-text">NT数据库比对</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#k-mers"><span class="nav-number">3.</span> <span class="nav-text">k-mers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%BB%84%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">基于组装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%82%E5%90%88%E5%BA%A6%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">杂合度估计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%BA%8F%E5%88%97%E4%BC%B0%E8%AE%A1"><span class="nav-number">6.</span> <span class="nav-text">重复序列估计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Grand-Omics"><span class="nav-number">7.</span> <span class="nav-text">Grand Omics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E6%8E%A7%E5%8F%8A%E6%B1%A1%E6%9F%93%E8%AF%84%E4%BC%B0"><span class="nav-number">7.1.</span> <span class="nav-text">数据质控及污染评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%A4%A7%E5%B0%8F%E5%92%8C%E6%9D%82%E5%90%88%E5%BA%A6%E4%BC%B0%E8%AE%A1"><span class="nav-number">7.2.</span> <span class="nav-text">基因组大小和杂合度估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC-depth-%E5%88%86%E6%9E%90%E5%8F%8A%E6%B1%A1%E6%9F%93%E8%AF%84%E4%BC%B0"><span class="nav-number">7.3.</span> <span class="nav-text">GC-depth 分析及污染评估</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Biomarker"><span class="nav-number">8.</span> <span class="nav-text">Biomarker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%A0%94%E5%9B%BE%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86"><span class="nav-number">8.1.</span> <span class="nav-text">调研图分析原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%A0%94%E5%9B%BE%E5%88%86%E6%9E%90%E5%86%85%E5%AE%B9"><span class="nav-number">8.2.</span> <span class="nav-text">调研图分析内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%B0%83%E7%A0%94%E5%9B%BEsurvey%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">8.3.</span> <span class="nav-text">基因组调研图survey的意义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Novogene"><span class="nav-number">9.</span> <span class="nav-text">Novogene</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%86%85%E5%AE%B9"><span class="nav-number">9.1.</span> <span class="nav-text">分析内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BerryGenomics"><span class="nav-number">10.</span> <span class="nav-text">BerryGenomics</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pipeline"><span class="nav-number">11.</span> <span class="nav-text">Pipeline</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A8%E6%8E%A7"><span class="nav-number">2.</span> <span class="nav-text"> 质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rawdata-qc"><span class="nav-number">2.1.</span> <span class="nav-text"> rawdata qc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trim"><span class="nav-number">2.2.</span> <span class="nav-text"> trim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cleandata-qc"><span class="nav-number">2.3.</span> <span class="nav-text"> cleandata qc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nt%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E5%AF%B9"><span class="nav-number">2.4.</span> <span class="nav-text"> NT数据库比对</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#k-mers"><span class="nav-number">3.</span> <span class="nav-text"> k-mers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%BB%84%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text"> 基于组装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%82%E5%90%88%E5%BA%A6%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text"> 杂合度估计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%BA%8F%E5%88%97%E4%BC%B0%E8%AE%A1"><span class="nav-number">6.</span> <span class="nav-text"> 重复序列估计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#font-colorgreengrand-omicsfont"><span class="nav-number">7.</span> <span class="nav-text"> Grand Omics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E6%8E%A7%E5%8F%8A%E6%B1%A1%E6%9F%93%E8%AF%84%E4%BC%B0"><span class="nav-number">7.1.</span> <span class="nav-text"> 数据质控及污染评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%A4%A7%E5%B0%8F%E5%92%8C%E6%9D%82%E5%90%88%E5%BA%A6%E4%BC%B0%E8%AE%A1"><span class="nav-number">7.2.</span> <span class="nav-text"> 基因组大小和杂合度估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gc-depth-%E5%88%86%E6%9E%90%E5%8F%8A%E6%B1%A1%E6%9F%93%E8%AF%84%E4%BC%B0"><span class="nav-number">7.3.</span> <span class="nav-text"> GC-depth 分析及污染评估</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#font-colorgreenbiomarkerfont"><span class="nav-number">8.</span> <span class="nav-text"> Biomarker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%A0%94%E5%9B%BE%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86"><span class="nav-number">8.1.</span> <span class="nav-text"> 调研图分析原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%A0%94%E5%9B%BE%E5%88%86%E6%9E%90%E5%86%85%E5%AE%B9"><span class="nav-number">8.2.</span> <span class="nav-text"> 调研图分析内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%B0%83%E7%A0%94%E5%9B%BEsurvey%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">8.3.</span> <span class="nav-text"> 基因组调研图survey的意义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#font-colorgreennovogenefont"><span class="nav-number">9.</span> <span class="nav-text"> Novogene</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%86%85%E5%AE%B9"><span class="nav-number">9.1.</span> <span class="nav-text"> 分析内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#font-colorgreenberrygenomicsfont"><span class="nav-number">10.</span> <span class="nav-text"> BerryGenomics</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#font-colorgreenpipelinefont"><span class="nav-number">11.</span> <span class="nav-text"> Pipeline</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -744,7 +776,7 @@ $ make install
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -757,7 +789,7 @@ $ make install
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

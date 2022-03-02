@@ -28,18 +28,18 @@
 <meta property="og:site_name" content="Banner&#39;s Blog">
 <meta property="og:description" content="监督学习 无监督学习：数据无标注甚至非结构化。KMeans…">
 <meta property="og:locale">
-<meta property="og:image" content="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/1.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/4.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/2.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/3.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/5.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/6.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/1.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/4.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/2.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/3.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/5.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/6.png">
 <meta property="article:published_time" content="2021-11-15T12:21:47.691Z">
 <meta property="article:modified_time" content="2021-11-15T14:36:10.154Z">
 <meta property="article:author" content="Wang C">
 <meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/1.png">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/blog/2021/11/15/2021-11-15-kmeans/1.png">
 
 <link rel="canonical" href="https://wangc1106.github.io/blog/2021/11/15/2021-11-15-kmeans/">
 
@@ -263,10 +263,9 @@
         <p>监督学习</p>
 <p>无监督学习：数据无标注甚至非结构化。KMeans…</p>
 <span id="more"></span>
-
-
-
-<h1 id="KMeans"><a href="#KMeans" class="headerlink" title="KMeans"></a>KMeans</h1><h2 id="简介-聚类与KMeans"><a href="#简介-聚类与KMeans" class="headerlink" title="简介-聚类与KMeans"></a>简介-聚类与KMeans</h2><blockquote>
+<h1 id="kmeans"><a class="markdownIt-Anchor" href="#kmeans"></a> KMeans</h1>
+<h2 id="简介-聚类与kmeans"><a class="markdownIt-Anchor" href="#简介-聚类与kmeans"></a> 简介-聚类与KMeans</h2>
+<blockquote>
 <ul>
 <li><strong>聚类（Clustering）</strong>：将数据对象分为多个类或者簇 (Cluster)，使同一簇对象间较高相似度，不同簇对象差别较大。</li>
 <li><strong>划分（Partitioning）</strong>：聚类可基于划分，也可基于分层。划分即将对象划分成不同簇，而分层将对象分等级。</li>
@@ -276,17 +275,21 @@
 </ul>
 </blockquote>
 <ul>
-<li><p>与分类、序列标注不同，聚类事先并不知道任何样本标签，通过数据之间内在关系把样本划分为若干类别，使得同类别样本之间的相似度高，不同类别相似度低（增大类内聚，减少类间距）。</p>
+<li>
+<p>与分类、序列标注不同，聚类事先并不知道任何样本标签，通过数据之间内在关系把样本划分为若干类别，使得同类别样本之间的相似度高，不同类别相似度低（增大类内聚，减少类间距）。</p>
 </li>
-<li><p>聚类属于非监督学习，K均值聚类最基础常用。基本思想，<font color="green">通过迭代寻找K个簇（Cluster），使聚类结果对应的损失函数最小</font>。终止条件是没有（或最小数目）对象被重新分配给不同的聚类，没有（或最小数目）聚类中心再发生变化，误差平方和局部最小。<font color="red">损失函数定义为各个样本距离所属簇中心点的误差平方和</font>：</p>
+<li>
+<p>聚类属于非监督学习，K均值聚类最基础常用。基本思想，<font color="green">通过迭代寻找K个簇（Cluster），使聚类结果对应的损失函数最小</font>。终止条件是没有（或最小数目）对象被重新分配给不同的聚类，没有（或最小数目）聚类中心再发生变化，误差平方和局部最小。<font color="red">损失函数定义为各个样本距离所属簇中心点的误差平方和</font>：</p>
 </li>
 </ul>
-<p><img src="/blog/2021/11/15/2021-11-15-kmeans/1.png"></p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/1.png" alt></p>
 <p>xi代表第i个样本，ci是xi所属的簇，uci代表簇对应中心点，M是样本总数。</p>
 <ul>
-<li><p>？损失函数本质是衡量模型的拟合效果，有求解参数需求的算法，才会有损失函数。Kmeans 不求解什么参数，它的模型本质也没有在拟合数据，而是在对数据进行一 种探索。在决策树中有衡量分类效果的指标准确度<code>accuracy</code>，准确度所对应的损失叫做泛化误差，但不能通过最小化泛化误差来求解某个模型中需要的信息，只是希望模型的效果上表现出来的泛化误差 很小。因此决策树，KNN 等算法，是绝对没有损失函数的。</p>
+<li>
+<p>？损失函数本质是衡量模型的拟合效果，有求解参数需求的算法，才会有损失函数。Kmeans 不求解什么参数，它的模型本质也没有在拟合数据，而是在对数据进行一 种探索。在决策树中有衡量分类效果的指标准确度<code>accuracy</code>，准确度所对应的损失叫做泛化误差，但不能通过最小化泛化误差来求解某个模型中需要的信息，只是希望模型的效果上表现出来的泛化误差 很小。因此决策树，KNN 等算法，是绝对没有损失函数的。</p>
 </li>
-<li><table>
+<li>
+<table>
 <thead>
 <tr>
 <th>距离度量对比</th>
@@ -294,7 +297,8 @@
 <th>Inertia</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>欧几里得距离</td>
 <td>均值</td>
 <td>最小化每个样本点到质心的欧式距离之和</td>
@@ -309,12 +313,14 @@
 <td>均值</td>
 <td>最小化每个样本点到质心的余弦距离之和</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
-<li><p>  上述问题是<font color="green">NP-Hard</font>问题。一般是采用坐标下降（Coordinate Decendet）方法求解。坐标下降法属于非梯度优化方法，每一步迭代中沿着一个坐标轴方向探索，通过循环使用不同的坐标达到求解目标函数的局部最小值。 </p>
+<li>
+<p>上述问题是<font color="green">NP-Hard</font>问题。一般是采用坐标下降（Coordinate Decendet）方法求解。坐标下降法属于非梯度优化方法，每一步迭代中沿着一个坐标轴方向探索，通过循环使用不同的坐标达到求解目标函数的局部最小值。</p>
 </li>
 </ul>
-<p><img src="/blog/2021/11/15/2021-11-15-kmeans/4.png"></p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/4.png" alt></p>
 <p>如上图，假设两维度x，y：</p>
 <ol>
 <li>首先选择初始位置(x,y)，假设x未知将y的值代入目标函数中，令目标函数导数0，求得此时最佳x值。</li>
@@ -324,12 +330,14 @@
 <p>收敛的过程如红色箭头所示。更多维度时，同理，一次只对一个维度最优化。</p>
 <p>坐标下降法一般要求目标函数是可微的凸函数(局部最小值即全局最小值?)，此时求得的极小值才能是全局最小值。</p>
 <p>使用K-Means前，可先用PCA使各个变量间尽可能独立。否则如两变量间有较强关联性，函数收敛速度会非常慢。</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>KMeans的核心目标是将给定的数据集划分成K个簇（K是超参），并给出每个样本数据对应的中心点。具体步骤非常简单，可以分为4步：</p>
-<p><img src="/blog/2021/11/15/2021-11-15-kmeans/2.png"></p>
+<h2 id="步骤"><a class="markdownIt-Anchor" href="#步骤"></a> 步骤</h2>
+<p>KMeans的核心目标是将给定的数据集划分成K个簇（K是超参），并给出每个样本数据对应的中心点。具体步骤非常简单，可以分为4步：</p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/2.png" alt></p>
 <p><strong>KMeans最核心的部分就是先固定中心点，调整每个样本所属的类别来减少J；再固定每个样本的类别，调整中心点继续减小J 。两个过程交替循环， J 单调递减直到最（极）小值，中心点和样本划分的类别同时收敛。</strong></p>
-<p><img src="/blog/2021/11/15/2021-11-15-kmeans/3.png"></p>
-<p><img src="/blog/2021/11/15/2021-11-15-kmeans/5.png"></p>
-<h1 id="优缺点优化策略"><a href="#优缺点优化策略" class="headerlink" title="优缺点优化策略"></a>优缺点优化策略</h1><p>KMenas优点：</p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/3.png" alt></p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/5.png" alt></p>
+<h1 id="优缺点优化策略"><a class="markdownIt-Anchor" href="#优缺点优化策略"></a> 优缺点优化策略</h1>
+<p>KMenas优点：</p>
 <ul>
 <li>高效可伸缩，计算复杂度 为<font color="green">O(NKt)</font>接近于线性（N是数据量，K是聚类总数，t是迭代轮数）。</li>
 <li><font color="green">收敛速度快</font>，原理通俗易懂，可解释性强。</li>
@@ -346,7 +354,7 @@
 <ol>
 <li><strong>数据预处理：归一化和异常点过滤</strong></li>
 </ol>
-<p><strong>KMeans本质是基于欧式距离度量的数据划分方法，均值和方差大的维度将对数据聚类结果产生决定性影响。</strong>聚类前对数据（<strong>具体的说是每一个维度的特征</strong>）做<font color="green">归一化</font>和<font color="green">单位统一</font>至关重要。<font color="green">异常值</font>会对均值计算产生较大影响，导致<strong>中心偏移</strong>，<font color="green">噪声点最好能提前过滤</font>。</p>
+<p><strong>KMeans本质是基于欧式距离度量的数据划分方法，均值和方差大的维度将对数据聚类结果产生决定性影响。<strong>聚类前对数据（<strong>具体的说是每一个维度的特征</strong>）做<font color="green">归一化</font>和<font color="green">单位统一</font>至关重要。<font color="green">异常值</font>会对均值计算产生较大影响，导致</strong>中心偏移</strong>，<font color="green">噪声点最好能提前过滤</font>。</p>
 <p><strong>2.合理选择K值</strong></p>
 <p>K值的选择一般基于实验和多次实验结果。例如采用<strong>手肘法</strong>，尝试不同K值并将对应的损失函数画成折线。手肘法认为图上的<strong>拐点就是K的最佳值</strong>（上图对应K=3）。</p>
 <p><strong>Gap Statistic方法</strong>。只需要找到最大的Gap Statistic对应的K(自动)。</p>
@@ -364,25 +372,24 @@
 <p>K均值聚类是使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%80%E5%A4%A7%E6%9C%9F%E6%9C%9B%E7%AE%97%E6%B3%95/10180861">最大期望算法</a>（Expectation-Maximization algorithm）求解的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/8878468">高斯混合模型</a>（Gaussian Mixture Model, GMM）在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/829892">正态分布</a>的协方差为单位矩阵，且隐变量的后验分布为一组<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%8B%84%E6%8B%89%E5%85%8B%CE%B4%E5%87%BD%E6%95%B0/5760582">狄拉克δ函数</a>时所得到的特例?</p>
 <p>Python</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KMeansClusterer</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,ndarray,cluster_num</span>):</span></span><br><span class="line">        self.ndarray = ndarray</span><br><span class="line">        self.cluster_num = cluster_num</span><br><span class="line">        self.points=self.__pick_start_point(ndarray,cluster_num)</span><br><span class="line">         </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cluster</span>(<span class="params">self</span>):</span></span><br><span class="line">        result = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.cluster_num):</span><br><span class="line">            result.append([])</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.ndarray:</span><br><span class="line">            distance_min = sys.maxsize</span><br><span class="line">            index=-<span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(self.points)):                </span><br><span class="line">                distance = self.__distance(item,self.points[i])</span><br><span class="line">                <span class="keyword">if</span> distance &lt; distance_min:</span><br><span class="line">                    distance_min = distance</span><br><span class="line">                    index = i</span><br><span class="line">            result[index] = result[index] + [item.tolist()]</span><br><span class="line">        new_center=[]</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result:</span><br><span class="line">            new_center.append(self.__center(item).tolist())</span><br><span class="line">        <span class="comment"># 中心点未改变，说明达到稳态，结束递归</span></span><br><span class="line">        <span class="keyword">if</span> (self.points==new_center).<span class="built_in">all</span>():</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">         </span><br><span class="line">        self.points=np.array(new_center)</span><br><span class="line">        <span class="keyword">return</span> self.cluster()</span><br><span class="line">             </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__center</span>(<span class="params">self,<span class="built_in">list</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;计算一组坐标的中心点</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 计算每一列的平均值</span></span><br><span class="line">        <span class="keyword">return</span> np.array(<span class="built_in">list</span>).mean(axis=<span class="number">0</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__distance</span>(<span class="params">self,p1,p2</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;计算两点间距</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        tmp=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(p1)):</span><br><span class="line">            tmp += <span class="built_in">pow</span>(p1[i]-p2[i],<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">pow</span>(tmp,<span class="number">0.5</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__pick_start_point</span>(<span class="params">self,ndarray,cluster_num</span>):</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> cluster_num &lt;<span class="number">0</span> <span class="keyword">or</span> cluster_num &gt; ndarray.shape[<span class="number">0</span>]:</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">&quot;簇数设置有误&quot;</span>)</span><br><span class="line">      </span><br><span class="line">        <span class="comment"># 随机点的下标</span></span><br><span class="line">        indexes=random.sample(np.arange(<span class="number">0</span>,ndarray.shape[<span class="number">0</span>],step=<span class="number">1</span>).tolist(),cluster_num)</span><br><span class="line">        points=[]</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> indexes:</span><br><span class="line">            points.append(ndarray[index].tolist())</span><br><span class="line">        <span class="keyword">return</span> np.array(points)</span><br></pre></td></tr></table></figure>
-
-
-
 <hr>
-<h2 id="KMeans-and-gaussian-mixture-model"><a href="#KMeans-and-gaussian-mixture-model" class="headerlink" title="KMeans and gaussian mixture model"></a>KMeans and gaussian mixture model</h2><p>数据表示：kmeans单个点对cluster建模（假设各clus数据是圆形或高位球形）。GMM，使用高斯分布表示</p>
+<h2 id="kmeans-and-gaussian-mixture-model"><a class="markdownIt-Anchor" href="#kmeans-and-gaussian-mixture-model"></a> KMeans and gaussian mixture model</h2>
+<p>数据表示：kmeans单个点对cluster建模（假设各clus数据是圆形或高位球形）。GMM，使用高斯分布表示</p>
 <p>数据先验：kmeans，假设各clus先验概率一样，实际clus数据量可能不均匀。clusA10000，B100，新样本不考虑与AB相似度，属于A概率大。GMM对数据先验进行建模。</p>
 <p>相似度衡量：Kmeans的欧式距离假设各个维度对相似度衡量作用一样。GMM相似度衡量使用后验概率通过引入协方差矩阵，对各个维度数据的不同重要性建模。</p>
 <p>数据分配：kmeans各样本只属于相似度最高clus（hard clusting），GMM使用后验概率对各个clus按比例分配（fuzzy clustering？）。</p>
 <hr>
-<h2 id="k-means-聚类算法"><a href="#k-means-聚类算法" class="headerlink" title="k-means++聚类算法"></a>k-means++聚类算法</h2><p><code>KMeans</code>算法，<code>KMeans</code>在聚类之前首先需初始化k个簇中心，因此 <code>KMeans</code> 算法对初值敏感，对于不同的初始值，会导致不同聚类结果。若初始化随机，很有可能 k簇中心都在同一个簇，这种情况 <code>KMeans</code> 很大程度上都不会收敛到全局最小。</p>
-<p>为优化选择初始质心的方法，2007 年 Arthur,等 三人发表了论文“k-means++: <code>The advantages of careful seeding</code>，<code>sklearn.cluster.KMeans</code> 中默认参数为 <code>init=&#39;k-means++&#39;</code> ，其算法原理为在初始化簇中心时，逐个选取 k个簇中心，且离其他簇中心越远的样本越有可能被选为下个簇中心。</p>
+<h2 id="k-means聚类算法"><a class="markdownIt-Anchor" href="#k-means聚类算法"></a> k-means++聚类算法</h2>
+<p><code>KMeans</code>算法，<code>KMeans</code>在聚类之前首先需初始化k个簇中心，因此 <code>KMeans</code> 算法对初值敏感，对于不同的初始值，会导致不同聚类结果。若初始化随机，很有可能 k簇中心都在同一个簇，这种情况 <code>KMeans</code> 很大程度上都不会收敛到全局最小。</p>
+<p>为优化选择初始质心的方法，2007 年 Arthur,等 三人发表了论文“k-means++: <code>The advantages of careful seeding</code>，<code>sklearn.cluster.KMeans</code> 中默认参数为 <code>init='k-means++'</code> ，其算法原理为在初始化簇中心时，逐个选取 k个簇中心，且离其他簇中心越远的样本越有可能被选为下个簇中心。</p>
 <p>算法步骤：</p>
-<p><img src="/blog/2021/11/15/2021-11-15-kmeans/6.png"></p>
+<p><img src="/blog/blog/2021/11/15/2021-11-15-kmeans/6.png" alt></p>
 <hr>
 <p>ref：</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/184686598">https://zhuanlan.zhihu.com/p/184686598</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gaochundong/p/kmeans_clustering.html">https://www.cnblogs.com/gaochundong/p/kmeans_clustering.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31296149">https://www.zhihu.com/question/31296149</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/342052190#:~:text=KMeans%20">https://zhuanlan.zhihu.com/p/342052190#:~:text=KMeans%20</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/342052190#:~:text=KMeans%20">https://zhuanlan.zhihu.com/p/342052190#:~:text=KMeans </a></p>
 
     </div>
 
@@ -483,7 +490,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KMeans"><span class="nav-number">1.</span> <span class="nav-text">KMeans</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-%E8%81%9A%E7%B1%BB%E4%B8%8EKMeans"><span class="nav-number">1.1.</span> <span class="nav-text">简介-聚类与KMeans</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">优缺点优化策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMeans-and-gaussian-mixture-model"><span class="nav-number">2.1.</span> <span class="nav-text">KMeans and gaussian mixture model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means-%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">k-means++聚类算法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kmeans"><span class="nav-number">1.</span> <span class="nav-text"> KMeans</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-%E8%81%9A%E7%B1%BB%E4%B8%8Ekmeans"><span class="nav-number">1.1.</span> <span class="nav-text"> 简介-聚类与KMeans</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.</span> <span class="nav-text"> 步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text"> 优缺点优化策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#kmeans-and-gaussian-mixture-model"><span class="nav-number">2.1.</span> <span class="nav-text"> KMeans and gaussian mixture model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> k-means++聚类算法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -498,7 +505,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -511,7 +518,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
