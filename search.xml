@@ -110,7 +110,6 @@ Hifiasm针对HiFi特点开发，在hifi数据的组装表现上较同类软件�
 <hr>
 </li>
 </ul>
-<p><a href="https://blog.csdn.net/weixin_36416921/article/details/112277318">https://blog.csdn.net/weixin_36416921/article/details/112277318</a> ？？</p>
 <hr>
 <h1 id="hifi组装实例"><a class="markdownIt-Anchor" href="#hifi组装实例"></a> HiFI组装实例</h1>
 <p>Contiguity, Completeness, and Correctness</p>
@@ -135,6 +134,31 @@ Hifiasm针对HiFi特点开发，在hifi数据的组装表现上较同类软件�
 （8）使用Juicebox对scaffolds进行微调，并从scaffolds上去除不一致的contigs，产生最终的染色体基因组，其包含32条染色体(8个同源组，每个组中有4个等位基因染色体)，总长度为2738Mb，和419Mb未挂载到染色体水平的序列。</p>
 <h2 id="202007"><a class="markdownIt-Anchor" href="#202007"></a> 2020.07</h2>
 <p>加州大学HiFi组装人完整X染色体，Nature</p>
+<hr>
+<h1 id="基于pacbio长序列的结构变异检测germline-sv-calling"><a class="markdownIt-Anchor" href="#基于pacbio长序列的结构变异检测germline-sv-calling"></a> 基于Pacbio长序列的结构变异检测germline SV calling</h1>
+<p><a href="https://blog.csdn.net/weixin_36416921/article/details/112277318">https://blog.csdn.net/weixin_36416921/article/details/112277318</a> ？？</p>
+<p><img src="/blog/blog/2022/03/02/2022-03-02-HiFi-3-software/2.png" alt="img"></p>
+<ul>
+<li>
+<p>获取bam文件（Pacbio下机数据）。</p>
+</li>
+<li>
+<p>subreads.bam文件 到ccs.bam文件</p>
+</li>
+<li>
+<p>bam到fastq文件</p>
+</li>
+<li>
+<p>数据分析，变异检测</p>
+<ul>
+<li>**mapping &amp; calling 【**nextSV2流程】</li>
+<li>常用的长序列比对软件有<strong>ngmlr</strong> 和 <strong>minimap2</strong>，不同的mapping软件得到结果略有差别，minimap2比对得到的结果较多？</li>
+<li><strong>sniffles calling</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>一般认为只有CLR的subreads需要用NGS校正，ccs或hifi reads已经自身校正了，不用额外校正。当ccs的阈值设定为3时，得到的序列就是HIFI reads了。</p>
 ]]></content>
       <categories>
         <category>Software</category>
@@ -1806,6 +1830,9 @@ MovieName 是cell的名字，holeNumer是ZMW孔的编号，qStart和qEnd是subre
 <p><font color="red">bam: 这是数据的格式，一般有bam格式，xml，fasta格式等</font></p>
 <p>BAM文件官网：<a href="https://pacbiofileformats.readthedocs.io/en/3.0/BAM.html">https://pacbiofileformats.readthedocs.io/en/3.0/BAM.html</a></p>
 <p><a href="https://github.com/PacificBiosciences/PacBioFileFormats/blob/3.0/BAM.rst">https://github.com/PacificBiosciences/PacBioFileFormats/blob/3.0/BAM.rst</a></p>
+<h1 id="clr-hifi-选择"><a class="markdownIt-Anchor" href="#clr-hifi-选择"></a> CLR HiFi 选择</h1>
+<p><img src="/blog/blog/2022/02/20/2022-02-20-HiFi-2-SMRT/29.png" alt="img"></p>
+<p><img src="/blog/blog/2022/02/20/2022-02-20-HiFi-2-SMRT/30.png" alt="img"></p>
 ]]></content>
       <categories>
         <category>biology</category>
