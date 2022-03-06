@@ -1,0 +1,401 @@
+<hr>
+<p>atitle: HiFi-4-QC-BUSCO<br>tags:</p>
+<ul>
+<li>denovo-III<br>categories:</li>
+<li>Software</li>
+</ul>
+<hr>
+<p>BUSCO - <strong>B</strong>enchmarking <strong>U</strong>niversal <strong>S</strong>ingle-<strong>C</strong>opy <strong>O</strong>rthologs</p>
+<p>普遍通用的单拷贝直系同源测试?</p>
+<!-- more -->
+
+<p>official：<a href="https://busco.ezlab.org/busco_userguide.html">https://busco.ezlab.org/busco_userguide.html</a></p>
+<p>Ref:<a href="https://www.jianshu.com/p/5041460f7a5d">https://www.jianshu.com/p/5041460f7a5d</a></p>
+<p>BUSCO是使用python语言编写的<font color="blue">对<strong>转录组</strong>和<strong>基因组组装质量</strong>进行<strong>评估</strong></font>的软件。相近物种间总有一些保守序列，BUSCO<font color="blue">使用这些<strong>保守序列</strong>与<strong>组装结果</strong>进行<strong>比对</strong></font>，鉴定组装结果是否包含这些序列，包含单条、多条还是部分或者不包含等情况给出结果</p>
+<blockquote>
+<p>BUSCO 软件根据<strong>OrthoDB 数据库</strong>，构建了<strong>几个大的进化分支</strong>的<strong>单拷贝基因集</strong>。将转录本拼接结果<strong>与该基因集比较</strong>，根据比对上的比例、完整性，来评价拼接结果的<strong>准确性和完整性</strong></p>
+</blockquote>
+<p>基于大量物种的<font color="blue">单拷贝基因构建数据集</font>，用于评估<font color="blue"><strong>基因组组装，转录组组装，基因注释，蛋白集的完整性</strong></font>。core-genes 构建方式，90%物种共享的基因即为核心基因。使用的是直系同源基因家族的概念，基于100个物种基因组，某一个基因家族存在于&gt;90个基因组中，即将该基因家族认定为核心基因</p>
+<p>BUSCO使用其他工具搭建流程</p>
+<pre><code>genoem assemble : tBLASTn --&gt; Augustus --&gt; HMMER3 √
+Transcriptome   :             Find ORF --&gt; HMMER3
+Gene set        :                          HMMER3
+</code></pre>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><h2 id="conda"><a href="#conda" class="headerlink" title="conda"></a>conda</h2><pre><code># 没有镜像的话，添加镜像
+conda config --show 
+conda config --add channels conda-forge
+
+# 构建conda的python3环境
+conda create --name python36 python=3.6
+#  然后激活
+conda activate python36
+# 执行安装
+conda install -c conda-forge -c bioconda busco=5.3.0
+# 在使用完busco之后可以退出python36环境
+conda deactivate
+</code></pre>
+<h2 id="独立安装？"><a href="#独立安装？" class="headerlink" title="独立安装？"></a>独立安装？</h2><p>busco，依赖Augustus，HMMER，Blast+</p>
+<pre><code class="bash">#  ============ 下载BUSCO  ============ 
+cd ~/Applications/download
+wget -c https://gitlab.com/ezlab/busco/-/archive/master/busco-master.zip -O busco.zip
+
+# ============ 下载依赖的工具 ============
+# 下载Augustus
+wget -c http://bioinf.uni-greifswald.de/augustus/binaries/augustus.current.tar.gz
+# 下载HMMER
+wget -c http://eddylab.org/software/hmmer/hmmer.tar.gz -O hmmer.tar.gz
+# 下载Blast+
+wget -c ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz
+#-------------------------------------------------------------------------------------
+cd ~/Applications/download
+
+# === 安装busco ===
+unzip busco.zip
+# 改名
+mv busco-master busco 
+# 移动到外部
+mv busco ../
+cd ../busco
+# 安装
+python setup.py install
+
+cd ~/Applications/download
+# === 安装Augustus ===
+tar -xzvf augustus.current.tar.gz
+cd augustus-3.3.1
+cd ../
+mv augustus-3.3.1 ../
+cd ../augustus-3.3.1
+# 打开common.mk文件，将ZIPINPUT = true注释掉（即在最前面加一#号）
+vim common.mk
+# 安装
+make
+
+cd ~/Applications/download
+# === 安装HMMER ===
+tar -xzvf hmmer.tar.gz
+cd hmmer-3.2.1
+./configure
+make
+
+# === 安装blast+ ===
+tar -xzvf ncbi-blast-2.7.1+-x64-linux.tar.gz
+# 改名
+mv ncbi-blast-2.7.1+ ../blast+-2.7.1-linux
+
+# 删除安装包
+cd ~/Applications/download
+rm busco.zip
+rm augustus.current.tar.gz
+rm hmmer.tar.gz
+rm ncbi-blast-2.7.1+-x64-linux.tar.gz
+</code></pre>
+<h2 id="下载数据库文件"><a href="#下载数据库文件" class="headerlink" title="下载数据库文件"></a>下载数据库文件</h2><p><a href="https://busco-data.ezlab.org/v5/data/lineages/">https://busco-data.ezlab.org/v5/data/lineages/</a></p>
+<pre><code>大类五类
+- Bacteria 细菌
+- Protists 原生生物
+- Metazoa 后生动物
+- Fungi 真菌
+- Plant 植物
+下载的是植物相关 embryophyta_odb10.2020-09-10.tar.gz
+# 解压文件
+tar -xzvf embryophyta_odb9.tar.gz
+</code></pre>
+<p>执行时需要对应的数据库文件路径 ///embryophyta_odb9</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>配置是必须的，<strong>这一步需要仔细一些，路径出错的话是无法通过busco的检测的</strong>，在安装好软件之后 <code>~/Applications/busco/config/</code>之中并没有<code>config.ini</code>文件，只有一个<code>config.ini_default</code>文件，可以把里面的内容复制下来，</p>
+<ul>
+<li>方法1</li>
+</ul>
+<p>新建<code>config.ini</code>文件或者直接复制</p>
+<pre><code class="bash">cp config.ini_default config.ini
+</code></pre>
+<ul>
+<li>方法2</li>
+</ul>
+<p>也可新建</p>
+<pre><code class="bash"># 增加配置文件
+vim ~/Applications/busco/config/config.ini
+</code></pre>
+<pre><code class="bash"># BUSCO specific configuration
+#It 【overrides default values】 in code and dataset cfg, and is 【overridden by arguments in command line】
+# Uncomment lines when appropriate
+[busco]
+# Input file
+;in = ./sample_data/target.fa
+# Run name, used in output files and folder
+;out = SAMPLE
+# Where to store the output directory
+#【？】 out_path = /workdir
+# Path to the BUSCO dataset
+;lineage_path = ./sample_data/example
+# Which mode to run (【genome / protein / transcriptome】)
+;mode = genome
+# How many threads to use for 【multithreaded】 steps
+;cpu = 1
+# Domain for augustus retraining, eukaryota or prokaryota
+# 【Do not change】 this unless you know exactly why !!!
+;domain = eukaryota
+# Force rewrite if files already exist (True/False)
+;force = False
+# Restart mode (True/False)
+;restart = False
+# Blast e-value
+;evalue = 1e-3
+# Species to use with augustus, for old datasets only
+;species = fly
+# Augustus extra parameters
+# Use single quotes, like this: &#39;--param1=1 --param2=2&#39;
+;augustus_parameters = &#39;&#39;
+# Tmp folder
+;tmp_path = ./tmp/
+# How many candidate regions (contigs, scaffolds) to consider for each BUSCO
+;limit = 3
+# Augustus long mode for retraining (True/False)
+;long = False
+# Quiet mode (True/False)
+;quiet = False
+# Debug logs (True/False), it needs Quiet to be False
+debug = True
+# tar gzip output files (True/False)
+;gzip = False
+# Force single core for the tblastn step
+;blast_single_core = True
+
+【[tblastn]】
+# path to tblastn
+path = ~/Applications/blast+-2.7.1-linux/bin
+
+【[makeblastdb]】
+# path to makeblastdb
+path = ~/Applications/blast+-2.7.1-linux/bin
+
+【[augustus]】
+# path to augustus
+path = ~/Applications/augustus-3.3.1/bin
+
+【[etraining]】
+# path to augustus etraining
+path = ~/Applications/augustus-3.3.1/bin
+
+# path to augustus perl scripts, redeclare it for each new script        
+【[gff2gbSmallDNA.pl]】                                                      
+path = ~/Applications/augustus-3.3.1/scripts                         
+【[new_species.pl]】                                                         
+path = ~/Applications/augustus-3.3.1/scripts                         
+【[optimize_augustus.pl]】                                                   
+path = ~/Applications/augustus-3.3.1/scripts                         
+                                                                         
+【[hmmsearch]】                                                              
+# path to HMMsearch executable                                           
+path = ~/Applications/hmmer-3.2.1/src                                
+                                                                         
+【[Rscript]】                                                                
+# path to Rscript, if you wish to use the plot tool                      
+path = /usr/bin/
+</code></pre>
+<p>新建config.ini`文件之后，</p>
+<ol>
+<li>将<code>config.ini</code>文件中的<code>out_path = /workdir</code>前面加上<code>#</code><br>因为输出路径有时候会出错，所以注释掉，之后运行busco，<font color="blue">输出的路径就是cd的路径</font></li>
+<li>之后需要改这几项对应的路径（<strong>里面的路径需要更改为自己的工具的路径</strong>）</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>相关</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[tblastn]</td>
+<td>blast+</td>
+</tr>
+<tr>
+<td>[makeblastdb]</td>
+<td>blast+</td>
+</tr>
+<tr>
+<td>[augustus]</td>
+<td>Augustus</td>
+</tr>
+<tr>
+<td>[hmmsearch]</td>
+<td>HMMER</td>
+</tr>
+<tr>
+<td>[gff2gbSmallDNA.pl]</td>
+<td>Augustus</td>
+</tr>
+<tr>
+<td>[new_species.pl]</td>
+<td>Augustus</td>
+</tr>
+<tr>
+<td>[optimize_augustus.pl]</td>
+<td>Augustus</td>
+</tr>
+<tr>
+<td>[hmmsearch]</td>
+<td>HMMER</td>
+</tr>
+</tbody></table>
+<p>自己安装的<code>blast+</code>和<code>HMMER</code>和<code>Augustus</code>的执行文件的路径，只需要把前面的路径改为安装的程序位置的路径。</p>
+<p>如blast+安装在<code>~/Applications</code>之下， 执行文件在<code>~/Applications/blast+-2.7.1-linux/bin</code> 之中，如安装在<code>~/NAME/biosofts</code>下，那对应执行文件路径是<code>~/NAME/biosofts/blast+-2.7.1-linux/bin</code>。<br>其实可以看到上面的都是一些路径或默认选项设置。</p>
+<h1 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1><pre><code class="bash"># augustus工具的执行文件所在文件夹
+export PATH=&quot;/home/ssd/Applications/augustus-3.3.1/bin:$PATH&quot;
+# augustus工具附加脚本所在文件夹
+export PATH=&quot;/home/ssd/Applications/augustus-3.3.1/scripts:$PATH&quot;
+# augustus工具配置文件的所在位置 。AUGUSTUS_CONFIG_PATH 需要使用绝对路径
+export AUGUSTUS_CONFIG_PATH=&quot;/home/ssd/Applications/augustus-3.3.1/config&quot;
+# hmmer工具的执行文件所在文件夹
+export PATH=&quot;/home/ssd/Applications/hmmer-3.2.1/src:$PATH&quot;
+# blast+工具的执行文件所在文件夹
+export PATH=&quot;/home/ssd/Applications/blast+-2.7.1-linux/bin:$PATH&quot;
+</code></pre>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><pre><code class="sh">run_BUSCO.py -i [组装的文件.fasta]  -l  [数据库文件夹] -o [输出文件名] -m [评估模式] [其他一些选项]
+</code></pre>
+<p>实际使用例子，如果使用<code>conda</code>安装的<code>BUSCO</code>的话。执行时不需写完整路径，只需写<code>run_BUSCO.py</code>。</p>
+<pre><code class="bash"># 首先cd到对应的组装文件的文件夹
+# 
+
+# -i 输入文件
+# -l BUSCO的数据库文件
+# -o 输出的文件名的后缀以及文件夹的名称
+# -m 分析类型（genome、transcriptome、proteins）
+# --cpu 线程数
+~/Applications/busco/scripts/run_BUSCO.py \
+    -i contigs.fasta \
+    -l ~/database/BUSCO/embryophyta_odb9 \
+    -o suffix\
+    -m genome \
+    --cpu 8
+</code></pre>
+<p>fasta文件中，一些组装工具生成的<code>contig</code>的名字是形如<code>&gt;contig/1/12345</code>之类的，这种fasta文件运行时BUSCO会报错，解决办法是改名，perl单行。</p>
+<pre><code class="sh">cat contig.fasta | perl -p -e &#39;s{/}{}g&#39; &gt; contig.new.fasta
+</code></pre>
+<h1 id="结果解读"><a href="#结果解读" class="headerlink" title="结果解读"></a>结果解读</h1><p>在运行文件夹下会有</p>
+<ul>
+<li><code>run_suffix</code> 文件夹：因为上面<code>-o</code>选项设置了<code>suffix</code>，所以文件夹名称加了后缀。文件夹里，有一个文件最为重要。是<code>short_summary_suffix.txt</code></li>
+</ul>
+<pre><code class="text"># Summarized benchmarking in BUSCO notation for file assembly/spades/contigs.fasta
+# BUSCO was run in mode: genome
+    C:98.6%[S:98.6%,D:0.0%],F:0.0%,M:1.4%,n:148
+
+    146 Complete BUSCOs (C)
+    146 Complete and single-copy BUSCOs (S)
+    0   Complete and duplicated BUSCOs (D)
+    0   Fragmented BUSCOs (F)
+    2   Missing BUSCOs (M)
+    148 Total BUSCO groups searched
+</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">缩写</th>
+<th>全称</th>
+<th>说明</th>
+<th>关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">C</td>
+<td>Complete</td>
+<td>多少个BUSCO测试基因被覆盖。</td>
+<td>C = S + D</td>
+</tr>
+<tr>
+<td align="left">S</td>
+<td>single-copy</td>
+<td>多少个基因经过比对发现是单拷贝。</td>
+<td>-</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td>duplicated</td>
+<td>多少个基因经过比对发现包含多拷贝。</td>
+<td>-</td>
+</tr>
+<tr>
+<td align="left">F</td>
+<td>Fragment</td>
+<td>多少个基因经过比对覆盖不完全，只是部分比对上。</td>
+<td>-</td>
+</tr>
+<tr>
+<td align="left">M</td>
+<td>Miss</td>
+<td>没有得到比对结果的基因数</td>
+<td>-</td>
+</tr>
+<tr>
+<td align="left">Total</td>
+<td>Total</td>
+<td>总共测试的基因条目数</td>
+<td>Total = C + F + M</td>
+</tr>
+</tbody></table>
+<pre><code class="css">一般情况下对于完整度较好的基因组组装结果来讲，Complete and single-copy越多越好，而Complete and duplicated和Missing越少越好，对于Fragmented也尽可能地少一些。
+真实项目中，Complete BUSCOs (C) 的比例通常都能达到 80% 以上。
+C值表示和BUSCO集相比的完整度，M值表示可能缺少的基因数，D则是重复数。
+</code></pre>
+<p>三种比对</p>
+<ul>
+<li>情况1 - 完全覆盖</li>
+</ul>
+<pre><code class="sh">说明: +表示组装得到基因序列 -表示用于测试的基因序列
+
+组装 : ================+++++++==============
+测试                   -------
+                       或者
+组装 : ==============+++++++++++============
+测试                   -------               
+</code></pre>
+<ul>
+<li>情况2 - 部分覆盖</li>
+</ul>
+<pre><code class="text">组装 : ================+++++++==============
+测试                   -----
+                     /      \
+                       或者
+组装 : ================+++++++==============
+测试                   -------
+                     /        \
+</code></pre>
+<ul>
+<li>情况3 - 没有比对</li>
+</ul>
+<pre><code class="text">组装 : ================+++++++==============
+测试 
+</code></pre>
+<p>一般<code>S</code> + <code>D</code>的数值也就是<code>C</code>的值越大越好，但是在文献中作者说如果<code>D</code>的数值太多的话可能意味着组装错误的可能性较大。因为一个基因（BUSCO数据库中该基因一般为单拷贝）被覆盖多次，那么可能就是说该基因所在的片段组装可能出现问题。<br>因为理论上</p>
+<pre><code class="text">理论上：--------------------------------------------
+实际上：--------   ----------    ----------    -----
+错误的：--------                 -------------
+           \\\\                    ///
+          -----------     --------------
+</code></pre>
+<p>理论上组装之后各个片段之间应该前后有序，之间除了重复区域或者其他特殊片段之外不应该有可以重叠的地方。<br>例如</p>
+<pre><code class="text">sequence1 : ..TAGTCGTGA                         GTGCATGCTGTAGC..
+                       \                       /
+                        AAAATTGG......CGATGAAAA
+                       /                       \
+sequence2 : ..GGGTAGCGG                         TTGACTAGCTAGCT..
+</code></pre>
+<p>也就是说中间一段序列是两个序列的共同部分，除非这个序列存在多个拷贝，否则就很可能是拼接错误。通常一般这种拼接错误的序列的两端会出现重复序列。另外如果是多倍体组装的话，<code>D</code>值也可能大。</p>
+<p>一般来看，<code>S</code>似乎越大越好，<code>M</code>越小越好，说明组装的越完整，因为检测的单拷贝同源基因出现得多。但是<code>D</code>与<code>F</code>这两个数值越大不见得就是好的，因为组装的错误可能会带来这两个值的增大。不能仅仅只是通过这一个软件来判定。比如还可以借助<code>QUAST</code>和常规指标<code>N50</code>、<code>总的核酸量</code>、<code>点阵图</code>等等多个辅助标准来进行综合的评估。</p>
+<h1 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h1><p>执行完毕后，可使用<code>generate_plot.py</code>画图，条形图。</p>
+<ul>
+<li>首先把所有经过BUSCO检测的结果聚集到一个文件夹之内</li>
+</ul>
+<pre><code class="bash">mkdir my_summaries
+cp run_SPEC1/short_summary_SPEC1.txt my_summaries/.
+cp run_SPEC2/short_summary_SPEC2.txt my_summaries/.
+cp run_SPEC3/short_summary_SPEC3.txt my_summaries/.
+cp run_SPEC4/short_summary_SPEC4.txt my_summaries/.
+cp run_SPEC5/short_summary_SPEC5.txt my_summaries/.
+</code></pre>
+<ul>
+<li>运行</li>
+</ul>
+<pre><code class="undefined">python scripts/generate_plot.py –wd my_summaries
+</code></pre>
+<p>五个数值变成条形图显示，对比更加明显.</p>

@@ -253,27 +253,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="fastq压缩之gzip文件大小与样本数据量关系"><a class="markdownIt-Anchor" href="#fastq压缩之gzip文件大小与样本数据量关系"></a> fastq压缩之gzip文件大小与样本数据量关系</h1>
-<span id="more"></span>
+        <h1 id="fastq压缩之gzip文件大小与样本数据量关系"><a href="#fastq压缩之gzip文件大小与样本数据量关系" class="headerlink" title="fastq压缩之gzip文件大小与样本数据量关系"></a>fastq压缩之gzip文件大小与样本数据量关系</h1><span id="more"></span>
+
 <p>ref : <a target="_blank" rel="noopener" href="https://www.zxzyl.com/archives/1011">https://www.zxzyl.com/archives/1011</a></p>
 <p>测序时，先拿到的是样本fastq压缩后的gz文件，若关心数据量够不够，则需计算fastq.gz文件大小和测序数据量的关系。</p>
 <p>用Miseq测序数据（gz文件200M），Hiseq panel（gz文件50M）和WES测序数据（gz文件4G）进行简单分析。发现，<font color="green"><strong>虽然R1和R2数据量是一样，解压出来的文件大小一样，但R2的gzip文件总比R1大</strong></font>。不管是Miseq还是Hiseq的panel测序，压缩后的R2均大于R1文件，且文件越小，差异越大。</p>
-<p>因R1和R2数据量相同，只看R1的真实文件和gz文件大小与数据量之间的关系。<br>
-<font color="green"><strong>数据量</strong></font>=FASTQ文件行数/4x<font color="green"><strong>151</strong></font>/1000/<font color="green"><strong>1000</strong></font> 单位为<strong>M</strong><br>
-<font color="green"><strong>真实文件大小估计</strong></font>=FASTQ文件行数/4x<font color="green"><strong>357</strong></font>/1024/<font color="green"><strong>1024</strong></font> 单位为<strong>M</strong>，预测值，差别不大，<strong>因为FASTQ文件中每四行357个字符</strong>（和平台和设置有关系），每个字符1byte。</p>
+<p>因R1和R2数据量相同，只看R1的真实文件和gz文件大小与数据量之间的关系。<br><font color="green"><strong>数据量</strong></font>=FASTQ文件行数/4x<font color="green"><strong>151</strong></font>/1000/<font color="green"><strong>1000</strong></font> 单位为<strong>M</strong><br><font color="green"><strong>真实文件大小估计</strong></font>=FASTQ文件行数/4x<font color="green"><strong>357</strong></font>/1024/<font color="green"><strong>1024</strong></font> 单位为<strong>M</strong>，预测值，差别不大，<strong>因为FASTQ文件中每四行357个字符</strong>（和平台和设置有关系），每个字符1byte。</p>
 <p>GZ文件大小通过ll -h查看</p>
 <p>因为FASTQ文件是<strong>规范</strong>的，<strong>每四行字符基本一致</strong>，所以<font color="green"><strong>FASTQ真实文件大小和数据量成正比</strong></font>。<strong>前面提到每四行有357个字符，其中序列只占151个字符，FASTQ文件大小大概是测序量的357/151≈2.3倍多</strong>。但因FASTQ文件为文本文件，占用空间较大，所以一般将FASTQ文件压缩成gz。</p>
 <p>用gz文件大小除以估计的真实文件大小，得到压缩比，发现压缩比和测序平台有关系，<font color="green"><strong>Miseq</strong>的压缩比在<strong>0.35</strong>左右，<strong>Hiseq</strong>平台中的panel测序在<strong>0.24</strong>左右，<strong>WES</strong>在<strong>0.2</strong>左右</font>。可以发现WES的数据的压缩效率最高，猜测不同平台在压缩过程中设置的压缩比例不同。Hiseq测序平台的gz文件压缩性能大于Miseq平台。</p>
 <ul>
-<li>
-<p>以Miseq的gzip文件大小和数据量<strong>作图</strong>，可以很直观的发现gz文件大小和数据量之间的线性关系。斜率是1.245，截距可以忽略不计，因为纵坐标很大。也就是说R1文件的数据量约等于gzip文件的1.245倍。</p>
+<li><p>以Miseq的gzip文件大小和数据量<strong>作图</strong>，可以很直观的发现gz文件大小和数据量之间的线性关系。斜率是1.245，截距可以忽略不计，因为纵坐标很大。也就是说R1文件的数据量约等于gzip文件的1.245倍。</p>
 </li>
-<li>
-<p><strong>从另外一个角度计算</strong>，<font color="green"><strong>R1文件数据量=gzip文件大小/压缩效率/2.3</strong></font>，则因为Miseq的压缩效率在0.35，Hiseq在0.23左右，所以Miseq R1文件的数据量大概是gzip文件的<font color="green">1.242倍（1/0.35/2.3）</font>，和上图拟合的结果很相近，<strong>Hiseq约在1.89(1/0.23/2.3)倍</strong>。真实的数据量其实是R1文件数据量的2倍（R2文件中的数据量和R1文件相同）。</p>
+<li><p><strong>从另外一个角度计算</strong>，<font color="green"><strong>R1文件数据量=gzip文件大小/压缩效率/2.3</strong></font>，则因为Miseq的压缩效率在0.35，Hiseq在0.23左右，所以Miseq R1文件的数据量大概是gzip文件的<font color="green">1.242倍（1/0.35/2.3）</font>，和上图拟合的结果很相近，<strong>Hiseq约在1.89(1/0.23/2.3)倍</strong>。真实的数据量其实是R1文件数据量的2倍（R2文件中的数据量和R1文件相同）。</p>
 </li>
 </ul>
-<p>**结论：**不同平台和不同测序方法之间的<font color="green">fastq文件压缩比例并不一致</font>，但同一种方法和平台内的压缩比例是相近的，因而可以根据gzip文件的大小推测出测序的数据量。</p>
-<p>**Miseq的测序量约是R1 gzip文件大小的2.49倍(R1+R2)，Hiseq的测序量约是R1 gzip文件大小的3.78倍。**不同平台和方法之间，这个值是不固定的，可以根据手头的数据计算一下这个比例，就能迅速的估算出样本的数据量。</p>
+<p><strong>结论：</strong>不同平台和不同测序方法之间的<font color="green">fastq文件压缩比例并不一致</font>，但同一种方法和平台内的压缩比例是相近的，因而可以根据gzip文件的大小推测出测序的数据量。</p>
+<p><strong>Miseq的测序量约是R1 gzip文件大小的2.49倍(R1+R2)，Hiseq的测序量约是R1 gzip文件大小的3.78倍。</strong>不同平台和方法之间，这个值是不固定的，可以根据手头的数据计算一下这个比例，就能迅速的估算出样本的数据量。</p>
 
     </div>
 
@@ -313,8 +309,8 @@
       <i class="fa fa-chevron-left"></i> Genome assemble pipeline
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2022/03/02/2022-03-02-HiFi-3-software/" rel="next" title="HiFi-3-assemble-software">
-      HiFi-3-assemble-software <i class="fa fa-chevron-right"></i>
+    <a href="/blog/2022/03/02/2022-03-02-HiFi-3-software/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -374,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#fastq%E5%8E%8B%E7%BC%A9%E4%B9%8Bgzip%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E4%B8%8E%E6%A0%B7%E6%9C%AC%E6%95%B0%E6%8D%AE%E9%87%8F%E5%85%B3%E7%B3%BB"><span class="nav-number">1.</span> <span class="nav-text"> fastq压缩之gzip文件大小与样本数据量关系</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#fastq%E5%8E%8B%E7%BC%A9%E4%B9%8Bgzip%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E4%B8%8E%E6%A0%B7%E6%9C%AC%E6%95%B0%E6%8D%AE%E9%87%8F%E5%85%B3%E7%B3%BB"><span class="nav-number">1.</span> <span class="nav-text">fastq压缩之gzip文件大小与样本数据量关系</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -389,20 +385,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

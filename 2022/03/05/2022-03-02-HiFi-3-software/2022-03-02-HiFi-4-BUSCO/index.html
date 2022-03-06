@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="1osTo_gOe1SW9Hevqtz8vl8HfSgTO4DSMZ0DiMPMX6w">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="BUSCO - Benchmarking Universal Single-Copy Orthologs 普遍通用的单拷贝直系同源测试?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Banner&#39;s Blog">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/index.html">
+<meta property="og:site_name" content="Banner&#39;s Blog">
+<meta property="og:description" content="BUSCO - Benchmarking Universal Single-Copy Orthologs 普遍通用的单拷贝直系同源测试?">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-03-05T12:45:15.750Z">
+<meta property="article:modified_time" content="2022-03-05T15:08:21.105Z">
+<meta property="article:author" content="Wang C">
+<meta property="article:tag" content="denovo-III">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title> | Banner's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Banner's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream big work hard</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://wangc1106.github.io/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/banner.png">
+      <meta itemprop="name" content="Wang C">
+      <meta itemprop="description" content="Make more time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Banner's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-05 20:45:15 / Modified: 23:08:21" itemprop="dateCreated datePublished" datetime="2022-03-05T20:45:15+08:00">2022-03-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/" class="post-meta-item leancloud_visitors" data-flag-title="" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>8.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>8 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>BUSCO - <strong>B</strong>enchmarking <strong>U</strong>niversal <strong>S</strong>ingle-<strong>C</strong>opy <strong>O</strong>rthologs</p>
+<p>普遍通用的单拷贝直系同源测试?</p>
+<span id="more"></span>
+
+<p>official：<a target="_blank" rel="noopener" href="https://busco.ezlab.org/busco_userguide.html">https://busco.ezlab.org/busco_userguide.html</a></p>
+<p>Ref:<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5041460f7a5d">https://www.jianshu.com/p/5041460f7a5d</a></p>
+<p>BUSCO是使用python语言编写的<font color="blue">对<strong>转录组</strong>和<strong>基因组组装质量</strong>进行<strong>评估</strong></font>的软件。相近物种间总有一些保守序列，BUSCO<font color="blue">使用这些<strong>保守序列</strong>与<strong>组装结果</strong>进行<strong>比对</strong></font>，鉴定组装结果是否包含这些序列，包含单条、多条还是部分或者不包含等情况给出结果</p>
+<blockquote>
+<p>BUSCO 软件根据<strong>OrthoDB 数据库</strong>，构建了<strong>几个大的进化分支</strong>的<strong>单拷贝基因集</strong>。将转录本拼接结果<strong>与该基因集比较</strong>，根据比对上的比例、完整性，来评价拼接结果的<strong>准确性和完整性</strong></p>
+</blockquote>
+<p>基于大量物种的<font color="blue">单拷贝基因构建数据集</font>，用于评估<font color="blue"><strong>基因组组装，转录组组装，基因注释，蛋白集的完整性</strong></font>。core-genes 构建方式，90%物种共享的基因即为核心基因。使用的是直系同源基因家族的概念，基于100个物种基因组，某一个基因家族存在于&gt;90个基因组中，即将该基因家族认定为核心基因</p>
+<p>BUSCO使用其他工具搭建流程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">genoem assemble : tBLASTn --&gt; Augustus --&gt; HMMER3 √</span><br><span class="line">Transcriptome   :             Find ORF --&gt; HMMER3</span><br><span class="line">Gene set        :                          HMMER3</span><br></pre></td></tr></table></figure>
+
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><h2 id="conda"><a href="#conda" class="headerlink" title="conda"></a>conda</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 没有镜像的话，添加镜像</span><br><span class="line">conda config --show </span><br><span class="line">conda config --add channels conda-forge</span><br><span class="line"></span><br><span class="line"># 构建conda的python3环境</span><br><span class="line">conda create --name python36 python=3.6</span><br><span class="line">#  然后激活</span><br><span class="line">conda activate python36</span><br><span class="line"># 执行安装</span><br><span class="line">conda install -c conda-forge -c bioconda busco=5.3.0</span><br><span class="line"># 在使用完busco之后可以退出python36环境</span><br><span class="line">conda deactivate</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="独立安装？"><a href="#独立安装？" class="headerlink" title="独立安装？"></a>独立安装？</h2><p>busco，依赖Augustus，HMMER，Blast+</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  ============ 下载BUSCO  ============ </span></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line">wget -c https://gitlab.com/ezlab/busco/-/archive/master/busco-master.zip -O busco.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># ============ 下载依赖的工具 ============</span></span><br><span class="line"><span class="comment"># 下载Augustus</span></span><br><span class="line">wget -c http://bioinf.uni-greifswald.de/augustus/binaries/augustus.current.tar.gz</span><br><span class="line"><span class="comment"># 下载HMMER</span></span><br><span class="line">wget -c http://eddylab.org/software/hmmer/hmmer.tar.gz -O hmmer.tar.gz</span><br><span class="line"><span class="comment"># 下载Blast+</span></span><br><span class="line">wget -c ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz</span><br><span class="line"><span class="comment">#-------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line"></span><br><span class="line"><span class="comment"># === 安装busco ===</span></span><br><span class="line">unzip busco.zip</span><br><span class="line"><span class="comment"># 改名</span></span><br><span class="line">mv busco-master busco </span><br><span class="line"><span class="comment"># 移动到外部</span></span><br><span class="line">mv busco ../</span><br><span class="line"><span class="built_in">cd</span> ../busco</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line"><span class="comment"># === 安装Augustus ===</span></span><br><span class="line">tar -xzvf augustus.current.tar.gz</span><br><span class="line"><span class="built_in">cd</span> augustus-3.3.1</span><br><span class="line"><span class="built_in">cd</span> ../</span><br><span class="line">mv augustus-3.3.1 ../</span><br><span class="line"><span class="built_in">cd</span> ../augustus-3.3.1</span><br><span class="line"><span class="comment"># 打开common.mk文件，将ZIPINPUT = true注释掉（即在最前面加一#号）</span></span><br><span class="line">vim common.mk</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line"><span class="comment"># === 安装HMMER ===</span></span><br><span class="line">tar -xzvf hmmer.tar.gz</span><br><span class="line"><span class="built_in">cd</span> hmmer-3.2.1</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># === 安装blast+ ===</span></span><br><span class="line">tar -xzvf ncbi-blast-2.7.1+-x64-linux.tar.gz</span><br><span class="line"><span class="comment"># 改名</span></span><br><span class="line">mv ncbi-blast-2.7.1+ ../blast+-2.7.1-linux</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除安装包</span></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line">rm busco.zip</span><br><span class="line">rm augustus.current.tar.gz</span><br><span class="line">rm hmmer.tar.gz</span><br><span class="line">rm ncbi-blast-2.7.1+-x64-linux.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="下载数据库文件"><a href="#下载数据库文件" class="headerlink" title="下载数据库文件"></a>下载数据库文件</h2><p><a target="_blank" rel="noopener" href="https://busco-data.ezlab.org/v5/data/lineages/">https://busco-data.ezlab.org/v5/data/lineages/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">大类五类</span><br><span class="line">- Bacteria 细菌</span><br><span class="line">- Protists 原生生物</span><br><span class="line">- Metazoa 后生动物</span><br><span class="line">- Fungi 真菌</span><br><span class="line">- Plant 植物</span><br><span class="line">下载的是植物相关 embryophyta_odb10.2020-09-10.tar.gz</span><br><span class="line"># 解压文件</span><br><span class="line">tar -xzvf embryophyta_odb9.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>执行时需要对应的数据库文件路径 ///embryophyta_odb9</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>配置是必须的，<strong>这一步需要仔细一些，路径出错的话是无法通过busco的检测的</strong>，在安装好软件之后 <code>~/Applications/busco/config/</code>之中并没有<code>config.ini</code>文件，只有一个<code>config.ini_default</code>文件，可以把里面的内容复制下来，</p>
+<ul>
+<li>方法1</li>
+</ul>
+<p>新建<code>config.ini</code>文件或者直接复制</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp config.ini_default config.ini</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>方法2</li>
+</ul>
+<p>也可新建</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 增加配置文件</span></span><br><span class="line">vim ~/Applications/busco/config/config.ini</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># BUSCO specific configuration</span></span><br><span class="line"><span class="comment">#It 【overrides default values】 in code and dataset cfg, and is 【overridden by arguments in command line】</span></span><br><span class="line"><span class="comment"># Uncomment lines when appropriate</span></span><br><span class="line">[busco]</span><br><span class="line"><span class="comment"># Input file</span></span><br><span class="line">;<span class="keyword">in</span> = ./sample_data/target.fa</span><br><span class="line"><span class="comment"># Run name, used in output files and folder</span></span><br><span class="line">;out = SAMPLE</span><br><span class="line"><span class="comment"># Where to store the output directory</span></span><br><span class="line"><span class="comment">#【？】 out_path = /workdir</span></span><br><span class="line"><span class="comment"># Path to the BUSCO dataset</span></span><br><span class="line">;lineage_path = ./sample_data/example</span><br><span class="line"><span class="comment"># Which mode to run (【genome / protein / transcriptome】)</span></span><br><span class="line">;mode = genome</span><br><span class="line"><span class="comment"># How many threads to use for 【multithreaded】 steps</span></span><br><span class="line">;cpu = 1</span><br><span class="line"><span class="comment"># Domain for augustus retraining, eukaryota or prokaryota</span></span><br><span class="line"><span class="comment"># 【Do not change】 this unless you know exactly why !!!</span></span><br><span class="line">;domain = eukaryota</span><br><span class="line"><span class="comment"># Force rewrite if files already exist (True/False)</span></span><br><span class="line">;force = False</span><br><span class="line"><span class="comment"># Restart mode (True/False)</span></span><br><span class="line">;restart = False</span><br><span class="line"><span class="comment"># Blast e-value</span></span><br><span class="line">;evalue = 1e-3</span><br><span class="line"><span class="comment"># Species to use with augustus, for old datasets only</span></span><br><span class="line">;species = fly</span><br><span class="line"><span class="comment"># Augustus extra parameters</span></span><br><span class="line"><span class="comment"># Use single quotes, like this: &#x27;--param1=1 --param2=2&#x27;</span></span><br><span class="line">;augustus_parameters = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># Tmp folder</span></span><br><span class="line">;tmp_path = ./tmp/</span><br><span class="line"><span class="comment"># How many candidate regions (contigs, scaffolds) to consider for each BUSCO</span></span><br><span class="line">;<span class="built_in">limit</span> = 3</span><br><span class="line"><span class="comment"># Augustus long mode for retraining (True/False)</span></span><br><span class="line">;long = False</span><br><span class="line"><span class="comment"># Quiet mode (True/False)</span></span><br><span class="line">;quiet = False</span><br><span class="line"><span class="comment"># Debug logs (True/False), it needs Quiet to be False</span></span><br><span class="line">debug = True</span><br><span class="line"><span class="comment"># tar gzip output files (True/False)</span></span><br><span class="line">;gzip = False</span><br><span class="line"><span class="comment"># Force single core for the tblastn step</span></span><br><span class="line">;blast_single_core = True</span><br><span class="line"></span><br><span class="line">【[tblastn]】</span><br><span class="line"><span class="comment"># path to tblastn</span></span><br><span class="line">path = ~/Applications/blast+-2.7.1-linux/bin</span><br><span class="line"></span><br><span class="line">【[makeblastdb]】</span><br><span class="line"><span class="comment"># path to makeblastdb</span></span><br><span class="line">path = ~/Applications/blast+-2.7.1-linux/bin</span><br><span class="line"></span><br><span class="line">【[augustus]】</span><br><span class="line"><span class="comment"># path to augustus</span></span><br><span class="line">path = ~/Applications/augustus-3.3.1/bin</span><br><span class="line"></span><br><span class="line">【[etraining]】</span><br><span class="line"><span class="comment"># path to augustus etraining</span></span><br><span class="line">path = ~/Applications/augustus-3.3.1/bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># path to augustus perl scripts, redeclare it for each new script        </span></span><br><span class="line">【[gff2gbSmallDNA.pl]】                                                      </span><br><span class="line">path = ~/Applications/augustus-3.3.1/scripts                         </span><br><span class="line">【[new_species.pl]】                                                         </span><br><span class="line">path = ~/Applications/augustus-3.3.1/scripts                         </span><br><span class="line">【[optimize_augustus.pl]】                                                   </span><br><span class="line">path = ~/Applications/augustus-3.3.1/scripts                         </span><br><span class="line">                                                                         </span><br><span class="line">【[hmmsearch]】                                                              </span><br><span class="line"><span class="comment"># path to HMMsearch executable                                           </span></span><br><span class="line">path = ~/Applications/hmmer-3.2.1/src                                </span><br><span class="line">                                                                         </span><br><span class="line">【[Rscript]】                                                                </span><br><span class="line"><span class="comment"># path to Rscript, if you wish to use the plot tool                      </span></span><br><span class="line">path = /usr/bin/</span><br></pre></td></tr></table></figure>
+
+<p>新建config.ini`文件之后，</p>
+<ol>
+<li>将<code>config.ini</code>文件中的<code>out_path = /workdir</code>前面加上<code>#</code><br>因为输出路径有时候会出错，所以注释掉，之后运行busco，<font color="blue">输出的路径就是cd的路径</font></li>
+<li>之后需要改这几项对应的路径（<strong>里面的路径需要更改为自己的工具的路径</strong>）</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>相关</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[tblastn]</td>
+<td>blast+</td>
+</tr>
+<tr>
+<td>[makeblastdb]</td>
+<td>blast+</td>
+</tr>
+<tr>
+<td>[augustus]</td>
+<td>Augustus</td>
+</tr>
+<tr>
+<td>[hmmsearch]</td>
+<td>HMMER</td>
+</tr>
+<tr>
+<td>[gff2gbSmallDNA.pl]</td>
+<td>Augustus</td>
+</tr>
+<tr>
+<td>[new_species.pl]</td>
+<td>Augustus</td>
+</tr>
+<tr>
+<td>[optimize_augustus.pl]</td>
+<td>Augustus</td>
+</tr>
+<tr>
+<td>[hmmsearch]</td>
+<td>HMMER</td>
+</tr>
+</tbody></table>
+<p>自己安装的<code>blast+</code>和<code>HMMER</code>和<code>Augustus</code>的执行文件的路径，只需要把前面的路径改为安装的程序位置的路径。</p>
+<p>如blast+安装在<code>~/Applications</code>之下， 执行文件在<code>~/Applications/blast+-2.7.1-linux/bin</code> 之中，如安装在<code>~/NAME/biosofts</code>下，那对应执行文件路径是<code>~/NAME/biosofts/blast+-2.7.1-linux/bin</code>。<br>其实可以看到上面的都是一些路径或默认选项设置。</p>
+<h1 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># augustus工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/bin:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># augustus工具附加脚本所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/scripts:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># augustus工具配置文件的所在位置 。AUGUSTUS_CONFIG_PATH 需要使用绝对路径</span></span><br><span class="line"><span class="built_in">export</span> AUGUSTUS_CONFIG_PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/config&quot;</span></span><br><span class="line"><span class="comment"># hmmer工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/hmmer-3.2.1/src:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># blast+工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/blast+-2.7.1-linux/bin:<span class="variable">$PATH</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run_BUSCO.py -i [组装的文件.fasta]  -l  [数据库文件夹] -o [输出文件名] -m [评估模式] [其他一些选项]</span><br></pre></td></tr></table></figure>
+
+<p>实际使用例子，如果使用<code>conda</code>安装的<code>BUSCO</code>的话。执行时不需写完整路径，只需写<code>run_BUSCO.py</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先cd到对应的组装文件的文件夹</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -i 输入文件</span></span><br><span class="line"><span class="comment"># -l BUSCO的数据库文件</span></span><br><span class="line"><span class="comment"># -o 输出的文件名的后缀以及文件夹的名称</span></span><br><span class="line"><span class="comment"># -m 分析类型（genome、transcriptome、proteins）</span></span><br><span class="line"><span class="comment"># --cpu 线程数</span></span><br><span class="line">~/Applications/busco/scripts/run_BUSCO.py \</span><br><span class="line">    -i contigs.fasta \</span><br><span class="line">    -l ~/database/BUSCO/embryophyta_odb9 \</span><br><span class="line">    -o suffix\</span><br><span class="line">    -m genome \</span><br><span class="line">    --cpu 8</span><br></pre></td></tr></table></figure>
+
+<p>fasta文件中，一些组装工具生成的<code>contig</code>的名字是形如<code>&gt;contig/1/12345</code>之类的，这种fasta文件运行时BUSCO会报错，解决办法是改名，perl单行。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat contig.fasta | perl -p -e <span class="string">&#x27;s&#123;/&#125;&#123;&#125;g&#x27;</span> &gt; contig.new.fasta</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="结果解读"><a href="#结果解读" class="headerlink" title="结果解读"></a>结果解读</h1><p>在运行文件夹下会有</p>
+<ul>
+<li><code>run_suffix</code> 文件夹：因为上面<code>-o</code>选项设置了<code>suffix</code>，所以文件夹名称加了后缀。文件夹里，有一个文件最为重要。是<code>short_summary_suffix.txt</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Summarized benchmarking in BUSCO notation for file assembly/spades/contigs.fasta</span><br><span class="line"># BUSCO was run in mode: genome</span><br><span class="line">    C:98.6%[S:98.6%,D:0.0%],F:0.0%,M:1.4%,n:148</span><br><span class="line"></span><br><span class="line">    146 Complete BUSCOs (C)</span><br><span class="line">    146 Complete and single-copy BUSCOs (S)</span><br><span class="line">    0   Complete and duplicated BUSCOs (D)</span><br><span class="line">    0   Fragmented BUSCOs (F)</span><br><span class="line">    2   Missing BUSCOs (M)</span><br><span class="line">    148 Total BUSCO groups searched</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">缩写</th>
+<th>全称</th>
+<th>说明</th>
+<th>关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">C</td>
+<td>Complete</td>
+<td>多少个BUSCO测试基因被覆盖。</td>
+<td>C = S + D</td>
+</tr>
+<tr>
+<td align="left">S</td>
+<td>single-copy</td>
+<td>多少个基因经过比对发现是单拷贝。</td>
+<td>-</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td>duplicated</td>
+<td>多少个基因经过比对发现包含多拷贝。</td>
+<td>-</td>
+</tr>
+<tr>
+<td align="left">F</td>
+<td>Fragment</td>
+<td>多少个基因经过比对覆盖不完全，只是部分比对上。</td>
+<td>-</td>
+</tr>
+<tr>
+<td align="left">M</td>
+<td>Miss</td>
+<td>没有得到比对结果的基因数</td>
+<td>-</td>
+</tr>
+<tr>
+<td align="left">Total</td>
+<td>Total</td>
+<td>总共测试的基因条目数</td>
+<td>Total = C + F + M</td>
+</tr>
+</tbody></table>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一般情况下对于完整度较好的基因组组装结果来讲，Complete and single-copy越多越好，而Complete and duplicated和Missing越少越好，对于Fragmented也尽可能地少一些。</span><br><span class="line">真实项目中，Complete BUSCOs (C) 的比例通常都能达到 <span class="number">80%</span> 以上。</span><br><span class="line">C值表示和BUSCO集相比的完整度，M值表示可能缺少的基因数，D则是重复数。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>三种比对</p>
+<ul>
+<li>情况1 - 完全覆盖</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">说明: +表示组装得到基因序列 -表示用于测试的基因序列</span><br><span class="line"></span><br><span class="line">组装 : ================+++++++==============</span><br><span class="line">测试                   -------</span><br><span class="line">                       或者</span><br><span class="line">组装 : ==============+++++++++++============</span><br><span class="line">测试                   -------               </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>情况2 - 部分覆盖</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">组装 : ================+++++++==============</span><br><span class="line">测试                   -----</span><br><span class="line">                     /      \</span><br><span class="line">                       或者</span><br><span class="line">组装 : ================+++++++==============</span><br><span class="line">测试                   -------</span><br><span class="line">                     /        \</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>情况3 - 没有比对</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">组装 : ================+++++++==============</span><br><span class="line">测试 </span><br></pre></td></tr></table></figure>
+
+<p>一般<code>S</code> + <code>D</code>的数值也就是<code>C</code>的值越大越好，但是在文献中作者说如果<code>D</code>的数值太多的话可能意味着组装错误的可能性较大。因为一个基因（BUSCO数据库中该基因一般为单拷贝）被覆盖多次，那么可能就是说该基因所在的片段组装可能出现问题。<br>因为理论上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">理论上：--------------------------------------------</span><br><span class="line">实际上：--------   ----------    ----------    -----</span><br><span class="line">错误的：--------                 -------------</span><br><span class="line">           \\\\                    ///</span><br><span class="line">          -----------     --------------</span><br></pre></td></tr></table></figure>
+
+<p>理论上组装之后各个片段之间应该前后有序，之间除了重复区域或者其他特殊片段之外不应该有可以重叠的地方。<br>例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sequence1 : ..TAGTCGTGA                         GTGCATGCTGTAGC..</span><br><span class="line">                       \                       /</span><br><span class="line">                        AAAATTGG......CGATGAAAA</span><br><span class="line">                       /                       \</span><br><span class="line">sequence2 : ..GGGTAGCGG                         TTGACTAGCTAGCT..</span><br></pre></td></tr></table></figure>
+
+<p>也就是说中间一段序列是两个序列的共同部分，除非这个序列存在多个拷贝，否则就很可能是拼接错误。通常一般这种拼接错误的序列的两端会出现重复序列。另外如果是多倍体组装的话，<code>D</code>值也可能大。</p>
+<p>一般来看，<code>S</code>似乎越大越好，<code>M</code>越小越好，说明组装的越完整，因为检测的单拷贝同源基因出现得多。但是<code>D</code>与<code>F</code>这两个数值越大不见得就是好的，因为组装的错误可能会带来这两个值的增大。不能仅仅只是通过这一个软件来判定。比如还可以借助<code>QUAST</code>和常规指标<code>N50</code>、<code>总的核酸量</code>、<code>点阵图</code>等等多个辅助标准来进行综合的评估。</p>
+<h1 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h1><p>执行完毕后，可使用<code>generate_plot.py</code>画图，条形图。</p>
+<ul>
+<li>首先把所有经过BUSCO检测的结果聚集到一个文件夹之内</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir my_summaries</span><br><span class="line">cp run_SPEC1/short_summary_SPEC1.txt my_summaries/.</span><br><span class="line">cp run_SPEC2/short_summary_SPEC2.txt my_summaries/.</span><br><span class="line">cp run_SPEC3/short_summary_SPEC3.txt my_summaries/.</span><br><span class="line">cp run_SPEC4/short_summary_SPEC4.txt my_summaries/.</span><br><span class="line">cp run_SPEC5/short_summary_SPEC5.txt my_summaries/.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python scripts/generate_plot.py –wd my_summaries</span><br></pre></td></tr></table></figure>
+
+<p>五个数值变成条形图显示，对比更加明显.</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/" title="">https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/denovo-III/" rel="tag"># denovo-III</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2022/03/02/2022-03-02-paper-Petunia/" rel="prev" title="【paper】Insight into the evolution of the Solanaceae from the parental genomes of Petunia hybrida">
+      <i class="fa fa-chevron-left"></i> 【paper】Insight into the evolution of the Solanaceae from the parental genomes of Petunia hybrida
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#conda"><span class="nav-number">1.1.</span> <span class="nav-text">conda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E5%AE%89%E8%A3%85%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">独立安装？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">下载数据库文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB"><span class="nav-number">5.</span> <span class="nav-text">结果解读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%BB%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text">画图</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang C"
+      src="/blog/images/banner.png">
+  <p class="site-author-name" itemprop="name">Wang C</p>
+  <div class="site-description" itemprop="description">Make more time</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangc1106" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangc1106" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangchen116@126.com" title="E-Mail → mailto:wangchen116@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-dna"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang C</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz","app_key":"iYpeWQcmNqpHwr2uVlnJYVji","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+      <div style="height: 200px">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5knf34gs07t&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

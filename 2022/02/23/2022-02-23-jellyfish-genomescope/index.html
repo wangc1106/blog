@@ -29,7 +29,7 @@
 <meta property="og:description" content="A fast, lock-free approach for efficient parallel counting of occurrences of k-mers">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-02-23T14:49:06.478Z">
-<meta property="article:modified_time" content="2022-03-01T01:43:11.235Z">
+<meta property="article:modified_time" content="2022-03-05T05:54:49.324Z">
 <meta property="article:author" content="Wang C">
 <meta property="article:tag" content="survey">
 <meta name="twitter:card" content="summary">
@@ -217,7 +217,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-01 09:43:11" itemprop="dateModified" datetime="2022-03-01T09:43:11+08:00">2022-03-01</time>
+                <time title="Modified: 2022-03-05 13:54:49" itemprop="dateModified" datetime="2022-03-05T13:54:49+08:00">2022-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,7 +241,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>9.9k</span>
+              <span>9.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -259,105 +259,82 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="a-fast-lock-free-approach-for-efficient-parallel-counting-of-occurrences-of-k-mers"><a class="markdownIt-Anchor" href="#a-fast-lock-free-approach-for-efficient-parallel-counting-of-occurrences-of-k-mers"></a> A fast, lock-free approach for efficient parallel counting of occurrences of k-mers</h1>
-<span id="more"></span>
-<h1 id="1-paper-2011"><a class="markdownIt-Anchor" href="#1-paper-2011"></a> <a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/21217122/">1. Paper-2011</a> :</h1>
-<ul>
-<li>
-<p><font color="red">Counting the number of occurrences of every k-mer</font></p>
+        <h1 id="A-fast-lock-free-approach-for-efficient-parallel-counting-of-occurrences-of-k-mers"><a href="#A-fast-lock-free-approach-for-efficient-parallel-counting-of-occurrences-of-k-mers" class="headerlink" title="A fast, lock-free approach for efficient parallel counting of occurrences of k-mers"></a>A fast, lock-free approach for efficient parallel counting of occurrences of k-mers</h1><span id="more"></span>
+
+<h1 id="1-Paper-2011"><a href="#1-Paper-2011" class="headerlink" title="1. Paper-2011 :"></a><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/21217122/">1. Paper-2011</a> :</h1><ul>
+<li><p><font color="red">Counting the number of occurrences of every k-mer</font> </p>
 </li>
-<li>
-<p><font color="green">genome assembly</font></p>
+<li><p> <font color="green">genome assembly</font></p>
 </li>
-<li>
-<p><font color="purple">error correction</font> of sequencing reads</p>
+<li><p><font color="purple">error correction</font> of sequencing reads</p>
 </li>
-<li>
-<p><font color="daekred">fast multiple sequence alignment</font></p>
+<li><p><font color="daekred">fast multiple sequence alignment</font> </p>
 </li>
-<li>
-<p><font color="blue">repeat detection</font></p>
+<li><p><font color="blue">repeat detection</font></p>
 </li>
-<li>
-<p><strong>current</strong> k-mer counting tools <strong>too slow</strong> , <strong>memory intensive</strong></p>
+<li><p><strong>current</strong> k-mer counting tools <strong>too slow</strong> , <strong>memory intensive</strong></p>
 </li>
-<li>
-<p>multicore computers facilities <strong>parallel computational paradigm</strong></p>
+<li><p>multicore computers facilities <strong>parallel computational paradigm</strong></p>
 </li>
-<li>
-<p>multithreaded, <font color="red">lock-free hash table</font></p>
+<li><p>multithreaded, <font color="red">lock-free hash table</font> </p>
 </li>
-<li>
-<p><strong>k-mers up to 31</strong></p>
+<li><p><strong>k-mers up to 31</strong> </p>
 </li>
-<li>
-<p><strong>suffix arrays</strong></p>
+<li><p><strong>suffix arrays</strong> </p>
 </li>
 </ul>
 <hr>
-<h1 id="font-colorred2-github-docfont"><a class="markdownIt-Anchor" href="#font-colorred2-github-docfont"></a> <font color="red"><a target="_blank" rel="noopener" href="https://github.com/gmarcais/Jellyfish/tree/master/doc">2. github-doc</a></font> :</h1>
-<h2 id="21-counting-k-mers-in-sequencing-reads"><a class="markdownIt-Anchor" href="#21-counting-k-mers-in-sequencing-reads"></a> 2.1 Counting k-mers in sequencing reads</h2>
-<ul>
-<li>
-<p>The <code>-C</code> switch instructs to save in the hash only canonical规范 k-mers, while the count is the number of occurrences of both a k-mer and it reverse complement.</p>
+<h1 id="2-github-doc"><a href="#2-github-doc" class="headerlink" title="2. github-doc :"></a><font color="red"><a target="_blank" rel="noopener" href="https://github.com/gmarcais/Jellyfish/tree/master/doc">2. github-doc</a></font> :</h1><h2 id="2-1-Counting-k-mers-in-sequencing-reads"><a href="#2-1-Counting-k-mers-in-sequencing-reads" class="headerlink" title="2.1 Counting k-mers in sequencing reads"></a>2.1 Counting k-mers in sequencing reads</h2><ul>
+<li><p>The <code>-C</code> switch instructs to save in the hash only canonical规范 k-mers, while the count is the number of occurrences of both a k-mer and it reverse complement.</p>
 </li>
-<li>
-<p><font color="green"><strong>-s</strong></font> 预估值设置：The size parameter (given with <font color="red">-s</font>) is an indication of <font color="red">the number k-mers [N*(L-K+1)]</font> that will be <font color="red"><strong>stored in the hash</strong></font>. For sequencing reads, this size should be the size of <font color="red">the genome plus the k-mers generated by sequencing errors</font>. For example, if the error rate is <font color="red">e</font> (e.g.Illumina reads, usually e~<font color="red">1%</font>), with an estimated genome size of G and a coverage of <font color="red">c</font>, the number of expected k-mers is <font color="red"><strong>G+Gcek</strong></font>.</p>
+<li><p><font color="green"><strong>-s</strong></font> 预估值设置：The size parameter (given with <font color="red">-s</font>) is an indication of <font color="red">the number k-mers [N*(L-K+1)]</font> that will be <font color="red"><strong>stored in the hash</strong></font>. For sequencing reads, this size should be the size of <font color="red">the genome plus the k-mers generated by sequencing errors</font>. For example, if the error rate is <font color="red">e</font> (e.g.Illumina reads, usually e~<font color="red">1%</font>), with an estimated genome size of G and a coverage of <font color="red">c</font>, the number of expected k-mers is <font color="red"><strong>G+Gcek</strong></font>.</p>
 </li>
 </ul>
 <blockquote>
-<p>NOTE: unlike in Jellyfish 1, this <code>-s</code> parameter is <font color="red">only an estimation</font>. <font color="red">If the size given is too small to fit all the k-mers, the hash size will be increased automatically or partial results will be written to disk and finally merged automatically</font>. Running <code>jellyfish merge</code> should never be necessary, as now jellyfish now takes care of this task on its own.</p>
+<p>NOTE: unlike in Jellyfish 1, this <code>-s</code> parameter is <font color="red">only an estimation</font>. <font color="red">If the size given is too small to fit all the k-mers, the hash size will be increased automatically or partial results will be written to disk and finally merged automatically</font>. Running <code>jellyfish merge</code> should never be necessary, as now jellyfish now takes care of this task on its own. </p>
 </blockquote>
 <ul>
 <li><font color="green"><strong>-s 预估kmer以hash表存储所需内存大小，设置小了会自动扩大，并自动merge</strong></font>。</li>
 <li>If the low frequency k-mers (k-mers occurring only once), which are mostly due to sequencing errors, are not of interest, one might consider counting only high-frequency k-mers (see section <a target="_blank" rel="noopener" href="https://github.com/gmarcais/Jellyfish/tree/master/doc#Counting-high-frequency-k-mers">Counting high frequency k-mers</a>), which uses less memory and is potentially faster. <font color="green"><strong>低频k-mers由测序错误导致，只考虑高频减少内存使用提高速度</strong></font>。</li>
 </ul>
-<h2 id="22-counting-k-mers-in-a-genome"><a class="markdownIt-Anchor" href="#22-counting-k-mers-in-a-genome"></a> 2.2 Counting k-mers in a genome</h2>
-<ul>
+<h2 id="2-2-Counting-k-mers-in-a-genome"><a href="#2-2-Counting-k-mers-in-a-genome" class="headerlink" title="2.2 Counting k-mers in a genome"></a>2.2 Counting k-mers in a genome</h2><ul>
 <li>In an 【actual genome or finished sequence？】, a k-mer and its reverse complement are not equivalent, hence using the <code>-C</code> switch does not make sense. In addition, the size for the hash can be set directly to the size of the genome.</li>
 <li>-C没有意义？哈希表的size直接设置为基因组大小？不够自动调整？</li>
 </ul>
-<h2 id="23-counting-high-frequency-k-mers"><a class="markdownIt-Anchor" href="#23-counting-high-frequency-k-mers"></a> 2.3 Counting high-frequency k-mers</h2>
-<p>Jellyfish offers <font color="red">two way</font> to count only high-frequency k-mers (<font color="red"><strong>count &gt;1</strong></font>), which reduces significantly the memory usage. Both methods are based on using <font color="red">Bloom filters</font>. The first method is a one pass method, which <font color="red">provides approximate count for some percentage of the k-mers</font>. The second method is a two pass method which <font color="red">provides exact count</font>. In both methods, most of the low-frequency k-mers are not reported.</p>
-<h3 id="231-one-pass-method"><a class="markdownIt-Anchor" href="#231-one-pass-method"></a> 2.3.1 One pass method</h3>
-<h3 id="232-two-passes-method"><a class="markdownIt-Anchor" href="#232-two-passes-method"></a> 2.3.2 Two passes method</h3>
-<h2 id="24-counting-a-subset-of-k-mers"><a class="markdownIt-Anchor" href="#24-counting-a-subset-of-k-mers"></a> 2.4 Counting a subset of k-mers</h2>
-<ul>
-<li>It is possible to count the number of occurrences of <font color="red">only a subset of</font> predefined k-mers, using the <font color="red"><strong>–if</strong></font> switch. Only count the 20-mers of chromosome 20 in chromosome 1 of human</li>
+<h2 id="2-3-Counting-high-frequency-k-mers"><a href="#2-3-Counting-high-frequency-k-mers" class="headerlink" title="2.3 Counting high-frequency k-mers"></a>2.3 Counting high-frequency k-mers</h2><p>Jellyfish offers <font color="red">two way</font> to count only high-frequency k-mers (<font color="red"><strong>count &gt;1</strong></font>), which reduces significantly the memory usage. Both methods are based on using <font color="red">Bloom filters</font>. The first method is a one pass method, which <font color="red">provides approximate count for some percentage of the k-mers</font>. The second method is a two pass method which <font color="red">provides exact count</font>. In both methods, most of the low-frequency k-mers are not reported.</p>
+<h3 id="2-3-1-One-pass-method"><a href="#2-3-1-One-pass-method" class="headerlink" title="2.3.1 One pass method"></a>2.3.1 One pass method</h3><h3 id="2-3-2-Two-passes-method"><a href="#2-3-2-Two-passes-method" class="headerlink" title="2.3.2 Two passes method"></a>2.3.2 Two passes method</h3><h2 id="2-4-Counting-a-subset-of-k-mers"><a href="#2-4-Counting-a-subset-of-k-mers" class="headerlink" title="2.4 Counting a subset of k-mers"></a>2.4 Counting a subset of k-mers</h2><ul>
+<li>It is possible to count the number of occurrences of <font color="red">only a subset of</font> predefined k-mers, using the <font color="red"><strong>–if</strong></font> switch. Only count the 20-mers of chromosome 20 in chromosome 1 of human </li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish count -m 20 -s 100M -C -t 10 -o 20and1.jf --<span class="keyword">if</span> chr20.fa chr1.fa</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>
-<p>This <strong>reads all the canonical 20-mers from the file chr20.fa</strong> (<font color="green"><strong>but don’t count them</strong></font>) and <font color="green"><strong>loads them in memory</strong></font>. Then it <strong>reads chr1.fa and counts the number of occurrences of the 20-mers</strong> <font color="green"><strong>only of the k-mers already loaded in memory</strong></font>.</p>
+<li><p>This <strong>reads all the canonical 20-mers from the file chr20.fa</strong> (<font color="green"><strong>but don’t count them</strong></font>) and <font color="green"><strong>loads them in memory</strong></font>. Then it <strong>reads chr1.fa and counts the number of occurrences of the 20-mers</strong> <font color="green"><strong>only of the k-mers already loaded in memory</strong></font>.</p>
 </li>
-<li>
-<p>把chr20的kmer，存储。统计chr1的20-mer在上一步存储中已存在的部分的数目。？chr1和20的关联？</p>
+<li><p>把chr20的kmer，存储。统计chr1的20-mer在上一步存储中已存在的部分的数目。？chr1和20的关联？</p>
 </li>
-<li>
-<p>Now, the histogram will also report k-mers with a <font color="green"><strong>0 count</strong></font> (<font color="green"><strong>the 20-mers of chr20</strong></font> which <font color="green"><strong>do not exists in chr1</strong></font>):</p>
+<li><p>Now, the histogram will also report k-mers with a <font color="green"><strong>0 count</strong></font> (<font color="green"><strong>the 20-mers of chr20</strong></font> which <font color="green"><strong>do not exists in chr1</strong></font>):</p>
 </li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jellyfish histo 20and1.jf | head </span><br><span class="line">0 49401674</span><br><span class="line">1 1116213</span><br><span class="line">2 425471</span><br></pre></td></tr></table></figure>
+
 <p>Note that the file given to <code>--if</code> is a fasta file. If a list of k-mers is available instead (say one per line in a text file), it can be transformed into a fasta file with one k-mer per line using the following one liner Perl command:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">perl -ne <span class="string">&#x27;print(&quot;&gt;\n$_&quot;)&#x27;</span></span><br><span class="line"><span class="comment">#kmer line转fa，一行&gt;号，一行kmer</span></span><br></pre></td></tr></table></figure>
-<h2 id="25-如何读取压缩文件"><a class="markdownIt-Anchor" href="#25-如何读取压缩文件"></a> 2.5 如何读取压缩文件</h2>
-<p>jellyfish只读入fq或fa</p>
+
+<h2 id="2-5-如何读取压缩文件"><a href="#2-5-如何读取压缩文件" class="headerlink" title="2.5 如何读取压缩文件"></a>2.5 如何读取压缩文件</h2><p> jellyfish只读入fq或fa</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zcat *.fastq.gz | jellyfish count /dev/fd/0 ...</span><br><span class="line"><span class="comment">#using the &lt;() redirection provided by the shell (e.g. bash, zsh):</span></span><br><span class="line"><span class="comment">#!/usr/bin/bash</span></span><br><span class="line">jellyfish count &lt;(zcat file1.fastq.gz) &lt;(zcat file2.fasta.gz) ...</span><br></pre></td></tr></table></figure>
+
 <hr>
-<h1 id="3-jellyfish介绍"><a class="markdownIt-Anchor" href="#3-jellyfish介绍"></a> 3. Jellyfish介绍</h1>
-<p><a target="_blank" rel="noopener" href="http://www.cbcb.umd.edu/software/jellyfish/">JELLYFISH</a>是<a target="_blank" rel="noopener" href="http://www.cbcb.umd.edu/">CBCB(Center for Bioinformatics and Computational Biology)</a>的Guillaume Marçais 和 <a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~ckingsf/">Carl Kingsford</a> 研发的一款计数 DNA 的 k-mers 的软件。该软件运用 Hash 表来存储数据，同时能多线程运行，速度快，内存消耗小。该软件只能运行在64位的Linux系统下。其<a target="_blank" rel="noopener" href="http://bioinformatics.oxfordjournals.org/content/27/6/764">文章</a>于2011年发表在杂志 <a target="_blank" rel="noopener" href="http://bioinformatics.oxfordjournals.org/">Bioinformatics</a> 上。</p>
-<h1 id="4-jellyfish安装"><a class="markdownIt-Anchor" href="#4-jellyfish安装"></a> 4. Jellyfish安装</h1>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ wget 最新targz</span><br><span class="line">$ tar zxvf .tar.gz</span><br><span class="line">$ mkdir jellyfish</span><br><span class="line">$ <span class="built_in">cd</span> jellyfish-2.3.0</span><br><span class="line">$ ./configure --prefix=Your/Path/to/jellyfish</span><br><span class="line">如果安装在当前目录中，会报错。</span><br><span class="line">$ make -j 8</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
-<h1 id="5-jellyfish使用"><a class="markdownIt-Anchor" href="#5-jellyfish使用"></a> 5. Jellyfish使用</h1>
-<h2 id="jellyfish-count-count-kmers-to-estimate-genome-size"><a class="markdownIt-Anchor" href="#jellyfish-count-count-kmers-to-estimate-genome-size"></a> jellyfish count 【count kmers to estimate genome size】</h2>
-<p>Theory:</p>
+<h1 id="3-Jellyfish介绍"><a href="#3-Jellyfish介绍" class="headerlink" title="3. Jellyfish介绍"></a>3. Jellyfish介绍</h1><p><a target="_blank" rel="noopener" href="http://www.cbcb.umd.edu/software/jellyfish/">JELLYFISH</a>是<a target="_blank" rel="noopener" href="http://www.cbcb.umd.edu/">CBCB(Center for Bioinformatics and Computational Biology)</a>的Guillaume Marçais 和 <a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~ckingsf/">Carl Kingsford</a> 研发的一款计数 DNA 的 k-mers 的软件。该软件运用 Hash 表来存储数据，同时能多线程运行，速度快，内存消耗小。该软件只能运行在64位的Linux系统下。其<a target="_blank" rel="noopener" href="http://bioinformatics.oxfordjournals.org/content/27/6/764">文章</a>于2011年发表在杂志 <a target="_blank" rel="noopener" href="http://bioinformatics.oxfordjournals.org/">Bioinformatics</a> 上。</p>
+<h1 id="4-Jellyfish安装"><a href="#4-Jellyfish安装" class="headerlink" title="4. Jellyfish安装"></a>4. Jellyfish安装</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ wget 最新targz</span><br><span class="line">$ tar zxvf .tar.gz</span><br><span class="line">$ mkdir jellyfish</span><br><span class="line">$ <span class="built_in">cd</span> jellyfish-2.3.0</span><br><span class="line">$ ./configure --prefix=Your/Path/to/jellyfish</span><br><span class="line">如果安装在当前目录中，会报错。</span><br><span class="line">$ make -j 8</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-Jellyfish使用"><a href="#5-Jellyfish使用" class="headerlink" title="5. Jellyfish使用"></a>5. Jellyfish使用</h1><h2 id="jellyfish-count-【count-kmers-to-estimate-genome-size】"><a href="#jellyfish-count-【count-kmers-to-estimate-genome-size】" class="headerlink" title="jellyfish count 【count kmers to estimate genome size】"></a>jellyfish count 【count kmers to estimate genome size】</h2><p>Theory:</p>
 <ul>
 <li>If k is large enough so that each kmer found is unique in the genome,</li>
 <li>and if the genome length (e.g. 1,000,000) is much larger than the kmer length (e.g. 21),</li>
 <li>and if no PCR or sequencing errors,</li>
 <li>then the number of kmers will be approximately equal to the length of the genome.</li>
 </ul>
-<p>！<font color="red">Kmer counting tutorial</font>: <a target="_blank" rel="noopener" href="https://bioinformatics.uconn.edu/genome-size-estimation-tutorial/#">https://bioinformatics.uconn.edu/genome-size-estimation-tutorial/#</a></p>
+<p>！！！！<font color="red">Kmer counting tutorial</font>: <a target="_blank" rel="noopener" href="https://bioinformatics.uconn.edu/genome-size-estimation-tutorial/#">https://bioinformatics.uconn.edu/genome-size-estimation-tutorial/#</a></p>
 <ul>
 <li>Jellyfish: <a target="_blank" rel="noopener" href="https://github.com/gmarcais/Jellyfish">https://github.com/gmarcais/Jellyfish</a></li>
 <li>Further jellyfish steps : <a target="_blank" rel="noopener" href="https://github.com/gmarcais/Jellyfish/tree/master/doc">https://github.com/gmarcais/Jellyfish/tree/master/doc</a></li>
@@ -365,7 +342,7 @@
 <p>Note: Aug 2019: conda install seems to work only with: conda install jellyfish=2.2.3</p>
 <p>Steps:</p>
 <ul>
-<li><font color="green">&quot;&gt;Go through</font> the sequencing reads</li>
+<li><font color="green">“&gt;Go through</font> the sequencing reads</li>
 <li>For each <font color="green">new kmer seen</font>, <font color="green">add to table with count</font>.</li>
 <li>If kmer <font color="green">seen before</font>, <font color="green">increment count</font>.</li>
 <li>Find the <font color="green">average kmer frequency</font> (sequencing depth), e.g. 50</li>
@@ -373,8 +350,10 @@
 <li>Add all the other kmers, and <font color="green"><strong>divide by average kmer frequency</strong></font> =&gt; This is the approx genome length</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish count -m 21 -s 100M -t 10 -C reads.fasta</span><br></pre></td></tr></table></figure>
+
 <p>To use gzipped files: and <font color="green">paired-end reads</font>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish count -m 21 -s 100M -t 10 -C &lt;zcat R1.fq.gz) &lt;(zcat R2.fq.gz)</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>-m: kmer length, 21 is commonly used, <strong>17</strong></li>
 <li>-s: size of hash table: should be genome size + extra kmers from seq errors. <font color="green">However, it does say that hash size <strong>will be increased automatically if needed</strong>.</font></li>
@@ -384,8 +363,10 @@
 </ul>
 <p>Plot the histogram:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish histo -t 10 mer_counts.jf &gt; reads.histo</span><br></pre></td></tr></table></figure>
+
 <p><strong>???Plot the histogram with an x axis of one million instead of default 10,000</strong>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish histo -t 10 --high=1000000 mer_counts.jf &gt; reads.histo</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>Discussion on setting to 1 million: <a target="_blank" rel="noopener" href="https://github.com/schatzlab/genomescope/issues/22">https://github.com/schatzlab/genomescope/issues/22</a></li>
 <li>There may be very high counts of some kmers due to chloroplast sequences, spike-in sequences, etc.</li>
@@ -394,79 +375,62 @@
 <p>使用fastq文件在默认参数上和fasta文件没有区别。生成的hash结果为二进制文件。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-m | --mer-len=&lt;num&gt;</span><br><span class="line"> 使用的k-mer的长度。如果基因组大小为G，则k-mer长度选择为: k ~= <span class="built_in">log</span>(200G)</span><br><span class="line">/<span class="built_in">log</span>(4)。</span><br><span class="line">-s | --size=&lt;num&gt;</span><br><span class="line"> Hash 的大小。最好设置的值大于总的独特的(distinct)k-mer数,这样生成的文件只</span><br><span class="line">有一个。若该值不够大，则会生成多个<span class="built_in">hash</span>文件，以数字区分文件名。该值识别 </span><br><span class="line">M 和 G。</span><br><span class="line">-t | --threads=&lt;num&gt;  default: 1</span><br><span class="line"> 使用的CPU线程数</span><br><span class="line">-o | --output=&lt;string&gt;  default: mer_counts.jf</span><br><span class="line"> 输出的结果文件前缀</span><br><span class="line">-c | --counter-len=&lt;num&gt;  default:7</span><br><span class="line"> k-mer的计数结果所占的比特数,默认支持的最大数字是2^7=128。对于基因组测序覆盖</span><br><span class="line">度为N，则要使设置的该值要大于N。该值越大，消耗内存越大。</span><br><span class="line">-out-counter-len=&lt;num&gt;  default:4</span><br><span class="line"> 输出的二进制<span class="built_in">hash</span>文件中的计数结果所占的字节数,一个字节是8比特。则默认支持的最大</span><br><span class="line">数字是2^32=4.3G</span><br><span class="line"><span class="comment">#The count of k-mers which cannot be represented with the given number of bytes will have a value equal to the maximum value that can be represented. Meaning, if the counter field uses 1 byte, any k-mers with count greater or equal to 255 will be reported of having a count of 255.</span></span><br><span class="line">-C | --both-strand  default: <span class="literal">false</span></span><br><span class="line"> 【对正义链和反义链都进行计数】</span><br><span class="line">-q | --quake  default: <span class="literal">false</span></span><br><span class="line"> quake兼容模式</span><br><span class="line">--quality-start=&lt;num&gt;  default: 64</span><br><span class="line"> 起始碱基质量的ASCII值，默认为PHRED64</span><br><span class="line">--min-quality=&lt;num&gt;  default: 0</span><br><span class="line"> 支持的最小的碱基质量值，低于此值的碱基将由N代替</span><br><span class="line">-L | --lower-count=&lt;num&gt;</span><br><span class="line"> 【不输出数目低于此值的k-mer】</span><br><span class="line">-U | --upper-count=&lt;num&gt;</span><br><span class="line"> 【不输出数目高于此值的k-mer】</span><br><span class="line"><span class="comment">#low frequency and high frequency k-mers can be skipped using the --L and --U` switches respectively. Although it might be more appropriate to filter out the low frequency $k$-mers using Bloom filters, as shown in section Counting-high-frequency-k-mers.</span></span><br></pre></td></tr></table></figure>
 </blockquote>
-<h2 id="jellyfish-merge-合并"><a class="markdownIt-Anchor" href="#jellyfish-merge-合并"></a> jellyfish merge 合并</h2>
-<p>Count的输出结果为二进制文件，可能输出多个hash文件，需要hash文件合并一个文件, merge 命令。</p>
+<h2 id="jellyfish-merge-合并"><a href="#jellyfish-merge-合并" class="headerlink" title="jellyfish merge 合并"></a>jellyfish merge 合并</h2><p>Count的输出结果为二进制文件，可能输出多个hash文件，需要hash文件合并一个文件, merge 命令。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#The merge subcommand is of little direct use with version version 2 of Jellyfish</span></span><br><span class="line"><span class="comment">#The count subcommand will merge intermediary files automatically as needed.</span></span><br><span class="line">jellyfish merge -o mer_counts_merged.jf hash1 hash2 ...</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>-o | --output=<string>  default: mer_counts_merged.jf<br>
-输出的结果文件<br>
-–out-counter-len=<num>  default: 4<br>
-输出的二进制hash文件中的计数结果所占的字节数,一个字节是8比特。则默认支持的最大数字是2^32=4.3G</num></string></p>
+<p>-o | –output=<string>  default: mer_counts_merged.jf<br>    输出的结果文件<br>–out-counter-len=<num>  default: 4<br>输出的二进制hash文件中的计数结果所占的字节数,一个字节是8比特。则默认支持的最大数字是2^32=4.3G</num></string></p>
 </blockquote>
-<h2 id="jellyfish-stats-统计"><a class="markdownIt-Anchor" href="#jellyfish-stats-统计"></a> jellyfish stats 统计</h2>
-<p>k-mer的结果以hash的二进制文件结果给出，需要统计出k-mer总数，特异的k-mer数目，只出现过一次的kmer数，出现了最多的k-mer的数目等信息。以stats命令来运行。使用方法：</p>
+<h2 id="jellyfish-stats-统计"><a href="#jellyfish-stats-统计" class="headerlink" title="jellyfish stats 统计"></a>jellyfish stats 统计</h2><p>k-mer的结果以hash的二进制文件结果给出，需要统计出k-mer总数，特异的k-mer数目，只出现过一次的kmer数，出现了最多的k-mer的数目等信息。以stats命令来运行。使用方法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Although these statistics could be computed from the histogram, it provides quick summary information</span></span><br><span class="line">$ jellyfish stats <span class="built_in">hash</span></span><br><span class="line">示例结果为：</span><br><span class="line">Unique:    32355544    <span class="comment">#只出现过一次的k-mer的数目</span></span><br><span class="line">Distinct:  88414020    <span class="comment">#特异性的k-mer数目，包含上一个的数据</span></span><br><span class="line">Total:     432232807   <span class="comment">#总的k-mer数目</span></span><br><span class="line">Max_count: 85348       <span class="comment">#同一个k-mer出现的最多的数目</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>-L | --lower-count=<num><br>
-不统计数目低于此值的k-mer<br>
--U | --upper-count=<num><br>
-不统计数目高于此值的k-mer</num></num></p>
+<p>-L | –lower-count=<num><br>    不统计数目低于此值的k-mer<br>-U | –upper-count=<num><br>    不统计数目高于此值的k-mer</num></num></p>
 </blockquote>
-<h2 id="jellyfish-histo-绘图"><a class="markdownIt-Anchor" href="#jellyfish-histo-绘图"></a> jellyfish histo 绘图</h2>
-<p>对k-mer的计数结果有个直观的认识，则需要统计出现了x(x=1,2,3…)次的kmer的数目y,以x，y为横纵坐标画出直方图。使用 histo 命令能给出 x 和 y 对应的值，将结果默认输出到标准输出。其使用方法为</p>
+<h2 id="jellyfish-histo-绘图"><a href="#jellyfish-histo-绘图" class="headerlink" title="jellyfish histo 绘图"></a>jellyfish histo 绘图</h2><p>对k-mer的计数结果有个直观的认识，则需要统计出现了x(x=1,2,3…)次的kmer的数目y,以x，y为横纵坐标画出直方图。使用 histo 命令能给出 x 和 y 对应的值，将结果默认输出到标准输出。其使用方法为</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish histo -l 1 -h 1000 <span class="built_in">hash</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>-l | --low=<num>  default: 1<br>
-最低的 x 轴的值。同时结果会将低于此值的所有的k-mer的数目作为 (x-1) 的值。因<br>
-此该值为 2 和 1 的结果是一致的。<br>
--h | --high=<num>  【default: 10000？？】<br>
-最高的 x 轴的值。同时结果会将高于此值的所有的k-mer的数目的和作为 (x+1) 的值。<br>
--i | --increment=<num>  default: 1<br>
-x 轴取值是每隔该数值取值<br>
--t | --threads=<num>  default: 1<br>
-使用的CPU线程数<br>
--f | --full  default: false<br>
-全部的直方图</num></num></num></num></p>
+<p>-l | –low=<num>  default: 1<br>    最低的 x 轴的值。同时结果会将低于此值的所有的k-mer的数目作为 (x-1) 的值。因<br>此该值为 2 和 1 的结果是一致的。<br>-h | –high=<num>  【default: 10000？？】<br>    最高的 x 轴的值。同时结果会将高于此值的所有的k-mer的数目的和作为 (x+1) 的值。<br>-i | –increment=<num>  default: 1<br>    x 轴取值是每隔该数值取值<br>-t | –threads=<num>  default: 1<br>    使用的CPU线程数<br>-f | –full  default: false<br>    全部的直方图</num></num></num></num></p>
 </blockquote>
-<h2 id="jellyfish-dump-结果文件格式转换"><a class="markdownIt-Anchor" href="#jellyfish-dump-结果文件格式转换"></a> jellyfish dump 结果文件格式转换</h2>
-<p>由于count命令生成的结果为二进制的，如有需要，则可以转换成可读文本文件。使用 dump 命令，使用方法：</p>
+<h2 id="jellyfish-dump-结果文件格式转换"><a href="#jellyfish-dump-结果文件格式转换" class="headerlink" title="jellyfish dump 结果文件格式转换"></a>jellyfish dump 结果文件格式转换</h2><p>由于count命令生成的结果为二进制的，如有需要，则可以转换成可读文本文件。使用 dump 命令，使用方法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jellyfish dump -c -t -U 1000 <span class="built_in">hash</span></span><br><span class="line"><span class="comment">#To output all the counts for all the k-mers in the file</span></span><br><span class="line"><span class="comment">#By default, the output is in FASTA format</span></span><br><span class="line">jellyfish dump mer_counts.jf &gt; mer_counts_dumps.fa</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-c | --colum  default: <span class="literal">false</span></span><br><span class="line"> 生成结果为2列，第一列为k-mer序列，第二列为对应的数目。默认情况下是是fasta格</span><br><span class="line">式，fasta的头为k-mer的数目，fasta的序列为k-mer的序列。</span><br><span class="line">-t | --tab  default: <span class="literal">false</span></span><br><span class="line"> 当 -c 参数存在时，以tab来进行分隔两行。默认是以空格来分开的。</span><br><span class="line"><span class="comment"># Low frequency and high frequency k-mers can be skipped with the `-L` and `-U` switches respectively.</span></span><br><span class="line">-L | --lower-count=&lt;num&gt;</span><br><span class="line"> 不输出小于该值的k-mer</span><br><span class="line">-U | --upper-count=&lt;num&gt;</span><br><span class="line"> 不输出高于该值的k-mer</span><br><span class="line">-o | --output=&lt;file&gt;</span><br><span class="line"> 输出文件的路径和名称</span><br></pre></td></tr></table></figure>
-<h2 id="jellyfish-query-查询"><a class="markdownIt-Anchor" href="#jellyfish-query-查询"></a> jellyfish query 查询</h2>
-<p>如果需要从Hash结果中查询指定的k-mer出现的次数，则要是用 query 命令。从标准输入读取k-mer的序列，从标准输出得到k-mer对应的数目。使用方法</p>
+
+
+
+<h2 id="jellyfish-query-查询"><a href="#jellyfish-query-查询" class="headerlink" title="jellyfish query 查询"></a>jellyfish query 查询</h2><p>如果需要从Hash结果中查询指定的k-mer出现的次数，则要是用 query 命令。从标准输入读取k-mer的序列，从标准输出得到k-mer对应的数目。使用方法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish query hash</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>-C | --both-strands  default: false<br>
-同时查询k-mer序列的正负链<br>
--i | --input=<file><br>
-输入的文件<br>
--o | --output=<file><br>
-输出的文件</file></file></p>
+<p>-C | –both-strands  default: false<br>   同时查询k-mer序列的正负链<br>-i | –input=<file><br>   输入的文件<br>-o | –output=<file><br>   输出的文件</file></file></p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish query mer_counts.jf AACGTTG</span><br></pre></td></tr></table></figure>
-<h2 id="jellyfish-info"><a class="markdownIt-Anchor" href="#jellyfish-info"></a> jellyfish info</h2>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#To get some information on 【how, when and where】 this jellyfish file was 【generated】, use the info subcommand</span></span><br><span class="line"><span class="comment">#outputs some information about the jellyfish file and the command used to generated it, in which directory and at what time the command was run</span></span><br><span class="line">jellyfish info mer_counts.jf</span><br></pre></td></tr></table></figure>
-<h2 id="jellyfish-mem"><a class="markdownIt-Anchor" href="#jellyfish-mem"></a> jellyfish mem</h2>
-<p>The <code>mem</code> subcommand shows how much memory a count subcommand will need or conversely how large of a hash size will fit in a given amount of memory.</p>
+
+
+
+<h2 id="jellyfish-info"><a href="#jellyfish-info" class="headerlink" title="jellyfish info"></a>jellyfish info</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#To get some information on 【how, when and where】 this jellyfish file was 【generated】, use the info subcommand</span></span><br><span class="line"><span class="comment">#outputs some information about the jellyfish file and the command used to generated it, in which directory and at what time the command was run</span></span><br><span class="line">jellyfish info mer_counts.jf</span><br></pre></td></tr></table></figure>
+
+<h2 id="jellyfish-mem"><a href="#jellyfish-mem" class="headerlink" title="jellyfish mem"></a>jellyfish mem</h2><p>The <code>mem</code> subcommand shows how much memory a count subcommand will need or conversely how large of a hash size will fit in a given amount of memory.</p>
 <hr>
 <p>ref：</p>
 <p><a target="_blank" rel="noopener" href="https://www.annasyme.com/docs/jellyfish.html">https://www.annasyme.com/docs/jellyfish.html</a></p>
 <hr>
-<h1 id="genomescope"><a class="markdownIt-Anchor" href="#genomescope"></a> Genomescope</h1>
-<p>安装github最新</p>
+<h1 id="Genomescope"><a href="#Genomescope" class="headerlink" title="Genomescope"></a>Genomescope</h1><p>安装github最新</p>
 <p><font color="red">githubdoc</font>  : <a target="_blank" rel="noopener" href="https://github.com/schatzlab/genomescope">https://github.com/schatzlab/genomescope</a></p>
 <p><font color="red">paperlink</font> : <a target="_blank" rel="noopener" href="https://doi.org/10.1093/bioinformatics/btx153">https://doi.org/10.1093/bioinformatics/btx153</a></p>
-<h2 id="数据准备"><a class="markdownIt-Anchor" href="#数据准备"></a> 数据准备</h2>
-<p>将paired-end数据整合？将read2数据的序列反向重复后与read1文件合并？使用Trinity附带的fastool程序完成转换。</p>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>将paired-end数据整合？将read2数据的序列反向重复后与read1文件合并？使用Trinity附带的fastool程序完成转换。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ zcat read_1.clean.fq.gz | <span class="variable">$Trinity_Home</span>/trinity-plugins/fastool/fastool --illumina-trinity --to-fasta &gt; reads_1.fasta</span><br><span class="line">$ zcat read_2.clean.fq.gz | <span class="variable">$Trinity_Home</span>/trinity-plugins/fastool/fastool --rev --illumina-trinity --to-fasta &gt; reads_2.fasta</span><br><span class="line">$ cat reads_1.fasta reads_2.fasta &gt; both.fasta</span><br></pre></td></tr></table></figure>
-<h2 id="统计kmer"><a class="markdownIt-Anchor" href="#统计kmer"></a> 统计kmer</h2>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish count -C -m [] -s [] -t [] s.fasta -o s.jf</span><br></pre></td></tr></table></figure>
-<h2 id="绘直方图"><a class="markdownIt-Anchor" href="#绘直方图"></a> 绘直方图</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish histo -t 10 s.jf &gt; s.histo</span><br></pre></td></tr></table></figure>
-<h2 id="参数"><a class="markdownIt-Anchor" href="#参数"></a> 参数</h2>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s 预估哈希表的大小，即G+Gce*k。G是Genome Size；c是coverage（genome survey测序通常低于100x）；e是测序错误率（illumina为1%）；k是kmer大小。</span><br><span class="line">-C 表示考虑DNA正义与反义链，遇到反义kmer时，计入正义kmer频数中。</span><br></pre></td></tr></table></figure>
-<h2 id="绘图"><a class="markdownIt-Anchor" href="#绘图"></a> 绘图</h2>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rscript genomescope.R histogram_file k-mer_length read_length output_dir [kmer_max] [verbose]</span><br></pre></td></tr></table></figure>
+
+<h2 id="统计kmer"><a href="#统计kmer" class="headerlink" title="统计kmer"></a>统计kmer</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish count -C -m [] -s [] -t [] s.fasta -o s.jf</span><br></pre></td></tr></table></figure>
+
+<h2 id="绘直方图"><a href="#绘直方图" class="headerlink" title="绘直方图"></a>绘直方图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jellyfish histo -t 10 s.jf &gt; s.histo</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s 预估哈希表的大小，即G+Gce*k。G是Genome Size；c是coverage（genome survey测序通常低于100x）；e是测序错误率（illumina为1%）；k是kmer大小。</span><br><span class="line">-C 表示考虑DNA正义与反义链，遇到反义kmer时，计入正义kmer频数中。</span><br></pre></td></tr></table></figure>
+
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rscript genomescope.R histogram_file k-mer_length read_length output_dir [kmer_max] [verbose]</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -567,7 +531,7 @@ x 轴取值是每隔该数值取值<br>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#a-fast-lock-free-approach-for-efficient-parallel-counting-of-occurrences-of-k-mers"><span class="nav-number">1.</span> <span class="nav-text"> A fast, lock-free approach for efficient parallel counting of occurrences of k-mers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-paper-2011"><span class="nav-number">2.</span> <span class="nav-text"> 1. Paper-2011 :</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#font-colorred2-github-docfont"><span class="nav-number">3.</span> <span class="nav-text"> 2. github-doc :</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-counting-k-mers-in-sequencing-reads"><span class="nav-number">3.1.</span> <span class="nav-text"> 2.1 Counting k-mers in sequencing reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-counting-k-mers-in-a-genome"><span class="nav-number">3.2.</span> <span class="nav-text"> 2.2 Counting k-mers in a genome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-counting-high-frequency-k-mers"><span class="nav-number">3.3.</span> <span class="nav-text"> 2.3 Counting high-frequency k-mers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#231-one-pass-method"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 2.3.1 One pass method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#232-two-passes-method"><span class="nav-number">3.3.2.</span> <span class="nav-text"> 2.3.2 Two passes method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-counting-a-subset-of-k-mers"><span class="nav-number">3.4.</span> <span class="nav-text"> 2.4 Counting a subset of k-mers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-%E5%A6%82%E4%BD%95%E8%AF%BB%E5%8F%96%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6"><span class="nav-number">3.5.</span> <span class="nav-text"> 2.5 如何读取压缩文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-jellyfish%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text"> 3. Jellyfish介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-jellyfish%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text"> 4. Jellyfish安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-jellyfish%E4%BD%BF%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text"> 5. Jellyfish使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-count-count-kmers-to-estimate-genome-size"><span class="nav-number">6.1.</span> <span class="nav-text"> jellyfish count 【count kmers to estimate genome size】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-merge-%E5%90%88%E5%B9%B6"><span class="nav-number">6.2.</span> <span class="nav-text"> jellyfish merge 合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-stats-%E7%BB%9F%E8%AE%A1"><span class="nav-number">6.3.</span> <span class="nav-text"> jellyfish stats 统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-histo-%E7%BB%98%E5%9B%BE"><span class="nav-number">6.4.</span> <span class="nav-text"> jellyfish histo 绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-dump-%E7%BB%93%E6%9E%9C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">6.5.</span> <span class="nav-text"> jellyfish dump 结果文件格式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-query-%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.6.</span> <span class="nav-text"> jellyfish query 查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-info"><span class="nav-number">6.7.</span> <span class="nav-text"> jellyfish info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-mem"><span class="nav-number">6.8.</span> <span class="nav-text"> jellyfish mem</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#genomescope"><span class="nav-number">7.</span> <span class="nav-text"> Genomescope</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="nav-number">7.1.</span> <span class="nav-text"> 数据准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1kmer"><span class="nav-number">7.2.</span> <span class="nav-text"> 统计kmer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">7.3.</span> <span class="nav-text"> 绘直方图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">7.4.</span> <span class="nav-text"> 参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%9B%BE"><span class="nav-number">7.5.</span> <span class="nav-text"> 绘图</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-fast-lock-free-approach-for-efficient-parallel-counting-of-occurrences-of-k-mers"><span class="nav-number">1.</span> <span class="nav-text">A fast, lock-free approach for efficient parallel counting of occurrences of k-mers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Paper-2011"><span class="nav-number">2.</span> <span class="nav-text">1. Paper-2011 :</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-github-doc"><span class="nav-number">3.</span> <span class="nav-text">2. github-doc :</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Counting-k-mers-in-sequencing-reads"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Counting k-mers in sequencing reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Counting-k-mers-in-a-genome"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Counting k-mers in a genome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Counting-high-frequency-k-mers"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Counting high-frequency k-mers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-One-pass-method"><span class="nav-number">3.3.1.</span> <span class="nav-text">2.3.1 One pass method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-Two-passes-method"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.3.2 Two passes method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Counting-a-subset-of-k-mers"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Counting a subset of k-mers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E5%A6%82%E4%BD%95%E8%AF%BB%E5%8F%96%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 如何读取压缩文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Jellyfish%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text">3. Jellyfish介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Jellyfish%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">4. Jellyfish安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Jellyfish%E4%BD%BF%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">5. Jellyfish使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-count-%E3%80%90count-kmers-to-estimate-genome-size%E3%80%91"><span class="nav-number">6.1.</span> <span class="nav-text">jellyfish count 【count kmers to estimate genome size】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-merge-%E5%90%88%E5%B9%B6"><span class="nav-number">6.2.</span> <span class="nav-text">jellyfish merge 合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-stats-%E7%BB%9F%E8%AE%A1"><span class="nav-number">6.3.</span> <span class="nav-text">jellyfish stats 统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-histo-%E7%BB%98%E5%9B%BE"><span class="nav-number">6.4.</span> <span class="nav-text">jellyfish histo 绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-dump-%E7%BB%93%E6%9E%9C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">6.5.</span> <span class="nav-text">jellyfish dump 结果文件格式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-query-%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.6.</span> <span class="nav-text">jellyfish query 查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-info"><span class="nav-number">6.7.</span> <span class="nav-text">jellyfish info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jellyfish-mem"><span class="nav-number">6.8.</span> <span class="nav-text">jellyfish mem</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Genomescope"><span class="nav-number">7.</span> <span class="nav-text">Genomescope</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="nav-number">7.1.</span> <span class="nav-text">数据准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1kmer"><span class="nav-number">7.2.</span> <span class="nav-text">统计kmer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">7.3.</span> <span class="nav-text">绘直方图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">7.4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%9B%BE"><span class="nav-number">7.5.</span> <span class="nav-text">绘图</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -582,20 +546,20 @@ x 轴取值是每隔该数值取值<br>
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
