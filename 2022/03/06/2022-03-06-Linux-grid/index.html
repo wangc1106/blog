@@ -28,17 +28,17 @@
 <meta property="og:site_name" content="Banner&#39;s Blog">
 <meta property="og:description" content="调度器主要是基于HPC场景的集群任务调度系统，英文Cluster Scheduler、Job Scheduler等。 市面主流调度器有四大流派：LSF   SGE   Slurm   PBS">
 <meta property="og:locale">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/06/2022-03-06-Linux-grid/1.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/06/2022-03-06-Linux-grid/2.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/06/2022-03-06-Linux-grid/3.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/06/2022-03-06-Linux-grid/4.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/06/2022-03-06-Linux-grid/5.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/06/2022-03-06-Linux-grid/1.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/06/2022-03-06-Linux-grid/2.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/06/2022-03-06-Linux-grid/3.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/06/2022-03-06-Linux-grid/4.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/06/2022-03-06-Linux-grid/5.png">
 <meta property="article:published_time" content="2022-03-06T15:16:52.560Z">
 <meta property="article:modified_time" content="2022-03-07T13:39:18.115Z">
 <meta property="article:author" content="Wang C">
 <meta property="article:tag" content="technology">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wangc1106.github.io/blog/blog/2022/03/06/2022-03-06-Linux-grid/1.png">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/2022/03/06/2022-03-06-Linux-grid/1.png">
 
 <link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/06/2022-03-06-Linux-grid/">
 
@@ -268,67 +268,55 @@
         <p>调度器主要是基于<strong>HPC场景</strong>的<strong>集群任务调度系统</strong>，英文<strong>Cluster Scheduler</strong>、<strong>Job Scheduler</strong>等。</p>
 <p>市面主流调度器有四大流派：<font color="red"><strong>LSF   SGE   Slurm   PBS</strong></font></p>
 <span id="more"></span>
-<h1 id="从cluster-集群-grid-网格-到-cloud-云"><a class="markdownIt-Anchor" href="#从cluster-集群-grid-网格-到-cloud-云"></a> 从Cluster (集群)、Grid (网格) 到 Cloud （云）</h1>
-<p>为解决复杂的<strong>计算密集型</strong>和<strong>数据密集型</strong>问题，需要<strong>高网络性能</strong>、<strong>快速存储</strong>、<strong>大量内存</strong>、<strong>超高计算能力</strong>。</p>
-<h2 id="cluster"><a class="markdownIt-Anchor" href="#cluster"></a> <strong>Cluster</strong></h2>
-<p>一组松散集成的计算机<strong>软件</strong>或<strong>硬件</strong>连接起来<strong>高度紧密地协作</strong>完成计算工作。在某种意义上，可以被看作是一台计算机。集群系统中的<font color="blue"><strong>单个计算机</strong></font>通常称为<font color="blue"><strong>节点node</strong></font>，通常通过<strong>局域网(LAN)连接</strong>,性价比比<font color="blue"><strong>大型机（mainframe）</strong></font>等<strong>高</strong>。</p>
-<h2 id="grid"><a class="markdownIt-Anchor" href="#grid"></a> <strong>Grid</strong></h2>
-<p>通过<strong>利用</strong>大量<strong>异构计算机</strong>的<strong>未用资源</strong>，如<strong>CPU</strong>、<strong>磁盘存储</strong>等，将其作为嵌入在分布式的一个<strong>虚拟的计算机集群</strong>，为解决<strong>大规模计算问题</strong>提供一个<strong>模型</strong>。目标是<font color="blue">解决</font>对单一超级计算机都<font color="blue">困难的大问题</font>，并同时保持解决多个<font color="blue">较小</font>问题的灵活性。网格天生就是在本地网、城域网或广域网上进行分布的。网格<font color="blue">可以分布在任何地方</font>。而<font color="blue">集群</font>物理上都在<font color="blue">一处</font>，通常是<font color="blue">局域网互连</font>。</p>
-<h2 id="cloud"><a class="markdownIt-Anchor" href="#cloud"></a> <strong>Cloud</strong></h2>
-<p>集群技术发展而来，区别在于<font color="blue">集群虽然把多台机器联起来</font>，但其<font color="blue">某项<strong>具体任务</strong>执行的时候还是会被转发到<strong>某台服务器</strong>上</font>，而<font color="blue">云</font>可以简单认为是<font color="blue">任务被<strong>分割成多个进程</strong>在<strong>多台服务器</strong>上<strong>并行计算</strong></font>，优势是大数据量的操作性能非常好。云可以使用廉价的PC服务器 ，可以<font color="blue"><strong>管理</strong>大数据量与大集群</font>，<font color="blue">关键技术在于能够对云内的基础设施进行动态按需分配与管理</font>。云计算与并行计算、分布式计算的区别，<font color="red">对于计算机用户，<strong>并行计算</strong>由<strong>单个用户完成</strong>，<strong>分布式计算</strong>由<strong>多个用户合作</strong>完成，<strong>云计算</strong>是<strong>没有用户参与</strong>，而是交给<strong>网络另一端的服务器完成</strong>。</font></p>
-<p><img src="/blog/blog/2022/03/06/2022-03-06-Linux-grid/1.png" alt="img"></p>
-<p><img src="/blog/blog/2022/03/06/2022-03-06-Linux-grid/2.png" alt="img"></p>
+
+<h1 id="从Cluster-集群-、Grid-网格-到-Cloud-（云）"><a href="#从Cluster-集群-、Grid-网格-到-Cloud-（云）" class="headerlink" title="从Cluster (集群)、Grid (网格) 到 Cloud （云）"></a>从Cluster (集群)、Grid (网格) 到 Cloud （云）</h1><p>为解决复杂的<strong>计算密集型</strong>和<strong>数据密集型</strong>问题，需要<strong>高网络性能</strong>、<strong>快速存储</strong>、<strong>大量内存</strong>、<strong>超高计算能力</strong>。</p>
+<h2 id="Cluster"><a href="#Cluster" class="headerlink" title="Cluster"></a><strong>Cluster</strong></h2><p>一组松散集成的计算机<strong>软件</strong>或<strong>硬件</strong>连接起来<strong>高度紧密地协作</strong>完成计算工作。在某种意义上，可以被看作是一台计算机。集群系统中的<font color="blue"><strong>单个计算机</strong></font>通常称为<font color="blue"><strong>节点node</strong></font>，通常通过<strong>局域网(LAN)连接</strong>,性价比比<font color="blue"><strong>大型机（mainframe）</strong></font>等<strong>高</strong>。</p>
+<h2 id="Grid"><a href="#Grid" class="headerlink" title="Grid"></a><strong>Grid</strong></h2><p>通过<strong>利用</strong>大量<strong>异构计算机</strong>的<strong>未用资源</strong>，如<strong>CPU</strong>、<strong>磁盘存储</strong>等，将其作为嵌入在分布式的一个<strong>虚拟的计算机集群</strong>，为解决<strong>大规模计算问题</strong>提供一个<strong>模型</strong>。目标是<font color="blue">解决</font>对单一超级计算机都<font color="blue">困难的大问题</font>，并同时保持解决多个<font color="blue">较小</font>问题的灵活性。网格天生就是在本地网、城域网或广域网上进行分布的。网格<font color="blue">可以分布在任何地方</font>。而<font color="blue">集群</font>物理上都在<font color="blue">一处</font>，通常是<font color="blue">局域网互连</font>。</p>
+<h2 id="Cloud"><a href="#Cloud" class="headerlink" title="Cloud"></a><strong>Cloud</strong></h2><p>集群技术发展而来，区别在于<font color="blue">集群虽然把多台机器联起来</font>，但其<font color="blue">某项<strong>具体任务</strong>执行的时候还是会被转发到<strong>某台服务器</strong>上</font>，而<font color="blue">云</font>可以简单认为是<font color="blue">任务被<strong>分割成多个进程</strong>在<strong>多台服务器</strong>上<strong>并行计算</strong></font>，优势是大数据量的操作性能非常好。云可以使用廉价的PC服务器 ，可以<font color="blue"><strong>管理</strong>大数据量与大集群</font>，<font color="blue">关键技术在于能够对云内的基础设施进行动态按需分配与管理</font>。云计算与并行计算、分布式计算的区别，<font color="red">对于计算机用户，<strong>并行计算</strong>由<strong>单个用户完成</strong>，<strong>分布式计算</strong>由<strong>多个用户合作</strong>完成，<strong>云计算</strong>是<strong>没有用户参与</strong>，而是交给<strong>网络另一端的服务器完成</strong>。</font></p>
+<p><img src="/blog/2022/03/06/2022-03-06-Linux-grid/1.png" alt="img"></p>
+<p><img src="/blog/2022/03/06/2022-03-06-Linux-grid/2.png" alt="img"></p>
 <p><strong>研究发现</strong>：<strong>商务计算机</strong>只用到其<strong>功能</strong>的 <strong>10％ —20％</strong>。24 小时内，一般的 <strong>UNIX 服务器</strong>只<strong>利用 10％</strong> 的时间，大型机大约 40％，<strong>台式机少于 5％</strong>。同样时间间隔内，利用<strong>网格计算</strong>，<strong>资源利用</strong>可以达到 <strong>90％</strong> 。</p>
-<h2 id="从服务角度看网格分类"><a class="markdownIt-Anchor" href="#从服务角度看网格分类"></a> <strong>从服务角度看网格分类</strong></h2>
-<ul>
-<li>
-<p><strong>专用网格</strong></p>
+<h2 id="从服务角度看网格分类"><a href="#从服务角度看网格分类" class="headerlink" title="从服务角度看网格分类"></a><strong>从服务角度看网格分类</strong></h2><ul>
+<li><p><strong>专用网格</strong></p>
 <p>由用于网格的<strong>专用硬件</strong>和<strong>计算资源</strong>组成, 提供了<strong>最大</strong>的<strong>控制</strong>和<strong>灵活性</strong></p>
 </li>
-<li>
-<p><strong>非专用网格</strong></p>
+<li><p><strong>非专用网格</strong></p>
 <p>更多地<strong>依赖</strong>于<strong>现有网络</strong>和<strong>基础设施</strong>，对<strong>网络决策</strong>的<strong>控制很少</strong>甚至不能控制。</p>
 </li>
-<li>
-<p><strong>分布式网格</strong></p>
+<li><p><strong>分布式网格</strong></p>
 <p>分布式网格 由在 WAN 或 <font color="blue"><strong>Internet 上分布的</strong>、<strong>位于任何位置</strong></font>（内部或外部）的<strong>计算机资源组成</strong>。</p>
 </li>
 </ul>
-<h2 id="从应用角度网格分类"><a class="markdownIt-Anchor" href="#从应用角度网格分类"></a> <strong>从应用角度网格分类</strong></h2>
-<ul>
-<li>
-<p><strong>计算网格</strong></p>
+<h2 id="从应用角度网格分类"><a href="#从应用角度网格分类" class="headerlink" title="从应用角度网格分类"></a><strong>从应用角度网格分类</strong></h2><ul>
+<li><p><strong>计算网格</strong></p>
 <p>侧重于<font color="blue">计算密集型</font>操作的网格</p>
 </li>
-<li>
-<p><strong>数据网格</strong></p>
+<li><p><strong>数据网格</strong></p>
 <p>处理数据的数据计算系统——<font color="blue">控制大量的分布式数据的共享和管理</font></p>
 </li>
-<li>
-<p><strong>设备网格</strong></p>
+<li><p><strong>设备网格</strong></p>
 <p><font color="blue">用于<strong>远程控制</strong>设备和分析产生的数据</font></p>
 </li>
 </ul>
-<h1 id="sge-sun-grid-engine"><a class="markdownIt-Anchor" href="#sge-sun-grid-engine"></a> SGE [Sun Grid Engine]</h1>
-<p><font color="red">从<strong>登陆节点</strong>上<strong>向计算节点</strong>进行<strong>任务投递</strong></font>。SGE或者其他集群管理工作做的事情就是<font color="blue">将用户投递的<strong>任务排队</strong></font>，然后将任务交给<font color="blue"><strong>能够运行</strong>的<strong>计算节点执行</strong></font>，工作流程分四步:</p>
+<h1 id="SGE-Sun-Grid-Engine"><a href="#SGE-Sun-Grid-Engine" class="headerlink" title="SGE [Sun Grid Engine]"></a>SGE [Sun Grid Engine]</h1><p><font color="red">从<strong>登陆节点</strong>上<strong>向计算节点</strong>进行<strong>任务投递</strong></font>。SGE或者其他集群管理工作做的事情就是<font color="blue">将用户投递的<strong>任务排队</strong></font>，然后将任务交给<font color="blue"><strong>能够运行</strong>的<strong>计算节点执行</strong></font>，工作流程分四步:</p>
 <ol>
 <li><strong>接受</strong>用户投放的<strong>任务</strong></li>
 <li>在任务运行以前，将任务<strong>放到</strong>一个<strong>存储区域</strong></li>
 <li><strong>发送任务</strong>到一个<strong>执行设备</strong>，并<strong>监控</strong>任务的运行</li>
 <li>运行<strong>结束</strong>写回结果并记录运行<strong>日志</strong></li>
 </ol>
-<h2 id="sge的常用命令"><a class="markdownIt-Anchor" href="#sge的常用命令"></a> SGE的常用命令</h2>
-<h3 id="任务投递"><a class="markdownIt-Anchor" href="#任务投递"></a> 任务投递</h3>
-<p>SGE中投递任务所用到的命令是<code>qsub</code>. 最简单的用法，即将要执行的命令通过标准输入的方式传递给<code>qsub</code></p>
+<h2 id="SGE的常用命令"><a href="#SGE的常用命令" class="headerlink" title="SGE的常用命令"></a>SGE的常用命令</h2><h3 id="任务投递"><a href="#任务投递" class="headerlink" title="任务投递"></a>任务投递</h3><p>SGE中投递任务所用到的命令是<code>qsub</code>. 最简单的用法，即将要执行的命令通过标准输入的方式传递给<code>qsub</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;ls -l &quot;</span> | qsub</span><br></pre></td></tr></table></figure>
+
 <p>投递之后可以用<code>qstat</code>查看任务运行情况，如下图</p>
-<p><img src="/blog/blog/2022/03/06/2022-03-06-Linux-grid/3.png" alt="img"></p>
+<p><img src="/blog/2022/03/06/2022-03-06-Linux-grid/3.png" alt="img"></p>
 <p>任务投递情况</p>
-<p>第一列是任务编号, 第二列是优先级，第三列是任务名字，在参数里没有特别说明的情况下，SGE会用任务的来源进行命令，STDIN表示来自于标准输入，第四列是用户名，第五列是运行状态(“r&quot;表示运行中), 第六列表示任务投递和开始时间，第七列是任务投递的节点，第8列则是要申请的线程数。在执行完成后会在家目录下生成&quot;STDIN.e7883&quot;和&quot;STDIN.o7883”, 其中7883是任务编号, 前者存放标准错误输出, 后者存放标准输出， 因此&quot;cat STDIN.o7883&quot;的内容就是<code>ls -l</code>的内容。</p>
-<p>另一种方法是先写脚本后投递，比如先编辑文件&quot;<a target="_blank" rel="noopener" href="http://ls.sh">ls.sh</a>&quot;, 然后用&quot;qsub <a target="_blank" rel="noopener" href="http://ls.sh">ls.sh</a>&quot;投递任务。</p>
+<p>第一列是任务编号, 第二列是优先级，第三列是任务名字，在参数里没有特别说明的情况下，SGE会用任务的来源进行命令，STDIN表示来自于标准输入，第四列是用户名，第五列是运行状态(“r”表示运行中), 第六列表示任务投递和开始时间，第七列是任务投递的节点，第8列则是要申请的线程数。在执行完成后会在家目录下生成”STDIN.e7883”和”STDIN.o7883”, 其中7883是任务编号, 前者存放标准错误输出, 后者存放标准输出， 因此”cat STDIN.o7883”的内容就是<code>ls -l</code>的内容。</p>
+<p>另一种方法是先写脚本后投递，比如先编辑文件”ls.sh”, 然后用”qsub ls.sh”投递任务。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l</span><br></pre></td></tr></table></figure>
-<p>跟之前一样，最后在home目录产生了&quot;ls.sh.exxxx&quot;和&quot;ls.sh.exxxx&quot;两个文件</p>
-<p>实际肯定没有那么简单，需要增加各种参数来调整<code>qsub</code>的行为，用<code>qsub -help</code>可以看完整参数，但是常用的为如下几个</p>
+
+<p>跟之前一样，最后在home目录产生了”ls.sh.exxxx”和”ls.sh.exxxx”两个文件</p>
+<p>实际肯定没有那么简单，需要增加各种参数来调整<code>qsub</code>的行为，用<code>qsub -help</code>可以看完整参数，但是常用的为如下几个 </p>
 <ul>
 <li>-q xxx : 指定要投递到的队列，如果不指定的话，SGE会在用户可使用的队列中选择一个满足要求的队列</li>
 <li>-V： <font color="red">将当前的环境变量传递到执行命令的节点【在使用PBS时，直接运行可以执行，投递PBS则失败，是任务到了计算节点不识别环境变量？】</font></li>
@@ -343,11 +331,13 @@
 </ul>
 <p>接下来就可以添加这些参数运行一些命令，例如在命令行里投递一个比对任务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;bowtie2 -p 8 -x index/ref -1 data/A_1.fq -2 data/A_2.fq | samtools sort &gt; A.bam&quot;</span> | qsub -V -cwd -l vf=25G -S /bin/bash -pe openmpi 8 -N A.bt2</span><br></pre></td></tr></table></figure>
+
 <p>这些参数除了在<strong>外部设置</strong>外，还可以在shell脚本<strong>内部设置</strong>，如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#$ -S /bin/bash</span></span><br><span class="line"><span class="comment">#$ -V</span></span><br><span class="line"><span class="comment">#$ -cwd</span></span><br><span class="line"><span class="comment">#$ -l vf=25G</span></span><br><span class="line"><span class="comment">#$ -pe openmpi 8</span></span><br><span class="line"><span class="comment">#$ -N a.bt2</span></span><br><span class="line">bowtie2 -p 8 -x index/ref -1 data/A_1.fq -2 data/A_2.fq | samtools sort &gt; A.bam</span><br></pre></td></tr></table></figure>
-<h3 id="查询任务"><a class="markdownIt-Anchor" href="#查询任务"></a> 查询任务</h3>
-<p>除任务投递外，查询任务也是常用命令，除直接用<code>qstat</code>查看，还有如下参数比较好用</p>
+
+<h3 id="查询任务"><a href="#查询任务" class="headerlink" title="查询任务"></a>查询任务</h3><p>除任务投递外，查询任务也是常用命令，除直接用<code>qstat</code>查看，还有如下参数比较好用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">qstat -f        <span class="comment"># 查看用户任务</span></span><br><span class="line">qstat -j jobId  <span class="comment"># 按任务id查看</span></span><br><span class="line">qstat -explain a|c|A|E -j jobID <span class="comment"># 查看任务任务并给出解释</span></span><br><span class="line">qstat -u user   <span class="comment"># 按用户查看</span></span><br></pre></td></tr></table></figure>
+
 <p>任务状态：</p>
 <ul>
 <li>qw: 表示等待状态</li>
@@ -357,14 +347,13 @@
 <li>s: 暂时挂起</li>
 <li>dr: 节点挂了之后，删除任务就会出现这个状态，只有节点重启后，任务才会消失</li>
 </ul>
-<h3 id="删除任务"><a class="markdownIt-Anchor" href="#删除任务"></a> 删除任务</h3>
-<p>任务删除也比较重要，偶尔会出现任务投递出错的情况</p>
+<h3 id="删除任务"><a href="#删除任务" class="headerlink" title="删除任务"></a>删除任务</h3><p>任务删除也比较重要，偶尔会出现任务投递出错的情况</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qdel -j 1111   删除任务号为1111的任务</span><br></pre></td></tr></table></figure>
-<h3 id="其他命令"><a class="markdownIt-Anchor" href="#其他命令"></a> 其他命令</h3>
-<ul>
-<li>
-<p>qrsh：与qsub相比，是交互式的投递任务，注意参数:</p>
+
+<h3 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h3><ul>
+<li><p>qrsh：与qsub相比，是交互式的投递任务，注意参数:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-now yes|no</span><br></pre></td></tr></table></figure>
+
 <p>默认设置为yes</p>
 <ul>
 <li>若设置为yes，<font color="blue">立即调度作业</font>，如果没有可用资源，则拒绝作业，任务投递失败，任务状态为Eqw。</li>
@@ -372,37 +361,29 @@
 <li>例子： qrsh -l vf=*G -q all.q -now no -w n *sh</li>
 </ul>
 </li>
-<li>
-<p>qacct 从集群日志中抽取任意账户信息</p>
+<li><p>qacct 从集群日志中抽取任意账户信息</p>
 </li>
-<li>
-<p>qalter 更改已提交但正处于暂挂状态的作业的属性</p>
+<li><p>qalter 更改已提交但正处于暂挂状态的作业的属性</p>
 </li>
-<li>
-<p>qconf 为集群和队列配置提供用户界面</p>
+<li><p>qconf 为集群和队列配置提供用户界面</p>
 <ul>
 <li><code>qconf -spl</code>查看可用并行环境</li>
 </ul>
 </li>
-<li>
-<p>qhold 阻止已提交作业的执行</p>
+<li><p>qhold 阻止已提交作业的执行</p>
 </li>
-<li>
-<p>qhost 显示<font color="blue">SGE执行主机</font>（即<font color="blue">各个计算节点</font>）的<font color="blue">状态信息</font></p>
+<li><p>qhost 显示<font color="blue">SGE执行主机</font>（即<font color="blue">各个计算节点</font>）的<font color="blue">状态信息</font></p>
 <ul>
 <li><code>qhost -j</code>按照节点显示任务</li>
 <li><code>qhost -F</code>展示每个节点的资源</li>
 </ul>
 </li>
-<li>
-<p>qlogin 启动telnet或类似的登录会话。</p>
+<li><p>qlogin 启动telnet或类似的登录会话。</p>
 </li>
 </ul>
-<h2 id="案例一个投递比对任务的简单脚本"><a class="markdownIt-Anchor" href="#案例一个投递比对任务的简单脚本"></a> 案例：一个投递比对任务的简单脚本</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"><span class="built_in">set</span> -u</span><br><span class="line"><span class="built_in">set</span> -o pipefail</span><br><span class="line"></span><br><span class="line">threads=8</span><br><span class="line">index=index/hg19</span><br><span class="line"></span><br><span class="line">FQ_DIR=<span class="string">&quot;analysis/0-raw-data&quot;</span></span><br><span class="line">ALIGN_DIR=<span class="string">&quot;analysis/2-read-align&quot;</span></span><br><span class="line">LOG_DIR=<span class="string">&quot;analysis/log&quot;</span></span><br><span class="line">TMP_DIR=<span class="string">&quot;analysis/tmp&quot;</span></span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$&#123;ALIGN_DIR&#125;</span></span><br><span class="line">mkdir -p <span class="variable">$&#123;LOG_DIR&#125;</span></span><br><span class="line">mkdir -p <span class="variable">$&#123;TMP_DIR&#125;</span></span><br><span class="line"></span><br><span class="line">tail -n+2 download_table.txt | cut -f 6 | <span class="keyword">while</span> <span class="built_in">read</span> id;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;</span></span><br><span class="line"><span class="string">    bowtie2 --very-sensitive-local --mm -p <span class="variable">$threads</span> -x <span class="variable">$index</span> -U <span class="variable">$&#123;FQ_DIR&#125;</span>/<span class="variable">$id</span>.fastq.gz 2&gt; <span class="variable">$&#123;LOG_DIR&#125;</span>/<span class="variable">$id</span>.bt2.log | \</span></span><br><span class="line"><span class="string">    samtools sort -@ 2 -m 1G -T <span class="variable">$&#123;TMP_DIR&#125;</span>/<span class="variable">$&#123;id&#125;</span> -o <span class="variable">$&#123;ALIGN_DIR&#125;</span>/<span class="variable">$&#123;id&#125;</span>.sort.bam&quot;</span> | qsub -V -cwd -pe openmpi <span class="variable">$threads</span> -N <span class="variable">$&#123;id&#125;</span>_bt2 -q all.q -S /bin/bash</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<h1 id="pbs-protable-batch-system"><a class="markdownIt-Anchor" href="#pbs-protable-batch-system"></a> PBS [Protable Batch System]</h1>
-<h2 id="1-服务器集群"><a class="markdownIt-Anchor" href="#1-服务器集群"></a> 1. 服务器集群</h2>
-<ul>
+<h2 id="案例：一个投递比对任务的简单脚本"><a href="#案例：一个投递比对任务的简单脚本" class="headerlink" title="案例：一个投递比对任务的简单脚本"></a>案例：一个投递比对任务的简单脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"><span class="built_in">set</span> -u</span><br><span class="line"><span class="built_in">set</span> -o pipefail</span><br><span class="line"></span><br><span class="line">threads=8</span><br><span class="line">index=index/hg19</span><br><span class="line"></span><br><span class="line">FQ_DIR=<span class="string">&quot;analysis/0-raw-data&quot;</span></span><br><span class="line">ALIGN_DIR=<span class="string">&quot;analysis/2-read-align&quot;</span></span><br><span class="line">LOG_DIR=<span class="string">&quot;analysis/log&quot;</span></span><br><span class="line">TMP_DIR=<span class="string">&quot;analysis/tmp&quot;</span></span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$&#123;ALIGN_DIR&#125;</span></span><br><span class="line">mkdir -p <span class="variable">$&#123;LOG_DIR&#125;</span></span><br><span class="line">mkdir -p <span class="variable">$&#123;TMP_DIR&#125;</span></span><br><span class="line"></span><br><span class="line">tail -n+2 download_table.txt | cut -f 6 | <span class="keyword">while</span> <span class="built_in">read</span> id;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;</span></span><br><span class="line"><span class="string">    bowtie2 --very-sensitive-local --mm -p <span class="variable">$threads</span> -x <span class="variable">$index</span> -U <span class="variable">$&#123;FQ_DIR&#125;</span>/<span class="variable">$id</span>.fastq.gz 2&gt; <span class="variable">$&#123;LOG_DIR&#125;</span>/<span class="variable">$id</span>.bt2.log | \</span></span><br><span class="line"><span class="string">    samtools sort -@ 2 -m 1G -T <span class="variable">$&#123;TMP_DIR&#125;</span>/<span class="variable">$&#123;id&#125;</span> -o <span class="variable">$&#123;ALIGN_DIR&#125;</span>/<span class="variable">$&#123;id&#125;</span>.sort.bam&quot;</span> | qsub -V -cwd -pe openmpi <span class="variable">$threads</span> -N <span class="variable">$&#123;id&#125;</span>_bt2 -q all.q -S /bin/bash</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="PBS-Protable-Batch-System"><a href="#PBS-Protable-Batch-System" class="headerlink" title="PBS [Protable Batch System]"></a>PBS [Protable Batch System]</h1><h2 id="1-服务器集群"><a href="#1-服务器集群" class="headerlink" title="1. 服务器集群"></a>1. 服务器集群</h2><ul>
 <li>服务器集群指将很多服务器集中一起进行同种服务，在<font color="blue">客户端看来就像只有一个服务器</font>，集群可以利用多个计算机进行<font color="blue">并行计算</font>从而获得很高的计算速度，也可以用多个计算机做<font color="blue">备份</font>，从而使得任何一个机器坏了整个系统还是正常运行。</li>
 <li>集群是一组独立的计算机（节点）的集合体，节点间通过高性能的互连网络连接；<strong>各节点</strong>除作为<strong>单一计算资源</strong>供交互式用户使用外，还可以<strong>协同工作</strong>并表现为一个单一的、集中的计算资源供并行计算任务使用。</li>
 </ul>
@@ -413,119 +394,72 @@
 <li>系统配制的<font color="blue">登陆管理节点</font>，部署的集群管理系统。用户可根据<font color="blue">登录节点IP，登录集群，提交作业</font>，编译程序。</li>
 </ul>
 <p><strong>1.2. 集群计算资源列表</strong></p>
-<p><img src="/blog/blog/2022/03/06/2022-03-06-Linux-grid/4.png" alt="集群计算资源列表示例"></p>
+<p><img src="/blog/2022/03/06/2022-03-06-Linux-grid/4.png" alt="集群计算资源列表示例"></p>
 <ul>
-<li>一般搭建好集群后，都会给出集群计算资源列表，类似于上图的几个部分。
-<ul>
+<li>一般搭建好集群后，都会给出集群计算资源列表，类似于上图的几个部分。<ul>
 <li>首先，会将整个<font color="blue">集群划分为若干个队列（Queue）</font>，并根据<font color="blue">队列资源配置</font>情况进行<font color="blue">相应命名</font>；</li>
-<li>其次，<font color="blue">每个<strong>队列</strong>下若干个<strong>计算节点</strong>（<strong>nodes</strong>），每个计算节点配制<strong>若干个CPU</strong>（<strong>ppn</strong>）</font>；</li>
+<li> 其次，<font color="blue">每个<strong>队列</strong>下若干个<strong>计算节点</strong>（<strong>nodes</strong>），每个计算节点配制<strong>若干个CPU</strong>（<strong>ppn</strong>）</font>；</li>
 <li>最后，对集群的一些其他<strong>信息说明</strong>和<strong>限制情况说明</strong>，如CPU型号和核数，用户<strong>可提交的作业数</strong>，每个作业的<strong>最大运行时间</strong>等。</li>
 </ul>
 </li>
 <li>在往集群上投递任务之前，首先要了解该<strong>任务所需的计算资源是否能被集群所满足</strong>。</li>
 </ul>
-<h2 id="2-pbs任务管理系统"><a class="markdownIt-Anchor" href="#2-pbs任务管理系统"></a> 2. PBS任务管理系统</h2>
-<h3 id="21-pbs-简介"><a class="markdownIt-Anchor" href="#21-pbs-简介"></a> <strong>2.1 PBS 简介</strong></h3>
-<ul>
+<h2 id="2-PBS任务管理系统"><a href="#2-PBS任务管理系统" class="headerlink" title="2. PBS任务管理系统"></a>2. PBS任务管理系统</h2><h3 id="2-1-PBS-简介"><a href="#2-1-PBS-简介" class="headerlink" title="2.1 PBS 简介"></a><strong>2.1 PBS 简介</strong></h3><ul>
 <li>PBS （Protable Batch System） 是一种常用作业管理系统，其他类似的还有 LSF 和 SLURM。</li>
 </ul>
 <ul>
-<li>
-<p>PBS会根据一个集群上的<strong>可用计算节点</strong>的<strong>计算资源</strong><font color="blue">管理和调度</font>所有计算作业（无论批处理作业还是交互式作业）。</p>
+<li><p>PBS会根据一个集群上的<strong>可用计算节点</strong>的<strong>计算资源</strong><font color="blue">管理和调度</font>所有计算作业（无论批处理作业还是交互式作业）。</p>
 </li>
-<li>
-<p>目前有两个版本：<font color="blue">OpenPBS（开源）</font>和<font color="blue">PBSPro（商业）</font>。TORQUE：基于PBS项目的开源软件，是开源的OpenPBS改进版。主要包括：</p>
+<li><p>目前有两个版本：<font color="blue">OpenPBS（开源）</font>和<font color="blue">PBSPro（商业）</font>。TORQUE：基于PBS项目的开源软件，是开源的OpenPBS改进版。主要包括：</p>
 </li>
-<li>
-<p><strong>PBS Server</strong>：运行于集群的<font color="red"><strong>管理节点</strong></font>。<font color="red"><strong>创建并接受作业、修改作业、激活调度器（PBS Scheduler）以及通知PBS执行器（PBS Moms）执行作业</strong></font></p>
+<li><p><strong>PBS Server</strong>：运行于集群的<font color="red"><strong>管理节点</strong></font>。<font color="red"><strong>创建并接受作业、修改作业、激活调度器（PBS Scheduler）以及通知PBS执行器（PBS Moms）执行作业</strong></font></p>
 </li>
-<li>
-<p><strong>PBS Scheduler激活调度器</strong>：根据资源管理器获知<strong>各个节点的资源状况</strong>和<strong>系统的作业信息</strong>生成相应<font color="red">作业优先级列表</font></p>
+<li><p><strong>PBS Scheduler激活调度器</strong>：根据资源管理器获知<strong>各个节点的资源状况</strong>和<strong>系统的作业信息</strong>生成相应<font color="red">作业优先级列表</font></p>
 </li>
-<li>
-<p><strong>PBS MomsPBS执行器</strong>：<font color="blue">每个节点均有一个<strong>后台进程</strong>，该进程真正<strong>启动</strong>和<strong>停止</strong>提交到该节点的作业</font></p>
+<li><p><strong>PBS MomsPBS执行器</strong>：<font color="blue">每个节点均有一个<strong>后台进程</strong>，该进程真正<strong>启动</strong>和<strong>停止</strong>提交到该节点的作业</font></p>
 </li>
 </ul>
-<h3 id="22-常用pbs命令"><a class="markdownIt-Anchor" href="#22-常用pbs命令"></a> <strong>2.2 常用PBS命令</strong></h3>
-<ul>
-<li>查看节点状态<br>
-<font color="red"><strong>pbsnodes （查看所有节点）</strong></font><br>
-<font color="red"><strong>pbsnodes -l free （查看空闲节点）</strong></font><br>
-pbsnodes 某节点 （查看某节点状态）</li>
-<li>节点切换<br>
-<font color="red"><strong>ssh 某节点 （转到某节点）</strong></font></li>
-<li>退出节点<br>
-<strong>exit （离开节点）</strong></li>
-<li>查看任务运行状态<br>
-<font color="red"><strong>【qstat （列出所有作业运行状态）】</strong></font></li>
+<h3 id="2-2-常用PBS命令"><a href="#2-2-常用PBS命令" class="headerlink" title="2.2 常用PBS命令"></a><strong>2.2 常用PBS命令</strong></h3><ul>
+<li>查看节点状态<br><font color="red"><strong>pbsnodes （查看所有节点）</strong></font><br><font color="red"><strong>pbsnodes -l free （查看空闲节点）</strong></font><br>pbsnodes 某节点 （查看某节点状态）</li>
+<li>节点切换<br><font color="red"><strong>ssh 某节点 （转到某节点）</strong></font></li>
+<li>退出节点<br><strong>exit （离开节点）</strong></li>
+<li>查看任务运行状态<br><font color="red"><strong>【qstat （列出所有作业运行状态）】</strong></font></li>
 </ul>
 <blockquote>
 <p>【主要包括以下几个方面信息】</p>
 <ul>
-<li>
-<p>Job ID 任务ID号</p>
+<li><p>Job ID 任务ID号</p>
 </li>
-<li>
-<p>Name 任务脚本名称</p>
+<li><p>Name 任务脚本名称</p>
 </li>
-<li>
-<p>User 用户名</p>
+<li><p>User 用户名</p>
 </li>
-<li>
-<p>Time Use 任务运行时间</p>
+<li><p>Time Use 任务运行时间</p>
 </li>
-<li>
-<p>S State 任务状态<br>
-* B 只用于任务向量，表示任务向量已经开始执行<br>
-* E 任务在运行后退出<br>
-* H 任务被服务器或用户或者管理员阻塞<br>
-* Q 任务正在排队中，等待被调度运行<br>
-* R 任务正在运行<br>
-* S 任务被服务器挂起，由于一个更高优先级的任务需要当前任务的资源<br>
-* T 任务被转移到其它执行节点了<br>
-* U 由于服务器繁忙，任务被挂起<br>
-* W 任务在等待它所请求的执行时间的到来(qsub -a)<br>
-* X 只用于子任务，表示子任务完成<br>
-* C 表示程序正在被关闭，一般是程序运行错误，报错</p>
+<li><p>S State 任务状态<br>* B 只用于任务向量，表示任务向量已经开始执行<br>* E 任务在运行后退出<br>* H 任务被服务器或用户或者管理员阻塞<br>* Q 任务正在排队中，等待被调度运行<br>* R 任务正在运行<br>* S 任务被服务器挂起，由于一个更高优先级的任务需要当前任务的资源<br>* T 任务被转移到其它执行节点了<br>* U 由于服务器繁忙，任务被挂起<br>* W 任务在等待它所请求的执行时间的到来(qsub -a)<br>* X 只用于子任务，表示子任务完成<br>* C 表示程序正在被关闭，一般是程序运行错误，报错</p>
 </li>
-<li>
-<p>Queue 任务执行所在队列</p>
+<li><p>Queue 任务执行所在队列</p>
 </li>
 </ul>
-<p><strong>qstat -q （列出队列使用信息）</strong><br>
-<strong>qstat -n （列出队列中使用的节点）</strong><br>
-<strong>qstat -f jobid （查看jobid任务的详细信息）</strong></p>
+<p><strong>qstat -q （列出队列使用信息）</strong><br><strong>qstat -n （列出队列中使用的节点）</strong><br><strong>qstat -f jobid （查看jobid任务的详细信息）</strong></p>
 </blockquote>
 <ul>
-<li><strong>提交</strong>任务到集群<br>
-qsub 文件名.pbs/.sh （提交任务）<br>
-echo “<a target="_blank" rel="noopener" href="http://script.py">script.py</a>” | qsub -l q batch1 -l nodes=1:ppn=2 (直接在终端设置PBS资源命令，并在此资源下提交可执行脚本)</li>
-<li><strong>任务挂起，释放，重新加载</strong><br>
-qhold：挂起作业<br>
-qrls：释放挂起的作业<br>
-qrerun：重新运行作业</li>
-<li><strong>任务更改</strong><br>
-qmove：将作业移动到另一个队列<br>
-qalter： 更改作业资源属性</li>
-<li>删除任务<br>
-<strong>qdel jobid</strong> （取消任务）</li>
+<li><strong>提交</strong>任务到集群<br>qsub 文件名.pbs/.sh （提交任务）<br>echo “script.py” | qsub -l q batch1 -l nodes=1:ppn=2 (直接在终端设置PBS资源命令，并在此资源下提交可执行脚本)</li>
+<li><strong>任务挂起，释放，重新加载</strong><br>qhold：挂起作业<br>qrls：释放挂起的作业<br>qrerun：重新运行作业</li>
+<li><strong>任务更改</strong><br>qmove：将作业移动到另一个队列<br>qalter： 更改作业资源属性</li>
+<li>删除任务<br><strong>qdel jobid</strong> （取消任务）</li>
 </ul>
-<h3 id="23-qsub-提交任务"><a class="markdownIt-Anchor" href="#23-qsub-提交任务"></a> <strong>2.3 qsub 提交任务</strong></h3>
-<p><strong>2.3.1 通过终端提交任务</strong></p>
+<h3 id="2-3-qsub-提交任务"><a href="#2-3-qsub-提交任务" class="headerlink" title="2.3 qsub 提交任务"></a><strong>2.3 qsub 提交任务</strong></h3><p><strong>2.3.1 通过终端提交任务</strong></p>
 <ul>
 <li>通过命令行参数传递给 qsub 命令</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;python script.py -i inputdir -o outdir &quot; | qsub -q Batch1 -l nodes=1:ppn=1 -l mem=40gb -N jobname</span><br></pre></td></tr></table></figure>
-<p><strong><a target="_blank" rel="noopener" href="http://xn--script-vh7lp71w.py">执行script.py</a> 脚本， 通过pbs投递任务, 任务提交到Batch1队列，所需资源为，1个节点，节点使用1个cpu, 40GB物理内存，该任务命名jobname</strong></p>
+
+<p><strong>执行script.py 脚本， 通过pbs投递任务, 任务提交到Batch1队列，所需资源为，1个节点，节点使用1个cpu, 40GB物理内存，该任务命名jobname</strong></p>
 <ul>
 <li>-N 任务名称</li>
 <li>-q 指定Queue</li>
-<li><font color="red">-l</font> resource_list 指定<font color="red">任务所需资源</font><br>
-一般包括：<br>
-* cput=N， 请求N秒CPU时间，N也可以写成hh:mm::ss，单位分别是 时：分：秒<br>
-* mem=N[K|M|G|][B|W], 请求N大小的<font color="red">内存</font><br>
-* nodes=N, N个<font color="red">节点</font><br>
-* ppn=M, 每个节点需要M个<font color="red">cpu</font></li>
+<li><font color="red">-l</font> resource_list 指定<font color="red">任务所需资源</font><br>一般包括：<br>* cput=N， 请求N秒CPU时间，N也可以写成hh:mm::ss，单位分别是 时：分：秒<br>* mem=N[K|M|G|][B|W], 请求N大小的<font color="red">内存</font><br>* nodes=N, N个<font color="red">节点</font><br>* ppn=M, 每个节点需要M个<font color="red">cpu</font></li>
 <li>-e path 将标准错误重定向到path</li>
 <li>-o path 标准输出重定向到path</li>
 <li>-j join 将标准输出信息与标准错误信息合并到同一个文件join中去</li>
@@ -534,23 +468,24 @@ qalter： 更改作业资源属性</li>
 </ul>
 <p><strong>2.3.2 <font color="red">PBS通过sh脚本执行命令</font></strong></p>
 <ul>
-<li><font color="red">在 PBS 脚本中以 #PBS 方式指定</font><br>
-在PBS系统中，用户使用qsub命令提交用户程序。用户运行程序的命令 以及 PBS环境变量设置 共同组成了PBS作业脚本。</li>
+<li><font color="red">在 PBS 脚本中以 #PBS 方式指定</font><br>在PBS系统中，用户使用qsub命令提交用户程序。用户运行程序的命令 以及 PBS环境变量设置 共同组成了PBS作业脚本。</li>
 <li>注释为 “#” 开头</li>
 <li>PBS指令为 “#PBS” 开头</li>
 <li>shell命令 （运行脚本的命令）</li>
 </ul>
-<p>例如 <a target="_blank" rel="noopener" href="http://run.sh">run.sh</a></p>
+<p>例如 run.sh</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">参数解析</span></span><br><span class="line"><span class="meta">#</span><span class="bash">指定节点数目 ppn指每个节点运行的cpu数量（4个小节点，每个48个CPU）</span></span><br><span class="line"><span class="meta">#</span><span class="bash">PBS -l nodes=1:ppn=16</span></span><br><span class="line"><span class="meta">#</span><span class="bash">指定合并到标准输出文件中</span></span><br><span class="line"><span class="meta">#</span><span class="bash">PBS -j oe</span></span><br><span class="line"><span class="meta">#</span><span class="bash">设置程序运行的最大时间192小时</span></span><br><span class="line"><span class="meta">#</span><span class="bash">PBS -l walltime=192:00:00</span></span><br><span class="line"><span class="meta">#</span><span class="bash">指定qsub的所有环境变量都传递到批处理作业中</span></span><br><span class="line"><span class="meta">#</span><span class="bash">PBS -V</span></span><br><span class="line"><span class="meta">#</span><span class="bash">输出文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash">PBS -o /public/home/tang/chaim/back_info/<span class="variable">$jobname</span>.out</span></span><br><span class="line"><span class="meta">#</span><span class="bash">错误输出文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash">PBS -e /public/home/tang/chaim/back_info/<span class="variable">$jobname</span>.err</span></span><br><span class="line">cd PBS_O_OUTDIR</span><br><span class="line"><span class="meta">#</span><span class="bash"> 程序执行命令</span></span><br><span class="line">python script.py -i inputdir -o outdir </span><br></pre></td></tr></table></figure>
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 执行脚本</span></span><br><span class="line">qsub run.sh</span><br><span class="line"><span class="meta">#</span><span class="bash"> 制定命令开始运行的时间</span>  </span><br><span class="line">qusb -a 070000 run.s  #7天后运行程序，此时是处于W状态(等待状态)</span><br><span class="line">qsub -a 2400 run.s #24h后运行程序</span><br></pre></td></tr></table></figure>
+
 <p><strong>2.3.3 通过交互式的方式执行任务</strong></p>
 <ul>
 <li><strong>qsub -I</strong></li>
 <li>qsub -I -q Batch1 -l nodes=1:ppn=1 -l mem=80gb -N jobname</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[#</span><span class="bash">11<span class="comment">#Rd01@login ~]$</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">qsub -I -q Batch1 -l nodes=1:ppn=1 -l mem=80gb -N jobname</span></span><br><span class="line">qsub: waiting for job 1230615.admin to start</span><br><span class="line">qsub: job 1230615.admin ready</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">[#</span><span class="bash">1<span class="comment">#Rd01@comput4 ~]$</span></span></span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
-<h3 id="24-pbs常用环境变量"><a class="markdownIt-Anchor" href="#24-pbs常用环境变量"></a> <strong>2.4 PBS常用环境变量</strong></h3>
-<ul>
+
+<h3 id="2-4-PBS常用环境变量"><a href="#2-4-PBS常用环境变量" class="headerlink" title="2.4 PBS常用环境变量"></a><strong>2.4 PBS常用环境变量</strong></h3><ul>
 <li>PBS_ENVIRONMENT：批处理作业为 PBS_BATCH，交互式作业为 PBS_INTERACTIVE</li>
 <li>PBS_JOBID：PBS 系统给作业分配的标识号</li>
 <li>PBS_JOBNAME：用户指定的作业名称</li>
@@ -563,14 +498,11 @@ qalter： 更改作业资源属性</li>
 <li>PBS_O_QUEUE：提交作业的最初队列名称</li>
 <li>PBS_O_WORKDIR：执行 qsub 命令所在的绝对路径</li>
 </ul>
-<h1 id="调度器"><a class="markdownIt-Anchor" href="#调度器"></a> 调度器</h1>
-<p><strong>如果有一天，你有16万个CPU，你要怎么用？</strong> <strong>调度器</strong>最大程度压榨现有<strong>资源或时间的最大价值</strong>。</p>
+<h1 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h1><p><strong>如果有一天，你有16万个CPU，你要怎么用？</strong> <strong>调度器</strong>最大程度压榨现有<strong>资源或时间的最大价值</strong>。</p>
 <p>不同行业因使用习惯和不同调度器对应用的支持力度不同，往往有不同偏好：<strong>比如高校和超算经常用Slurm，半导体公司最常用的是LSF和SGE，工业制造业可能用PBS更多一些。</strong></p>
-<p>1篇 <a target="_blank" rel="noopener" href="https://fastonetech.com/blog/biotech-fastone-help-hms-on-molecules-selection-20200709/">15小时虚拟筛选10亿分子，《Nature》+HMS验证云端新药研发未来</a> 文章里哈佛大学医学院用<strong>云端16万个CPU来筛选10亿种化合物</strong>，只用了15小时。<br>
-<strong>超大规模计算集群上的工作流程图</strong>：</p>
-<p><img src="/blog/blog/2022/03/06/2022-03-06-Linux-grid/5.png" alt="调度器-生信分析-高性能计算集群-化合物筛选"></p>
-<p>蓝色框表示计算节点，其中包含CPU核数（蓝色框内的黑色正方形），紫色小圆圈代表待处理的配体。整张图代表整个计算集群，并行运行1.1到X.1个任务，任务1.1完成后会自动运行任务1.2，以此类推直到任务完成。<br>
-每个任务（包含多个子任务）使用3个计算节点，每个节点有8个CPU核。</p>
+<p>1篇 <a target="_blank" rel="noopener" href="https://fastonetech.com/blog/biotech-fastone-help-hms-on-molecules-selection-20200709/">15小时虚拟筛选10亿分子，《Nature》+HMS验证云端新药研发未来</a> 文章里哈佛大学医学院用<strong>云端16万个CPU来筛选10亿种化合物</strong>，只用了15小时。<br><strong>超大规模计算集群上的工作流程图</strong>：</p>
+<p><img src="/blog/2022/03/06/2022-03-06-Linux-grid/5.png" alt="调度器-生信分析-高性能计算集群-化合物筛选"></p>
+<p>蓝色框表示计算节点，其中包含CPU核数（蓝色框内的黑色正方形），紫色小圆圈代表待处理的配体。整张图代表整个计算集群，并行运行1.1到X.1个任务，任务1.1完成后会自动运行任务1.2，以此类推直到任务完成。<br>每个任务（包含多个子任务）使用3个计算节点，每个节点有8个CPU核。</p>
 <p><strong>假设有10亿化合物需要筛选，面对16万CPU，把流程图里缺乏的时间维度考虑进来，我们可以多思考几个问题：</strong></p>
 <ol>
 <li><strong>16万CPU，怎么顺利一一配置，启动，关闭？</strong></li>
@@ -585,42 +517,30 @@ qalter： 更改作业资源属性</li>
 </ol>
 <p>如果还不是特别明白，再打个比方。认真想像一下你是老板，手里有且只有100个打工人，你想想要怎么管理才能让他们更好地为你工作？？</p>
 <p><strong>基于这几家主流调度器：LSF/SGE/Slurm/PBS以及它们的不同演化版本进行了梳理和盘点，尤其是对云的支持方面划了重点。</strong></p>
-<h2 id="lsf"><a class="markdownIt-Anchor" href="#lsf"></a> LSF</h2>
-<p><strong>基于LSF（Load Sharing Facility）的调度器主要有Spectrum LSF、PlatformLSF、OpenLava三家。</strong></p>
-<p>早期LSF由Toronto大学开发的Utopia系统发展而来。<br>
-2007年，<strong>Platform Computing</strong>基于早期老版本的LSF开源了一个简化版Platform Lava。</p>
-<p>这个开源项目2011年中止了，被<strong>OpenLava</strong>接手。<br>
-2011年，Platform员工David Bigagli基于Platform Lava的派生代码创建了OpenLava 1.0。2014年，一些Platform的员工成立了Teraproc公司，为OpenLava提供开发和商业支持。<strong>2016年IBM就LSF版权对Teraproc公司发起诉讼，2018年IBM胜诉，OpenLava被禁用。</strong></p>
-<p>2011年，Platform Lava开源项目中止后。<strong>2012年1月，IBM收购了Platform Computing。Spectrum LSF</strong>就是IBM收购后推出的商用版本，目前更新到10.1.0，同时支持Linux和Windows，<font color="red">最大节点数超过6000，在国内提供商业支持。</font><br>
-<strong>Platform LSF</strong>是LSF的早期版本，与Spectrum LSF一样属于IBM，目前版本是9.1.3，目测已经停止更新以维护为主。</p>
-<h2 id="sge"><a class="markdownIt-Anchor" href="#sge"></a> SGE</h2>
-<p><strong>基于SGE（Sun Grid Engine）的调度器包括UGE（Univa Grid Engine）和SGE（Son of Grid Engine）。</strong></p>
+<h2 id="LSF"><a href="#LSF" class="headerlink" title="LSF"></a>LSF</h2><p><strong>基于LSF（Load Sharing Facility）的调度器主要有Spectrum LSF、PlatformLSF、OpenLava三家。</strong></p>
+<p>早期LSF由Toronto大学开发的Utopia系统发展而来。<br>2007年，<strong>Platform Computing</strong>基于早期老版本的LSF开源了一个简化版Platform Lava。</p>
+<p>这个开源项目2011年中止了，被<strong>OpenLava</strong>接手。<br>2011年，Platform员工David Bigagli基于Platform Lava的派生代码创建了OpenLava 1.0。2014年，一些Platform的员工成立了Teraproc公司，为OpenLava提供开发和商业支持。<strong>2016年IBM就LSF版权对Teraproc公司发起诉讼，2018年IBM胜诉，OpenLava被禁用。</strong></p>
+<p>2011年，Platform Lava开源项目中止后。<strong>2012年1月，IBM收购了Platform Computing。Spectrum LSF</strong>就是IBM收购后推出的商用版本，目前更新到10.1.0，同时支持Linux和Windows，<font color="red">最大节点数超过6000，在国内提供商业支持。</font><br><strong>Platform LSF</strong>是LSF的早期版本，与Spectrum LSF一样属于IBM，目前版本是9.1.3，目测已经停止更新以维护为主。</p>
+<h2 id="SGE"><a href="#SGE" class="headerlink" title="SGE"></a>SGE</h2><p><strong>基于SGE（Sun Grid Engine）的调度器包括UGE（Univa Grid Engine）和SGE（Son of Grid Engine）。</strong></p>
 <p>1993年，<strong>Grid Engine</strong>作为商业软件发布，先后使用了<strong>CODINE</strong>（Computing in Distributed Networked Environments）、<strong>GRD</strong>（Global Resource Director）作为名称。1999年，第一次由Genias Software推出市场，然后被Gridware公司收购。直到2000年被SUN收购之后正式改名<strong>Sun Grid Engine</strong>，2001年发布开源版。</p>
-<p>2010年被Oracle收购后改名<strong>Oracle Grid Engine</strong>，改成闭源版，不提供源代码。原来开源项目的资料库禁止用户修改。<br>
-于是，Grid Engine社区开始开源版本的<strong>SGE</strong>（<strong>Son of Grid Engine</strong>）项目。该调度器最后一次更新为2016年的8.1.9，由于存在版权风险，SGE已长期无维护和更新。</p>
-<p>2013年Univa收购了Oracle Grid Engine，成为唯一商业软件**UGE（Univa Grid Engine）**提供商。UGE最新版本为8.6.15，同时支持Linux和Windows，国内暂无商业支持的相关信息。<br>
-2020年9月，Altair收购了Univa。</p>
-<h2 id="slurm-四大流派里唯一纯开源派"><a class="markdownIt-Anchor" href="#slurm-四大流派里唯一纯开源派"></a> Slurm <strong>四大流派里唯一纯开源派</strong></h2>
-<p><font color="red"><strong>Slurm全称为Simple Linux Utility for Resource Management</strong></font>，前期主要由劳伦斯利弗莫尔国家实验室、SchedMD、Linux NetworX、Hewlett-Packard 和 Groupe Bull 负责开发，受到闭源软件Quadrics RMS的启发。</p>
-<p>Slurm最新版本为20.02，目前由社区和SchedMD公司共同维护，<strong>保持开源和免费</strong>，由SchedMD公司提供商业支持，仅支持Linux系统，<font color="red">最大节点数量超过12万</font>。<br>
-Slurm拥有<font color="red">容错率高、支持异构资源、高度可扩展等优点，每秒可提交超过1000个任务，且由于是开放框架，高度可配置，拥有超过100种插件，因此适用性相当强。</font></p>
+<p>2010年被Oracle收购后改名<strong>Oracle Grid Engine</strong>，改成闭源版，不提供源代码。原来开源项目的资料库禁止用户修改。<br>于是，Grid Engine社区开始开源版本的<strong>SGE</strong>（<strong>Son of Grid Engine</strong>）项目。该调度器最后一次更新为2016年的8.1.9，由于存在版权风险，SGE已长期无维护和更新。</p>
+<p>2013年Univa收购了Oracle Grid Engine，成为唯一商业软件<strong>UGE（Univa Grid Engine）</strong>提供商。UGE最新版本为8.6.15，同时支持Linux和Windows，国内暂无商业支持的相关信息。<br>2020年9月，Altair收购了Univa。</p>
+<h2 id="Slurm-四大流派里唯一纯开源派"><a href="#Slurm-四大流派里唯一纯开源派" class="headerlink" title="Slurm 四大流派里唯一纯开源派"></a>Slurm <strong>四大流派里唯一纯开源派</strong></h2><p><font color="red"><strong>Slurm全称为Simple Linux Utility for Resource Management</strong></font>，前期主要由劳伦斯利弗莫尔国家实验室、SchedMD、Linux NetworX、Hewlett-Packard 和 Groupe Bull 负责开发，受到闭源软件Quadrics RMS的启发。</p>
+<p>Slurm最新版本为20.02，目前由社区和SchedMD公司共同维护，<strong>保持开源和免费</strong>，由SchedMD公司提供商业支持，仅支持Linux系统，<font color="red">最大节点数量超过12万</font>。<br>Slurm拥有<font color="red">容错率高、支持异构资源、高度可扩展等优点，每秒可提交超过1000个任务，且由于是开放框架，高度可配置，拥有超过100种插件，因此适用性相当强。</font></p>
 <p><strong>全球60%的TOP500超算中心和超大规模集群（包括我国的天河二号等）都采用Slurm作为调度系统。我们的TOP500就是用Slurm调度云上资源跑的。</strong><a target="_blank" rel="noopener" href="https://fastonetech.com/blog/top500/">上榜啦～花费4小时5500美元，速石科技跻身全球超算TOP500</a></p>
 <p>支持在Slurm上的集群自动伸缩和云端费用监控，并支持AWS、阿里云、Azure、腾讯云、华为云、Google Cloud等云厂商。</p>
 <p><strong><a target="_blank" rel="noopener" href="https://fastonetech.com/blog/case-vina-20201021/">生信云实证Vol.3</a>：提速2920倍！用AutoDockVina对接2800万个分子  这篇主要基于用户不同的策略，跨区、跨类型自动为用户调度云资源，如何以最快速度or最低成本完成计算任务。</strong></p>
-<h2 id="pbs"><a class="markdownIt-Anchor" href="#pbs"></a> PBS</h2>
-<p><strong>基于PBS（Portable Batch System）的调度器包括OpenPBS、PBS PRO、Moab/TORQUE。</strong></p>
-<p>PBS最初是由MRJ Technology Solutions于 1991 年 6 月开始为 <font color="red">NASA 所研发的作业调度系统</font>，MRJ于 20 世纪90 年代末被 Veridian 收购。2003年，Altair收购了Veridian，获得了PBS的技术和知识产权。<br>
-<font color="red"><strong>PBS Pro</strong></font>是Altair旗下PBS WORKS提供的<font color="red">商业版本，支持可视化界面，节点数超过50000个。</font></p>
+<h2 id="PBS"><a href="#PBS" class="headerlink" title="PBS"></a>PBS</h2><p><strong>基于PBS（Portable Batch System）的调度器包括OpenPBS、PBS PRO、Moab/TORQUE。</strong></p>
+<p>PBS最初是由MRJ Technology Solutions于 1991 年 6 月开始为 <font color="red">NASA 所研发的作业调度系统</font>，MRJ于 20 世纪90 年代末被 Veridian 收购。2003年，Altair收购了Veridian，获得了PBS的技术和知识产权。<br><font color="red"><strong>PBS Pro</strong></font>是Altair旗下PBS WORKS提供的<font color="red">商业版本，支持可视化界面，节点数超过50000个。</font></p>
 <p>2016年Altair基于<strong>PBS Pro</strong>提供了开源许可版本，其与MRJ于1998年发布的原始开源版本两者合二为一大致就是现在的<font color="red"><strong>OpenPBS</strong></font>。<font color="red">与Pro版本比，多了很多限制，但都支持Linux和Windows。</font></p>
-<p>**Moab/TORQUE合在一起是一个完整调度器的功能，现在属于同一家公司Adaptive Computing。**90年代中期由MHPCC的David Jackson开发的Maui，他后来创立了Adaptive Computing。</p>
+<p><strong>Moab/TORQUE合在一起是一个完整调度器的功能，现在属于同一家公司Adaptive Computing。</strong>90年代中期由MHPCC的David Jackson开发的Maui，他后来创立了Adaptive Computing。</p>
 <p><strong>Moab</strong>是Adaptive Computing 公司（前身为 Cluster Resources 公司开发的Maui Cluster Scheduler）维护的 OpenPBS 分支，2003年发布。该项目最初是开源免费的，后来变成了商用软件Moab后不再免费。</p>
-<p><strong>TORQUE</strong>（Terascale Open-source Resource and QUEue Manager）早期的 Torque 也是开源免费软件，不过 2018 年 6 月开始 TORQUE 不再开源。<br>
-<font color="red">两者均只支持Linux系统，提供可视化界面，拥有约数千个节点。</font></p>
+<p><strong>TORQUE</strong>（Terascale Open-source Resource and QUEue Manager）早期的 Torque 也是开源免费软件，不过 2018 年 6 月开始 TORQUE 不再开源。<br><font color="red">两者均只支持Linux系统，提供可视化界面，拥有约数千个节点。</font></p>
 <p>云服务方面，PBS Pro能通过<strong>Altair Control产品</strong>从本地溢出到多云和Auto-Scale集群自动伸缩，支持的云厂商包括AWS、Azure和Google Cloud。</p>
 <p>Moab/TORQUE 则可通过 <strong>NODUSCloud OS 产品</strong>实现本地扩展到云，支持TORQUE 或 Slurm集群和自动伸缩，可支持的云厂商包括AWS、Azure、GoogleCloud 和华为云，并通过 Account Manager 产品实现云端费用监控。</p>
 <hr>
 <p>ref</p>
-<p><a target="_blank" rel="noopener" href="https://fastonetech.com/blog/cluster-scheduler-20201105/">https://fastonetech.com/blog/cluster-scheduler-20201105/</a></p>
+<p> <a target="_blank" rel="noopener" href="https://fastonetech.com/blog/cluster-scheduler-20201105/">https://fastonetech.com/blog/cluster-scheduler-20201105/</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/45e3f88086f3">https://www.jianshu.com/p/45e3f88086f3</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b7b540a3c015">https://www.jianshu.com/p/b7b540a3c015</a></p>
 
@@ -720,7 +640,7 @@ Slurm拥有<font color="red">容错率高、支持异构资源、高度可扩展
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8Ecluster-%E9%9B%86%E7%BE%A4-grid-%E7%BD%91%E6%A0%BC-%E5%88%B0-cloud-%E4%BA%91"><span class="nav-number">1.</span> <span class="nav-text"> 从Cluster (集群)、Grid (网格) 到 Cloud （云）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cluster"><span class="nav-number">1.1.</span> <span class="nav-text"> Cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grid"><span class="nav-number">1.2.</span> <span class="nav-text"> Grid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cloud"><span class="nav-number">1.3.</span> <span class="nav-text"> Cloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%9C%8D%E5%8A%A1%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%BD%91%E6%A0%BC%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.</span> <span class="nav-text"> 从服务角度看网格分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%BA%94%E7%94%A8%E8%A7%92%E5%BA%A6%E7%BD%91%E6%A0%BC%E5%88%86%E7%B1%BB"><span class="nav-number">1.5.</span> <span class="nav-text"> 从应用角度网格分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sge-sun-grid-engine"><span class="nav-number">2.</span> <span class="nav-text"> SGE [Sun Grid Engine]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sge%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text"> SGE的常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E6%8A%95%E9%80%92"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 任务投递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 查询任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.1.3.</span> <span class="nav-text"> 删除任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.4.</span> <span class="nav-text"> 其他命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E4%B8%80%E4%B8%AA%E6%8A%95%E9%80%92%E6%AF%94%E5%AF%B9%E4%BB%BB%E5%8A%A1%E7%9A%84%E7%AE%80%E5%8D%95%E8%84%9A%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text"> 案例：一个投递比对任务的简单脚本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pbs-protable-batch-system"><span class="nav-number">3.</span> <span class="nav-text"> PBS [Protable Batch System]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4"><span class="nav-number">3.1.</span> <span class="nav-text"> 1. 服务器集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pbs%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.2.</span> <span class="nav-text"> 2. PBS任务管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#21-pbs-%E7%AE%80%E4%BB%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 2.1 PBS 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-%E5%B8%B8%E7%94%A8pbs%E5%91%BD%E4%BB%A4"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 2.2 常用PBS命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-qsub-%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.2.3.</span> <span class="nav-text"> 2.3 qsub 提交任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-pbs%E5%B8%B8%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.4.</span> <span class="nav-text"> 2.4 PBS常用环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text"> 调度器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lsf"><span class="nav-number">4.1.</span> <span class="nav-text"> LSF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sge"><span class="nav-number">4.2.</span> <span class="nav-text"> SGE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slurm-%E5%9B%9B%E5%A4%A7%E6%B5%81%E6%B4%BE%E9%87%8C%E5%94%AF%E4%B8%80%E7%BA%AF%E5%BC%80%E6%BA%90%E6%B4%BE"><span class="nav-number">4.3.</span> <span class="nav-text"> Slurm 四大流派里唯一纯开源派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pbs"><span class="nav-number">4.4.</span> <span class="nav-text"> PBS</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8ECluster-%E9%9B%86%E7%BE%A4-%E3%80%81Grid-%E7%BD%91%E6%A0%BC-%E5%88%B0-Cloud-%EF%BC%88%E4%BA%91%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">从Cluster (集群)、Grid (网格) 到 Cloud （云）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">1.1.</span> <span class="nav-text">Cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grid"><span class="nav-number">1.2.</span> <span class="nav-text">Grid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cloud"><span class="nav-number">1.3.</span> <span class="nav-text">Cloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%9C%8D%E5%8A%A1%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%BD%91%E6%A0%BC%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.</span> <span class="nav-text">从服务角度看网格分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%BA%94%E7%94%A8%E8%A7%92%E5%BA%A6%E7%BD%91%E6%A0%BC%E5%88%86%E7%B1%BB"><span class="nav-number">1.5.</span> <span class="nav-text">从应用角度网格分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SGE-Sun-Grid-Engine"><span class="nav-number">2.</span> <span class="nav-text">SGE [Sun Grid Engine]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGE%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">SGE的常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E6%8A%95%E9%80%92"><span class="nav-number">2.1.1.</span> <span class="nav-text">任务投递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.1.2.</span> <span class="nav-text">查询任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.1.3.</span> <span class="nav-text">删除任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.4.</span> <span class="nav-text">其他命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%8A%95%E9%80%92%E6%AF%94%E5%AF%B9%E4%BB%BB%E5%8A%A1%E7%9A%84%E7%AE%80%E5%8D%95%E8%84%9A%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text">案例：一个投递比对任务的简单脚本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PBS-Protable-Batch-System"><span class="nav-number">3.</span> <span class="nav-text">PBS [Protable Batch System]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4"><span class="nav-number">3.1.</span> <span class="nav-text">1. 服务器集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-PBS%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.2.</span> <span class="nav-text">2. PBS任务管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-PBS-%E7%AE%80%E4%BB%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.1 PBS 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%B8%B8%E7%94%A8PBS%E5%91%BD%E4%BB%A4"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2 常用PBS命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-qsub-%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.3 qsub 提交任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-PBS%E5%B8%B8%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.4.</span> <span class="nav-text">2.4 PBS常用环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">调度器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LSF"><span class="nav-number">4.1.</span> <span class="nav-text">LSF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGE"><span class="nav-number">4.2.</span> <span class="nav-text">SGE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Slurm-%E5%9B%9B%E5%A4%A7%E6%B5%81%E6%B4%BE%E9%87%8C%E5%94%AF%E4%B8%80%E7%BA%AF%E5%BC%80%E6%BA%90%E6%B4%BE"><span class="nav-number">4.3.</span> <span class="nav-text">Slurm 四大流派里唯一纯开源派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PBS"><span class="nav-number">4.4.</span> <span class="nav-text">PBS</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

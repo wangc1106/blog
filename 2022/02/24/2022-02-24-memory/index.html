@@ -251,74 +251,61 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id><a class="markdownIt-Anchor" href="#"></a> </h1>
-<span id="more"></span>
-<h1 id="内存是什么"><a class="markdownIt-Anchor" href="#内存是什么"></a> 内存是什么</h1>
-<ul>
-<li>
-<p>内存又称主存，是 CPU 能直接寻址的存储空间，由半导体器件制成</p>
+        <h1 id><a href="#" class="headerlink" title></a></h1><span id="more"></span>
+
+<h1 id="内存是什么"><a href="#内存是什么" class="headerlink" title="内存是什么"></a>内存是什么</h1><ul>
+<li><p>内存又称主存，是 CPU 能直接寻址的存储空间，由半导体器件制成</p>
 </li>
-<li>
-<p>内存的特点是存取速率快</p>
+<li><p>内存的特点是存取速率快</p>
 </li>
-<li>
-<p>CPU、IO、磁盘、内存可以说是影响计算机性能关键因素</p>
+<li><p>CPU、IO、磁盘、内存可以说是影响计算机性能关键因素</p>
 </li>
-<li>
-<p>内存为进程的运行提供物理空间，同时作为快速CPU和慢速磁盘之间的适配器，</p>
+<li><p>内存为进程的运行提供物理空间，同时作为快速CPU和慢速磁盘之间的适配器，</p>
 </li>
 </ul>
-<h1 id="内存的作用"><a class="markdownIt-Anchor" href="#内存的作用"></a> 内存的作用</h1>
-<ul>
-<li>
-<p>暂时存放 cpu 的运算数据</p>
+<h1 id="内存的作用"><a href="#内存的作用" class="headerlink" title="内存的作用"></a>内存的作用</h1><ul>
+<li><p>暂时存放 cpu 的运算数据</p>
 </li>
-<li>
-<p>硬盘等外部存储器交换的数据</p>
+<li><p>硬盘等外部存储器交换的数据</p>
 </li>
-<li>
-<p>保障 cpu 计算的稳定性和高性能</p>
+<li><p>保障 cpu 计算的稳定性和高性能</p>
 </li>
 </ul>
-<h1 id="查看内存情况"><a class="markdownIt-Anchor" href="#查看内存情况"></a> 查看内存情况</h1>
-<p>free命令是一个快速查看内存使用情况的方法，它是对 /proc/meminfo 收集到的信息的一个概述。</p>
+<h1 id="查看内存情况"><a href="#查看内存情况" class="headerlink" title="查看内存情况"></a>查看内存情况</h1><p>free命令是一个快速查看内存使用情况的方法，它是对 /proc/meminfo 收集到的信息的一个概述。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zds@ubuntu ~ $ free -m   <span class="comment"># 以 Mb 为单位显示</span></span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line"><span class="comment"># 物理内存</span></span><br><span class="line">Mem:           2990        1528         383          49        1078        1217</span><br><span class="line"><span class="comment"># 虚拟内存</span></span><br><span class="line">Swap:          2044           0        2044</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">zds@ubuntu ~ $ top</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">top - 23:43:07 up 32 min,  1 user,  load average: 0.17, 0.36, 0.34</span><br><span class="line">Tasks: 230 total,   1 running, 229 sleeping,   0 stopped,   0 zombie</span><br><span class="line">%Cpu(s): 12.9 us,  5.6 sy,  0.0 ni, 81.5 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br><span class="line">KiB Mem :  2029876 total,   148224 free,   998788 used,   882864 buff/cache</span><br><span class="line">KiB Swap:  2094076 total,  2087304 free,     6772 used.   819128 avail Mem </span><br><span class="line"></span><br><span class="line">   PID 进程号    PR 优先级  VIRT 进程占用的虚拟内存值</span><br><span class="line">       USER 进程所有者              RES 进程占用的物理内存值</span><br><span class="line">                     NI 优先级相对值       SHR 进程使用的共享内存值</span><br><span class="line"></span><br><span class="line">   PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND</span><br><span class="line">   978 root      20   0  356740  84104  37752 S  8.9  4.1   0:19.39 Xorg    </span><br><span class="line">  1909 zds       20   0 1023828 118576  80360 S  4.6  5.8   0:18.36 compiz       </span><br><span class="line">  2439 zds       20   0  630364  52556  42052 S  4.3  2.6   0:08.29 gnome-terminal-   </span><br><span class="line">  1945 zds       20   0  633568  35384  28860 S  0.7  1.7   0:10.46 sogou-qimpanel- </span><br><span class="line">     7 root      20   0       0      0      0 S  0.3  0.0   0:01.94 rcu_sched   </span><br><span class="line">   845 root      20   0  187344   9684   8508 S  0.3  0.5   0:03.35 vmtoolsd  </span><br><span class="line">  1631 zds       20   0   43736   4216   2924 S  0.3  0.2   0:01.82 dbus-daemon </span><br><span class="line">  1795 zds       20   0  564648  29760  24496 S  0.3  1.5   0:01.08 unity-panel-ser</span><br><span class="line">  1958 zds       20   0 1026996  95708  27980 S  0.3  4.7   0:07.03 gnome-software</span><br><span class="line">  1966 zds       20   0  496776  28904  25224 S  0.3  1.4   0:03.52 vmtoolsd   </span><br><span class="line">  7336 zds       20   0   43652   3948   3340 R  0.3  0.2   0:01.25 top  </span><br><span class="line">     1 root      20   0  119836   5652   4024 S  0.0  0.3   0:03.27 systemd </span><br><span class="line">     2 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kthreadd </span><br><span class="line">     3 root      20   0       0      0      0 S  0.0  0.0   0:00.52 ksoftirqd/0</span><br><span class="line">     5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:0H </span><br><span class="line">     8 root      20   0       0      0      0 S  0.0  0.0   0:00.00 rcu_bh</span><br><span class="line">     9 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 migration/0</span><br><span class="line">    10 root      rt   0       0      0      0 S  0.0  0.0   0:00.01 watchdog/0</span><br><span class="line">    11 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kdevtmpfs </span><br><span class="line">    12 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 netns </span><br><span class="line">    13 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 perf </span><br><span class="line">    14 root      20   0       0      0      0 S  0.0  0.0   0:00.00 khungtaskd  </span><br></pre></td></tr></table></figure>
+
+
+
 <p><strong>htop</strong>命令显示了每个进程的内存实时使用率。它提供了所有进程的常驻内存大小、程序总内存大小、共享库大小等的报告。列表可以水平及垂直滚动。</p>
 <p><strong>top</strong>命令提供了实时的运行中的程序的资源使用统计。你可以根据内存的使用和大小来进行排序。</p>
-<h1 id="core-dump"><a class="markdownIt-Anchor" href="#core-dump"></a> Core Dump</h1>
-<ul>
-<li>Core意思是内存, Dump的意思是扔出来, 堆出来。在开发（或使用）一个程序时，有时程序莫名其妙的down了, 却没有任何提示(有时提示core dumped)。虽然系统没事，但下次仍可能遇到相同问题。这时可查看有无形如core.PID的core文件生成，这个文件便是操作系统把程序down掉时的内存内容扔出来生成的，让debugger 做参考。这个动作叫 core dump。
-<ul>
+<h1 id="Core-Dump"><a href="#Core-Dump" class="headerlink" title="Core Dump"></a>Core Dump</h1><ul>
+<li>Core意思是内存, Dump的意思是扔出来, 堆出来。在开发（或使用）一个程序时，有时程序莫名其妙的down了, 却没有任何提示(有时提示core dumped)。虽然系统没事，但下次仍可能遇到相同问题。这时可查看有无形如core.PID的core文件生成，这个文件便是操作系统把程序down掉时的内存内容扔出来生成的，让debugger 做参考。这个动作叫 core dump。<ul>
 <li>core dump又叫<strong>核心转储</strong>, 当程序运行过程中发生异常, 程序异常退出时, 由操作系统把程序当前的内存状况存储在一个core文件中, 叫core dump。简而言之，<font color="red">进程异常终止，进程用户空间的数据就会被写到磁盘core文件</font>。</li>
 </ul>
 </li>
 </ul>
-<h2 id="为何有时程序down了却没生成-core文件"><a class="markdownIt-Anchor" href="#为何有时程序down了却没生成-core文件"></a> 为何有时程序Down了，却没生成 Core文件</h2>
-<ul>
+<h2 id="为何有时程序Down了，却没生成-Core文件"><a href="#为何有时程序Down了，却没生成-Core文件" class="headerlink" title="为何有时程序Down了，却没生成 Core文件"></a>为何有时程序Down了，却没生成 Core文件</h2><ul>
 <li><font color="red">有时候程序down了, 不像编译错误会提示到文件某一行，而是没有任何信息</font>。一种办法是用gdb的step（linux下调试工具gdb是很强大的调试器）, 一步一步寻找，但要step一个上万行的代码让人难以想象。 更好的办法就是core file。</li>
 <li><font color="red">如果core文件没有生成</font>，是因为core.PID的core文件的生成跟当前系统的环境设置有关系，<font color="red">系统默认core文件的大小为0</font>（注意core file size (blocks, -c) 0 这行，表示分配给core文件的长度（单位为字节，一个块的大小要分系统而定了），为0肯定无core文件，可修改之）</li>
 <li>用ulimit命令查看和修改core文件的大小，使用<code>ulimit -a</code>查看大小，使用 <code>ulimit -c unlimited</code>表示对core文件不做限制 或 使用<code>ulimit -c 1024</code> 对core文件分配1024个字节</li>
 <li><font color="red">程序运行过程出现aborted(core dumped)，ulimit -a，结果确实 core file size (blocks, -c) 0，无法生成中断文件</font></li>
 <li>若修改后再运行程序便生成<code>core.PID</code>的core文件（<strong>core文件生成的位置一般和运行程序的路径相同, 文件名一般为core.进程号</strong>）。</li>
 </ul>
-<h2 id="如何使用core文件"><a class="markdownIt-Anchor" href="#如何使用core文件"></a> 如何使用core文件?</h2>
-<ul>
+<h2 id="如何使用core文件"><a href="#如何使用core文件" class="headerlink" title="如何使用core文件?"></a>如何使用core文件?</h2><ul>
 <li>发生core dump后，使用gdb查看core文件内容, 以定位文件中引发core dump的行，在Linux下，查看core文件中的出错堆栈信息有二种方式，使用：<font color="red">gdb -c core.pid program_name</font>或gdb [program_name] [core.pid]可以进入gdb模式</li>
 <li>在进入gdb后输入<font color="red">where并回车</font>，就可以指出是在哪一行被Down掉，在哪个函数内，由谁调用等等。</li>
 <li>在进入gdb后输入<font color="red"> bt</font>，用bt命令查看backtrace以检查发生程序运行到哪里，来定位core dump的文件-&gt;行。</li>
 </ul>
-<h2 id="core-dump-原因"><a class="markdownIt-Anchor" href="#core-dump-原因"></a> core dump 原因</h2>
-<ul>
-<li>
-<p><font color="red">batch_size过大导致的。Aborted(core dumped)</font></p>
+<h2 id="core-dump-原因"><a href="#core-dump-原因" class="headerlink" title="core dump 原因"></a>core dump 原因</h2><ul>
+<li><p><font color="red">batch_size过大导致的。Aborted(core dumped)</font></p>
 </li>
-<li>
-<p>线程被谋杀， 被谋杀者所在线程会抛出一个异常。Cancellation &amp; C++ Exception</p>
+<li><p>线程被谋杀， 被谋杀者所在线程会抛出一个异常。Cancellation &amp; C++ Exception</p>
 </li>
-<li>
-<p>pure virtual method called terminate called without an active exception 解决方案</p>
+<li><p>pure virtual method called terminate called without an active exception 解决方案</p>
 </li>
 </ul>
 <p>对于多线程的程序，这个错误的主要原因是当前对象已经被销毁或者正在被销毁，但是其又在被调用，导致了冲突。</p>
@@ -326,8 +313,7 @@
 <li>pure virtual method called</li>
 </ul>
 <hr>
-<h1 id="查看存储空间"><a class="markdownIt-Anchor" href="#查看存储空间"></a> 查看存储空间：</h1>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">zds@ubuntu ~ $ df -hl</span><br><span class="line">文件系统         容量   已用  可用 已用% 挂载点</span><br><span class="line">udev            972M     0  972M    0% /dev</span><br><span class="line">tmpfs           199M  6.3M  192M    4% /run</span><br><span class="line">/dev/sda1        23G  5.3G   17G   25% /</span><br><span class="line">tmpfs           992M  212K  991M    1% /dev/shm</span><br><span class="line">tmpfs           5.0M  4.0K  5.0M    1% /run/lock</span><br><span class="line">tmpfs           992M     0  992M    0% /sys/fs/cgroup</span><br><span class="line">tmpfs           199M   60K  199M    1% /run/user/1000 </span><br></pre></td></tr></table></figure>
+<h1 id="查看存储空间："><a href="#查看存储空间：" class="headerlink" title="查看存储空间："></a>查看存储空间：</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">zds@ubuntu ~ $ df -hl</span><br><span class="line">文件系统         容量   已用  可用 已用% 挂载点</span><br><span class="line">udev            972M     0  972M    0% /dev</span><br><span class="line">tmpfs           199M  6.3M  192M    4% /run</span><br><span class="line">/dev/sda1        23G  5.3G   17G   25% /</span><br><span class="line">tmpfs           992M  212K  991M    1% /dev/shm</span><br><span class="line">tmpfs           5.0M  4.0K  5.0M    1% /run/lock</span><br><span class="line">tmpfs           992M     0  992M    0% /sys/fs/cgroup</span><br><span class="line">tmpfs           199M   60K  199M    1% /run/user/1000 </span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -427,7 +413,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.</span> <span class="nav-text"> 内存是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text"> 内存的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5"><span class="nav-number">4.</span> <span class="nav-text"> 查看内存情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#core-dump"><span class="nav-number">5.</span> <span class="nav-text"> Core Dump</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95%E6%9C%89%E6%97%B6%E7%A8%8B%E5%BA%8Fdown%E4%BA%86%E5%8D%B4%E6%B2%A1%E7%94%9F%E6%88%90-core%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text"> 为何有时程序Down了，却没生成 Core文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8core%E6%96%87%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text"> 如何使用core文件?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-dump-%E5%8E%9F%E5%9B%A0"><span class="nav-number">5.3.</span> <span class="nav-text"> core dump 原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">6.</span> <span class="nav-text"> 查看存储空间：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.</span> <span class="nav-text">内存是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">内存的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5"><span class="nav-number">4.</span> <span class="nav-text">查看内存情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Core-Dump"><span class="nav-number">5.</span> <span class="nav-text">Core Dump</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95%E6%9C%89%E6%97%B6%E7%A8%8B%E5%BA%8FDown%E4%BA%86%EF%BC%8C%E5%8D%B4%E6%B2%A1%E7%94%9F%E6%88%90-Core%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">为何有时程序Down了，却没生成 Core文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8core%E6%96%87%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">如何使用core文件?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-dump-%E5%8E%9F%E5%9B%A0"><span class="nav-number">5.3.</span> <span class="nav-text">core dump 原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">查看存储空间：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
