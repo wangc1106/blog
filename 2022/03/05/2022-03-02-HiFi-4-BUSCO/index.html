@@ -23,18 +23,18 @@
 
   <meta name="description" content="BUSCO - Benchmarking Universal Single-Copy Orthologs 普遍通用的单拷贝直系同源测试?">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Banner&#39;s Blog">
-<meta property="og:url" content="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/index.html">
+<meta property="og:title" content="HiFi-4-QC-BUSCO">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-4-BUSCO/index.html">
 <meta property="og:site_name" content="Banner&#39;s Blog">
 <meta property="og:description" content="BUSCO - Benchmarking Universal Single-Copy Orthologs 普遍通用的单拷贝直系同源测试?">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-03-05T12:45:15.750Z">
-<meta property="article:modified_time" content="2022-03-05T15:08:21.105Z">
+<meta property="article:modified_time" content="2022-03-07T13:39:47.500Z">
 <meta property="article:author" content="Wang C">
 <meta property="article:tag" content="denovo-III">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/">
+<link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-4-BUSCO/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title> | Banner's Blog</title>
+  <title>HiFi-4-QC-BUSCO | Banner's Blog</title>
   
 
 
@@ -187,7 +187,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-4-BUSCO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/banner.png">
@@ -200,7 +200,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          HiFi-4-QC-BUSCO
         </h1>
 
         <div class="post-meta">
@@ -209,10 +209,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-03-05 20:45:15 / Modified: 23:08:21" itemprop="dateCreated datePublished" datetime="2022-03-05T20:45:15+08:00">2022-03-05</time>
+              <time title="Created: 2022-03-05 20:45:15" itemprop="dateCreated datePublished" datetime="2022-03-05T20:45:15+08:00">2022-03-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-07 21:39:47" itemprop="dateModified" datetime="2022-03-07T21:39:47+08:00">2022-03-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -224,7 +230,7 @@
             </span>
 
           
-            <span id="/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/" class="post-meta-item leancloud_visitors" data-flag-title="" title="Views">
+            <span id="/blog/2022/03/05/2022-03-02-HiFi-4-BUSCO/" class="post-meta-item leancloud_visitors" data-flag-title="HiFi-4-QC-BUSCO" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -235,13 +241,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>8.3k</span>
+              <span>12k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>8 mins.</span>
+              <span>11 mins.</span>
             </span>
 
         </div>
@@ -256,7 +262,6 @@
         <p>BUSCO - <strong>B</strong>enchmarking <strong>U</strong>niversal <strong>S</strong>ingle-<strong>C</strong>opy <strong>O</strong>rthologs</p>
 <p>普遍通用的单拷贝直系同源测试?</p>
 <span id="more"></span>
-
 <p>official：<a target="_blank" rel="noopener" href="https://busco.ezlab.org/busco_userguide.html">https://busco.ezlab.org/busco_userguide.html</a></p>
 <p>Ref:<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5041460f7a5d">https://www.jianshu.com/p/5041460f7a5d</a></p>
 <p>BUSCO是使用python语言编写的<font color="blue">对<strong>转录组</strong>和<strong>基因组组装质量</strong>进行<strong>评估</strong></font>的软件。相近物种间总有一些保守序列，BUSCO<font color="blue">使用这些<strong>保守序列</strong>与<strong>组装结果</strong>进行<strong>比对</strong></font>，鉴定组装结果是否包含这些序列，包含单条、多条还是部分或者不包含等情况给出结果</p>
@@ -266,36 +271,33 @@
 <p>基于大量物种的<font color="blue">单拷贝基因构建数据集</font>，用于评估<font color="blue"><strong>基因组组装，转录组组装，基因注释，蛋白集的完整性</strong></font>。core-genes 构建方式，90%物种共享的基因即为核心基因。使用的是直系同源基因家族的概念，基于100个物种基因组，某一个基因家族存在于&gt;90个基因组中，即将该基因家族认定为核心基因</p>
 <p>BUSCO使用其他工具搭建流程</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">genoem assemble : tBLASTn --&gt; Augustus --&gt; HMMER3 √</span><br><span class="line">Transcriptome   :             Find ORF --&gt; HMMER3</span><br><span class="line">Gene set        :                          HMMER3</span><br></pre></td></tr></table></figure>
-
-<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><h2 id="conda"><a href="#conda" class="headerlink" title="conda"></a>conda</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 没有镜像的话，添加镜像</span><br><span class="line">conda config --show </span><br><span class="line">conda config --add channels conda-forge</span><br><span class="line"></span><br><span class="line"># 构建conda的python3环境</span><br><span class="line">conda create --name python36 python=3.6</span><br><span class="line">#  然后激活</span><br><span class="line">conda activate python36</span><br><span class="line"># 执行安装</span><br><span class="line">conda install -c conda-forge -c bioconda busco=5.3.0</span><br><span class="line"># 在使用完busco之后可以退出python36环境</span><br><span class="line">conda deactivate</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="独立安装？"><a href="#独立安装？" class="headerlink" title="独立安装？"></a>独立安装？</h2><p>busco，依赖Augustus，HMMER，Blast+</p>
+<h1 id="下载"><a class="markdownIt-Anchor" href="#下载"></a> 下载</h1>
+<h2 id="conda"><a class="markdownIt-Anchor" href="#conda"></a> conda</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 没有镜像的话，添加镜像</span><br><span class="line">conda config --show </span><br><span class="line">conda config --add channels conda-forge</span><br><span class="line"></span><br><span class="line"># 构建conda的python3环境</span><br><span class="line">【conda create --name python36 python=3.6】</span><br><span class="line">#  然后激活</span><br><span class="line">【conda activate python36】</span><br><span class="line"># 执行安装</span><br><span class="line">【conda install -c conda-forge -c bioconda busco=5.3.0】</span><br><span class="line"># 在使用完busco之后可以退出python36环境</span><br><span class="line">【conda deactivate】</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="独立安装"><a class="markdownIt-Anchor" href="#独立安装"></a> 独立安装？</h2>
+<p>busco，依赖Augustus，HMMER，Blast+</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  ============ 下载BUSCO  ============ </span></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line">wget -c https://gitlab.com/ezlab/busco/-/archive/master/busco-master.zip -O busco.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># ============ 下载依赖的工具 ============</span></span><br><span class="line"><span class="comment"># 下载Augustus</span></span><br><span class="line">wget -c http://bioinf.uni-greifswald.de/augustus/binaries/augustus.current.tar.gz</span><br><span class="line"><span class="comment"># 下载HMMER</span></span><br><span class="line">wget -c http://eddylab.org/software/hmmer/hmmer.tar.gz -O hmmer.tar.gz</span><br><span class="line"><span class="comment"># 下载Blast+</span></span><br><span class="line">wget -c ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz</span><br><span class="line"><span class="comment">#-------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line"></span><br><span class="line"><span class="comment"># === 安装busco ===</span></span><br><span class="line">unzip busco.zip</span><br><span class="line"><span class="comment"># 改名</span></span><br><span class="line">mv busco-master busco </span><br><span class="line"><span class="comment"># 移动到外部</span></span><br><span class="line">mv busco ../</span><br><span class="line"><span class="built_in">cd</span> ../busco</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line"><span class="comment"># === 安装Augustus ===</span></span><br><span class="line">tar -xzvf augustus.current.tar.gz</span><br><span class="line"><span class="built_in">cd</span> augustus-3.3.1</span><br><span class="line"><span class="built_in">cd</span> ../</span><br><span class="line">mv augustus-3.3.1 ../</span><br><span class="line"><span class="built_in">cd</span> ../augustus-3.3.1</span><br><span class="line"><span class="comment"># 打开common.mk文件，将ZIPINPUT = true注释掉（即在最前面加一#号）</span></span><br><span class="line">vim common.mk</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line"><span class="comment"># === 安装HMMER ===</span></span><br><span class="line">tar -xzvf hmmer.tar.gz</span><br><span class="line"><span class="built_in">cd</span> hmmer-3.2.1</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># === 安装blast+ ===</span></span><br><span class="line">tar -xzvf ncbi-blast-2.7.1+-x64-linux.tar.gz</span><br><span class="line"><span class="comment"># 改名</span></span><br><span class="line">mv ncbi-blast-2.7.1+ ../blast+-2.7.1-linux</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除安装包</span></span><br><span class="line"><span class="built_in">cd</span> ~/Applications/download</span><br><span class="line">rm busco.zip</span><br><span class="line">rm augustus.current.tar.gz</span><br><span class="line">rm hmmer.tar.gz</span><br><span class="line">rm ncbi-blast-2.7.1+-x64-linux.tar.gz</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="下载数据库文件"><a href="#下载数据库文件" class="headerlink" title="下载数据库文件"></a>下载数据库文件</h2><p><a target="_blank" rel="noopener" href="https://busco-data.ezlab.org/v5/data/lineages/">https://busco-data.ezlab.org/v5/data/lineages/</a></p>
+<h2 id="下载数据库文件"><a class="markdownIt-Anchor" href="#下载数据库文件"></a> 下载数据库文件</h2>
+<p><a target="_blank" rel="noopener" href="https://busco-data.ezlab.org/v5/data/lineages/">https://busco-data.ezlab.org/v5/data/lineages/</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">大类五类</span><br><span class="line">- Bacteria 细菌</span><br><span class="line">- Protists 原生生物</span><br><span class="line">- Metazoa 后生动物</span><br><span class="line">- Fungi 真菌</span><br><span class="line">- Plant 植物</span><br><span class="line">下载的是植物相关 embryophyta_odb10.2020-09-10.tar.gz</span><br><span class="line"># 解压文件</span><br><span class="line">tar -xzvf embryophyta_odb9.tar.gz</span><br></pre></td></tr></table></figure>
-
 <p>执行时需要对应的数据库文件路径 ///embryophyta_odb9</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>配置是必须的，<strong>这一步需要仔细一些，路径出错的话是无法通过busco的检测的</strong>，在安装好软件之后 <code>~/Applications/busco/config/</code>之中并没有<code>config.ini</code>文件，只有一个<code>config.ini_default</code>文件，可以把里面的内容复制下来，</p>
+<h1 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h1>
+<p>配置是必须的，<strong>这一步需要仔细一些，路径出错的话是无法通过busco的检测的</strong>，在安装好软件之后 <code>~/Applications/busco/config/</code>之中并没有<code>config.ini</code>文件，只有一个<code>config.ini_default</code>文件，可以把里面的内容复制下来，</p>
 <ul>
 <li>方法1</li>
 </ul>
 <p>新建<code>config.ini</code>文件或者直接复制</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp config.ini_default config.ini</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>方法2</li>
 </ul>
 <p>也可新建</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 增加配置文件</span></span><br><span class="line">vim ~/Applications/busco/config/config.ini</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># BUSCO specific configuration</span></span><br><span class="line"><span class="comment">#It 【overrides default values】 in code and dataset cfg, and is 【overridden by arguments in command line】</span></span><br><span class="line"><span class="comment"># Uncomment lines when appropriate</span></span><br><span class="line">[busco]</span><br><span class="line"><span class="comment"># Input file</span></span><br><span class="line">;<span class="keyword">in</span> = ./sample_data/target.fa</span><br><span class="line"><span class="comment"># Run name, used in output files and folder</span></span><br><span class="line">;out = SAMPLE</span><br><span class="line"><span class="comment"># Where to store the output directory</span></span><br><span class="line"><span class="comment">#【？】 out_path = /workdir</span></span><br><span class="line"><span class="comment"># Path to the BUSCO dataset</span></span><br><span class="line">;lineage_path = ./sample_data/example</span><br><span class="line"><span class="comment"># Which mode to run (【genome / protein / transcriptome】)</span></span><br><span class="line">;mode = genome</span><br><span class="line"><span class="comment"># How many threads to use for 【multithreaded】 steps</span></span><br><span class="line">;cpu = 1</span><br><span class="line"><span class="comment"># Domain for augustus retraining, eukaryota or prokaryota</span></span><br><span class="line"><span class="comment"># 【Do not change】 this unless you know exactly why !!!</span></span><br><span class="line">;domain = eukaryota</span><br><span class="line"><span class="comment"># Force rewrite if files already exist (True/False)</span></span><br><span class="line">;force = False</span><br><span class="line"><span class="comment"># Restart mode (True/False)</span></span><br><span class="line">;restart = False</span><br><span class="line"><span class="comment"># Blast e-value</span></span><br><span class="line">;evalue = 1e-3</span><br><span class="line"><span class="comment"># Species to use with augustus, for old datasets only</span></span><br><span class="line">;species = fly</span><br><span class="line"><span class="comment"># Augustus extra parameters</span></span><br><span class="line"><span class="comment"># Use single quotes, like this: &#x27;--param1=1 --param2=2&#x27;</span></span><br><span class="line">;augustus_parameters = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># Tmp folder</span></span><br><span class="line">;tmp_path = ./tmp/</span><br><span class="line"><span class="comment"># How many candidate regions (contigs, scaffolds) to consider for each BUSCO</span></span><br><span class="line">;<span class="built_in">limit</span> = 3</span><br><span class="line"><span class="comment"># Augustus long mode for retraining (True/False)</span></span><br><span class="line">;long = False</span><br><span class="line"><span class="comment"># Quiet mode (True/False)</span></span><br><span class="line">;quiet = False</span><br><span class="line"><span class="comment"># Debug logs (True/False), it needs Quiet to be False</span></span><br><span class="line">debug = True</span><br><span class="line"><span class="comment"># tar gzip output files (True/False)</span></span><br><span class="line">;gzip = False</span><br><span class="line"><span class="comment"># Force single core for the tblastn step</span></span><br><span class="line">;blast_single_core = True</span><br><span class="line"></span><br><span class="line">【[tblastn]】</span><br><span class="line"><span class="comment"># path to tblastn</span></span><br><span class="line">path = ~/Applications/blast+-2.7.1-linux/bin</span><br><span class="line"></span><br><span class="line">【[makeblastdb]】</span><br><span class="line"><span class="comment"># path to makeblastdb</span></span><br><span class="line">path = ~/Applications/blast+-2.7.1-linux/bin</span><br><span class="line"></span><br><span class="line">【[augustus]】</span><br><span class="line"><span class="comment"># path to augustus</span></span><br><span class="line">path = ~/Applications/augustus-3.3.1/bin</span><br><span class="line"></span><br><span class="line">【[etraining]】</span><br><span class="line"><span class="comment"># path to augustus etraining</span></span><br><span class="line">path = ~/Applications/augustus-3.3.1/bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># path to augustus perl scripts, redeclare it for each new script        </span></span><br><span class="line">【[gff2gbSmallDNA.pl]】                                                      </span><br><span class="line">path = ~/Applications/augustus-3.3.1/scripts                         </span><br><span class="line">【[new_species.pl]】                                                         </span><br><span class="line">path = ~/Applications/augustus-3.3.1/scripts                         </span><br><span class="line">【[optimize_augustus.pl]】                                                   </span><br><span class="line">path = ~/Applications/augustus-3.3.1/scripts                         </span><br><span class="line">                                                                         </span><br><span class="line">【[hmmsearch]】                                                              </span><br><span class="line"><span class="comment"># path to HMMsearch executable                                           </span></span><br><span class="line">path = ~/Applications/hmmer-3.2.1/src                                </span><br><span class="line">                                                                         </span><br><span class="line">【[Rscript]】                                                                </span><br><span class="line"><span class="comment"># path to Rscript, if you wish to use the plot tool                      </span></span><br><span class="line">path = /usr/bin/</span><br></pre></td></tr></table></figure>
-
 <p>新建config.ini`文件之后，</p>
 <ol>
-<li>将<code>config.ini</code>文件中的<code>out_path = /workdir</code>前面加上<code>#</code><br>因为输出路径有时候会出错，所以注释掉，之后运行busco，<font color="blue">输出的路径就是cd的路径</font></li>
+<li>将<code>config.ini</code>文件中的<code>out_path = /workdir</code>前面加上<code>#</code><br>
+因为输出路径有时候会出错，所以注释掉，之后运行busco，<font color="blue">输出的路径就是cd的路径</font></li>
 <li>之后需要改这几项对应的路径（<strong>里面的路径需要更改为自己的工具的路径</strong>）</li>
 </ol>
 <table>
@@ -305,7 +307,8 @@
 <th>相关</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>[tblastn]</td>
 <td>blast+</td>
 </tr>
@@ -322,7 +325,7 @@
 <td>HMMER</td>
 </tr>
 <tr>
-<td>[gff2gbSmallDNA.pl]</td>
+<td>[<a target="_blank" rel="noopener" href="http://gff2gbSmallDNA.pl">gff2gbSmallDNA.pl</a>]</td>
 <td>Augustus</td>
 </tr>
 <tr>
@@ -337,116 +340,104 @@
 <td>[hmmsearch]</td>
 <td>HMMER</td>
 </tr>
-</tbody></table>
-<p>自己安装的<code>blast+</code>和<code>HMMER</code>和<code>Augustus</code>的执行文件的路径，只需要把前面的路径改为安装的程序位置的路径。</p>
-<p>如blast+安装在<code>~/Applications</code>之下， 执行文件在<code>~/Applications/blast+-2.7.1-linux/bin</code> 之中，如安装在<code>~/NAME/biosofts</code>下，那对应执行文件路径是<code>~/NAME/biosofts/blast+-2.7.1-linux/bin</code>。<br>其实可以看到上面的都是一些路径或默认选项设置。</p>
-<h1 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># augustus工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/bin:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># augustus工具附加脚本所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/scripts:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># augustus工具配置文件的所在位置 。AUGUSTUS_CONFIG_PATH 需要使用绝对路径</span></span><br><span class="line"><span class="built_in">export</span> AUGUSTUS_CONFIG_PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/config&quot;</span></span><br><span class="line"><span class="comment"># hmmer工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/hmmer-3.2.1/src:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># blast+工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/blast+-2.7.1-linux/bin:<span class="variable">$PATH</span>&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run_BUSCO.py -i [组装的文件.fasta]  -l  [数据库文件夹] -o [输出文件名] -m [评估模式] [其他一些选项]</span><br></pre></td></tr></table></figure>
-
-<p>实际使用例子，如果使用<code>conda</code>安装的<code>BUSCO</code>的话。执行时不需写完整路径，只需写<code>run_BUSCO.py</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先cd到对应的组装文件的文件夹</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -i 输入文件</span></span><br><span class="line"><span class="comment"># -l BUSCO的数据库文件</span></span><br><span class="line"><span class="comment"># -o 输出的文件名的后缀以及文件夹的名称</span></span><br><span class="line"><span class="comment"># -m 分析类型（genome、transcriptome、proteins）</span></span><br><span class="line"><span class="comment"># --cpu 线程数</span></span><br><span class="line">~/Applications/busco/scripts/run_BUSCO.py \</span><br><span class="line">    -i contigs.fasta \</span><br><span class="line">    -l ~/database/BUSCO/embryophyta_odb9 \</span><br><span class="line">    -o suffix\</span><br><span class="line">    -m genome \</span><br><span class="line">    --cpu 8</span><br></pre></td></tr></table></figure>
-
+</tbody>
+</table>
+<h1 id="环境变量"><a class="markdownIt-Anchor" href="#环境变量"></a> 环境变量</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># augustus工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/bin:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># augustus工具附加脚本所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/scripts:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># augustus工具配置文件的所在位置 。AUGUSTUS_CONFIG_PATH 需要使用绝对路径</span></span><br><span class="line"><span class="built_in">export</span> AUGUSTUS_CONFIG_PATH=<span class="string">&quot;/home/ssd/Applications/augustus-3.3.1/config&quot;</span></span><br><span class="line"><span class="comment"># hmmer工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/hmmer-3.2.1/src:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="comment"># blast+工具的执行文件所在文件夹</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/home/ssd/Applications/blast+-2.7.1-linux/bin:<span class="variable">$PATH</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a class="markdownIt-Anchor" href="#运行"></a> 运行</h1>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run_BUSCO.py -i [组装的文件.fasta]  -l  [数据库文件夹] -o [输出文件名] -m [评估模式] [其他一些选项]</span><br></pre></td></tr></table></figure>
+<p>实例，如果用<code>conda</code>安装BUSCO。执行只需写<code>busco</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先cd到对应的组装文件的文件夹</span></span><br><span class="line"><span class="comment"># 确保canu全路径，conda安装，which busco</span></span><br><span class="line"><span class="comment"># -i 输入文件</span></span><br><span class="line"><span class="comment"># -l BUSCO的数据库文件</span></span><br><span class="line"><span class="comment"># -o 输出的文件名的后缀以及文件夹的名称</span></span><br><span class="line"><span class="comment"># -m 分析类型（genome、transcriptome、proteins）</span></span><br><span class="line"><span class="comment"># --cpu 线程数</span></span><br><span class="line">busco \</span><br><span class="line">    -i contigs.fasta \</span><br><span class="line">    -l ~/database/BUSCO/embryophyta_odb9 \</span><br><span class="line">    -o suffix\</span><br><span class="line">    -m genome \</span><br><span class="line">    --cpu 8</span><br></pre></td></tr></table></figure>
+<h2 id="font-colorred参数font"><a class="markdownIt-Anchor" href="#font-colorred参数font"></a> <font color="red">参数</font></h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">usage: busco -i [SEQUENCE_FILE] -l [LINEAGE] -o [OUTPUT_NAME] -m [MODE] [OTHER OPTIONS]</span><br><span class="line"></span><br><span class="line">Welcome to BUSCO 5.3.0: the Benchmarking Universal Single-Copy Ortholog assessment tool.</span><br><span class="line">For more detailed usage information, please review the README file provided with this distribution and the BUSCO user guide. Visit this page https://gitlab.com/ezlab/busco<span class="comment">#how-to-cite-busco to see how to cite BUSCO</span></span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  <span class="string">&#x27;-i&#x27;</span> SEQUENCE_FILE, --<span class="keyword">in</span> SEQUENCE_FILE</span><br><span class="line">                        Input sequence file <span class="keyword">in</span> <span class="string">&#x27;FASTA format&#x27;</span>. Can be an assembled genome or transcriptome (DNA), or protein sequences from an annotated gene <span class="built_in">set</span>. Also possible to use a path to a directory containing multiple input files.</span><br><span class="line">  <span class="string">&#x27;-o&#x27;</span> OUTPUT, --out OUTPUT</span><br><span class="line">                        Give your analysis run a recognisable short name. <span class="string">&#x27;Output folders and files will be labelled with this name&#x27;</span>. The path to the output folder is <span class="built_in">set</span> with --out_path.</span><br><span class="line">  <span class="string">&#x27;-m&#x27;</span> MODE, --mode MODE  Specify <span class="built_in">which</span> BUSCO analysis mode to run.</span><br><span class="line">                        There are three valid modes:</span><br><span class="line">                        - geno or <span class="string">&#x27;genome&#x27;</span>, <span class="keyword">for</span> genome assemblies (DNA)</span><br><span class="line">                        - tran or transcriptome, <span class="keyword">for</span> transcriptome assemblies (DNA)</span><br><span class="line">                        - prot or proteins, <span class="keyword">for</span> annotated gene sets (protein)</span><br><span class="line">  <span class="string">&#x27;-l&#x27;</span> LINEAGE, --lineage_dataset LINEAGE</span><br><span class="line">                        Specify the name of the BUSCO lineage to be used<span class="string">&#x27;database?&#x27;</span></span><br><span class="line">  --augustus            Use augustus gene predictor <span class="keyword">for</span> eukaryote runs</span><br><span class="line">  --augustus_parameters --PARAM1=VALUE1,--PARAM2=VALUE2</span><br><span class="line">                        Pass additional arguments to Augustus. All arguments should be contained within a single string with no white space, with each argument separated by a comma.</span><br><span class="line">  --augustus_species AUGUSTUS_SPECIES</span><br><span class="line">                        Specify a species <span class="keyword">for</span> Augustus training.</span><br><span class="line">  --auto-lineage        Run auto-lineage to find optimum lineage path</span><br><span class="line">  --auto-lineage-euk    Run auto-placement just on eukaryote tree to find optimum lineage path</span><br><span class="line">  --auto-lineage-prok   Run auto-lineage just on non-eukaryote trees to find optimum lineage path</span><br><span class="line">  <span class="string">&#x27;-c&#x27;</span> N, --cpu N         Specify the number (N=<span class="built_in">integer</span>) of threads/cores to use.</span><br><span class="line">  <span class="string">&#x27;--config&#x27;</span> CONFIG_FILE  Provide a config file</span><br><span class="line">  --datasets_version DATASETS_VERSION</span><br><span class="line">                        Specify the version of BUSCO datasets, e.g. odb10</span><br><span class="line">  <span class="string">&#x27;--download&#x27;</span> [dataset [dataset ...]]</span><br><span class="line">                        Download dataset. Possible values are a specific dataset name, <span class="string">&quot;all&quot;</span>, <span class="string">&quot;prokaryota&quot;</span>, <span class="string">&quot;eukaryota&quot;</span>, or <span class="string">&quot;virus&quot;</span>. If used together with other <span class="built_in">command</span> line arguments, make sure to place this last.</span><br><span class="line">  --download_base_url DOWNLOAD_BASE_URL</span><br><span class="line">                        Set the url to the remote BUSCO dataset location</span><br><span class="line">  --download_path DOWNLOAD_PATH</span><br><span class="line">                        Specify <span class="built_in">local</span> filepath <span class="keyword">for</span> storing BUSCO dataset downloads</span><br><span class="line">  <span class="string">&#x27;-e&#x27;</span> N, --evalue N      <span class="string">&#x27;E-value cutoff for BLAST searches&#x27;</span>. Allowed formats, 0.001 or 1e-03 (Default: 1e-03)</span><br><span class="line">  -f, --force           Force rewriting of existing files. Must be used when output files with the provided name already exist.</span><br><span class="line">  -h, --<span class="built_in">help</span>            Show this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">  --<span class="built_in">limit</span> N             How many candidate regions (contig or transcript) to consider per BUSCO (default: 3)</span><br><span class="line">  --list-datasets       Print the list of available BUSCO datasets</span><br><span class="line">  --long                Optimization Augustus self-training mode (Default: Off); adds considerably to the run time, but can improve results <span class="keyword">for</span> some non-model organisms</span><br><span class="line">  --metaeuk_parameters <span class="string">&quot;--PARAM1=VALUE1,--PARAM2=VALUE2&quot;</span></span><br><span class="line">                        Pass additional arguments to Metaeuk <span class="keyword">for</span> the first run. All arguments should be contained within a single string with no white space, with each argument separated by a comma.</span><br><span class="line">  --metaeuk_rerun_parameters <span class="string">&quot;--PARAM1=VALUE1,--PARAM2=VALUE2&quot;</span></span><br><span class="line">                        Pass additional arguments to Metaeuk <span class="keyword">for</span> the second run. All arguments should be contained within a single string with no white space, with each argument separated by a comma.</span><br><span class="line">  <span class="string">&#x27;--offline&#x27;</span>            <span class="string">&#x27;To indicate that BUSCO cannot attempt to download files&#x27;</span></span><br><span class="line">  --out_path OUTPUT_PATH</span><br><span class="line">                        Optional location <span class="keyword">for</span> results folder, excluding results folder name. <span class="string">&#x27;Default is current working directory&#x27;</span>.</span><br><span class="line">  -q, --quiet           Disable the info logs, <span class="string">&#x27;displays only errors&#x27;</span></span><br><span class="line">  -r, --restart         <span class="string">&#x27;Continue a run that had already partially completed&#x27;</span>.</span><br><span class="line">  --tar                 <span class="string">&#x27;Compress some subdirectories with many files to save space&#x27;</span></span><br><span class="line">  --update-data         Download and replace with last versions all lineages datasets and files necessary to their automated selection</span><br><span class="line">  -v, --version         Show this version and <span class="built_in">exit</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>fasta文件中，一些组装工具生成的<code>contig</code>的名字是形如<code>&gt;contig/1/12345</code>之类的，这种fasta文件运行时BUSCO会报错，解决办法是改名，perl单行。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat contig.fasta | perl -p -e <span class="string">&#x27;s&#123;/&#125;&#123;&#125;g&#x27;</span> &gt; contig.new.fasta</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="结果解读"><a href="#结果解读" class="headerlink" title="结果解读"></a>结果解读</h1><p>在运行文件夹下会有</p>
+<h1 id="结果解读"><a class="markdownIt-Anchor" href="#结果解读"></a> 结果解读</h1>
+<p>在运行文件夹下会有</p>
 <ul>
 <li><code>run_suffix</code> 文件夹：因为上面<code>-o</code>选项设置了<code>suffix</code>，所以文件夹名称加了后缀。文件夹里，有一个文件最为重要。是<code>short_summary_suffix.txt</code></li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Summarized benchmarking in BUSCO notation for file assembly/spades/contigs.fasta</span><br><span class="line"># BUSCO was run in mode: genome</span><br><span class="line">    C:98.6%[S:98.6%,D:0.0%],F:0.0%,M:1.4%,n:148</span><br><span class="line"></span><br><span class="line">    146 Complete BUSCOs (C)</span><br><span class="line">    146 Complete and single-copy BUSCOs (S)</span><br><span class="line">    0   Complete and duplicated BUSCOs (D)</span><br><span class="line">    0   Fragmented BUSCOs (F)</span><br><span class="line">    2   Missing BUSCOs (M)</span><br><span class="line">    148 Total BUSCO groups searched</span><br></pre></td></tr></table></figure>
-
 <table>
 <thead>
 <tr>
-<th align="left">缩写</th>
+<th style="text-align:left">缩写</th>
 <th>全称</th>
 <th>说明</th>
 <th>关系</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">C</td>
+<tbody>
+<tr>
+<td style="text-align:left">C</td>
 <td>Complete</td>
 <td>多少个BUSCO测试基因被覆盖。</td>
 <td>C = S + D</td>
 </tr>
 <tr>
-<td align="left">S</td>
+<td style="text-align:left">S</td>
 <td>single-copy</td>
 <td>多少个基因经过比对发现是单拷贝。</td>
 <td>-</td>
 </tr>
 <tr>
-<td align="left">D</td>
+<td style="text-align:left">D</td>
 <td>duplicated</td>
 <td>多少个基因经过比对发现包含多拷贝。</td>
 <td>-</td>
 </tr>
 <tr>
-<td align="left">F</td>
+<td style="text-align:left">F</td>
 <td>Fragment</td>
 <td>多少个基因经过比对覆盖不完全，只是部分比对上。</td>
 <td>-</td>
 </tr>
 <tr>
-<td align="left">M</td>
+<td style="text-align:left">M</td>
 <td>Miss</td>
 <td>没有得到比对结果的基因数</td>
 <td>-</td>
 </tr>
 <tr>
-<td align="left">Total</td>
+<td style="text-align:left">Total</td>
 <td>Total</td>
 <td>总共测试的基因条目数</td>
 <td>Total = C + F + M</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一般情况下对于完整度较好的基因组组装结果来讲，Complete and single-copy越多越好，而Complete and duplicated和Missing越少越好，对于Fragmented也尽可能地少一些。</span><br><span class="line">真实项目中，Complete BUSCOs (C) 的比例通常都能达到 <span class="number">80%</span> 以上。</span><br><span class="line">C值表示和BUSCO集相比的完整度，M值表示可能缺少的基因数，D则是重复数。</span><br></pre></td></tr></table></figure>
-
-
-
 <p>三种比对</p>
 <ul>
 <li>情况1 - 完全覆盖</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">说明: +表示组装得到基因序列 -表示用于测试的基因序列</span><br><span class="line"></span><br><span class="line">组装 : ================+++++++==============</span><br><span class="line">测试                   -------</span><br><span class="line">                       或者</span><br><span class="line">组装 : ==============+++++++++++============</span><br><span class="line">测试                   -------               </span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>情况2 - 部分覆盖</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">组装 : ================+++++++==============</span><br><span class="line">测试                   -----</span><br><span class="line">                     /      \</span><br><span class="line">                       或者</span><br><span class="line">组装 : ================+++++++==============</span><br><span class="line">测试                   -------</span><br><span class="line">                     /        \</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>情况3 - 没有比对</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">组装 : ================+++++++==============</span><br><span class="line">测试 </span><br></pre></td></tr></table></figure>
-
-<p>一般<code>S</code> + <code>D</code>的数值也就是<code>C</code>的值越大越好，但是在文献中作者说如果<code>D</code>的数值太多的话可能意味着组装错误的可能性较大。因为一个基因（BUSCO数据库中该基因一般为单拷贝）被覆盖多次，那么可能就是说该基因所在的片段组装可能出现问题。<br>因为理论上</p>
+<p>一般<code>S</code> + <code>D</code>的数值也就是<code>C</code>的值越大越好，但是在文献中作者说如果<code>D</code>的数值太多的话可能意味着组装错误的可能性较大。因为一个基因（BUSCO数据库中该基因一般为单拷贝）被覆盖多次，那么可能就是说该基因所在的片段组装可能出现问题。<br>
+因为理论上</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">理论上：--------------------------------------------</span><br><span class="line">实际上：--------   ----------    ----------    -----</span><br><span class="line">错误的：--------                 -------------</span><br><span class="line">           \\\\                    ///</span><br><span class="line">          -----------     --------------</span><br></pre></td></tr></table></figure>
-
-<p>理论上组装之后各个片段之间应该前后有序，之间除了重复区域或者其他特殊片段之外不应该有可以重叠的地方。<br>例如</p>
+<p>理论上组装之后各个片段之间应该前后有序，之间除了重复区域或者其他特殊片段之外不应该有可以重叠的地方。<br>
+例如</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sequence1 : ..TAGTCGTGA                         GTGCATGCTGTAGC..</span><br><span class="line">                       \                       /</span><br><span class="line">                        AAAATTGG......CGATGAAAA</span><br><span class="line">                       /                       \</span><br><span class="line">sequence2 : ..GGGTAGCGG                         TTGACTAGCTAGCT..</span><br></pre></td></tr></table></figure>
-
 <p>也就是说中间一段序列是两个序列的共同部分，除非这个序列存在多个拷贝，否则就很可能是拼接错误。通常一般这种拼接错误的序列的两端会出现重复序列。另外如果是多倍体组装的话，<code>D</code>值也可能大。</p>
 <p>一般来看，<code>S</code>似乎越大越好，<code>M</code>越小越好，说明组装的越完整，因为检测的单拷贝同源基因出现得多。但是<code>D</code>与<code>F</code>这两个数值越大不见得就是好的，因为组装的错误可能会带来这两个值的增大。不能仅仅只是通过这一个软件来判定。比如还可以借助<code>QUAST</code>和常规指标<code>N50</code>、<code>总的核酸量</code>、<code>点阵图</code>等等多个辅助标准来进行综合的评估。</p>
-<h1 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h1><p>执行完毕后，可使用<code>generate_plot.py</code>画图，条形图。</p>
+<h1 id="画图"><a class="markdownIt-Anchor" href="#画图"></a> 画图</h1>
+<p>执行完毕后，可使用<code>generate_plot.py</code>画图，条形图。</p>
 <ul>
 <li>首先把所有经过BUSCO检测的结果聚集到一个文件夹之内</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir my_summaries</span><br><span class="line">cp run_SPEC1/short_summary_SPEC1.txt my_summaries/.</span><br><span class="line">cp run_SPEC2/short_summary_SPEC2.txt my_summaries/.</span><br><span class="line">cp run_SPEC3/short_summary_SPEC3.txt my_summaries/.</span><br><span class="line">cp run_SPEC4/short_summary_SPEC4.txt my_summaries/.</span><br><span class="line">cp run_SPEC5/short_summary_SPEC5.txt my_summaries/.</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>运行</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python scripts/generate_plot.py –wd my_summaries</span><br></pre></td></tr></table></figure>
-
 <p>五个数值变成条形图显示，对比更加明显.</p>
 
     </div>
@@ -463,7 +454,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/" title="">https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-3-software/2022-03-02-HiFi-4-BUSCO/</a>
+    <a href="https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-4-BUSCO/" title="HiFi-4-QC-BUSCO">https://wangc1106.github.io/blog/2022/03/05/2022-03-02-HiFi-4-BUSCO/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -486,7 +477,10 @@
     <a href="/blog/2022/03/02/2022-03-02-paper-Petunia/" rel="prev" title="【paper】Insight into the evolution of the Solanaceae from the parental genomes of Petunia hybrida">
       <i class="fa fa-chevron-left"></i> 【paper】Insight into the evolution of the Solanaceae from the parental genomes of Petunia hybrida
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/blog/2022/03/06/2022-03-06-Linux-grid/" rel="next" title="【Linux集群任务调度系统】【LSF/SGE/Slurm/PBS】【grid】">
+      【Linux集群任务调度系统】【LSF/SGE/Slurm/PBS】【grid】 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -545,7 +539,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#conda"><span class="nav-number">1.1.</span> <span class="nav-text">conda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E5%AE%89%E8%A3%85%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">独立安装？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">下载数据库文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB"><span class="nav-number">5.</span> <span class="nav-text">结果解读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%BB%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text">画图</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text"> 下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#conda"><span class="nav-number">1.1.</span> <span class="nav-text"> conda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text"> 独立安装？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text"> 下载数据库文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text"> 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text"> 环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text"> 运行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#font-colorred%E5%8F%82%E6%95%B0font"><span class="nav-number">4.1.</span> <span class="nav-text"> 参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB"><span class="nav-number">5.</span> <span class="nav-text"> 结果解读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%BB%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text"> 画图</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -560,7 +554,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -573,7 +567,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
