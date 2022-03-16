@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="1osTo_gOe1SW9Hevqtz8vl8HfSgTO4DSMZ0DiMPMX6w">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="辅助组装案例2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HiFi-7-[HiFi+HiC-assembly-method]">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/index.html">
+<meta property="og:site_name" content="Banner&#39;s Blog">
+<meta property="og:description" content="辅助组装案例2">
+<meta property="og:locale">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/1.png">
+<meta property="article:published_time" content="2022-03-16T01:44:47.184Z">
+<meta property="article:modified_time" content="2022-03-16T04:13:59.970Z">
+<meta property="article:author" content="Wang C">
+<meta property="article:tag" content="denovo-III">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/1.png">
+
+<link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>HiFi-7-[HiFi+HiC-assembly-method] | Banner's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Banner's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream big work hard</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://wangc1106.github.io/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/banner.png">
+      <meta itemprop="name" content="Wang C">
+      <meta itemprop="description" content="Make more time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Banner's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HiFi-7-[HiFi+HiC-assembly-method]
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-16 09:44:47 / Modified: 12:13:59" itemprop="dateCreated datePublished" datetime="2022-03-16T09:44:47+08:00">2022-03-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/" class="post-meta-item leancloud_visitors" data-flag-title="HiFi-7-[HiFi+HiC-assembly-method]" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>22k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>20 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>辅助组装案例2</p>
+<span id="more"></span>
+
+<p>search：HiFi Hi-C  <a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/?term=HiFi%20Hi-C&amp;page=2">https://pubmed.ncbi.nlm.nih.gov/?term=HiFi%20Hi-C&amp;page=2</a></p>
+<h1 id="1-2021-09-亚麻纤维"><a href="#1-2021-09-亚麻纤维" class="headerlink" title="1. 2021.09 亚麻纤维"></a>1. 2021.09 亚麻纤维</h1><p><a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8473814/#">Front Genet.</a> 2021; 12: 735690.  cite1</p>
+<p>Published online 2021 Sep 13. doi: <a target="_blank" rel="noopener" href="https://dx.doi.org/10.3389%2Ffgene.2021.735690">10.3389/fgene.2021.735690</a></p>
+<blockquote>
+<p>Chromosome-Level Genome Assembly and Annotation of the Fiber Flax (<em>Linum usitatissimum</em>) Genome</p>
+</blockquote>
+<p><strong>Genome Assembly</strong></p>
+<p>The HiFi long reads were assembled by <strong>Hifiasm</strong> v0.13-r308 with the <strong>default parameters</strong>. Then the <strong>HiFi reads were mapped back to the assembly</strong> to generate a <strong>coverage distribution plot</strong> using <strong>minimap2</strong> 2.17-r941. According to the <strong>covering depth</strong>, <strong>purge_dups</strong> v1.2.5 (Guan et al., <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8473814/#B22">2020</a>) was applied to <strong>remove redundant haplotigs</strong>. The <strong>Juicer v1.6</strong> (Durand et al., <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8473814/#B15">2016</a>) and <strong>3D-DNA</strong> v180922 (Dudchenko et al., <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8473814/#B13">2017</a>) pipelines were used to process the <strong>Hi-C data and scaffold the assembly</strong>. The results were polished using the <strong>Juicebox Assembly Tools</strong> v1.11.08 (Dudchenko et al., <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8473814/#B14">2018</a>). The CDC Bethune v2 assembly has made most use of the long continuity of optical maps. To further improve the accuracy of order and orient in our assembly, we integrated information from the <strong>Hi-C scaffolding</strong> and the CDC Bethune v2 assembly using the ALLMAPS pipeline (Tang et al., <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8473814/#B55">2015b</a>) implemented in jcvi utility libraries (Tang et al., <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8473814/#B54">2015a</a>).</p>
+<h1 id="2-2021-06-玫瑰🌹"><a href="#2-2021-06-玫瑰🌹" class="headerlink" title="2. 2021.06 玫瑰🌹"></a>2. 2021.06 玫瑰🌹</h1><p><a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8213826/#">Hortic Res.</a> 2021; 8: 141.  cite4</p>
+<p>Published online 2021 Jun 18. doi: <a target="_blank" rel="noopener" href="https://dx.doi.org/10.1038%2Fs41438-021-00594-z">10.1038/s41438-021-00594-z</a></p>
+<blockquote>
+<p>A chromosome-level genome assembly of rugged rose (<em>Rosa rugosa</em>) provides insights into its evolution, ecology, and floral characteristics</p>
+</blockquote>
+<p><strong>Genome assembly and quality evaluation</strong></p>
+<p>Approximately 59.2 Gb of raw HiFi sequencing reads was obtained from the rosa DNA library. We first used <strong>HiCanu</strong> v2.2.1 for preliminary assembly of the rosa genome. Then, <strong>Redundans</strong> v 0.14a<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8213826/#CR27">27</a> was performed to <strong>remove the redundant sequences</strong>. A total of 150.6 Gb of <strong>Hi-C data</strong> were obtained to <strong>anchor</strong> the contig onto the chromosome. We <strong>aligned Hi-C</strong> reads to assembly by <strong>BWA</strong> v 0.7.17-r1188<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8213826/#CR28">28</a>. Next, the <strong>draft assembly genome</strong> was <strong>scaffolded with Hi-C reads by 3D-DNA</strong> v180114<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8213826/#CR29">29</a>. Then, <strong>Juicer</strong> was used to <strong>filter the sequence and cluster it</strong>, and the <strong>Juicerbox tool</strong><a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8213826/#CR30">30</a> was applied to <strong>manually adjust chromosome construction</strong>. We finally <strong>anchored the scaffolds on seven chromosomes</strong>. In addition, the <strong>BUSCO</strong> v3.0.2pipeline was used to assess the completeness and accuracy of the <em>R. rugosa</em> genome with the embryophyte_odb10 dataset, which contains 1614 BUSCO gene sets.</p>
+<p>#3. 2022.02 香菇</p>
+<p><a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8877449/#">J Fungi (Basel).</a> 2022 Feb; 8(2): 167. </p>
+<p>Published online 2022 Feb 9. doi: <a target="_blank" rel="noopener" href="https://dx.doi.org/10.3390%2Fjof8020167">10.3390/jof8020167</a></p>
+<blockquote>
+<p>Haplotype-Resolved Genome Analyses Reveal Genetically Distinct Nuclei within a Commercial Cultivar of <em>Lentinula edodes</em></p>
+</blockquote>
+<p><strong>Genome Sequencing and Assembly</strong></p>
+<p>SMRTbell libraries were sequenced on a PacBio Sequel II system, and consensus reads (HiFi reads) were generated using ccs software (<a target="_blank" rel="noopener" href="https://github.com/pacificbiosci-ences/unanimity">https://github.com/pacificbiosci-ences/unanimity</a>, accessed on 22 December 2021) with the parameter “–inPasses 3”. We generated 8.65 Gb and 5.35 Gb PacBio HiFi reads of SP3 and SP30, respectively. These long (~15 kb) and highly accurate (&gt;99%) HiFi reads were assembled using <strong>HiCanu</strong> [<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8877449/#B18-jof-08-00167">18</a>] for both strains with <strong>default parameters</strong>.</p>
+<p>The vegetative mycelia of SP3 and SP30 were also used to generate Hi-C DNA libraries at the Frasergen Enterprise (Wuhan, China). The Hi-C libraries were quantified and sequenced on the Illumina Nova-seq platform (San Diego, CA, USA). The chimeric fragments from the original cross-linked long-distance physical interactions were then isolated and processed into libraries. For anchored contigs, 34,909,404 and 31,267,524 clean <strong>reads</strong> were generated from the Hi-C library and were <strong>mapped</strong> to the SP3 and SP30 <strong>preliminary assembly</strong> using <strong>Juicer</strong> [<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8877449/#B20-jof-08-00167">20</a>] with default parameters. Paired reads mapped to different contigs were used for the Hi-C associated scaffolding. Self-ligated, non-ligated, and other invalid reads were filtered out. We applied <strong>3D-DNA</strong> to <strong>order</strong> and <strong>orient</strong> the clustered contigs. Then, <strong>Juicer</strong> was used to filter the sequences and cluster them, and the <strong>Juicebox</strong> was applied to <strong>adjust chromosome construction manually</strong> (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8877449/#app1-jof-08-00167">Figure S2</a>). We finally <strong>anchored the scaffolds on ten chromosomes</strong>. In addition, the BUSCO v3.0.231 pipeline was used to assess the completeness and accuracy of the SP3 and SP30 genomes.</p>
+<p><img src="/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/1.png" alt="截屏2022-03-16上午10.03.37"></p>
+<h1 id="4-2021-04-benchmark"><a href="#4-2021-04-benchmark" class="headerlink" title="4 2021.04 benchmark"></a>4 2021.04 benchmark</h1><p><a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#">Mol Med Rep.</a> 2021 Apr; 23(4): 251. </p>
+<p>Published online 2021 Feb 2. doi: <a target="_blank" rel="noopener" href="https://dx.doi.org/10.3892%2Fmmr.2021.11890">10.3892/mmr.2021.11890</a></p>
+<blockquote>
+<p>Benchmarking of next and third generation sequencing technologies and their associated algorithms for <em>de novo</em> genome assembly</p>
+</blockquote>
+<p><strong>Genome assembly</strong> </p>
+<p>In order to assess the hybrid assembly strategy, the present study chose to evaluate two pipelines, MaSuRCA (version 3.3.5) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b27-mmr-0-0-11890">27</a>,<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b28-mmr-0-0-11890">28</a>) and Wengan (version 0.1) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b29-mmr-0-0-11890">29</a>). MaSuRCA workflow offers three different assemblers, CABOG (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b30-mmr-0-0-11890">30</a>), SOAPdenovo (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b31-mmr-0-0-11890">31</a>) and Flye (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b32-mmr-0-0-11890">32</a>). The pipeline was tested using CABOG and Flye assemblers, which are designed for long-read assembly. Wengan pipeline is based on DiscovarDenovo assembler (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b33-mmr-0-0-11890">33</a>).</p>
+<p>Canu (version 2.0) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b34-mmr-0-0-11890">34</a>) is a long-read assembler, designed to use long high-noise single-molecule sequencing data, such as Nanopore and PacBio reads. Its workflow is based on the Celera assembler (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b35-mmr-0-0-11890">35</a>) which was used in the Human Genome Project to produce the first draft of the human genome. <strong>Hifiasm</strong> (version 0.13) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b36-mmr-0-0-11890">36</a>) and <strong>HiCanu</strong> (Canu version 2.1.1) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b37-mmr-0-0-11890">37</a>) are long-read assemblers exclusively <strong>for HiFi reads.</strong> The <strong>main difference</strong> between HiFi assemblers and the ones mentioned previously, is that <strong>Hifiasm and HiCanu produce phased assemblies</strong>. A phased assembly is a <strong>haplotype-resolved assembly</strong>, where <strong>high complexity regions</strong>, such as <strong>genes</strong>, will be <strong>separated into two different alleles</strong> (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b36-mmr-0-0-11890">36</a>,<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b38-mmr-0-0-11890">38</a>). HiCanu is a modified version of Canu, adapted to take advantage of the characteristics of HiFi reads. <strong>Hifiasm</strong> produces <strong>two different files</strong> for the <strong>primary</strong> and <strong>alternative</strong> assembly, whereas <strong>HiCanu</strong> <strong>combines</strong> the <strong>primary and the alternative</strong> assembly in the <strong>same FASTA file</strong>.</p>
+<p><strong>Scaffolding</strong> </p>
+<p>In order to test the necessity of scaffolding, a scaffolder was used to improve the assembly <strong>continuity</strong> and <strong>completeness</strong>, as follows: <strong>Hi-C data are mapped</strong> to the <strong>primary assembly</strong> by <strong>Arima</strong> mapping pipeline (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b39-mmr-0-0-11890">39</a>), to produce a BAM file which is consequently converted to a BED file. <strong>SALSA</strong> (version 2.2) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7893683/#b40-mmr-0-0-11890">40</a>) uses this BED file which contains the mapping information of Hi-C reads on the assembly, <strong>to scaffold</strong> the primary assembly.</p>
+<p><strong>Quality control metrics</strong></p>
+<p>QUAST (version 5.0.2)</p>
+<p><strong>Genome consistency plots</strong></p>
+<p>JupiterPlot (version 1.0) </p>
+<h1 id="5-2022-02-PJ"><a href="#5-2022-02-PJ" class="headerlink" title="5. 2022.02-PJ"></a>5. 2022.02-PJ</h1><blockquote>
+<p>A chromosome scale tomato genome built from complementary PacBio and Nanopore sequences alone reveals extensive linkage drag during breeding</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/35106855/">https://pubmed.ncbi.nlm.nih.gov/35106855/</a></p>
+<p>PacBio HiFi reads were independently assembled using Hifiasm and Canu, with respective N50 values of 31.3 and 17 Mbp (Table <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-tbl-0002">2</a>). Both HiFi assemblies <strong>contained single contigs that spanned the full length of the SL4.0 reference chromosome 5</strong> (Figure <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#support-information-section">S1</a>). We checked for the completeness of the assembly of gene sequences by Benchmarking Universal Single Copy Orthologs (BUSCO) analysis which showed both assemblies were almost gene complete (both 98.4%), slightly improving upon the SL4.0 genome and comparable to the <em>S. pimpinellifolium</em> ‘LA2093’ genome.</p>
+<p><strong>Hifiasm</strong> v0.14.2 (Cheng et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0013">2021</a>) was used to assemble the HiFi reads with default settings. Canu v2.1.1 was used to assemble the HiFi reads in ‘HiCanu’ mode (Nurk et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0050">2020</a>) with an estimated genome size of 916 Mbp based on kmer counting of the raw HiFi data using Jellyfish v2.2.6 (Marçais &amp; Kingsford, <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0044">2011</a>).</p>
+<p><strong>Quast</strong> v5.0.2 (Mikheenko et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0047">2018</a>) and GAAS v1.1.0 (<a target="_blank" rel="noopener" href="https://github.com/NBISweden/GAAS">https://github.com/NBISweden/GAAS</a>) were used to <strong>calculate statistics on fasta files</strong>. BUSCO was calculated using BUSCO v5.2.1 (Seppey et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0068">2019</a>) depending on hmmsearch v3.1, and metaeuk v4.a0f584d was used with lineage datasets solanales (<a target="_blank" rel="noopener" href="https://busco-data.ezlab.org/v5/data/lineages/solanales_odb10.2020-08-05.tar.gz">https://busco-data.ezlab.org/v5/data/lineages/solanales_odb10.2020-08-05.tar.gz</a>) and eudicots (<a target="_blank" rel="noopener" href="https://busco-data.ezlab.org/v5/data/lineages/eudicots_odb10.2020-09-10.tar.gz">https://busco-data.ezlab.org/v5/data/lineages/eudicots_odb10.2020-09-10.tar.gz</a>) to obtain evolutionarily informed expectations of gene content. To assess the LAI, LTR retriever v2.9.0 (Ou et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0051">2018</a>) was run with default settings on the respective genome assemblies.</p>
+<p>We ran one single round of <strong>Salsa</strong> v2.2 (Ghurye et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0026">2019</a>) with optional settings: <strong>-e DNASE -m yes -p yes</strong>.</p>
+<p>A modified version of the <strong>convert.sh</strong> script was used to convert the Salsa2 output to a Hi-C file, which was used within a local installation of <strong>Juicebox</strong> (<a target="_blank" rel="noopener" href="https://github.com/aidenlab/Juicebox">https://github.com/aidenlab/Juicebox</a>) v1.11.08 to generate a <strong>Hi-C contact plot.</strong></p>
+<p>The MbTMV genome assembly was aligned to SL4.0 (Hosmani et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0030">2019</a>) using <strong>Minimap2</strong> v2.17 (Li, <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0039">2018</a>) with default settings, followed by running RaGOO v1.11 (Alonge et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15690#tpj15690-bib-0003">2019</a>) with default options.</p>
+<h1 id="6-2021-09-gpb-拟南芥"><a href="#6-2021-09-gpb-拟南芥" class="headerlink" title="6. 2021.09-gpb 拟南芥"></a>6. 2021.09-gpb 拟南芥</h1><blockquote>
+<p>High-quality Arabidopsis thaliana Genome Assembly with Nanopore and HiFi Long Reads</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/34487862/">https://pubmed.ncbi.nlm.nih.gov/34487862/</a></p>
+<p>HiFi sequencing and assembly**</p>
+<p>Sequencing was performed on a PacBio Sequel II instrument with Sequencing Primer V2 and Sequel II Binding Kit 2.0 at the Genome Center of Grandomics. A total of 22.90 Gb of HiFi reads with ∼157 × coverage were generated, and N50 of the reads was 15,424 bp. HiFi reads were assembled using <strong>hifiasm</strong> v. 0.14-r312 [<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1672022921001741?via=ihub#b0085">17]</a>with <strong>default parameters</strong>, and the <strong>gfatools</strong> (<a target="_blank" rel="noopener" href="https://github.com/lh3/gfatools">https://github.com/lh3/gfatools</a>) was used to convert sequence graphs in the <strong>GFA to FASTA</strong> format.</p>
+<p><strong>Hi-C sequencing and scaffolding</strong></p>
+<p>Hi-C library was prepared from cross-linked chromatins of plant cells using a standard Hi-C protocol; the library was then sequenced using Illumina NovaSeq 6000. A total of 21.14 Gb of Hi-C reads with ∼158 × coverage were generated. The Hi-C sequencing data were used to <strong>anchor</strong> all contigs using <strong>Juicer</strong> v. 1.5 [<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1672022921001741?via=ihub#b0220">44]</a>, <strong>followed by a 3D-DNA scaffolding pipeline</strong> [<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1672022921001741?via=ihub#b0225">45]</a>. Scaffolds were then <strong>manually checked and refined</strong> with <strong>Juicebox</strong> v. 1.11.08 [<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1672022921001741?via=ihub#b0230">46]</a>.</p>
+<h1 id="7-2021-11-J-Hered-茱萸"><a href="#7-2021-11-J-Hered-茱萸" class="headerlink" title="7. 2021.11-J Hered 茱萸"></a>7. 2021.11-J Hered 茱萸</h1><p><strong>Nuclear Genome Assembly</strong></p>
+<p>We assembled the genome of the big berry manzanita following a <strong>protocol</strong> adapted from <strong>Rhie et al</strong>. (2021) as part of the CCGP assembly efforts. The CCGP assembly protocol version 1.0 uses PacBio <strong>HiFi</strong> reads and <strong>Hi-C</strong> chromatin capture data for the generation of high-quality and highly contiguous nuclear genome assemblies. The output corresponding to a diploid assembly consists of <strong>two pseudo haplotypes</strong> (<strong>primary</strong> and <strong>alternate</strong>). The <strong>primary</strong> assembly is <strong>more complete</strong> and consists of <strong>longer phased blocks</strong>. The <strong>alternate</strong> consists of <strong>haplotigs</strong> (contigs of clones with the same haplotype) in <strong>heterozygous regions</strong> and is not as complete and more fragmented. Given the characteristics of the latter, it <strong>cannot be considered on its own</strong> but as <strong>a complement of the primary assembly</strong> (<a target="_blank" rel="noopener" href="https://lh3.github.io/2021/04/17/concepts-in-phased-assemblies">https://lh3.github.io/2021/04/17/concepts-in-phased-assemblies</a>, <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/grc/help/definitions/">https://www.ncbi.nlm.nih.gov/grc/help/definitions/</a>).</p>
+<p>To generate this assembly, we <strong>removed remnant adapter</strong> sequences from the PacBio HiFi dataset using <strong>HiFiAdapterFilt</strong> and assembled the initial set of contigs with the filtered PacBio reads using <strong>HiFiasm</strong> (see Table 1 for assembly pipeline and relevant software). Next, we <strong>identified sequences corresponding to haplotypic duplications and contig overlaps</strong> on the <strong>primary assembly</strong> with <strong>purge_dups</strong> [Version 1.0.1] (Guan et al. 2020) and transferred them to the alternate assembly. We a<strong>ligned the Hi-C data</strong> to both <strong>primary and alternate assemblies</strong> using the <strong>Arima Genomics Mapping Pipeline</strong> (<a target="_blank" rel="noopener" href="https://github.com/ArimaGenomics/mapping_pipeline">https://github.com/ArimaGenomics/mapping_pipeline</a>) and <strong>scaffolded</strong> the genomes using <strong>SALSA</strong> [Version 2, options –e GATCGATC] (Ghurye et al. 2017; Ghurye et al. 2019). We <strong>closed the generated gaps</strong> in both <strong>assemblies</strong> using the PacBio <strong>HiFi</strong> reads and <strong>YAGCloser</strong> (<a target="_blank" rel="noopener" href="https://github.com/merlyescalona/yagcloser">https://github.com/merlyescalona/yagcloser</a>). The <strong>primary assembly</strong> was <strong>manually curated</strong> by <strong>iteratively generating and analyzing</strong> Hi-C <strong>contact maps</strong>. To generate the contact maps, we <strong>aligned</strong> the <strong>Hi-C</strong> data against the corresponding reference with <strong>bwa</strong> mem, identified ligation junctions, and generated <strong>Hi-C pairs</strong> using <strong>pairtools</strong> [Version 0.3.0] (Goloborodko et al. 2018). We generated a multi-resolution <strong>Hi-C matrix</strong> in binary form with <strong>cooler</strong> [Version 0.8.10] (Abdennur and Mirny 2020) and balanced it with <strong>hicExplorer</strong> [Version 3.6] (Ramírez et al. 2018). We used <strong>HiGlass</strong> [Version 2.1.11] (Kerpedjiev et al. 2018) and the <strong>PretextSuite</strong> (<a target="_blank" rel="noopener" href="https://github.com/wtsi-hpag/PretextView">https://github.com/wtsi-hpag/PretextView</a>; <a target="_blank" rel="noopener" href="https://github.com/wtsihpag/PretextMap">https://github.com/wtsihpag/PretextMap</a>; <a target="_blank" rel="noopener" href="https://github.com/wtsi-hpag/PretextSnapshot">https://github.com/wtsi-hpag/PretextSnapshot</a>) to <strong>visualize the contact maps</strong>. Assemblies were then checked for contamination using the <strong>BlobToolKit Framework</strong> [Version 2.3.3] (Challis et al. 2020), and <strong>trimmed</strong> for remnants of sequence adaptors and <strong>mitochondrial</strong> contamination.</p>
+<p>Table1 Assembly pipeline and software usage. Software citations are listed in the text</p>
+<table>
+<thead>
+<tr>
+<th>Assembly</th>
+<th align="left">Software</th>
+<th align="left">Version</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Filtering PacBio HiFi adapters</td>
+<td align="left">HiFiAdapterFilt   <a target="_blank" rel="noopener" href="https://github.com/sheinasim/HiFiAdapterFilt">https://github.com/sheinasim/HiFiAdapterFilt</a></td>
+<td align="left">Commit 64d1c7b</td>
+</tr>
+<tr>
+<td>K-mer counting</td>
+<td align="left">Meryl</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td>Estimation of genome size and heterozygosity</td>
+<td align="left"><font color="green"><strong>GenomeScope</strong> </font></td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td><em>De novo</em> assembly (contiging)</td>
+<td align="left"><font color="green"><strong>HiFiasm</strong> </font></td>
+<td align="left">0.13-r308</td>
+</tr>
+<tr>
+<td>Long read, genome-genome alignment</td>
+<td align="left"><font color="green"><strong>minimap2</strong> </font></td>
+<td align="left">2.16</td>
+</tr>
+<tr>
+<td>Remove low-coverage, duplicated contigs</td>
+<td align="left"><font color="green"><strong>purge_dups</strong></font></td>
+<td align="left">1.0.1</td>
+</tr>
+<tr>
+<td><strong>Scaffolding</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>Hi-C mapping for SALSA</td>
+<td align="left"><font color="green"><strong>Arima</strong></font> Genomics mapping pipeline   <a target="_blank" rel="noopener" href="https://github.com/ArimaGenomics/mapping_pipeline">https://github.com/ArimaGenomics/mapping_pipeline</a></td>
+<td align="left">2e74ea4</td>
+</tr>
+<tr>
+<td>Hi-C Scaffolding</td>
+<td align="left"><font color="green"><strong>SALSA</strong> </font></td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td>Gap closing</td>
+<td align="left">YAGCloser?   <a target="_blank" rel="noopener" href="https://github.com/merlyescalona/yagcloser">https://github.com/merlyescalona/yagcloser</a></td>
+<td align="left">20e2769</td>
+</tr>
+<tr>
+<td><strong>Hi-C contact map generation</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>Short-read alignment</td>
+<td align="left">bwa</td>
+<td align="left">0.7.17-r1188</td>
+</tr>
+<tr>
+<td>SAM/BAM processing</td>
+<td align="left">samtools</td>
+<td align="left">1.11</td>
+</tr>
+<tr>
+<td>SAM/BAM filtering</td>
+<td align="left">pairtools</td>
+<td align="left">0.3.0</td>
+</tr>
+<tr>
+<td>Pairs indexing</td>
+<td align="left">pairix</td>
+<td align="left">0.3.7</td>
+</tr>
+<tr>
+<td>Matrix generation</td>
+<td align="left">Cooler</td>
+<td align="left">0.8.10</td>
+</tr>
+<tr>
+<td>Matrix balancing</td>
+<td align="left">hicExplorer</td>
+<td align="left">3.6</td>
+</tr>
+<tr>
+<td>Contact map visualization</td>
+<td align="left">HiGlass</td>
+<td align="left">2.1.11</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">PretextMap</td>
+<td align="left">0.1.4</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">PretextView</td>
+<td align="left">0.1.5</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">PretextSnapshot</td>
+<td align="left">0.0.3</td>
+</tr>
+<tr>
+<td><strong>Organelle assembly</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>Sequence similarity search</td>
+<td align="left"><font color="green">BLAST+ </font></td>
+<td align="left">2.10</td>
+</tr>
+<tr>
+<td>Long read alignment</td>
+<td align="left"><font color="green">Pbmm2</font> (<a target="_blank" rel="noopener" href="https://github.com/PacificBiosciences/pbmm2">https://github.com/PacificBiosciences/pbmm2</a>)</td>
+<td align="left">1.4.0</td>
+</tr>
+<tr>
+<td>Variant calling and consensus</td>
+<td align="left">bcftools</td>
+<td align="left">1.11-5</td>
+</tr>
+<tr>
+<td>Extraction of sequences</td>
+<td align="left">seqtk</td>
+<td align="left">1.3-r115</td>
+</tr>
+<tr>
+<td>Circular-aware long-read alignment</td>
+<td align="left"><font color="green">racon </font></td>
+<td align="left">1.4.19</td>
+</tr>
+<tr>
+<td>Sequence polishing</td>
+<td align="left">raptor</td>
+<td align="left">0.20.3</td>
+</tr>
+<tr>
+<td>Sequence alignment</td>
+<td align="left">lastz</td>
+<td align="left">1.04.08</td>
+</tr>
+<tr>
+<td>Gene annotation</td>
+<td align="left">MitoFinder</td>
+<td align="left">1.4</td>
+</tr>
+<tr>
+<td><strong>Genome quality assessment</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>Basic assembly metrics</td>
+<td align="left"><font color="green"><strong>QUAST</strong> </font></td>
+<td align="left">5.0.2</td>
+</tr>
+<tr>
+<td>Assembly completeness</td>
+<td align="left"><font color="green"><strong>BUSCO</strong> </font></td>
+<td align="left">5.0.0</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">Merqury</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td><strong>Contamination screening</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>General contamination screening</td>
+<td align="left">BlobToolKit</td>
+<td align="left">2.3.3</td>
+</tr>
+</tbody></table>
+<p><strong>Mitochondrial Genome Assembly</strong></p>
+<p>We identified <strong>a subset of mitochondrial reads from the PacBio HiFi</strong> dataset using <strong>BLAST+</strong>  by identifying regions of similarity between the reads and the mitochondrial <strong>(mito) database</strong> (NCBI). These mitochondrial reads were used as input in <strong>HiFiasm</strong> [Version 0.13-r308] to generate the <strong>mitochondrial</strong> <strong>assembly</strong>. Given the circularity of the mitochondrial genome, we carried out self-alignment of the sequence using <strong>lastz</strong> [Version 1.04.08] (Harris 2007) to <strong>manually identify and remove duplicated regions</strong>. We aligned the subset of mitochondrial reads to the assembly using <strong>raptor</strong> [Version 0.20.3-171e0f1] (<a target="_blank" rel="noopener" href="https://github.com/isovic/raptor">https://github.com/isovic/raptor</a>) and <strong>polished</strong> it with <strong>racon</strong> [Version 1.14.] (<a target="_blank" rel="noopener" href="https://github.com/isovic/racon">https://github.com/isovic/racon</a>). We searched for <strong>matches</strong> of the resulting <strong>mitochondrial assembly</strong> sequence in the nuclear genome assembly using <strong>BLAST+</strong> and <strong>filtered out scaffolds from the nuclear genome</strong> with a percentage of <strong>sequence identity &gt;99%</strong> and <strong>size smaller than the mitochondrial assembly sequence</strong>. From the <strong>subset of mitochondrial reads</strong> used for the assembly, we analyzed the <strong>BLAST</strong> output and <strong>the species of the closest mitochondrial sequence</strong> available in the NCBI GenBank database, <em>Vaccinium macrocarpon</em> (Accession number: <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/nuccore/NC_023338.1">NC_023338.1</a>). We used the mitochondrial assembly of <em>V. macrocarpon</em> as a <strong>guide</strong> for the <strong>mitochondrial gene annotation</strong> generated with <strong>MitoFinder</strong> [Version 1.4] (Allio et al. 2020).</p>
+<p><strong>Chloroplast Genome Assembly</strong></p>
+<p>We identified chloroplast reads from the PacBio HiFi dataset with BLAST+ using the plastids RefSeq genomes [v4.1] (O’Leary et al. 2016). From this subset, we analyzed the matches and identified the species of the closest chloroplast sequence available in the NCBI database as <em>Camellia taliensis</em> (NC_022264.1). Next, we found matches of the <em>C. taliensis</em> chloroplast genome sequence in the nuclear genome assembly with BLAST+ and filtered out scaffolds from the nuclear genome assembly with length smaller than the <em>C. taliensis</em> length, sequence identity &gt;90%, and <em>e</em>-value &lt;0.00001. We aligned the filtered scaffolds to the <em>C. taliensis</em> chloroplast genome with minimap2 (Li 2018) and generated a consensus sequence with bcftools (Li 2011). We manually curated the sequence using lastz. Finally, we polished the last assembly version using raptor and racon and annotated it using the web platform GeSeq (Tillich et al. 2017).</p>
+<h1 id="8-2022-02-pj-澳洲坚果-value"><a href="#8-2022-02-pj-澳洲坚果-value" class="headerlink" title="8. 2022.02-pj 澳洲坚果 value"></a>8. 2022.02-pj 澳洲坚果 value</h1><blockquote>
+<p> De novo chromosome level assembly of a plant genome from long read sequence data</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/34784084/">https://pubmed.ncbi.nlm.nih.gov/34784084/</a></p>
+<p>We now report the use of <strong>HiFiasm</strong> to assemble the genome of Macadamia jansenii, a genome that has been used as a model to test sequencing and assembly. This achieved <strong>almost complete chromosome level assembly</strong> from the sequence data alone <strong>without</strong> the need for <strong>higher level chromosome map information</strong>. <strong>Eight of the 14 chromosomes were represented by a single large contig</strong> (six with telomere repeats at both ends) and the <strong>other six assembled from two to four main contigs</strong>. The small number of chromosome breaks appears to be the result of <strong>highly repetitive regions</strong> including ribosomal genes that cannot be assembled by these approaches. </p>
+<p>Table 1. HiFiasm contigs in different size categories and comparison of primary and haploid assemblies generated from HiFiasm genome assembler tool</p>
+<table>
+<thead>
+<tr>
+<th align="left">Number of contigs</th>
+<th align="left">Assembly length (Mb)</th>
+<th align="left">N50 (Mb)</th>
+<th align="left">N75 (Mb)</th>
+<th align="left">busco(%)</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">HiFiasm assembly</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">Total contigs</td>
+<td align="left">779</td>
+<td align="left">826</td>
+<td align="left">46</td>
+<td align="left">25</td>
+<td>99.6</td>
+</tr>
+<tr>
+<td align="left">Contigs &gt;40 Mb</td>
+<td align="left">10</td>
+<td align="left">524</td>
+<td align="left">50</td>
+<td align="left">46</td>
+<td>68.7</td>
+</tr>
+<tr>
+<td align="left">Contigs &gt;10 Mb</td>
+<td align="left">19</td>
+<td align="left">746</td>
+<td align="left">48</td>
+<td align="left">39</td>
+<td>93.9</td>
+</tr>
+<tr>
+<td align="left">Contigs &gt;1 Mb</td>
+<td align="left">30</td>
+<td align="left">784</td>
+<td align="left">46</td>
+<td align="left">30</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td align="left">Contigs &gt;100 kb</td>
+<td align="left">94</td>
+<td align="left">805</td>
+<td align="left">46</td>
+<td align="left">27</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td align="left">Between 100 kb and 1 Mb</td>
+<td align="left">64</td>
+<td align="left">20</td>
+<td align="left">0.49</td>
+<td align="left">0.22</td>
+<td>0.20</td>
+</tr>
+<tr>
+<td align="left">Between 10 kb and 100 kb</td>
+<td align="left">685</td>
+<td align="left">22</td>
+<td align="left">0.032</td>
+<td align="left">0.028</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td align="left">Comparison of HiFiasm primary and haploid assemblies</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">Primary assembly</td>
+<td align="left">779</td>
+<td align="left">827</td>
+<td align="left">46.1</td>
+<td align="left">25</td>
+<td>99.60</td>
+</tr>
+<tr>
+<td align="left">Hap 1_assembly</td>
+<td align="left">879</td>
+<td align="left">816</td>
+<td align="left">24.4</td>
+<td align="left">8.9</td>
+<td>98.80</td>
+</tr>
+<tr>
+<td align="left">Hap 2_assembly</td>
+<td align="left">363</td>
+<td align="left">776</td>
+<td align="left">14.3</td>
+<td align="left">5.4</td>
+<td>97.90</td>
+</tr>
+<tr>
+<td align="left">Hap 1 &gt;1 Mb</td>
+<td align="left">96</td>
+<td align="left">736</td>
+<td align="left">16.4</td>
+<td align="left">6.8</td>
+<td>96.70</td>
+</tr>
+<tr>
+<td align="left">Hap 2 &gt;1 Mb</td>
+<td align="left">72</td>
+<td align="left">766</td>
+<td align="left">24.5</td>
+<td align="left">12.3</td>
+<td>98.10</td>
+</tr>
+</tbody></table>
+<p><strong>HiFiasm assembly</strong></p>
+<p>For assembly, <strong>24 core</strong> processing units and <strong>120 Gb of memory</strong> was employed. Default settings of the HiFiasm assembler were used to assemble heterozygous genomes with <strong>built-in duplication purging parameters</strong>. The HiFiasm output directory consists of two haploid (1 and 2), one primary contig and one alternate haplotig GFA graph files. Each halplotig and one primary contig GFA file was converted to FASTA format using the <strong>awk</strong> command.</p>
+<p><strong>Analysis of assembly</strong></p>
+<p>The primary HiFiasm assembly of <em>M. jansenii</em> included 779 contigs that were categorised into three subsets: (i) contigs &lt;1 Mb size; (ii) contigs &lt;1 Mb and more than 100 kb size; and (iii) contigs &lt;100 kb size. Along with the <strong>main primary and two haploid assemblies</strong>, all <strong>three</strong> sets of primary contig subsets were <strong>passed</strong> through analysis using <strong>quast</strong> (Gurevich et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0010">2013</a>), <strong>busco</strong> (Simão et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0028">2015</a>) and <strong>repeatmodeler</strong> (Humann et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0012">2019</a>). The <strong>telomere sequences</strong> in the HiFiasm <strong>contigs</strong> were identified using the <strong>bioserf platform</strong> (<a target="_blank" rel="noopener" href="https://bioserf.org/">https://bioserf.org</a>) (Somanathan and Baysdorfer, <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0029">2018</a>). <strong>Ribosomal RNA</strong> and <strong>other protein coding genes</strong> at the <strong>terminal</strong> end of the HiFiasm contigs were identified using an <strong>ncbi blast search</strong> (<a target="_blank" rel="noopener" href="https://blast.ncbi.nlm.nih.gov/">https://blast.ncbi.nlm.nih.gov</a>). Ribosomal RNA in the contigs was identified using <strong>Barrnap</strong> (<a target="_blank" rel="noopener" href="https://github.com/tseemann/barrnap">https://github.com/tseemann/barrnap</a>) (Seemann, <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0023">2013</a>) with default settings for eukaryotes.</p>
+<p><strong>Comparison with Hi-C assembly</strong></p>
+<p>The HiFiasm contigs were compared with the <em>M. jansenii</em> 14 pseudo-molecules from the Hi-C assembly (Sharma et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0026">2021b</a>) using the online interactive D-Genies dotplot tool (Cabanettes and Klopp, <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0003">2018</a>) to <strong>compare two genomes using Minimap2</strong> and, for <strong>alignments</strong>, dotplot images were created after selecting the ‘sort contigs’ option, selecting the ‘minimum identity’ parameter at 0.75 and checking the ‘strong precision’ tick box.</p>
+<p><strong>Characterisation of organelle genomes content of HiFiasm contigs</strong></p>
+<p>A reference <font color="red"><strong>mitochondrial</strong> genome, <strong>chloroplast</strong> genome and <strong>nuclear ribosomal RNA</strong> sequence</font> from this sample were assembled from <strong>Illumina raw reads</strong> (Murigneux et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0020">2020</a>) using the <strong>GetOrganelle toolkit</strong> (Jin et al., <a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.15583#tpj15583-bib-0013">2020</a>) with default parameters. The <strong>HiFiasm contigs</strong> (779) were <strong>compared with</strong> the <strong>organellar and ribosomal sequences</strong> in dotplots.</p>
+<h1 id="9-2021-04-Mol-Ecol-Resour-百香果"><a href="#9-2021-04-Mol-Ecol-Resour-百香果" class="headerlink" title="9. 2021.04-Mol Ecol Resour 百香果"></a>9. 2021.04-Mol Ecol Resour 百香果</h1><p><a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1111/1755-0998.13310">https://onlinelibrary.wiley.com/doi/10.1111/1755-0998.13310</a></p>
+<blockquote>
+<p>Chromosome-level reference genome assembly provides insights into aroma biosynthesis in passion fruit (Passiflora edulis)</p>
+</blockquote>
+<p>The assembled reference genome is 1.28 Gb size with a scaffold N50 of 126.4 Mb and 99.22% sequences anchored onto nine pseudochromosomes. 以往的核型分析表明百香果是一种二倍体，9对染色体</p>
+<p><strong>Genome survey and assembly</strong><br>A total of 89.12 Gb of high-quality paired-end reads were obtained by <strong>Illumina</strong> genomic sequencing (~70.35X coverage, Table S1). The genome size, heterozygosity and repeat content were estimated based on k-mer distribution using <strong>21-mers</strong> extracted from the Illumina short reads. The estimated genome size was further validated using <strong>flow cytometr</strong>y. A total of 223.91 Gb raw PacBio subreads were filtered and corrected using pbccs pipeline with default parameters (<a target="_blank" rel="noopener" href="https://github.com/PacificBiosciences/ccs">https://github.com/PacificBiosciences/ccs</a>). The resulted CCS reads were subjected to hifiasm for de novo assembly. We <font color="red"><strong>corrected</strong> the <strong>primary contigs</strong> by the <strong>Pilon</strong></font> (version1.18) (Utturkar, Klingeman, Hurt, &amp; Brown, 2017) program <strong>using 89.12 Gb (70.35×) of Illumina paired-end reads</strong>. BWA (version0.7.10-r789) (Li, 2013) and SAMtools (version1.9) (Li et al., 2009) were used for reads alignment and SAM/BAM format conversion. <strong>BUSCO</strong> (version3.0) (Simao, Waterhouse, Ioannidis, Kriventseva, &amp; Zdobnov, 2015) program with embryophyta_odb10 database were used to assess the completeness of genome and gene annotation .</p>
+<p><strong>Chromosome assembly using Hi-C</strong></p>
+<p>Approximately 96.4 Gb of Hi-C data were generated. The raw data were filtered using perl script as implemented in the software <strong>LACHESIS</strong> (Burton et al., 2013). BWA software was used to <strong>map the Hi-C reads to the draft assembly</strong> and <strong>uniquely mapped reads were selected for furtheranalysis</strong>. We further applied our newly developed <strong>ALLHiC pipeline</strong> to link the contigs into <strong>nine pseudo-chromosomes</strong>. <strong>HiC-pro</strong> (version2.10.0) (Servant et al., 2015) program was used to <strong>calculate Hi-C mapping rate and evaluate the quality of Hi-C scaffolding</strong>.</p>
+<h1 id="10-2021-10-MolEcolResour-牡蛎🦪"><a href="#10-2021-10-MolEcolResour-牡蛎🦪" class="headerlink" title="10. 2021-10-MolEcolResour 牡蛎🦪"></a>10. 2021-10-MolEcolResour 牡蛎🦪</h1><blockquote>
+<p>Chromosome-level genome and population genomic analysis provide insights into the evolution and environmental adaptation of Jinjiang oyster Crassostrea ariakensis</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/34800349/">https://pubmed.ncbi.nlm.nih.gov/34800349/</a></p>
+<p>The C. ariakensis genome was 662.9 Mb with contig N50 length of 5.9 Mb using PacBio HiFi-CCS long reads, and 99.83% sequences were anchored onto 10 pseudochromosomes using Hi-C data.</p>
+<p>#11. 2021.10-Front Genet 思茅松毛虫</p>
+<blockquote>
+<p>Chromosome-Level Genome Assembly Reveals Significant Gene Expansion in the Toll and IMD Signaling Pathways of <em>Dendrolimus kikuchii</em></p>
+</blockquote>
+<p>forest pests</p>
+<p>Overall, a final genome assembly of 705.51 Mb with contig and scaffold N50 values of 20.89 and 24.73 Mb, respectively, was obtained. Of these contigs, 95.89% had unique locations on 29 chromosomes.</p>
+<p><strong>Genome Assembly and Polish</strong></p>
+<p>After quality control of raw reads, the pass reads were used for <em>de novo</em> genome assembly of using an <strong>OLC (overlap layout-consensus)/string graph method</strong> with NextDenovo (v2.3.0) with reads_cutoff:1 k and seed_cutoff:30 k. Firstly, self-correction of the original subreads was finished by NextCorrect to obtain consistent sequences (CNS reads). Then, CNS reads were used to obtain preliminary assembly through NextGraph (default parameter). The ONT, CCS and Hi-C data were used to correct the preliminary assembly using Racon (v1.3.1, default, CCS data) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B66">Vaser et al., 2017</a>)and Nextpolish (v1.2.4, default, ONT and Hi-C data) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B24">Hu et al., 2020</a>). <strong>BlastN was used to check the genome contamination</strong> (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#s10">Supplementary information S2</a>).</p>
+<p>Completeness of the genome assembly was assessed using <strong>BUSCO</strong> v4.0.5 (Benchmarking universal Single-Copy Orthologs) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B58">Simao et al., 2015</a>) and CEGMA (Core Eukaryotic Gene Mapping Approach) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B55">Parra et al., 2007</a>). <strong>To evaluate the accuracy of the assembly</strong>, all <strong>paired-end reads were mapped to the assembled</strong> genome using <strong>BWA</strong>  (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B39">Li and Durbin, 2010</a>) and the <strong>mapping rate</strong> and the genome coverage of sequencing reads were both assessed using SAMtools v0.1.1855 (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B40">Li et al., 2009</a>). In addition, the base accuracy of the assembly was calculated using bcftools (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B13">Danecek and Mccarthy, 2017</a>). Coverage of the expressed genes of the assembly was examined by aligning all the RNA-seq reads against the assembly using HISAT with default parameters. <strong>To ensure that mitochondrial sequences were not included in the assembly,</strong> the draft genome assembly was submitted to the <strong>NT library</strong> and matching sequences were eliminated.</p>
+<p><strong>Genome Anchoring to Chromosome</strong></p>
+<p>The read quality (370 million paired-end reads) was controlled using Hi-C-Pro. Firstly low-quality sequences (quality scores &lt;20), adaptor sequences, and sequences shorter than 30 bp were filtered out using fastp (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B10">Chen et al., 2018</a>). Next, clean reads were mapped to the draft assembled sequence using <strong>bowtie2</strong> (v2.3.2) (-end-to-end –very-sensitive -L 30) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B37">Langmead and Salzberg, 2012</a>) to obtain the unique mapped paired-end reads. Invalid read pairs were filtered using <strong>HiC-Pro</strong> (v2.8.1) (<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8589036/#B57">Servant et al., 2015</a>). The scaffolds were further <strong>clustered, ordered, and oriented onto chromosomes</strong> by <strong>LACHESIS</strong> (<a target="_blank" rel="noopener" href="https://github.com/shendurelab/LACHESIS">https://github.com/shendurelab/LACHESIS</a>), with parameters <strong>CLUSTER_MIN_RE_SITES = 100, CLUSTER_MAX_LINK_DENSITY = 2.5, CLUSTER NONINFORMATIVE RATIO = 1.4, ORDER MIN N RES IN TRUNK = 60, ORDER MIN N RES IN SHREDS = 60.</strong> Lastly, placement and orientation errors exhibiting obvious discrete chromatin interaction patterns were <strong>manually adjusted</strong>.</p>
+<p><strong>Synteny</strong> of the <em>D. kikuchii</em> <strong>genome</strong> with the <em>D. punctatus</em> genomes was analyzed using <strong>Minimap2</strong> and dotPlotly to identify chromosome structural changes among the two species.</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/" title="HiFi-7-[HiFi+HiC-assembly-method]">https://wangc1106.github.io/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/denovo-III/" rel="tag"># denovo-III</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2022/03/14/2022-03-14-HiFi-6-HiC-assembly/" rel="prev" title="HiFi-6-[HiFi-HiC-assembly-method]">
+      <i class="fa fa-chevron-left"></i> HiFi-6-[HiFi-HiC-assembly-method]
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2021-09-%E4%BA%9A%E9%BA%BB%E7%BA%A4%E7%BB%B4"><span class="nav-number">1.</span> <span class="nav-text">1. 2021.09 亚麻纤维</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-2021-06-%E7%8E%AB%E7%91%B0%F0%9F%8C%B9"><span class="nav-number">2.</span> <span class="nav-text">2. 2021.06 玫瑰🌹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-2021-04-benchmark"><span class="nav-number">3.</span> <span class="nav-text">4 2021.04 benchmark</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-2022-02-PJ"><span class="nav-number">4.</span> <span class="nav-text">5. 2022.02-PJ</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-2021-09-gpb-%E6%8B%9F%E5%8D%97%E8%8A%A5"><span class="nav-number">5.</span> <span class="nav-text">6. 2021.09-gpb 拟南芥</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-2021-11-J-Hered-%E8%8C%B1%E8%90%B8"><span class="nav-number">6.</span> <span class="nav-text">7. 2021.11-J Hered 茱萸</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-2022-02-pj-%E6%BE%B3%E6%B4%B2%E5%9D%9A%E6%9E%9C-value"><span class="nav-number">7.</span> <span class="nav-text">8. 2022.02-pj 澳洲坚果 value</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-2021-04-Mol-Ecol-Resour-%E7%99%BE%E9%A6%99%E6%9E%9C"><span class="nav-number">8.</span> <span class="nav-text">9. 2021.04-Mol Ecol Resour 百香果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-2021-10-MolEcolResour-%E7%89%A1%E8%9B%8E%F0%9F%A6%AA"><span class="nav-number">9.</span> <span class="nav-text">10. 2021-10-MolEcolResour 牡蛎🦪</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang C"
+      src="/blog/images/banner.png">
+  <p class="site-author-name" itemprop="name">Wang C</p>
+  <div class="site-description" itemprop="description">Make more time</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangc1106" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangc1106" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangchen116@126.com" title="E-Mail → mailto:wangchen116@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-dna"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang C</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz","app_key":"iYpeWQcmNqpHwr2uVlnJYVji","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+      <div style="height: 200px">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5knf34gs07t&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
