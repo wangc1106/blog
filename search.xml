@@ -179,7 +179,7 @@
       </tags>
   </entry>
   <entry>
-    <title>annotation</title>
+    <title>Assembly Gene Annotation</title>
     <url>/blog/2022/03/18/2022-03-18-annotation/</url>
     <content><![CDATA[<p>Structural annotation and functional annotation</p>
 <span id="more"></span>
@@ -566,6 +566,441 @@
 <p>*，使用Bandage编辑后，可以“merge all possible nodes”，然后再输出的文件格式gfa图形文件，gfa文件可以用gfa_to_fastg.py做一下转换。虽然gfa也是图形文件，但是图形内容与fastg有差异些复杂图形会输出失败。</p>
 </blockquote>
 <h1 id="Chloroplast-Genome-Assembly"><a href="#Chloroplast-Genome-Assembly" class="headerlink" title="Chloroplast Genome Assembly**"></a>Chloroplast Genome Assembly**</h1>]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>denovo-III</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【hifi mapping】【purge_dups】</title>
+    <url>/blog/2022/03/18/2022-03-18-purgedups/</url>
+    <content><![CDATA[<p>purge haplotigs and overlaps in an assembly based on read depth</p>
+<span id="more"></span>
+
+<p><a href="https://github.com/dfguan/purge_dups">https://github.com/dfguan/purge_dups</a></p>
+<h1 id="overview"><a href="#overview" class="headerlink" title="overview"></a>overview</h1><p>purge_dups is designed to remove haplotigs and contig overlaps in a <em>de novo</em> assembly based on read depth.</p>
+<p><img src="/blog/2022/03/18/2022-03-18-purgedups/1.png" alt="img"></p>
+<p><code>purge_dups</code>根据read深度分析组装中haplotigs和overlaps。相对于<code>purge_haplotigs</code>，运行速度更快，而且<strong>自动确定阈值</strong>。</p>
+<p><code>purge_dups</code>分为三个部分，<strong>第一部分</strong>是将序列<strong>回贴</strong>到基因组并分析<strong>覆盖度确定阈值</strong>，<strong>第二部分</strong>是将<strong>组装自我比对</strong>，<strong>第三部分</strong>是利用前两部分得到的信息<strong>鉴定</strong>原来序列中的<strong>haplotigs和overlaps</strong>.</p>
+<h1 id="Directory-Structure"><a href="#Directory-Structure" class="headerlink" title="Directory Structure"></a>Directory Structure</h1><ul>
+<li>scripts/pd_config.py: script to generate a configuration file used by run_purge_dups.py.</li>
+<li>scripts/run_purge_dups.py: script to run the <strong>purge_dups pipeline</strong>.</li>
+<li>scripts/run_busco: script to run busco, dependency: busco.</li>
+<li>scripts/run_kcm: script to make k-mer comparison plot.</li>
+<li>scripts/sub.sh: shell script to submit a <strong>farm</strong> job.</li>
+<li>src: purge_dups source files.</li>
+<li><font color="blue"><strong>src/split_fa</strong></font>: split fasta file by ‘N’s.</li>
+<li><font color="blue"><strong>src/pbcstat</strong></font>: create <strong>read depth histogram and base-level read depth</strong> for an assembly based on <strong>pacbio</strong> data.</li>
+<li><font color="blue"><strong>src/ngstat</strong></font>: create read depth histogram and base-level read detph for an assembly based on <strong>illumina</strong> data.</li>
+<li><font color="blue"><strong>src/calcuts</strong></font>: <strong>calculate coverage cutoffs</strong>.</li>
+<li><font color="blue"><strong>src/purge_dups</strong></font>: <strong>purge haplotigs and overlaps</strong> for an <strong>assembly</strong>.</li>
+<li><font color="blue"><strong>src/get_seqs</strong></font>: <strong>obtain seqeuences after purging</strong>.</li>
+<li>bin/* : all purge_dups excutables.</li>
+</ul>
+<h1 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/dfguan/purge_dups.git</span><br><span class="line"><span class="built_in">cd</span> purge_dups/src &amp;&amp; make</span><br><span class="line"><span class="comment">#脚本在scripts目录，编译程序在bin目录</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Pipeline-Guide"><a href="#Pipeline-Guide" class="headerlink" title="Pipeline Guide"></a>Pipeline Guide</h1><p>Given a primary assembly <em><strong>pri_asm</strong></em> and an alternative assembly <em><strong>hap_asm</strong></em> (<strong>optional</strong>, if you have one), follow the steps shown below to build your own purge_dups pipeline, steps with same number can be run simultaneously. Among all the steps, although <strong>step 5 is optional</strong>, we <strong>highly recommend</strong> our users to do so, because <strong>assemblers may produce overrepresented seqeuences</strong>. In such a case, The final <strong>step 5</strong> can be applied to <strong>remove those seqeuences</strong>.</p>
+<h2 id="Step-1-Run-minimap2-to-align-pacbio-data-and-generate-paf-files-then-calculate-read-depth-histogram-and-base-level-read-depth-根据覆盖度计算分界点-cutoff"><a href="#Step-1-Run-minimap2-to-align-pacbio-data-and-generate-paf-files-then-calculate-read-depth-histogram-and-base-level-read-depth-根据覆盖度计算分界点-cutoff" class="headerlink" title="Step 1. Run minimap2 to align pacbio data and generate paf files, then calculate read depth histogram and base-level read depth. 根据覆盖度计算分界点(cutoff)"></a>Step 1. Run minimap2 to align pacbio data and generate paf files, then calculate read depth histogram and base-level read depth. 根据覆盖度计算分界点(cutoff)</h2><p>For PacBio CLR reads</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$pb_list</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	minimap2 -xmap-pb <span class="variable">$pri_asm</span> <span class="variable">$i</span> | gzip -c - &gt; <span class="variable">$i</span>.paf.gz</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">bin/pbcstat *.paf.gz (produces PB.base.cov and PB.stat files)</span><br><span class="line">bin/calcuts PB.stat &gt; cutoffs 2&gt;calcults.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>For PacBio CCS reads</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gzip可以替换成pigz, 进行多线程压缩</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$pb_list</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	minimap2 -xasm20 <span class="variable">$pri_asm</span> <span class="variable">$i</span> | gzip -c - &gt; <span class="variable">$i</span>.paf.gz</span><br><span class="line"><span class="keyword">done</span><span class="comment"># 统计paf, 输出PB.base.cov和PB.stat文件</span></span><br><span class="line">bin/pbcstat *.paf.gz (produces PB.base.cov and PB.stat files)</span><br><span class="line">bin/calcuts PB.stat &gt; cutoffs 2&gt;calcults.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>Notice</strong> If you have a large genome, please set minimap2 <code>-I</code> option to ensure the genome can be indexed once, otherwise read depth can be wrong.</p>
+<p>二代测序，用<code>bwa mem</code>进行比对，然后用<code>bin/ngscstat</code>统计bam覆盖度，然后用<code>bin/calcuts</code>计算分界点。</p>
+<h2 id="Step-2-Split-an-assembly-and-do-a-self-self-alignment-Commands-are-following"><a href="#Step-2-Split-an-assembly-and-do-a-self-self-alignment-Commands-are-following" class="headerlink" title="Step 2. Split an assembly and do a self-self alignment. Commands are following:"></a>Step 2. Split an assembly and do a self-self alignment. Commands are following:</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#将assembly【从N处打断】，如果assembly中没有N就不打断，然后用minimap2进行contig自我比对。</span></span><br><span class="line"><span class="comment"># Split an assembly</span></span><br><span class="line">bin/split_fa <span class="variable">$pri_asm</span> &gt; <span class="variable">$pri_asm</span>.split</span><br><span class="line"><span class="comment"># do a self-self alignment</span></span><br><span class="line">minimap2 -xasm5 -DP <span class="variable">$pri_asm</span>.split <span class="variable">$pri_asm</span>.split | gzip -c - &gt; <span class="variable">$pri_asm</span>.split.self.paf.gz</span><br></pre></td></tr></table></figure>
+
+<p>run step1&amp;step2 simultaneously</p>
+<h2 id="Step-3-Purge-haplotigs-and-overlaps-with-the-following-command"><a href="#Step-3-Purge-haplotigs-and-overlaps-with-the-following-command" class="headerlink" title="Step 3. Purge haplotigs and overlaps with the following command."></a>Step 3. Purge haplotigs and overlaps with the following command.</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">根据每个碱基覆盖度以及组装自我比对结果对contig分类</span><br><span class="line"><span class="comment"># purge haplotigs and overlap</span></span><br><span class="line">bin/purge_dups -2 -T cutoffs -c PB.base.cov <span class="variable">$pri_asm</span>.split.self.paf.gz &gt; dups.bed 2&gt; purge_dups.log</span><br></pre></td></tr></table></figure>
+
+<p>dups.bed<strong>第四列</strong>是每个<strong>contig的分类信息</strong>，分为**”JUNK”, “HIGHCOV”, “HAPLOTIG”, “PRIMARY”, “REPEAT”, “OVLP”** 6类，<code>purge_dups</code>可以先以默认参数运行，如果结果不理想，可以调整如下参数</p>
+<ul>
+<li><code>-f</code>默认是.8, 根据80%区域的覆盖度来对contig进行分类。例如80%的区域都低于5x，将该序列定义为JUNK。对应源码中的<code>classify_seq</code>函数的<code>min_frac</code>参数</li>
+<li><code>-a</code>和<code>-b</code>过滤alignment, 对于源码中的<code>flt_by_bm_mm</code>的<code>min_bmf</code>和<code>min_mmf</code>参数</li>
+<li><code>-m</code>表示将两个联配衔接时，最低的匹配碱基数</li>
+<li><code>-M</code>和<code>-G</code>:分别表示第一轮和第二轮将前后两个联配衔接时最大空缺大小</li>
+<li><code>-E</code>表示 如果合并之后的alignment在contig末尾的前15k内，那么就把alignment延伸至contig末尾</li>
+<li><code>-l</code>: 用于控制overlap的大小，该值越小，overlap越多</li>
+</ul>
+<h2 id="Step-4-Get-purged-primary-and-haplotig-sequences-from-draft-assembly"><a href="#Step-4-Get-purged-primary-and-haplotig-sequences-from-draft-assembly" class="headerlink" title="Step 4. Get purged primary and haplotig sequences from draft assembly."></a>Step 4. Get purged primary and haplotig sequences from draft assembly.</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">bin/get_seqs -e dups.bed <span class="variable">$pri_asm</span> </span><br><span class="line"><span class="comment"># If you also want to remove the duplications in the middle, please remove 【`-e`】 option at your own risk, it may delete false positive duplications. For more options, please refer to `get_seqs -h`.</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的purged.fa就是最终结果，junk, haplotig和duplication都会在hap.fa中。</p>
+<p>可选步骤: 将<strong>alternative assembly和输出hap.fa进行合并</strong>，然后运行上面四步，得到的<strong>purge.fa就是新的alternative assembly</strong>，而<strong>再次输出的hap.fa则是junk或overrepresented序列</strong>。</p>
+<p>PS: 能不能用来过滤纯合基因组组装的垃圾序列呢？根据物种测试，过滤前后的BUSCO值，几乎没有变化，missing rate只提高了0.1%，</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 运行前</span></span><br><span class="line">C:98.8%[S:96.3%,D:2.5%],F:0.5%,M:0.7%,n:1375</span><br><span class="line"><span class="comment"># 运行后</span></span><br><span class="line">C:98.7%[S:96.3%,D:2.4%],F:0.5%,M:0.8%,n:1375</span><br></pre></td></tr></table></figure>
+
+<p>用法可行，且Canu的作者建议用<code>purge_dups</code>处理，参考<a href="https://links.jianshu.com/go?to=https://github.com/marbl/canu/issues/1717%23issuecomment-629644894">canu-issues-1717</a>。</p>
+<p>作者尚未在ONT和Illumina数据中测试软件，但是作者认为只需要修改<code>minimap2</code>的<code>-x map-pb</code>为<code>-x map-ont</code>就可以用在ONT数据上。</p>
+<p><strong>Notice</strong> this command will only remove haplotypic duplications at the ends of the contigs. If you also want to remove the duplications in the middle, please remove <code>-e</code> option at your own risk, it may delete false positive duplications. For more options, please refer to <code>get_seqs -h</code>.</p>
+<h2 id="Step-5-Merge-hap-fa-and-hap-asm-and-redo-the-above-steps-to-get-a-decent-haplotig-set"><a href="#Step-5-Merge-hap-fa-and-hap-asm-and-redo-the-above-steps-to-get-a-decent-haplotig-set" class="headerlink" title="Step 5. Merge hap.fa and $hap_asm and redo the above steps to get a decent haplotig set."></a>Step 5. Merge hap.fa and $hap_asm and redo the above steps to get a decent haplotig set.</h2><h1 id="Limitation"><a href="#Limitation" class="headerlink" title="Limitation"></a>Limitation</h1><ul>
+<li>Read depth cutoffs calculation: the coverage cutoffs can be larger for a low heterozygosity species, which causes the purged assembly size smaller than expected. In such a case, please use script/hist_plot.py to make the histogram plot and set coverage cutoffs manually.</li>
+<li>Repeats: purge_dups has a limited ability to process repeats.</li>
+</ul>
+<h1 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h1><p><strong>Q:</strong> Can I use purge_dups with <strong>short reads</strong>?</p>
+<p><strong>A:</strong> Yes, purge_dups does have a program to process Illumina reads, it’s called <strong>ngscstat</strong> under the bin directory. But I have not got time to test it. If you want to play with it, please follow this workflow:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bwa mem $pri_asm $sr_1.fq $sr_2.fq | samtools view -b -o - &gt; $sr.bam </span><br><span class="line">ngscstat $sr.bam... # The program will generate two/three outputs, TX.stat and TX.base.cov which functions the same way as PB.stat and PB.base.cov respectively.  </span><br></pre></td></tr></table></figure>
+
+<p>After you get the TX.stat and TX.base.cov file, you can following the normal purge_dups routine to clean your assembly.</p>
+<p><strong>Q1:</strong> Can I validate the cutoffs used by purge_dups?</p>
+<p><strong>A1:</strong> Yes, we also recommend this step. A script “hist_plot.py” under the scripts directory is available, you can also use it to manually select the cutoffs.</p>
+<p><strong>Q2:</strong> How can I <strong>validate the purged assembly?</strong> Is it clean enough or overpurged?</p>
+<p><strong>A2:</strong> There are many ways to validate the purged assembly. One way is to make a coverage plot for it which can also be <strong>hist_plot.py</strong>, the 2nd way is to run <strong>BUSCO</strong> and another way is to make a KAT plot with KAT (<a href="https://github.com/TGAC/KAT">https://github.com/TGAC/KAT</a>) or KMC (<a href="https://github.com/dfguan/KMC">https://github.com/dfguan/KMC</a>, use this if you only have a small memory machine) if short reads or some accurate reads are available.</p>
+<p><strong>Q3:</strong> Why do I get <strong>much fewer haplotypic duplications</strong> than expected?</p>
+<p><strong>A3:</strong> First check the original contig names, they should not contain any colons. Then check the cutoffs, if purge_dups automatically use <strong>a fairly low read depth for haplotypic duplications</strong>, it may <strong>remove nothing</strong>. In this case, you <strong>need to set the cutoffs manually.</strong></p>
+<p><strong>Q4:</strong> why does purge_dups remove <strong>middle sequence in a contig?</strong></p>
+<p><strong>A4:</strong> <strong>Some of them are real, while others may not</strong>. We are currently investigating them. Please use <code>-e</code> for <code>get_seqs</code> command if you <strong>only want to remove the duplications at the ends of the contigs.</strong></p>
+<hr>
+<p>Ref:<a href="https://www.jianshu.com/p/e218a1192d12">https://www.jianshu.com/p/e218a1192d12</a></p>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>denovo-III</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Hi-C】【Juicebox】</title>
+    <url>/blog/2022/03/17/2022-03-17-juicebox/</url>
+    <content><![CDATA[<p>Juicerbox guidline</p>
+<span id="more"></span>
+
+<ul>
+<li><p>通过<code>File</code>-&gt;<code>open</code>导入后缀为<code>hic</code>的文件查看，可导入本地的文件，也可输入url。软件内置ENCODE的数据集</p>
+</li>
+<li><p>自动展示所有染色体的HI-C图谱，通过工具栏<font color="blue"><strong>选择染色质</strong></font>，<font color="blue"><strong>调整分辨率</strong></font>，对交互矩阵<font color="blue"><strong>归一化</strong></font>，调整显示的染色质区域。以17号染色质体为例，在<code>Chromosomes</code>一栏中，两列都选择17号染色体，代表交互矩阵的行和列都是17号染色体，然后点击刷新，结果如下</p>
+</li>
+</ul>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/1.png" alt="img"></p>
+<ul>
+<li>通过<font color="blue"><strong>Normalization</strong></font>工具调整归一化方法(推荐banlanced？)；通过<font color="blue"><strong>Resolution</strong></font>工具调整分辨率；通过<font color="blue"><strong>Goto</strong></font>工具调整显示的染色体区域。</li>
+<li>通过简单操作就可查看和展示Hi-C图谱，除基本功能外，还支持导入<font color="blue">注释文件</font>，通过<code>View</code>-&gt;<font color="blue">Show Annotation Panel</font>可打开注释文件面板，注释信息分<strong>1D和2D</strong>两种，1D主要指chip_seq,RNA_seq等信息，2D指TAD,染色质环等信息，通过<code>Load ENCODE</code>以导入ENCODE<a href="https://cloud.tencent.com/solution/database?from=10680">数据库</a>中的一维注释，示意如下</li>
+</ul>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/2.png" alt="img"></p>
+<ul>
+<li>勾选需要导入的注释信息，通过Load导入</li>
+</ul>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/3.png" alt="img"></p>
+<ul>
+<li>每个导入的track的颜色等配置可在面板中调整</li>
+</ul>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/4.png" alt="img"></p>
+<ul>
+<li>通过<code>Load Loops/Domain</code>可导入2D的注释信息</li>
+</ul>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/5.png" alt="img"></p>
+<ul>
+<li>导入后在Hi-C图谱中看到对应的标记</li>
+</ul>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/6.png" alt="img"></p>
+<p>黄色区域标记的是TAD, 浅蓝色区域标记的是染色质环，调整好之后的图片也可以导出成PDF或者SVG格式。</p>
+<ul>
+<li>导入asm后蓝色区分假染色体，绿色区分scaffold</li>
+<li>按住shift选中contig</li>
+<li>绿色不能太碎</li>
+</ul>
+<p><strong>操作：</strong></p>
+<ul>
+<li><p>所有纠错操作都基于shift键</p>
+</li>
+<li><p>操作不熟练，你可能需要反复undo和redo（右键）</p>
+</li>
+<li><p>选框时，你只要在本框范围内拖动（按shift不要松），都会选中这个框（选中后为带黑黄色的线），并不要很精确地选在框边缘（因为你把握不好，有可能这个边缘是另一个框的范围，这时就会选错）</p>
+</li>
+<li><p>选择框时，尽可能放大（双击，或菜单栏BP，一般25kb-50kb）</p>
+</li>
+<li><p>如果你的染色体数目不对。拆分染色体：先选中要拆分区域，右击add染色体，再选中，右击remove染色体</p>
+</li>
+</ul>
+<ul>
+<li>从某一个地方剪掉框：选中，出现剪刀符号，单击</li>
+<li>旋转框：选中，出现旋转符号，单击</li>
+<li>从一个地方移动：选中，鼠标移到要插入的contig框顶点，单击</li>
+</ul>
+<p>Juice_box调图是个细致的体力活。一想到我的基因组是这么人为调出来的，我自己对结果都产生了怀疑。如果是3D-DNA，再简单的基因组也还是会有很多碎的，因为它手贱重新打碎了。所以说如果你原始组装的contig数目比3d-dna跑出的FINAL.fasta中的contig数目少，甚至比手工纠错后再跑3D-DNA的数目少，也不要感到惊讶。反正我是越纠越差，基因组越来越小。可能是我不会调细节吧，再次吐槽，这个软件我是真的讨厌。</p>
+<hr>
+<p>ref <a href="https://www.jianshu.com/p/4483eece598d">https://www.jianshu.com/p/4483eece598d</a></p>
+<p>注意事项：</p>
+<ol>
+<li>Juicebox的编辑功能在导入了assembly文件后放大scaffold块，放大到足够大的时候才能出现编辑的剪刀，进行分割染色体区域</li>
+<li>如果要去掉某些散在区块中的空白区域则需要放大到足够大后，用shift+左键选中空白的区域进行剪切去掉</li>
+<li>这些需要剪切的空白区域其实是表明这些contig和谁都没有关联，会在1-3.hic的步骤中被去除，相应的最终的.hic文件得到的hic组装结果能挂载到的基因会减少</li>
+</ol>
+<ul>
+<li><strong>但是如果0.hic的结果太差，可以试用3.hic的结果，也许会更好，有提升功能，如果挂载的基因不太少的话，会很好</strong></li>
+</ul>
+<ol start="4">
+<li>hic的最终assembly是（rawchrom.assembly）</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="number">00</span><span class="selector-class">.nextpolish</span><span class="selector-class">.final</span><span class="selector-class">.assembly</span> -&gt; <span class="number">00</span><span class="selector-class">.nextpolish</span><span class="selector-class">.rawchrom</span><span class="selector-class">.assembly</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>通常来讲，用0.hic对应的结果去进行染色体区块编辑后再进行染色体水平的基因组组装<code>run-asm-pipeline-post-review.sh</code>，得到fasta的文件，然后再通过已经注释的contig版本的基因组基因的坐标信息，对应上染色体水平的基因组基因信息</li>
+</ol>
+<p>？关于ALLHiC组装，可以用3d-dna得到的最终基因组fasta结果再用ALLHiC进行组装，相当于基因组已经经过了3d-dna的纠错，得到的可能是更加准确的包含N的基因组序列，再经过ALLHiC进行打断去除N，得到更好的结果</p>
+<hr>
+<p><a href="https://www.bilibili.com/video/BV1ph411X7wj">https://www.bilibili.com/video/BV1ph411X7wj</a></p>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/7.png" alt="img"></p>
+<p><strong>1. 挂载率</strong></p>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/8.png" alt="img"></p>
+<p><strong>2. 基因组草图中组装错误太多</strong></p>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/9.png" alt="img"></p>
+<p><strong>3. 样本杂质污染</strong></p>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/10.png" alt="img"></p>
+<p><strong>4. 高杂合基因组</strong></p>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/11.png" alt="img"></p>
+<p>HiC组装后续</p>
+<p><img src="/blog/2022/03/17/2022-03-17-juicebox/12.png" alt="img"></p>
+<p>两个contig之间可能是由500个N连接，hic关系决定</p>
+<blockquote>
+<p>Q: 3D-DNA 后的结果文件可继续用于ALLHiC</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>denovo-III</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Hi-C】【Lachesis原理】</title>
+    <url>/blog/2022/03/17/2022-03-17-LACHESIS/</url>
+    <content><![CDATA[<p>Lachesis</p>
+<span id="more"></span>
+
+<p><a href="https://www.plob.org/article/24852.html">https://www.plob.org/article/24852.html</a></p>
+<p><strong>染色体疆域</strong></p>
+<p>染色质在细胞核内分布的并不是随机分布的，而是不同染色体占据不同的空间。</p>
+<p><img src="/blog/2022/03/17/2022-03-17-LACHESIS/1.png" alt="三维基因组技术（二）：Hi-C辅助组装与Lachesis的使用"></p>
+<p><strong>Hi-C实验原理</strong></p>
+<p><img src="/blog/2022/03/17/2022-03-17-LACHESIS/2.png" alt="三维基因组技术（二）：Hi-C辅助组装与Lachesis的使用"></p>
+<p><strong>基因组互作衰减</strong></p>
+<p>染色体内互作强度较强，但也随着空间距离的增大互作强度在衰减。互作三定律</p>
+<ul>
+<li>1.<strong>染色体内互作富集</strong>（Intrachromosomal interaction enrichment）</li>
+<li>2.<strong>互作随距离衰减</strong>（distance-dependent interaction decay）</li>
+<li>3.<strong>局部互作平滑</strong>（local interaction smoothness）</li>
+</ul>
+<p><strong>Hic 优势</strong></p>
+<ul>
+<li>通过Scaffold间的交互频率大小，可以对已组装的基因组序列进行纠错。</li>
+<li>基因信息不再仅仅是contig片段，而是被划分至染色体上，成为染色体水平。</li>
+<li>无需辛苦的构建群体，单一一个体就能实现染色体定位。</li>
+<li>相比遗传图谱，标记密度更大，序列定位更完整。</li>
+<li>可以开展染色体重排等结构变异研究。</li>
+<li>QTL、GWAS可以定位区间到某个染色体。</li>
+<li>可以解析该物种的三维基因结构、染色体互作及动态变化。</li>
+</ul>
+<p><strong>HiC辅助组装</strong></p>
+<p>将contigs组装到<strong>假染色体</strong>层面，实现基因组组装到染色体层面</p>
+<p><strong>Lachesis辅助组装步骤</strong></p>
+<ul>
+<li>**Cluster(聚类)**。因为染色质内的互 作强度要高于染色质间的互作强度，所 以先对contig/scaffold进行聚类成染色体群。</li>
+<li>**Order(排序)**。确定每个染色体群中contig/scaffold的顺序</li>
+<li>**Orient(定向)**。确定每个 contig/scaffold的方向三个步骤按照互作强度依次</li>
+</ul>
+<p><img src="/blog/2022/03/17/2022-03-17-LACHESIS/3.png" alt="三维基因组技术（二）：Hi-C辅助组装与Lachesis的使用"></p>
+<p><strong>cluster聚类原理</strong></p>
+<p><img src="/blog/2022/03/17/2022-03-17-LACHESIS/4.png" alt="三维基因组技术（二）：Hi-C辅助组装与Lachesis的使用"></p>
+<p><strong>order排序原理</strong></p>
+<p><img src="/blog/2022/03/17/2022-03-17-LACHESIS/5.png" alt="三维基因组技术（二）：Hi-C辅助组装与Lachesis的使用"></p>
+<p><strong>orient定向原理</strong></p>
+<p><img src="/blog/2022/03/17/2022-03-17-LACHESIS/6.png" alt="三维基因组技术（二）：Hi-C辅助组装与Lachesis的使用"></p>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>denovo-III</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Hi-C】【3D-DNA】</title>
+    <url>/blog/2022/03/17/2022-03-17-3D-DNA/</url>
+    <content><![CDATA[<p>二倍体物种目前3D-DNA应该是组装效果比较好的软件。ALL-HiC对多倍体效果很好</p>
+<span id="more"></span>
+
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p>组装，Juicer分析Hi-C数据，3D-DNA scaffolding，JBAT 对组装结果手工纠正，最终得到准染色体水平基因组。</p>
+<p><img src="/blog/2022/03/17/2022-03-17-3D-DNA/1.png" alt="img"></p>
+<p><strong>CPU-version juicer installation</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir ~/soft</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/theaidenlab/juicer.git</span><br><span class="line"><span class="built_in">cd</span> juicer</span><br><span class="line">ln -s CPU scripts</span><br><span class="line"><span class="built_in">cd</span> scripts/common</span><br><span class="line">wget https://hicfiles.tc4ga.com/public/juicer/juicer_tools.1.9.9_jcuda.0.8.jar</span><br><span class="line">ln -s juicer_tools.1.9.9_jcuda.0.8.jar  juicer_tools.jar</span><br></pre></td></tr></table></figure>
+
+<p>aligned目录，其中”merged_nodups.txt”是下一步3D-DNA的输入文件之一。</p>
+<p><strong>3D-DNA installation</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/soft</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/theaidenlab/3d-dna.git</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>如果基因组<strong>不是复杂基因组</strong>，比如说高杂合，高重复序列，或者Hi-C数据测太少，那么3d-dna的流程更加简单, run-asm-pipeline.sh -h只有<font color="blue"><strong>四个参数需要改</strong></font>:</p>
+<ul>
+<li>-i|–input: 过滤长度低于给定阈值的contig/scaffold, <strong>默认是15000</strong></li>
+<li>-r|–round: 基因组中misjoin的<strong>纠错轮数</strong>，<strong>默认是2</strong>，当基因组<strong>比较准确</strong>，设置为<strong>0</strong>，然后在JABT中调整会更好</li>
+<li>-m|–mode: 是否调用merge模块，<strong>当且仅当在杂合度比较高的情况下使用</strong>，也就是组装结果的单倍型基因组明显偏大（和预期estimated 比较）</li>
+<li>-s|–stage: 从polish, split, seal, merge 或finalize 的某一个阶段开始</li>
+</ul>
+<hr>
+<p><strong>基因组复杂</strong>，需要调整参数非常多, run-asm-pipeline.sh –help会输出更多的信息，你需要根据当前结果去确定每个阶段的参数应该如何调整。<br>最终的输出文件最关键的是下面三类:</p>
+<ul>
+<li>.fasta: 以<strong>FINAL标记的是最终结果</strong></li>
+<li>.hic: <strong>各个阶段</strong>都会有输出结果，用于在JABT中展示</li>
+<li>.assembly: <strong>各个阶段</strong>都会有输出，一共两列，存放contig的组装顺序</li>
+</ul>
+<hr>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>Juicer的输出结果到3D-DNA，分析流程见下图。3D-DNA先根据Hi-C数据分析contig中的<strong>misjoin</strong>，对其进行纠错。之后通过四步,分别是Polish, Split, Seal和Merge, 得到最终的基因组序列</p>
+<p><img src="/blog/2022/03/17/2022-03-17-3D-DNA/2.png" alt="3d-dna流程"></p>
+<h1 id="使用juicerbox手工纠错"><a href="#使用juicerbox手工纠错" class="headerlink" title="使用juicerbox手工纠错"></a>使用juicerbox手工纠错</h1><p>关于juicerbox的用法，可以看hoptop的<a href="https://links.jianshu.com/go?to=https://www.bilibili.com/video/av65134634">https://www.bilibili.com/video/av65134634</a><br>最常见的几种组装错误:</p>
+<ul>
+<li>misjoin: 切割</li>
+<li>translocations: 移动</li>
+<li>inversions: 翻转</li>
+<li>chromosome boundaries: 确定染色体的边界</li>
+</ul>
+<p>这些错误的判断依赖于经验，所以只能靠自己多试试了。<br>最后输出genome.review.assembly用于下一步的分析</p>
+<h1 id="再次运行3d-dna"><a href="#再次运行3d-dna" class="headerlink" title="再次运行3d-dna"></a>再次运行3d-dna</h1><p>根据JABT手工纠正的结果, genome.review.assembly, 使用run-asm-pipeline-post-review.sh重新组装基因组。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">~/soft/<span class="number">3</span>d-dna/run-<span class="keyword">asm</span>-pipeline-post-review.sh \</span><br><span class="line">    -r genome.review.assembly genome.fa aligned/merged_nodups.txt &amp;&gt; <span class="number">3</span>d.log &amp;</span><br></pre></td></tr></table></figure>
+
+<h1 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h1><p>juicer代码至少以下几个地方都需要改：</p>
+<p>临时文件不及时删除<br>bwa得到的SAM文件处理方式有待优化，使用BAM能更快的并行计算<br>参数命令判断很差，用-z判断字符串是否为0，而不是用-f或-d去判断文件是否存在<br>Linux的sort支持多线程，但是没看到用<br>脚本中有些限速步骤的awk代码，不算高效<br>前两条导致了运行过程占用大量硬盘，所以<strong>不准备2T左右的硬盘，很容易出错</strong>。第三条是一些报错不会及时停止运算，也不容易排查。估计公司从效率角度出发，应该是写了很多脚本来替换原来的awk脚本</p>
+<p>另外，juicer在多倍体物种表现很差，建议使用ALLHiC</p>
+<hr>
+<p>ref：<a href="https://blog.csdn.net/u012110870/article/details/115511969">https://blog.csdn.net/u012110870/article/details/115511969</a></p>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>denovo-III</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Hi-C】【Juicer】</title>
+    <url>/blog/2022/03/16/2022-03-16-juicer/</url>
+    <content><![CDATA[<p>Juicer is a platform for analyzing kilobase resolution Hi-C data. In this distribution, we include the pipeline for <strong>generating Hi-C maps from fastq raw data</strong> files and <strong>command line tools for feature annotation on the Hi-C maps</strong>.</p>
+<span id="more"></span>
+
+
+<p><a href="https://github.com/aidenlab/juicer">https://github.com/aidenlab/juicer</a></p>
+<h1 id="Read-this-first"><a href="#Read-this-first" class="headerlink" title="Read this first!!"></a>Read this first!!</h1><p>To access Juicer 1.6 (last <strong>stable</strong> release), please see <a href="https://github.com/aidenlab/juicer/releases/tag/1.6">the Github Release</a>. If you clone the Juicer repo directly from Github, it will clone Juicer 2, which is under active development. If you encounter any bugs, please let us know.</p>
+<h1 id="About-Juicer"><a href="#About-Juicer" class="headerlink" title="About Juicer"></a>About Juicer</h1><p>Juicer is a platform for analyzing kilobase resolution Hi-C data. In this distribution, we include the pipeline for <strong>generating Hi-C maps from fastq raw data files</strong> and <strong>command line tools for feature annotation on the Hi-C maps</strong>.</p>
+<p><strong>If you use Juicer in your research, please cite: Neva C. Durand, Muhammad S. Shamim, Ido Machol, Suhas S. P. Rao, Miriam H. Huntley, Eric S. Lander, and Erez Lieberman Aiden. “Juicer provides a one-click system for analyzing loop-resolution Hi-C experiments.” Cell Systems 3(1), 2016.</strong></p>
+<h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><p>Please see <a href="https://github.com/aidenlab/juicer/wiki">the wiki</a> for extensive documentation.</p>
+<h1 id="Questions"><a href="#Questions" class="headerlink" title="Questions?"></a>Questions?</h1><p>For FAQs, or for asking new questions, please see our forum: <a href="http://aidenlab.org/forum.html">aidenlab.org/forum.html</a>.</p>
+<hr>
+<h2 id="Distribution"><a href="#Distribution" class="headerlink" title="Distribution"></a>Distribution</h2><p>In this repository, we include the scripts for running Juicer on AWS, LSF, Univa Grid Engine, SLURM, and a single CPU</p>
+<p>/AWS - scripts for running pipeline and postprocessing on AWS</p>
+<p>/UGER - scripts for running pipeline and postprocessing on UGER (Univa)</p>
+<p>/SLURM - scripts for running pipeline and postprocessing on SLURM</p>
+<p>/LSF - scripts for running pipeline and postprocessing on LSF <strong>BETA</strong></p>
+<p>/CPU - scripts for running pipeline and postprocessing on a single CPU <strong>BETA</strong></p>
+<p>/misc - miscellaneous helpful scripts</p>
+<hr>
+<h2 id="Hardware-and-Software-Requirements"><a href="#Hardware-and-Software-Requirements" class="headerlink" title="Hardware and Software Requirements"></a>Hardware and Software Requirements</h2><p>Juicer is a pipeline optimized for parallel computation on a cluster. Juicer consists of two parts: <strong>the pipeline that creates Hi-C files from raw data</strong>, and <strong>the post-processing command line tools</strong>.</p>
+<h3 id="Cluster-requirements"><a href="#Cluster-requirements" class="headerlink" title="Cluster requirements:"></a>Cluster requirements:</h3><p>Juicer requires the use of a cluster, with <strong>ideally &gt;= 4 cores</strong> (min 1 core) and <strong>&gt;= 64 GB RAM</strong> (min 16 GB RAM)</p>
+<p>Juicer currently works with the following resource management software:</p>
+<ul>
+<li><a href="http://www.openlava.org/">OpenLava</a></li>
+<li><a href="https://www.ibm.com/systems/spectrum-computing/products/lsf">LSF</a></li>
+<li><a href="https://slurm.schedmd.com/download.html">SLURM</a></li>
+<li>GridEngine (Univa, etc. any flavor)</li>
+</ul>
+<h3 id="Juicer-tools-requirements"><a href="#Juicer-tools-requirements" class="headerlink" title="Juicer tools requirements"></a>Juicer tools requirements</h3><p>The minimum software requirement to run Juicer is a working Java installation (version &gt;= 1.8) on Windows, Linux, and Mac OSX. We recommend using the latest Java version available, but please do not use the Java Beta Version. Minimum system requirements for running Java can be found at<a href="https://java.com/en/download/help/sysreq.xml">https://java.com/en/download/help/sysreq.xml</a></p>
+<p>To download and install the latest Java Runtime Environment (JRE), please go to <a href="https://www.java.com/download">https://www.java.com/download</a></p>
+<h3 id="GNU-CoreUtils"><a href="#GNU-CoreUtils" class="headerlink" title="GNU CoreUtils"></a>GNU CoreUtils</h3><p>The latest version of GNU coreutils can be downloaded from <a href="https://www.gnu.org/software/coreutils/manual/">https://www.gnu.org/software/coreutils/manual/</a></p>
+<h3 id="Burrows-Wheeler-Aligner-BWA"><a href="#Burrows-Wheeler-Aligner-BWA" class="headerlink" title="Burrows-Wheeler Aligner (BWA)"></a>Burrows-Wheeler Aligner (BWA)</h3><p>The <strong>latest version of BWA</strong> should be installed from <a href="http://bio-bwa.sourceforge.net/">http://bio-bwa.sourceforge.net/</a></p>
+<h3 id="CUDA-for-HiCCUPS-peak-calling"><a href="#CUDA-for-HiCCUPS-peak-calling" class="headerlink" title="CUDA (for HiCCUPS peak calling)"></a>CUDA (for HiCCUPS peak calling)</h3><p>You must have an NVIDIA GPU to install CUDA.</p>
+<p>Instructions for installing the latest version of CUDA can be found on the <a href="https://developer.nvidia.com/cuda-downloads">NVIDIA Developer site</a>.</p>
+<p>The native libraries included with Juicer are compiled for CUDA 7 or CUDA 7.5. See the <a href="https://github.com/theaidenlab/juicer/wiki/Download">download page for Juicer Tools</a>.</p>
+<p>Other versions of CUDA can be used, but you will need to download the respective native libraries from <a href="http://www.jcuda.org/downloads/downloads.html">JCuda</a>.</p>
+<p>For best performance, use a dedicated GPU. You may also be able to obtain access to GPU clusters through Amazon Web Services or a local research institution.</p>
+<p>If you cannot access a GPU, you can run the <a href="https://github.com/aidenlab/juicer/wiki/CPU-HiCCUPS">CPU version of HiCCUPS</a> directly using the <code>.hic</code> file and Juicer Tools.</p>
+<h3 id="Building-new-jars"><a href="#Building-new-jars" class="headerlink" title="Building new jars"></a>Building new jars</h3><p>See the Juicebox documentation at <a href="https://github.com/theaidenlab/Juicebox">https://github.com/theaidenlab/Juicebox</a> for details on building new jars of the juicer_tools.</p>
+<hr>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a><font color="red">Quick Start</font></h2><p>Run the Juicer pipeline on your cluster of choice with “juicer.sh [options]”</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Usage: juicer.sh [-g genomeID] [-d topDir] [-q queue] [-l long queue] [-s site]</span><br><span class="line">                 [-a about] [-R end] [-S stage] [-p chrom.sizes path]</span><br><span class="line">                 [-y restriction site file] [-z reference genome file]</span><br><span class="line">                 [-C chunk size] [-D Juicer scripts directory]</span><br><span class="line">                 [-Q queue time <span class="built_in">limit</span>] [-L long queue time <span class="built_in">limit</span>] [-e] [-h] [-x]</span><br><span class="line">* [-g genomeID] must be defined <span class="keyword">in</span> the script, e.g. <span class="string">&quot;hg19&quot;</span> or <span class="string">&quot;mm10&quot;</span> (default</span><br><span class="line">  <span class="string">&quot;hg19&quot;</span>); alternatively, it can be defined using the -z <span class="built_in">command</span></span><br><span class="line">* [<span class="string">&#x27;-d topDir&#x27;</span>] is the top level directory (default</span><br><span class="line">  <span class="string">&quot;/Users/nchernia/Downloads/neva-muck/UGER&quot;</span>)</span><br><span class="line">     [topDir]/fastq must contain the fastq files</span><br><span class="line">     [topDir]/splits will be created to contain the temporary split files</span><br><span class="line">     [topDir]/aligned will be created <span class="keyword">for</span> the final alignment</span><br><span class="line">* [-q queue] is the queue <span class="keyword">for</span> running alignments (default <span class="string">&quot;short&quot;</span>)</span><br><span class="line">* [-l long queue] is the queue <span class="keyword">for</span> running longer <span class="built_in">jobs</span> such as the hic file</span><br><span class="line">  creation (default <span class="string">&quot;long&quot;</span>)</span><br><span class="line">* [site] must be defined <span class="keyword">in</span> the script, e.g.  <span class="string">&quot;HindIII&quot;</span> or <span class="string">&quot;MboI&quot;</span></span><br><span class="line">  (default <span class="string">&quot;none&quot;</span>)</span><br><span class="line">* [about]: enter description of experiment, enclosed <span class="keyword">in</span> single quotes</span><br><span class="line">* [stage]: must be one of <span class="string">&quot;chimeric&quot;</span>, <span class="string">&quot;merge&quot;</span>, <span class="string">&quot;dedup&quot;</span>, <span class="string">&quot;final&quot;</span>, <span class="string">&quot;postproc&quot;</span>, or <span class="string">&quot;early&quot;</span>.</span><br><span class="line">    -Use <span class="string">&quot;chimeric&quot;</span> when alignments are <span class="keyword">done</span> but chimeric handling has not finished</span><br><span class="line">    -Use <span class="string">&quot;merge&quot;</span> when alignment has finished but the merged_sort file has not</span><br><span class="line">     yet been created.</span><br><span class="line">    -Use <span class="string">&quot;dedup&quot;</span> when the files have been merged into merged_sort but</span><br><span class="line">     merged_nodups has not yet been created.</span><br><span class="line">    -Use <span class="string">&quot;final&quot;</span> when the reads have been deduped into merged_nodups but the</span><br><span class="line">     final stats and hic files have not yet been created.</span><br><span class="line">    -Use <span class="string">&quot;postproc&quot;</span> when the hic files have been created and only</span><br><span class="line">     postprocessing feature annotation remains to be completed.</span><br><span class="line">    -Use <span class="string">&quot;early&quot;</span> <span class="keyword">for</span> an early <span class="built_in">exit</span>, before the final creation of the stats and</span><br><span class="line">     hic files</span><br><span class="line">* [<span class="string">&#x27;chrom.sizes path&#x27;</span>]: enter path <span class="keyword">for</span> chrom.sizes file</span><br><span class="line">* [<span class="string">&#x27;restriction site file&#x27;</span>]: enter path <span class="keyword">for</span> restriction site file (locations of</span><br><span class="line">  restriction sites <span class="keyword">in</span> genome; can be generated with the script</span><br><span class="line">  (misc/generate_site_positions.py) )</span><br><span class="line">* [<span class="string">&#x27;reference genome file&#x27;</span>]: enter path <span class="keyword">for</span> reference sequence file, BWA index</span><br><span class="line">  files must be <span class="keyword">in</span> same directory</span><br><span class="line">* [chunk size]: number of lines <span class="keyword">in</span> split files, must be multiple of 4</span><br><span class="line">  (default 90000000, <span class="built_in">which</span> equals 22.5 million reads)</span><br><span class="line">* [<span class="string">&#x27;Juicer scripts directory&#x27;</span>]: <span class="built_in">set</span> the Juicer directory,</span><br><span class="line">  <span class="built_in">which</span> should have scripts/ references/ and restriction_sites/ underneath it</span><br><span class="line">  (default /broad/aidenlab)</span><br><span class="line">* [queue time <span class="built_in">limit</span>]: time <span class="built_in">limit</span> <span class="keyword">for</span> queue, i.e. -W 12:00 is 12 hours</span><br><span class="line">  (default 1200)</span><br><span class="line">* [long queue time <span class="built_in">limit</span>]: time <span class="built_in">limit</span> <span class="keyword">for</span> long queue, i.e. -W 168:00 is one week</span><br><span class="line">  (default 3600)</span><br><span class="line">* -f: include fragment-delimited maps from hic file creation</span><br><span class="line">* -e: early <span class="built_in">exit</span></span><br><span class="line">* -h: <span class="built_in">print</span> this <span class="built_in">help</span> and <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Juicer-Usage"><a href="#Juicer-Usage" class="headerlink" title="Juicer Usage"></a>Juicer Usage</h2><ul>
+<li><strong>Running Juicer with no arguments</strong> will run it with genomeID hg19 and site MboI</li>
+<li><strong>Providing a genome ID</strong>: if not defined in the script, you can either directly modify the script or provide the script with the files needed. You would provide the script with the files needed via “-z reference_sequence_path” (needs to have the BWA index files in same directory), “-p chrom_sizes_path” (these are the chromosomes you want included in .hic file), and “-s site_file” (this is the listing of all the restriction site locations, one line per chromosome). Note that ligation junction won’t be defined in this case. The script (misc/generate_site_positions.py) can help you generate the file</li>
+<li><strong>Providing a restriction enzyme</strong>: if not defined in the script, you can either directly modify the script or provide the files needed via the “-s site_file” flag, as above. Alternatively, if you don’t want to do any fragment-level analysis (as with a DNAse experiment), you should assign the site “none”, as in <code>juicer.sh -s none</code></li>
+<li><strong>Directory structure</strong>: Juicer expects the fastq files to be stored in a directory underneath the top-level directory. E.g. HIC001/fastq. By default, the top-level directory is the directory where you are when you launch Juicer; you can change this via the -d flag. Fastqs can be zipped. [topDir]/splits will be created to contain the temporary split files and should be deleted once your run is completed. [topDir]/aligned will be created for the final files, including the hic files, the statistics, the valid pairs (merged_nodups), the collisions, and the feature annotations.</li>
+<li><strong>Queues</strong> are complicated and it’s likely that you’ll have to modify the script for your system, though we did our best to avoid this. By default there’s a short queue and a long queue. We also allow you to pass in wait times for those queues; this is currently ignored by the UGER and SLURM versions. The short queue should be able to complete alignment of one split file. The long queue is for jobs that we expect to take a while, like writing out the merged_sort file</li>
+<li><strong>Chunk size</strong> is intimitely associated with your queues; a smaller chunk size means more alignment jobs that complete in a faster time. If you have a hard limit on the number of jobs, you don’t want too small of a chunk size. If your short queue has a very limited runtime ceiling, you don’t want too big of a chunk size. Run time for alignment will also depend on the particulars of your cluster. We launch ~5 jobs per chunk. Chunk size must be a multiple of 4.</li>
+<li><strong>Relaunch</strong> via the same script. Type <code>juicer.sh [options] -S stage</code> where “stage” is one of merge, dedup, final, postproc, or early. “merge” is for when alignment has finished but merged_sort hasn’t been created; “dedup” is for when merged_sort is there but not merged_nodups (this will relaunch all dedup jobs); “final” is for when merged_nodups is there and you want the stats and hic files; “postproc” is for when you have the hic files and just want feature annotations; and “early” is for early exit, before hic file creation. If your jobs failed at the alignment stage, run <code>relaunch_prep.sh</code> and then run juicer.sh.</li>
+<li><strong>Miscelleaneous options</strong> include -a ‘experiment description’, which will add the experiment description to the statistics file and the meta data in the hic file; -r, which allows you to use bwa aln instead of bwa mem, useful for shorter reads; -R [end], in case you have one read end that’s short and one that’s long and you want to align the short end with bwa aln and the long end with bwa mem; and -D [Juicer scripts directory], to set an alternative Juicer directory; must have scripts/, references/, and restriction_sites/ underneath it</li>
+</ul>
+<hr>
+<h2 id="Command-Line-Tools-Usage"><a href="#Command-Line-Tools-Usage" class="headerlink" title="Command Line Tools Usage"></a>Command Line Tools Usage</h2><p>Detailed documentation about the command line tools can be found on the wiki:</p>
+<ul>
+<li><a href="https://github.com/aidenlab/juicer/wiki/Feature-Annotation">Annotating features with Arrowhead, HiCCUPS, MotifFinder, APA, Eigenvector, and Pearsons</a></li>
+<li><a href="https://github.com/aidenlab/juicer/wiki/Pre">Creating .hic with Pre</a></li>
+<li><a href="https://github.com/aidenlab/straw">Extracting data from .hic files with straw</a></li>
+</ul>
+<p>To launch the command line tools, use the shell script “juicer_tools” on Unix/MacOS or type</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar juicer_tools.jar (command...) [flags...] &lt;parameters...&gt;`</span><br></pre></td></tr></table></figure>
+
+<p>In the command line tools, there are several analysis functions:</p>
+<ol>
+<li><code>apa</code> for conducting aggregate peak analysis</li>
+<li><code>hiccups</code> for annotating loops</li>
+<li><code>motifs</code> for finding CTCF motifs</li>
+<li><code>arrowhead</code> for annotating contact domains</li>
+<li><code>eigenvector</code> for calculating the eigenvector (first PC) of the Pearson’s</li>
+<li><code>pearsons</code> for calculating the Pearson’s</li>
+</ol>
+<p>The <code>juicer_tools</code> (Unix/MacOS) script can be used in place of the unwieldy <code>java -Djava.library.path=path/to/natives/ -jar juicer_tools.jar</code></p>
+<hr>
+<h1 id="juicer的工作目录结构"><a href="#juicer的工作目录结构" class="headerlink" title="juicer的工作目录结构"></a>juicer的工作目录结构</h1><p>要求固定目录结构，新建<code>juicer</code>目录，该目录为软件安装目录，目录下必须有4个子目录</p>
+<p><code>references</code>目录存放参考基因组文件，<code>work</code>存放样本序列文件和分析结果，<code>scripts</code>存放软件运行脚本，<code>restriction_sites</code>存放参考基因组酶切图谱。</p>
+<h1 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h1><p>从github上下载juicer和jcuda的源代码，放置到<code>scripts</code>目录。</p>
+<p>其中的<code>CPU</code>目录就是单机服务器，而<code>AWS</code>, <code>LSF</code>, <code>PBS</code>等对应公有云和不同的集群系统。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd scripts/common</span><br><span class="line">wget https://hicfiles.tc4ga.com/public/juicer/juicer_tools.1.9.9_jcuda.0.8.jar</span><br><span class="line">ln -s juicer_tools.1.9.9_jcuda.0.8.jar  juicer_tools.jar</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考基因组，酶切图谱"><a href="#参考基因组，酶切图谱" class="headerlink" title="参考基因组，酶切图谱"></a>参考基因组，酶切图谱</h1><p>fasta序列文件和bwa 索引</p>
+<p>juicer/misc/generate_site_positions.py可以输出4种内切酶的酶切图谱。HindIII；DpnII；MboI；Sau3AI</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">generate_site_positions.py HindIII hg19 hg19.fasta</span><br><span class="line">python ../juicer/misc/generate_site_positions.py  MboI  hg38_MboI ../references/Homo_sapiens_assembly38.fasta # 生成了 hg38_MboI.txt 文件</span><br><span class="line">awk &#x27;BEGIN&#123;OFS=&quot;\t&quot;&#125;&#123;print $1, $NF&#125;&#x27; hg38_MboI.txt &gt; hg38.chrom.sizes</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数内切酶名称，第二个参数自定义基因组版本，第三个参数基因组fasta文件路径，输出文件名称为第二个参数和第一个参数用下划线链接，后缀为<code>txt</code></p>
+<h1 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h1><p>软件运行时对样本文件的存放位置也有要求，必须位于<code>work</code>目录下，以样本名作为一个子目录，序列文件存放于<code>fastq</code>目录下，示意如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/opt/juicer/work/MBR19/fastq</span><br><span class="line">/opt/juicer/work/MBR19/fastq/chr19_R1.fastq.gz</span><br><span class="line">/opt/juicer/work/MBR19/fastq/chr19_R2.fastq.gz</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="软件比较"><a href="#软件比较" class="headerlink" title="软件比较"></a>软件比较</h1><p><img src="/blog/2022/03/16/2022-03-16-juicer/1.png" alt="img"></p>
+<h1 id="脚本原理（juicer-sh）"><a href="#脚本原理（juicer-sh）" class="headerlink" title="脚本原理（juicer.sh）"></a>脚本原理（juicer.sh）</h1><p>fastq等文件输入 —》bwa比对 —》排序 —》合并 —》去PCR重复 —》生成 hic文件</p>
+<p>Juicer的工作流程见下图，输入<strong>原始</strong>fastq文件，处理得到<strong>中间</strong>文件.hic, 之后对.hic文件用于<strong>下游</strong>分析，包括</p>
+<p>Arrowhead: 寻找存在关联的区域<br>HiCCUPS: 分析局部富集peaks<br>MotifFinder: 用于锚定peaks<br>Persons: 计算观测/期望的皮尔森相关系数矩阵<br>Eigenvector: 确定分隔</p>
+<p><img src="/blog/%E3%80%82/2.png" alt="juicer工作流程"></p>
+<h1 id="结果文件"><a href="#结果文件" class="headerlink" title="结果文件"></a>结果文件</h1><p>结果文件都在 aligned 中，主要文件是 .hic 文件，其中inter_30.hic 是设置了 mapq threshold &gt;30 的结果。如果 GPU （cudd）可用，软件会自动使用自带 <strong>HiCCUPS</strong> 算法计算 contact domains 并保存在 inter_30_contact_domains 文件夹。如果GPU不可用，可手动用自带的 <strong>CPU HiCCUPS</strong> 算法来计算，后面章节有介绍。</p>
+<p>hic文件格式请看 <a href="https://links.jianshu.com/go?to=https://github.com/theaidenlab/juicebox/blob/master/HiC_format_v8.docx">https://github.com/theaidenlab/juicebox/blob/master/HiC_format_v8.docx</a></p>
+<h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">juicer.sh \</span><br><span class="line">-z references/hg19.fa \</span><br><span class="line">-p restriction_sites/hg19.chrom.sizes \</span><br><span class="line">-y restriction_sites/hg19_HindIII.txt \</span><br><span class="line">-d /home/pub/software/juicer/work/HIC003/ \</span><br><span class="line">-D /home/pub/software/juicer \</span><br><span class="line">-t 5</span><br><span class="line"></span><br><span class="line">-d: juicer的目录 安装在/soft/，设置为/soft/juicer</span><br><span class="line">-D: juicer scripts的目录，安装在/soft/，设置为/soft/juicer/CPU</span><br></pre></td></tr></table></figure>
+
+<p>需要注意, 指定文件路径时，最好指定绝对路径，特别是fastq文件路径。因为软件运行过程中会使用软链接，相对路径会出错。</p>
+<p><code>splits</code>目录下存放中间结果，由于hi-C数据量很大，所以会将原始序列<strong>拆分成多份</strong>，<strong>并行运算加快速度</strong>。默认每份包含22.5M的reads, 可以通过<code>-C</code>参数调整，该参数指定拆分文件的行数，默认是90000000?， 注意fastq文件4行代表一条序列，所以这个参数的值必须是4的倍数。拆分后序列的R1和R2端分别通过bwa比对基因组，然后合并，筛选嵌合体序列，去重复，生成预处理后的结果文件。</p>
+<p><code>aligned</code>目录下存放的是最终结果，包含了可以导入juicebox的后缀为<code>hic</code>的图谱文件, <code>inter.hic</code>和<code>inter_30.hic</code>， 30表示通过<code>MAPQ &gt; 30</code>过滤之后的结果。完整流程还会进行后续处理，包括识别TAD, 染色质环等结构。其中识别染色质环的HICCUPs算法必须通过<a href="https://cloud.tencent.com/product/gpu?from=10680">GPU</a>加速运行才可以，所以没有安装GPU卡的普通服务器无法运行这个步骤。</p>
+<p>上述过程可看到，juicer使用简单。由于Hi-C数据测序量非常大，以及后续分析算法的复杂度，对服务器计算资源的要求相当高，必须高性能服务器才能满足要求，而该软件所需的GPU卡成本也非常高，一块的成本在2万元左右，这些因素一定程度制约了Hi-C的普及和发展。</p>
+<h1 id="juicer下游分析"><a href="#juicer下游分析" class="headerlink" title="juicer下游分析"></a>juicer下游分析</h1><p><a href="https://zhuanlan.zhihu.com/p/341206245">https://zhuanlan.zhihu.com/p/341206245</a></p>
+<p>目前针对Hi-C数据的研究主要是三个方面，分别是<code>A/B comparment</code> ，<code>TADS</code>，<code>Loops</code>。</p>
+<p><code>juicer_tools.jar</code> 功能介绍</p>
+<p><code>arrowhead</code> 注释TAD</p>
+<p><code>hiccups</code> 注释loop</p>
+<p><code>motigs</code> 定位CTCF元件</p>
+<p><code>hiccupsdiff</code> 从多个loos文件中找到不同的loop</p>
+<p><code>apa</code> 聚合峰的分析</p>
+<p><code>pearsons</code> 计算O/E的皮尔森相关系数</p>
+<p><code>eigenvector</code> 计算特征向量的皮尔森相关系数</p>
+<p><code>dump</code> .hic文件互作矩阵提取</p>
+<p><code>pre</code> 非juicer数据转.hic文件</p>
+<h1 id="hic数据可视化"><a href="#hic数据可视化" class="headerlink" title="hic数据可视化"></a>hic数据可视化</h1><ul>
+<li><p><strong>加载.hic文件</strong></p>
+</li>
+<li><p><strong>加载一维注释</strong></p>
+</li>
+<li><p><strong>加载二维注释，黄的的是TAD，天蓝色的是loop</strong></p>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>Software</category>
       </categories>
@@ -1706,7 +2141,7 @@
 <p>hiclib主要用于数据标准化，hicpro可以，为什么还要安装hiclib? 或者是想比较两者分析的结果？</p>
 <p>HiC-Pro需要python版本&gt;=3.7, 安装3.9</p>
 </blockquote>
-<p><strong>Error1</strong>：directly use hicpro on the cluster,  —qual 多一个-无法解决，自己安装<br>/software/biosoft/software/bowtie2-2.2.9/bowtie2-align-s: <font color="red"><strong>unrecognized option ‘—quals’</strong></font><br>Bowtie 2 version 2.2.9 by Ben Langmead (<a href="mailto:&#108;&#97;&#x6e;&#103;&#109;&#101;&#97;&#x40;&#x63;&#x73;&#46;&#106;&#104;&#117;&#x2e;&#101;&#x64;&#117;">&#108;&#97;&#x6e;&#103;&#109;&#101;&#97;&#x40;&#x63;&#x73;&#46;&#106;&#104;&#117;&#x2e;&#101;&#x64;&#117;</a>, <a href="http://www.cs.jhu.edu/~langmea">www.cs.jhu.edu/~langmea</a>)<br>Usage:<br>  bowtie2 [options]* -x <bt2-idx> {-1 <m1> -2 <m2> | -U <r>} [-S <sam>]</sam></r></m2></m1></bt2-idx></p>
+<p><strong>Error1</strong>：directly use hicpro on the cluster,  —qual 多一个-无法解决，自己安装<br>/software/biosoft/software/bowtie2-2.2.9/bowtie2-align-s: <font color="red"><strong>unrecognized option ‘—quals’</strong></font><br>Bowtie 2 version 2.2.9 by Ben Langmead (<a href="mailto:&#x6c;&#x61;&#110;&#x67;&#x6d;&#x65;&#x61;&#64;&#x63;&#115;&#46;&#106;&#104;&#117;&#x2e;&#x65;&#100;&#x75;">&#x6c;&#x61;&#110;&#x67;&#x6d;&#x65;&#x61;&#64;&#x63;&#115;&#46;&#106;&#104;&#117;&#x2e;&#x65;&#100;&#x75;</a>, <a href="http://www.cs.jhu.edu/~langmea">www.cs.jhu.edu/~langmea</a>)<br>Usage:<br>  bowtie2 [options]* -x <bt2-idx> {-1 <m1> -2 <m2> | -U <r>} [-S <sam>]</sam></r></m2></m1></bt2-idx></p>
 <p>Encountered internal Bowtie 2 exception (#1)<br>Command: /software/biosoft/software/bowtie2-2.2.9/bowtie2-align-s –wrapper basic-0 –very-sensitive -L 30 –score-min L,-0.6,-0.2 –end-to-end –reorder –rg-id BMG –rg SM:L3_R1 <font color="red"><strong>—quals</strong></font> -p 10 -x /xtdisk/xueyb_group/wangchenA/Petunia_denovo/HiFi/02.bwa_mapping/primary//HiFi.p_ctg –passthrough -U /tmp/34683.unp<br>(ERR): bowtie2-align exited with value 1</p>
 <p>自己安装时，先创建conda环境，再tar xzvf，然后<font color="red"><strong>编辑config-install.txt的prefix 再make configure &amp;&amp; make install</strong></font><br><strong>Error2</strong>在错误产生output文件夹时再次运行直接报错stat: <font color="red"><strong>Bad file descriptor，先删除output_dir</strong></font><br>设置config-install.txt 的prefix时设置成///software/HiC-Pro<font color="red"><strong>/</strong></font><br>报错：<br><strong>Error3</strong>：install in another dir HiC-Pro， PREFIX = /xtdisk/xueyb_group/wangchenA/software/HiC-Pro/<br>/xtdisk/xueyb_group/wangchenA/software/HiC-Pro/HiC-Pro-3.1.0/bin/../scripts//Makefile:48: /xtdisk/xueyb_group/wangchenA/software/HiC-Pro<font color="red"><strong>//</strong></font>config-system.txt: No such file or directory<br>make:  No rule to make target ‘/xtdisk/xueyb_group/wangchenA/software/HiC-Pro<font color="red"><strong>//</strong></font>config-system.txt’.  Stop.<br>The config-system.txt file is a file which should be within the installation folder.<br>检查config-system.txt 发现多了//<br>设置config-install.txt 的prefix时设置成///software/HiC-Pro时会<font color="red"><strong>自动产生软件名文件夹</strong></font>，后面<font color="red">多加斜杠/直接报错</font></p>
 <p><strong>successfully installed</strong>  </p>

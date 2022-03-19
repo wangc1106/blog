@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="1osTo_gOe1SW9Hevqtz8vl8HfSgTO4DSMZ0DiMPMX6w">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Juicer is a platform for analyzing kilobase resolution Hi-C data. In this distribution, we include the pipeline for generating Hi-C maps from fastq raw data files and command line tools for feature an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Hi-C】【Juicer】">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/index.html">
+<meta property="og:site_name" content="Banner&#39;s Blog">
+<meta property="og:description" content="Juicer is a platform for analyzing kilobase resolution Hi-C data. In this distribution, we include the pipeline for generating Hi-C maps from fastq raw data files and command line tools for feature an">
+<meta property="og:locale">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/1.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/%E3%80%82/2.png">
+<meta property="article:published_time" content="2022-03-16T14:06:04.197Z">
+<meta property="article:modified_time" content="2022-03-19T14:15:48.167Z">
+<meta property="article:author" content="Wang C">
+<meta property="article:tag" content="denovo-III">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/1.png">
+
+<link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>【Hi-C】【Juicer】 | Banner's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Banner's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream big work hard</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://wangc1106.github.io/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/banner.png">
+      <meta itemprop="name" content="Wang C">
+      <meta itemprop="description" content="Make more time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Banner's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【Hi-C】【Juicer】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-16 22:06:04" itemprop="dateCreated datePublished" datetime="2022-03-16T22:06:04+08:00">2022-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-19 22:15:48" itemprop="dateModified" datetime="2022-03-19T22:15:48+08:00">2022-03-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/blog/2022/03/16/2022-03-16-juicer/" class="post-meta-item leancloud_visitors" data-flag-title="【Hi-C】【Juicer】" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Juicer is a platform for analyzing kilobase resolution Hi-C data. In this distribution, we include the pipeline for <strong>generating Hi-C maps from fastq raw data</strong> files and <strong>command line tools for feature annotation on the Hi-C maps</strong>.</p>
+<span id="more"></span>
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/aidenlab/juicer">https://github.com/aidenlab/juicer</a></p>
+<h1 id="Read-this-first"><a href="#Read-this-first" class="headerlink" title="Read this first!!"></a>Read this first!!</h1><p>To access Juicer 1.6 (last <strong>stable</strong> release), please see <a target="_blank" rel="noopener" href="https://github.com/aidenlab/juicer/releases/tag/1.6">the Github Release</a>. If you clone the Juicer repo directly from Github, it will clone Juicer 2, which is under active development. If you encounter any bugs, please let us know.</p>
+<h1 id="About-Juicer"><a href="#About-Juicer" class="headerlink" title="About Juicer"></a>About Juicer</h1><p>Juicer is a platform for analyzing kilobase resolution Hi-C data. In this distribution, we include the pipeline for <strong>generating Hi-C maps from fastq raw data files</strong> and <strong>command line tools for feature annotation on the Hi-C maps</strong>.</p>
+<p><strong>If you use Juicer in your research, please cite: Neva C. Durand, Muhammad S. Shamim, Ido Machol, Suhas S. P. Rao, Miriam H. Huntley, Eric S. Lander, and Erez Lieberman Aiden. “Juicer provides a one-click system for analyzing loop-resolution Hi-C experiments.” Cell Systems 3(1), 2016.</strong></p>
+<h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><p>Please see <a target="_blank" rel="noopener" href="https://github.com/aidenlab/juicer/wiki">the wiki</a> for extensive documentation.</p>
+<h1 id="Questions"><a href="#Questions" class="headerlink" title="Questions?"></a>Questions?</h1><p>For FAQs, or for asking new questions, please see our forum: <a target="_blank" rel="noopener" href="http://aidenlab.org/forum.html">aidenlab.org/forum.html</a>.</p>
+<hr>
+<h2 id="Distribution"><a href="#Distribution" class="headerlink" title="Distribution"></a>Distribution</h2><p>In this repository, we include the scripts for running Juicer on AWS, LSF, Univa Grid Engine, SLURM, and a single CPU</p>
+<p>/AWS - scripts for running pipeline and postprocessing on AWS</p>
+<p>/UGER - scripts for running pipeline and postprocessing on UGER (Univa)</p>
+<p>/SLURM - scripts for running pipeline and postprocessing on SLURM</p>
+<p>/LSF - scripts for running pipeline and postprocessing on LSF <strong>BETA</strong></p>
+<p>/CPU - scripts for running pipeline and postprocessing on a single CPU <strong>BETA</strong></p>
+<p>/misc - miscellaneous helpful scripts</p>
+<hr>
+<h2 id="Hardware-and-Software-Requirements"><a href="#Hardware-and-Software-Requirements" class="headerlink" title="Hardware and Software Requirements"></a>Hardware and Software Requirements</h2><p>Juicer is a pipeline optimized for parallel computation on a cluster. Juicer consists of two parts: <strong>the pipeline that creates Hi-C files from raw data</strong>, and <strong>the post-processing command line tools</strong>.</p>
+<h3 id="Cluster-requirements"><a href="#Cluster-requirements" class="headerlink" title="Cluster requirements:"></a>Cluster requirements:</h3><p>Juicer requires the use of a cluster, with <strong>ideally &gt;= 4 cores</strong> (min 1 core) and <strong>&gt;= 64 GB RAM</strong> (min 16 GB RAM)</p>
+<p>Juicer currently works with the following resource management software:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.openlava.org/">OpenLava</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ibm.com/systems/spectrum-computing/products/lsf">LSF</a></li>
+<li><a target="_blank" rel="noopener" href="https://slurm.schedmd.com/download.html">SLURM</a></li>
+<li>GridEngine (Univa, etc. any flavor)</li>
+</ul>
+<h3 id="Juicer-tools-requirements"><a href="#Juicer-tools-requirements" class="headerlink" title="Juicer tools requirements"></a>Juicer tools requirements</h3><p>The minimum software requirement to run Juicer is a working Java installation (version &gt;= 1.8) on Windows, Linux, and Mac OSX. We recommend using the latest Java version available, but please do not use the Java Beta Version. Minimum system requirements for running Java can be found at<a target="_blank" rel="noopener" href="https://java.com/en/download/help/sysreq.xml">https://java.com/en/download/help/sysreq.xml</a></p>
+<p>To download and install the latest Java Runtime Environment (JRE), please go to <a target="_blank" rel="noopener" href="https://www.java.com/download">https://www.java.com/download</a></p>
+<h3 id="GNU-CoreUtils"><a href="#GNU-CoreUtils" class="headerlink" title="GNU CoreUtils"></a>GNU CoreUtils</h3><p>The latest version of GNU coreutils can be downloaded from <a target="_blank" rel="noopener" href="https://www.gnu.org/software/coreutils/manual/">https://www.gnu.org/software/coreutils/manual/</a></p>
+<h3 id="Burrows-Wheeler-Aligner-BWA"><a href="#Burrows-Wheeler-Aligner-BWA" class="headerlink" title="Burrows-Wheeler Aligner (BWA)"></a>Burrows-Wheeler Aligner (BWA)</h3><p>The <strong>latest version of BWA</strong> should be installed from <a target="_blank" rel="noopener" href="http://bio-bwa.sourceforge.net/">http://bio-bwa.sourceforge.net/</a></p>
+<h3 id="CUDA-for-HiCCUPS-peak-calling"><a href="#CUDA-for-HiCCUPS-peak-calling" class="headerlink" title="CUDA (for HiCCUPS peak calling)"></a>CUDA (for HiCCUPS peak calling)</h3><p>You must have an NVIDIA GPU to install CUDA.</p>
+<p>Instructions for installing the latest version of CUDA can be found on the <a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">NVIDIA Developer site</a>.</p>
+<p>The native libraries included with Juicer are compiled for CUDA 7 or CUDA 7.5. See the <a target="_blank" rel="noopener" href="https://github.com/theaidenlab/juicer/wiki/Download">download page for Juicer Tools</a>.</p>
+<p>Other versions of CUDA can be used, but you will need to download the respective native libraries from <a target="_blank" rel="noopener" href="http://www.jcuda.org/downloads/downloads.html">JCuda</a>.</p>
+<p>For best performance, use a dedicated GPU. You may also be able to obtain access to GPU clusters through Amazon Web Services or a local research institution.</p>
+<p>If you cannot access a GPU, you can run the <a target="_blank" rel="noopener" href="https://github.com/aidenlab/juicer/wiki/CPU-HiCCUPS">CPU version of HiCCUPS</a> directly using the <code>.hic</code> file and Juicer Tools.</p>
+<h3 id="Building-new-jars"><a href="#Building-new-jars" class="headerlink" title="Building new jars"></a>Building new jars</h3><p>See the Juicebox documentation at <a target="_blank" rel="noopener" href="https://github.com/theaidenlab/Juicebox">https://github.com/theaidenlab/Juicebox</a> for details on building new jars of the juicer_tools.</p>
+<hr>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a><font color="red">Quick Start</font></h2><p>Run the Juicer pipeline on your cluster of choice with “juicer.sh [options]”</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">Usage: juicer.sh [-g genomeID] [-d topDir] [-q queue] [-l long queue] [-s site]</span><br><span class="line">                 [-a about] [-R end] [-S stage] [-p chrom.sizes path]</span><br><span class="line">                 [-y restriction site file] [-z reference genome file]</span><br><span class="line">                 [-C chunk size] [-D Juicer scripts directory]</span><br><span class="line">                 [-Q queue time <span class="built_in">limit</span>] [-L long queue time <span class="built_in">limit</span>] [-e] [-h] [-x]</span><br><span class="line">* [-g genomeID] must be defined <span class="keyword">in</span> the script, e.g. <span class="string">&quot;hg19&quot;</span> or <span class="string">&quot;mm10&quot;</span> (default</span><br><span class="line">  <span class="string">&quot;hg19&quot;</span>); alternatively, it can be defined using the -z <span class="built_in">command</span></span><br><span class="line">* [<span class="string">&#x27;-d topDir&#x27;</span>] is the top level directory (default</span><br><span class="line">  <span class="string">&quot;/Users/nchernia/Downloads/neva-muck/UGER&quot;</span>)</span><br><span class="line">     [topDir]/fastq must contain the fastq files</span><br><span class="line">     [topDir]/splits will be created to contain the temporary split files</span><br><span class="line">     [topDir]/aligned will be created <span class="keyword">for</span> the final alignment</span><br><span class="line">* [-q queue] is the queue <span class="keyword">for</span> running alignments (default <span class="string">&quot;short&quot;</span>)</span><br><span class="line">* [-l long queue] is the queue <span class="keyword">for</span> running longer <span class="built_in">jobs</span> such as the hic file</span><br><span class="line">  creation (default <span class="string">&quot;long&quot;</span>)</span><br><span class="line">* [site] must be defined <span class="keyword">in</span> the script, e.g.  <span class="string">&quot;HindIII&quot;</span> or <span class="string">&quot;MboI&quot;</span></span><br><span class="line">  (default <span class="string">&quot;none&quot;</span>)</span><br><span class="line">* [about]: enter description of experiment, enclosed <span class="keyword">in</span> single quotes</span><br><span class="line">* [stage]: must be one of <span class="string">&quot;chimeric&quot;</span>, <span class="string">&quot;merge&quot;</span>, <span class="string">&quot;dedup&quot;</span>, <span class="string">&quot;final&quot;</span>, <span class="string">&quot;postproc&quot;</span>, or <span class="string">&quot;early&quot;</span>.</span><br><span class="line">    -Use <span class="string">&quot;chimeric&quot;</span> when alignments are <span class="keyword">done</span> but chimeric handling has not finished</span><br><span class="line">    -Use <span class="string">&quot;merge&quot;</span> when alignment has finished but the merged_sort file has not</span><br><span class="line">     yet been created.</span><br><span class="line">    -Use <span class="string">&quot;dedup&quot;</span> when the files have been merged into merged_sort but</span><br><span class="line">     merged_nodups has not yet been created.</span><br><span class="line">    -Use <span class="string">&quot;final&quot;</span> when the reads have been deduped into merged_nodups but the</span><br><span class="line">     final stats and hic files have not yet been created.</span><br><span class="line">    -Use <span class="string">&quot;postproc&quot;</span> when the hic files have been created and only</span><br><span class="line">     postprocessing feature annotation remains to be completed.</span><br><span class="line">    -Use <span class="string">&quot;early&quot;</span> <span class="keyword">for</span> an early <span class="built_in">exit</span>, before the final creation of the stats and</span><br><span class="line">     hic files</span><br><span class="line">* [<span class="string">&#x27;chrom.sizes path&#x27;</span>]: enter path <span class="keyword">for</span> chrom.sizes file</span><br><span class="line">* [<span class="string">&#x27;restriction site file&#x27;</span>]: enter path <span class="keyword">for</span> restriction site file (locations of</span><br><span class="line">  restriction sites <span class="keyword">in</span> genome; can be generated with the script</span><br><span class="line">  (misc/generate_site_positions.py) )</span><br><span class="line">* [<span class="string">&#x27;reference genome file&#x27;</span>]: enter path <span class="keyword">for</span> reference sequence file, BWA index</span><br><span class="line">  files must be <span class="keyword">in</span> same directory</span><br><span class="line">* [chunk size]: number of lines <span class="keyword">in</span> split files, must be multiple of 4</span><br><span class="line">  (default 90000000, <span class="built_in">which</span> equals 22.5 million reads)</span><br><span class="line">* [<span class="string">&#x27;Juicer scripts directory&#x27;</span>]: <span class="built_in">set</span> the Juicer directory,</span><br><span class="line">  <span class="built_in">which</span> should have scripts/ references/ and restriction_sites/ underneath it</span><br><span class="line">  (default /broad/aidenlab)</span><br><span class="line">* [queue time <span class="built_in">limit</span>]: time <span class="built_in">limit</span> <span class="keyword">for</span> queue, i.e. -W 12:00 is 12 hours</span><br><span class="line">  (default 1200)</span><br><span class="line">* [long queue time <span class="built_in">limit</span>]: time <span class="built_in">limit</span> <span class="keyword">for</span> long queue, i.e. -W 168:00 is one week</span><br><span class="line">  (default 3600)</span><br><span class="line">* -f: include fragment-delimited maps from hic file creation</span><br><span class="line">* -e: early <span class="built_in">exit</span></span><br><span class="line">* -h: <span class="built_in">print</span> this <span class="built_in">help</span> and <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Juicer-Usage"><a href="#Juicer-Usage" class="headerlink" title="Juicer Usage"></a>Juicer Usage</h2><ul>
+<li><strong>Running Juicer with no arguments</strong> will run it with genomeID hg19 and site MboI</li>
+<li><strong>Providing a genome ID</strong>: if not defined in the script, you can either directly modify the script or provide the script with the files needed. You would provide the script with the files needed via “-z reference_sequence_path” (needs to have the BWA index files in same directory), “-p chrom_sizes_path” (these are the chromosomes you want included in .hic file), and “-s site_file” (this is the listing of all the restriction site locations, one line per chromosome). Note that ligation junction won’t be defined in this case. The script (misc/generate_site_positions.py) can help you generate the file</li>
+<li><strong>Providing a restriction enzyme</strong>: if not defined in the script, you can either directly modify the script or provide the files needed via the “-s site_file” flag, as above. Alternatively, if you don’t want to do any fragment-level analysis (as with a DNAse experiment), you should assign the site “none”, as in <code>juicer.sh -s none</code></li>
+<li><strong>Directory structure</strong>: Juicer expects the fastq files to be stored in a directory underneath the top-level directory. E.g. HIC001/fastq. By default, the top-level directory is the directory where you are when you launch Juicer; you can change this via the -d flag. Fastqs can be zipped. [topDir]/splits will be created to contain the temporary split files and should be deleted once your run is completed. [topDir]/aligned will be created for the final files, including the hic files, the statistics, the valid pairs (merged_nodups), the collisions, and the feature annotations.</li>
+<li><strong>Queues</strong> are complicated and it’s likely that you’ll have to modify the script for your system, though we did our best to avoid this. By default there’s a short queue and a long queue. We also allow you to pass in wait times for those queues; this is currently ignored by the UGER and SLURM versions. The short queue should be able to complete alignment of one split file. The long queue is for jobs that we expect to take a while, like writing out the merged_sort file</li>
+<li><strong>Chunk size</strong> is intimitely associated with your queues; a smaller chunk size means more alignment jobs that complete in a faster time. If you have a hard limit on the number of jobs, you don’t want too small of a chunk size. If your short queue has a very limited runtime ceiling, you don’t want too big of a chunk size. Run time for alignment will also depend on the particulars of your cluster. We launch ~5 jobs per chunk. Chunk size must be a multiple of 4.</li>
+<li><strong>Relaunch</strong> via the same script. Type <code>juicer.sh [options] -S stage</code> where “stage” is one of merge, dedup, final, postproc, or early. “merge” is for when alignment has finished but merged_sort hasn’t been created; “dedup” is for when merged_sort is there but not merged_nodups (this will relaunch all dedup jobs); “final” is for when merged_nodups is there and you want the stats and hic files; “postproc” is for when you have the hic files and just want feature annotations; and “early” is for early exit, before hic file creation. If your jobs failed at the alignment stage, run <code>relaunch_prep.sh</code> and then run juicer.sh.</li>
+<li><strong>Miscelleaneous options</strong> include -a ‘experiment description’, which will add the experiment description to the statistics file and the meta data in the hic file; -r, which allows you to use bwa aln instead of bwa mem, useful for shorter reads; -R [end], in case you have one read end that’s short and one that’s long and you want to align the short end with bwa aln and the long end with bwa mem; and -D [Juicer scripts directory], to set an alternative Juicer directory; must have scripts/, references/, and restriction_sites/ underneath it</li>
+</ul>
+<hr>
+<h2 id="Command-Line-Tools-Usage"><a href="#Command-Line-Tools-Usage" class="headerlink" title="Command Line Tools Usage"></a>Command Line Tools Usage</h2><p>Detailed documentation about the command line tools can be found on the wiki:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/aidenlab/juicer/wiki/Feature-Annotation">Annotating features with Arrowhead, HiCCUPS, MotifFinder, APA, Eigenvector, and Pearsons</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/aidenlab/juicer/wiki/Pre">Creating .hic with Pre</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/aidenlab/straw">Extracting data from .hic files with straw</a></li>
+</ul>
+<p>To launch the command line tools, use the shell script “juicer_tools” on Unix/MacOS or type</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar juicer_tools.jar (command...) [flags...] &lt;parameters...&gt;`</span><br></pre></td></tr></table></figure>
+
+<p>In the command line tools, there are several analysis functions:</p>
+<ol>
+<li><code>apa</code> for conducting aggregate peak analysis</li>
+<li><code>hiccups</code> for annotating loops</li>
+<li><code>motifs</code> for finding CTCF motifs</li>
+<li><code>arrowhead</code> for annotating contact domains</li>
+<li><code>eigenvector</code> for calculating the eigenvector (first PC) of the Pearson’s</li>
+<li><code>pearsons</code> for calculating the Pearson’s</li>
+</ol>
+<p>The <code>juicer_tools</code> (Unix/MacOS) script can be used in place of the unwieldy <code>java -Djava.library.path=path/to/natives/ -jar juicer_tools.jar</code></p>
+<hr>
+<h1 id="juicer的工作目录结构"><a href="#juicer的工作目录结构" class="headerlink" title="juicer的工作目录结构"></a>juicer的工作目录结构</h1><p>要求固定目录结构，新建<code>juicer</code>目录，该目录为软件安装目录，目录下必须有4个子目录</p>
+<p><code>references</code>目录存放参考基因组文件，<code>work</code>存放样本序列文件和分析结果，<code>scripts</code>存放软件运行脚本，<code>restriction_sites</code>存放参考基因组酶切图谱。</p>
+<h1 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h1><p>从github上下载juicer和jcuda的源代码，放置到<code>scripts</code>目录。</p>
+<p>其中的<code>CPU</code>目录就是单机服务器，而<code>AWS</code>, <code>LSF</code>, <code>PBS</code>等对应公有云和不同的集群系统。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd scripts/common</span><br><span class="line">wget https://hicfiles.tc4ga.com/public/juicer/juicer_tools.1.9.9_jcuda.0.8.jar</span><br><span class="line">ln -s juicer_tools.1.9.9_jcuda.0.8.jar  juicer_tools.jar</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考基因组，酶切图谱"><a href="#参考基因组，酶切图谱" class="headerlink" title="参考基因组，酶切图谱"></a>参考基因组，酶切图谱</h1><p>fasta序列文件和bwa 索引</p>
+<p>juicer/misc/generate_site_positions.py可以输出4种内切酶的酶切图谱。HindIII；DpnII；MboI；Sau3AI</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">generate_site_positions.py HindIII hg19 hg19.fasta</span><br><span class="line">python ../juicer/misc/generate_site_positions.py  MboI  hg38_MboI ../references/Homo_sapiens_assembly38.fasta # 生成了 hg38_MboI.txt 文件</span><br><span class="line">awk &#x27;BEGIN&#123;OFS=&quot;\t&quot;&#125;&#123;print $1, $NF&#125;&#x27; hg38_MboI.txt &gt; hg38.chrom.sizes</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数内切酶名称，第二个参数自定义基因组版本，第三个参数基因组fasta文件路径，输出文件名称为第二个参数和第一个参数用下划线链接，后缀为<code>txt</code></p>
+<h1 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h1><p>软件运行时对样本文件的存放位置也有要求，必须位于<code>work</code>目录下，以样本名作为一个子目录，序列文件存放于<code>fastq</code>目录下，示意如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/opt/juicer/work/MBR19/fastq</span><br><span class="line">/opt/juicer/work/MBR19/fastq/chr19_R1.fastq.gz</span><br><span class="line">/opt/juicer/work/MBR19/fastq/chr19_R2.fastq.gz</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="软件比较"><a href="#软件比较" class="headerlink" title="软件比较"></a>软件比较</h1><p><img src="/blog/2022/03/16/2022-03-16-juicer/1.png" alt="img"></p>
+<h1 id="脚本原理（juicer-sh）"><a href="#脚本原理（juicer-sh）" class="headerlink" title="脚本原理（juicer.sh）"></a>脚本原理（juicer.sh）</h1><p>fastq等文件输入 —》bwa比对 —》排序 —》合并 —》去PCR重复 —》生成 hic文件</p>
+<p>Juicer的工作流程见下图，输入<strong>原始</strong>fastq文件，处理得到<strong>中间</strong>文件.hic, 之后对.hic文件用于<strong>下游</strong>分析，包括</p>
+<p>Arrowhead: 寻找存在关联的区域<br>HiCCUPS: 分析局部富集peaks<br>MotifFinder: 用于锚定peaks<br>Persons: 计算观测/期望的皮尔森相关系数矩阵<br>Eigenvector: 确定分隔</p>
+<p><img src="/blog/%E3%80%82/2.png" alt="juicer工作流程"></p>
+<h1 id="结果文件"><a href="#结果文件" class="headerlink" title="结果文件"></a>结果文件</h1><p>结果文件都在 aligned 中，主要文件是 .hic 文件，其中inter_30.hic 是设置了 mapq threshold &gt;30 的结果。如果 GPU （cudd）可用，软件会自动使用自带 <strong>HiCCUPS</strong> 算法计算 contact domains 并保存在 inter_30_contact_domains 文件夹。如果GPU不可用，可手动用自带的 <strong>CPU HiCCUPS</strong> 算法来计算，后面章节有介绍。</p>
+<p>hic文件格式请看 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://github.com/theaidenlab/juicebox/blob/master/HiC_format_v8.docx">https://github.com/theaidenlab/juicebox/blob/master/HiC_format_v8.docx</a></p>
+<h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">juicer.sh \</span><br><span class="line">-z references/hg19.fa \</span><br><span class="line">-p restriction_sites/hg19.chrom.sizes \</span><br><span class="line">-y restriction_sites/hg19_HindIII.txt \</span><br><span class="line">-d /home/pub/software/juicer/work/HIC003/ \</span><br><span class="line">-D /home/pub/software/juicer \</span><br><span class="line">-t 5</span><br><span class="line"></span><br><span class="line">-d: juicer的目录 安装在/soft/，设置为/soft/juicer</span><br><span class="line">-D: juicer scripts的目录，安装在/soft/，设置为/soft/juicer/CPU</span><br></pre></td></tr></table></figure>
+
+<p>需要注意, 指定文件路径时，最好指定绝对路径，特别是fastq文件路径。因为软件运行过程中会使用软链接，相对路径会出错。</p>
+<p><code>splits</code>目录下存放中间结果，由于hi-C数据量很大，所以会将原始序列<strong>拆分成多份</strong>，<strong>并行运算加快速度</strong>。默认每份包含22.5M的reads, 可以通过<code>-C</code>参数调整，该参数指定拆分文件的行数，默认是90000000?， 注意fastq文件4行代表一条序列，所以这个参数的值必须是4的倍数。拆分后序列的R1和R2端分别通过bwa比对基因组，然后合并，筛选嵌合体序列，去重复，生成预处理后的结果文件。</p>
+<p><code>aligned</code>目录下存放的是最终结果，包含了可以导入juicebox的后缀为<code>hic</code>的图谱文件, <code>inter.hic</code>和<code>inter_30.hic</code>， 30表示通过<code>MAPQ &gt; 30</code>过滤之后的结果。完整流程还会进行后续处理，包括识别TAD, 染色质环等结构。其中识别染色质环的HICCUPs算法必须通过<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/gpu?from=10680">GPU</a>加速运行才可以，所以没有安装GPU卡的普通服务器无法运行这个步骤。</p>
+<p>上述过程可看到，juicer使用简单。由于Hi-C数据测序量非常大，以及后续分析算法的复杂度，对服务器计算资源的要求相当高，必须高性能服务器才能满足要求，而该软件所需的GPU卡成本也非常高，一块的成本在2万元左右，这些因素一定程度制约了Hi-C的普及和发展。</p>
+<h1 id="juicer下游分析"><a href="#juicer下游分析" class="headerlink" title="juicer下游分析"></a>juicer下游分析</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/341206245">https://zhuanlan.zhihu.com/p/341206245</a></p>
+<p>目前针对Hi-C数据的研究主要是三个方面，分别是<code>A/B comparment</code> ，<code>TADS</code>，<code>Loops</code>。</p>
+<p><code>juicer_tools.jar</code> 功能介绍</p>
+<p><code>arrowhead</code> 注释TAD</p>
+<p><code>hiccups</code> 注释loop</p>
+<p><code>motigs</code> 定位CTCF元件</p>
+<p><code>hiccupsdiff</code> 从多个loos文件中找到不同的loop</p>
+<p><code>apa</code> 聚合峰的分析</p>
+<p><code>pearsons</code> 计算O/E的皮尔森相关系数</p>
+<p><code>eigenvector</code> 计算特征向量的皮尔森相关系数</p>
+<p><code>dump</code> .hic文件互作矩阵提取</p>
+<p><code>pre</code> 非juicer数据转.hic文件</p>
+<h1 id="hic数据可视化"><a href="#hic数据可视化" class="headerlink" title="hic数据可视化"></a>hic数据可视化</h1><ul>
+<li><p><strong>加载.hic文件</strong></p>
+</li>
+<li><p><strong>加载一维注释</strong></p>
+</li>
+<li><p><strong>加载二维注释，黄的的是TAD，天蓝色的是loop</strong></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/" title="【Hi-C】【Juicer】">https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/denovo-III/" rel="tag"># denovo-III</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2022/03/16/2022-03-16-HiFi-7-HiC-assembly2/" rel="prev" title="HiFi-7-[HiFi+HiC-assembly-method]">
+      <i class="fa fa-chevron-left"></i> HiFi-7-[HiFi+HiC-assembly-method]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/2022/03/17/2022-03-17-3D-DNA/" rel="next" title="【Hi-C】【3D-DNA】">
+      【Hi-C】【3D-DNA】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Read-this-first"><span class="nav-number">1.</span> <span class="nav-text">Read this first!!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#About-Juicer"><span class="nav-number">2.</span> <span class="nav-text">About Juicer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Documentation"><span class="nav-number">3.</span> <span class="nav-text">Documentation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Questions"><span class="nav-number">4.</span> <span class="nav-text">Questions?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Distribution"><span class="nav-number">4.1.</span> <span class="nav-text">Distribution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hardware-and-Software-Requirements"><span class="nav-number">4.2.</span> <span class="nav-text">Hardware and Software Requirements</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cluster-requirements"><span class="nav-number">4.2.1.</span> <span class="nav-text">Cluster requirements:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Juicer-tools-requirements"><span class="nav-number">4.2.2.</span> <span class="nav-text">Juicer tools requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GNU-CoreUtils"><span class="nav-number">4.2.3.</span> <span class="nav-text">GNU CoreUtils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Burrows-Wheeler-Aligner-BWA"><span class="nav-number">4.2.4.</span> <span class="nav-text">Burrows-Wheeler Aligner (BWA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA-for-HiCCUPS-peak-calling"><span class="nav-number">4.2.5.</span> <span class="nav-text">CUDA (for HiCCUPS peak calling)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-new-jars"><span class="nav-number">4.2.6.</span> <span class="nav-text">Building new jars</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">4.3.</span> <span class="nav-text">Quick Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Juicer-Usage"><span class="nav-number">4.4.</span> <span class="nav-text">Juicer Usage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Command-Line-Tools-Usage"><span class="nav-number">4.5.</span> <span class="nav-text">Command Line Tools Usage</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#juicer%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">5.</span> <span class="nav-text">juicer的工作目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%BA%90%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">下载源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%9F%BA%E5%9B%A0%E7%BB%84%EF%BC%8C%E9%85%B6%E5%88%87%E5%9B%BE%E8%B0%B1"><span class="nav-number">7.</span> <span class="nav-text">参考基因组，酶切图谱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97"><span class="nav-number">8.</span> <span class="nav-text">序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E6%AF%94%E8%BE%83"><span class="nav-number">9.</span> <span class="nav-text">软件比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E5%8E%9F%E7%90%86%EF%BC%88juicer-sh%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">脚本原理（juicer.sh）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E6%96%87%E4%BB%B6"><span class="nav-number">11.</span> <span class="nav-text">结果文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">12.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#juicer%E4%B8%8B%E6%B8%B8%E5%88%86%E6%9E%90"><span class="nav-number">13.</span> <span class="nav-text">juicer下游分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hic%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">14.</span> <span class="nav-text">hic数据可视化</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang C"
+      src="/blog/images/banner.png">
+  <p class="site-author-name" itemprop="name">Wang C</p>
+  <div class="site-description" itemprop="description">Make more time</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangc1106" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangc1106" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangchen116@126.com" title="E-Mail → mailto:wangchen116@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-dna"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang C</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz","app_key":"iYpeWQcmNqpHwr2uVlnJYVji","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+      <div style="height: 200px">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5knf34gs07t&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

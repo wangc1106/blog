@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/18/2022-03-19-CUT-Tag/</loc>
+    
+    <lastmod>2022-03-19</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangc1106.github.io/blog/2022/03/18/2022-03-18-mito-chro/</loc>
     
     <lastmod>2022-03-19</lastmod>
@@ -9,7 +16,35 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/2022/03/18/2022-03-19-CUT-Tag/</loc>
+    <loc>https://wangc1106.github.io/blog/2022/03/17/2022-03-17-3D-DNA/</loc>
+    
+    <lastmod>2022-03-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/</loc>
+    
+    <lastmod>2022-03-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/17/2022-03-17-juicebox/</loc>
+    
+    <lastmod>2022-03-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/18/2022-03-18-purgedups/</loc>
+    
+    <lastmod>2022-03-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/17/2022-03-17-LACHESIS/</loc>
     
     <lastmod>2022-03-19</lastmod>
     
@@ -291,14 +326,14 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/O-Sativa/</loc>
+    <loc>https://wangc1106.github.io/blog/tags/Linux/</loc>
     <lastmod>2022-03-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/Linux/</loc>
+    <loc>https://wangc1106.github.io/blog/tags/O-Sativa/</loc>
     <lastmod>2022-03-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -340,13 +375,6 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/SOAPdenovo2/</loc>
-    <lastmod>2022-03-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://wangc1106.github.io/blog/tags/biology/</loc>
     <lastmod>2022-03-19</lastmod>
     <changefreq>daily</changefreq>
@@ -355,6 +383,13 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/fastq/</loc>
+    <lastmod>2022-03-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/tags/SOAPdenovo2/</loc>
     <lastmod>2022-03-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -426,14 +461,14 @@
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/GO/</loc>
+    <loc>https://wangc1106.github.io/blog/categories/Linux/</loc>
     <lastmod>2022-03-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/Linux/</loc>
+    <loc>https://wangc1106.github.io/blog/categories/GO/</loc>
     <lastmod>2022-03-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
