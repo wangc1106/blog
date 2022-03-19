@@ -245,7 +245,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>5.9k</span>
+              <span>5.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -263,84 +263,90 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Oryza-Sativa-【Gene-ID】【GO】【KEGG】"><a href="#Oryza-Sativa-【Gene-ID】【GO】【KEGG】" class="headerlink" title="Oryza Sativa 【Gene ID】【GO】【KEGG】"></a>Oryza Sativa 【Gene ID】【GO】【KEGG】</h2><span id="more"></span>
-
-<h1 id="O-sativa-ID-区分"><a href="#O-sativa-ID-区分" class="headerlink" title="O_sativa ID 区分"></a>O_sativa ID 区分</h1><ul>
-<li><p>MSU, <font color="red">RGAP7.0</font>(rice genome annotation project)：<strong>LOC_Os01g01010.1</strong>,  LOC_Osp#g#####，<strong>LOC_Os-Chr-g-number</strong></p>
+        <h2 id="oryza-sativa-gene-idgokegg"><a class="markdownIt-Anchor" href="#oryza-sativa-gene-idgokegg"></a> Oryza Sativa 【Gene ID】【GO】【KEGG】</h2>
+<span id="more"></span>
+<h1 id="o_sativa-id-区分"><a class="markdownIt-Anchor" href="#o_sativa-id-区分"></a> O_sativa ID 区分</h1>
+<ul>
+<li>
+<p>MSU, <font color="red">RGAP7.0</font>(rice genome annotation project)：<strong>LOC_Os01g01010.1</strong>,  LOC_Osp#g#####，<strong>LOC_Os-Chr-g-number</strong></p>
 </li>
-<li><p><font color="red">RAP</font>(the rice annotation project), IRGSP-1.0: <strong>Os06t0664200</strong>，<strong>Os-Chr-g-number</strong></p>
+<li>
+<p><font color="red">RAP</font>(the rice annotation project), IRGSP-1.0: <strong>Os06t0664200</strong>，<strong>Os-Chr-g-number</strong></p>
 </li>
-<li><p><font color="red">KEGG支持</font>：osa：RefSeq ID（Gene ID：<strong>4334374</strong>）；dosa：RAP-DB ID（<strong>Os06t0664200-01</strong>）</p>
+<li>
+<p><font color="red">KEGG支持</font>：osa：RefSeq ID（Gene ID：<strong>4334374</strong>）；dosa：RAP-DB ID（<strong>Os06t0664200-01</strong>）</p>
 </li>
-<li><p>疑问：RAP-DB ID为什么和IRGSP-1.0 ID多了个-01：RAP-Locus与RAP ID不同</p>
+<li>
+<p>疑问：RAP-DB ID为什么和IRGSP-1.0 ID多了个-01：RAP-Locus与RAP ID不同</p>
 </li>
-<li><p>clusterProfiler可能是目前KEGG富集分析最好的软件，因为能<strong>爬取最新的KEGG在线版数据库</strong>，而不是用不再更新的KEGG.db。</p>
+<li>
+<p>clusterProfiler可能是目前KEGG富集分析最好的软件，因为能<strong>爬取最新的KEGG在线版数据库</strong>，而不是用不再更新的KEGG.db。</p>
 </li>
-<li><p>对于RGAP水稻的基因编号，如LOC_Os01g01010.1 我们要把它变成<code>Os06t0664200-01</code> RAP-ID的命名方式，符合<code>dosa</code>的要求。</p>
+<li>
+<p>对于RGAP水稻的基因编号，如LOC_Os01g01010.1 我们要把它变成<code>Os06t0664200-01</code> RAP-ID的命名方式，符合<code>dosa</code>的要求。</p>
 </li>
 </ul>
-<h2 id="转化id"><a href="#转化id" class="headerlink" title="转化id"></a>转化id</h2><ul>
-<li><p>下载一个各个ID对应的文件：<a target="_blank" rel="noopener" href="https://shigen.nig.ac.jp/rice/oryzabase/download/riceId%E3%80%82%E5%AF%B9%E4%BA%8ERGAP%E6%B0%B4%E7%A8%BB%E7%9A%84%E5%9F%BA%E5%9B%A0%E7%BC%96%E5%8F%B7%EF%BC%8C%E5%A6%82LOC_Os01g01010.1">https://shigen.nig.ac.jp/rice/oryzabase/download/riceId。对于RGAP水稻的基因编号，如LOC_Os01g01010.1</a> 把它变成<code>Os06t0664200-01</code> RAP-ID的命名方式，符合<code>dosa</code>的要求。</p>
+<h2 id="转化id"><a class="markdownIt-Anchor" href="#转化id"></a> 转化id</h2>
+<ul>
+<li>
+<p>下载一个各个ID对应的文件：<a target="_blank" rel="noopener" href="https://shigen.nig.ac.jp/rice/oryzabase/download/riceId%E3%80%82%E5%AF%B9%E4%BA%8ERGAP%E6%B0%B4%E7%A8%BB%E7%9A%84%E5%9F%BA%E5%9B%A0%E7%BC%96%E5%8F%B7%EF%BC%8C%E5%A6%82LOC_Os01g01010.1">https://shigen.nig.ac.jp/rice/oryzabase/download/riceId。对于RGAP水稻的基因编号，如LOC_Os01g01010.1</a> 把它变成<code>Os06t0664200-01</code> RAP-ID的命名方式，符合<code>dosa</code>的要求。</p>
 </li>
-<li><p>日本晴数据库：<a target="_blank" rel="noopener" href="https://shigen.nig.ac.jp/rice/oryzabase">https://shigen.nig.ac.jp/rice/oryzabase</a></p>
+<li>
+<p>日本晴数据库：<a target="_blank" rel="noopener" href="https://shigen.nig.ac.jp/rice/oryzabase">https://shigen.nig.ac.jp/rice/oryzabase</a></p>
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ grep LOC_Os01g01010.1  rice_id_20140620174522.txt</span><br><span class="line">Os01g0100100    Os01t0100100-01 J075199P03      301700  J075199P03              LOC_Os01g01010.1        AK242339</span><br><span class="line">cat LOC.txt | xargs -i awk <span class="string">&#x27;BEGIN&#123;FS=&quot;\t&quot;&#125;  $0 ~/&#123;&#125;/ &#123; print $2&#125;&#x27;</span> rice_id_20140620174522.txt &gt; RAP_id.txt</span><br></pre></td></tr></table></figure>
-
-
-
 <hr>
-<h1 id="超几何分布"><a href="#超几何分布" class="headerlink" title="超几何分布"></a>超几何分布</h1><p>它描述了从有限N个物件（其中包含M个指定种类的物件）中抽出n个物件，成功抽出该指定种类的物件的次数（不放回）。称为超几何分布。</p>
+<h1 id="超几何分布"><a class="markdownIt-Anchor" href="#超几何分布"></a> 超几何分布</h1>
+<p>它描述了从有限N个物件（其中包含M个指定种类的物件）中抽出n个物件，成功抽出该指定种类的物件的次数（不放回）。称为超几何分布。</p>
 <p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83/4782968">https://baike.baidu.com/item/超几何分布/4782968</a></p>
 <hr>
-<h1 id="GO-enrichment：web"><a href="#GO-enrichment：web" class="headerlink" title="GO enrichment：web"></a>GO enrichment：web</h1><blockquote>
+<h1 id="go-enrichmentweb"><a class="markdownIt-Anchor" href="#go-enrichmentweb"></a> GO enrichment：web</h1>
+<blockquote>
 <p>网站：<a target="_blank" rel="noopener" href="http://systemsbiology.cau.edu.cn/agriGOv2">http://systemsbiology.cau.edu.cn/agriGOv2</a>  华大</p>
 </blockquote>
-<h1 id="GO-enrichment：R-clusterProfiler"><a href="#GO-enrichment：R-clusterProfiler" class="headerlink" title="GO enrichment：R clusterProfiler"></a>GO enrichment：R clusterProfiler</h1><p><strong>X</strong> clusterprofiler不能用来做GO的富集分析，因为其20个物种中不包括水稻；</p>
-<h2 id="获取Orgdb，"><a href="#获取Orgdb，" class="headerlink" title="获取Orgdb，"></a>获取Orgdb，</h2><p>AnnotationHub在线检索并抓取OrgDb</p>
+<h1 id="go-enrichmentr-clusterprofiler"><a class="markdownIt-Anchor" href="#go-enrichmentr-clusterprofiler"></a> GO enrichment：R clusterProfiler</h1>
+<p><strong>X</strong> clusterprofiler不能用来做GO的富集分析，因为其20个物种中不包括水稻；</p>
+<h2 id="获取orgdb"><a class="markdownIt-Anchor" href="#获取orgdb"></a> 获取Orgdb，</h2>
+<p>AnnotationHub在线检索并抓取OrgDb</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; require(AnnotationHub)</span><br><span class="line">&gt; hub &lt;- AnnotationHub()</span><br><span class="line">&gt; query(hub, <span class="string">&quot;oryza sativa&quot;</span>)</span><br><span class="line">title</span><br><span class="line">  AH10561 | hom.Oryza_sativa.inp8.sqlite</span><br><span class="line">  AH55775 | org.Oryza_sativa_Japonica_Group.eg.sqlite</span><br><span class="line">&gt; rice &lt;- hub[[<span class="string">&#x27;AH55775&#x27;</span>]]</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">length</span>(keys(rice))[<span class="number">1</span>]</span><br><span class="line"><span class="comment">#通过检索，org.Oryza_sativa_Japonica_Group.eg.sqlite就是我们所要的OrgDb，可以通过相应的accession number, AH55775 抓取文件，并存入了rice对象中，它包含了32639个基因的注释</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这个OrgDb，包含有以下一些注释信息:</span></span><br><span class="line">&gt; columns(rice)</span><br><span class="line"> [<span class="number">1</span>] <span class="string">&quot;ACCNUM&quot;</span>      <span class="string">&quot;ALIAS&quot;</span>       <span class="string">&quot;CHR&quot;</span>         <span class="string">&quot;ENTREZID&quot;</span>    <span class="string">&quot;EVIDENCE&quot;</span></span><br><span class="line"> [<span class="number">6</span>] <span class="string">&quot;EVIDENCEALL&quot;</span> <span class="string">&quot;GENENAME&quot;</span>    <span class="string">&quot;GID&quot;</span>         <span class="string">&quot;GO&quot;</span>          <span class="string">&quot;GOALL&quot;</span></span><br><span class="line">[<span class="number">11</span>] <span class="string">&quot;ONTOLOGY&quot;</span>    <span class="string">&quot;ONTOLOGYALL&quot;</span> <span class="string">&quot;PMID&quot;</span>        <span class="string">&quot;REFSEQ&quot;</span>      <span class="string">&quot;SYMBOL&quot;</span></span><br><span class="line">  [<span class="number">16</span>] <span class="string">&quot;UNIGENE&quot;</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##我们可以使用bitr来转换ID，甚至于直接检索GO注释：</span></span><br><span class="line">&gt; require(clusterProfiler)</span><br><span class="line">&gt; bitr(keys(rice)[<span class="number">1</span>], <span class="string">&#x27;ENTREZID&#x27;</span>, <span class="built_in">c</span>(<span class="string">&quot;REFSEQ&quot;</span>, <span class="string">&quot;GO&quot;</span>, <span class="string">&quot;ONTOLOGY&quot;</span>), rice)</span><br><span class="line"><span class="string">&#x27;select()&#x27;</span> returned <span class="number">1</span>:many mapping between keys and columns</span><br><span class="line">  ENTREZID      REFSEQ         GO ONTOLOGY</span><br><span class="line"><span class="number">1</span>  <span class="number">3131385</span> NP_039457.2 GO:<span class="number">0005739</span>       CC</span><br><span class="line"><span class="number">2</span>  <span class="number">3131385</span> NP_039457.2 GO:<span class="number">0005763</span>       CC</span><br><span class="line"><span class="comment">##GO富集分析</span></span><br><span class="line">&gt; sample_genes &lt;- keys(rice)[<span class="number">1</span>:<span class="number">100</span>]</span><br><span class="line">&gt; head(sample_genes)</span><br><span class="line">[<span class="number">1</span>] <span class="string">&quot;3131385&quot;</span> <span class="string">&quot;3131390&quot;</span> <span class="string">&quot;3131391&quot;</span> <span class="string">&quot;3131392&quot;</span> <span class="string">&quot;3131393&quot;</span> <span class="string">&quot;3131394&quot;</span></span><br><span class="line"><span class="comment">##这里只是简单地使用ID列表中前100个ENTREZ基因ID，也可以使用其它的ID，通过借助于bitr进行转换，或者通过给enrichGO指定ID类型(keyType参数）。</span></span><br><span class="line">&gt; 有了OrgDb，使用起来，就跟文档中使用人类基因做为例子一样，用法一致，并且也可以通过clusterProfiler所提供的各种可视化函数对结果进行展示：</span><br><span class="line"></span><br><span class="line">&gt; require(clusterProfiler)</span><br><span class="line">&gt; res = enrichGO(sample_genes, OrgDb=rice, pvalueCutoff=<span class="number">1</span>, qvalueCutoff=<span class="number">1</span>)</span><br><span class="line">&gt; res</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># over-representation test</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#...@organism    Oryza sativa_Japonica_Group</span></span><br><span class="line"><span class="comment">#...@ontology    MF</span></span><br><span class="line"><span class="comment">#...@keytype     ENTREZID</span></span><br><span class="line"><span class="comment">#...@gene        chr [1:100] &quot;3131385&quot; &quot;3131390&quot; &quot;3131391&quot; &quot;3131392&quot; &quot;3131393&quot; &quot;3131394&quot; ...</span></span><br><span class="line"><span class="comment">#...pvalues adjusted by &#x27;BH&#x27; with cutoff &lt;1</span></span><br><span class="line"><span class="comment">#...28 enriched terms found</span></span><br><span class="line"><span class="string">&#x27;data.frame&#x27;</span>:   <span class="number">28</span> obs. of  <span class="number">9</span> variables:</span><br><span class="line"> $ ID         : chr  <span class="string">&quot;GO:0003735&quot;</span> <span class="string">&quot;GO:0005198&quot;</span> <span class="string">&quot;GO:0003723&quot;</span> <span class="string">&quot;GO:0016830&quot;</span> ...</span><br><span class="line"> $ Description: chr  <span class="string">&quot;structural constituent of ribosome&quot;</span> <span class="string">&quot;structural molecule activity&quot;</span> <span class="string">&quot;RNA binding&quot;</span> <span class="string">&quot;carbon-carbon lyase activity&quot;</span> ...</span><br><span class="line"> $ GeneRatio  : chr  <span class="string">&quot;7/12&quot;</span> <span class="string">&quot;7/12&quot;</span> <span class="string">&quot;2/12&quot;</span> <span class="string">&quot;1/12&quot;</span> ...</span><br><span class="line"> $ BgRatio    : chr  <span class="string">&quot;22/478&quot;</span> <span class="string">&quot;22/478&quot;</span> <span class="string">&quot;14/478&quot;</span> <span class="string">&quot;10/478&quot;</span> ...</span><br><span class="line"> $ pvalue     : num  <span class="number">1.08e-07</span> <span class="number">1.08e-07</span> <span class="number">4.45e-02</span> <span class="number">2.26e-01</span> <span class="number">3.24e-01</span> ...</span><br><span class="line"> $ p.adjust   : num  <span class="number">1.52e-06</span> <span class="number">1.52e-06</span> <span class="number">4.15e-01</span> <span class="number">1.00</span> <span class="number">1.00</span> ...</span><br><span class="line"> $ qvalue     : num  <span class="number">1.42e-06</span> <span class="number">1.42e-06</span> <span class="number">3.90e-01</span> <span class="number">9.40e-01</span> <span class="number">9.40e-01</span> ...</span><br><span class="line"> $ geneID     : chr  <span class="string">&quot;3131425/3131435/3131436/3131439/3131441/3131442/3131457&quot;</span> <span class="string">&quot;3131425/3131435/3131436/3131439/3131441/3131442/3131457&quot;</span> <span class="string">&quot;3131425/3131457&quot;</span> <span class="string">&quot;3131463&quot;</span> ...</span><br><span class="line"> $ Count      : int  <span class="number">7</span> <span class="number">7</span> <span class="number">2</span> <span class="number">1</span> <span class="number">3</span> <span class="number">1</span> <span class="number">2</span> <span class="number">4</span> <span class="number">4</span> <span class="number">1</span> ...</span><br></pre></td></tr></table></figure>
-
-
-
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sly &lt;- ah[[<span class="string">&quot;AH61992&quot;</span>]]</span><br><span class="line">sly</span><br><span class="line">saveDb(sly,file=<span class="string">&quot;sly.orgdb&quot;</span>)</span><br><span class="line">laodDb(file=<span class="string">&quot;sly.orgdb&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
 <p>plant_GSEA: MSU-&gt;Uniprot</p>
 <p>david:Uniprot-&gt;Entrez_id</p>
 <hr>
-<h1 id="KEGG-enrichment：R-clusterProfiler"><a href="#KEGG-enrichment：R-clusterProfiler" class="headerlink" title="KEGG enrichment：R clusterProfiler"></a>KEGG enrichment：R clusterProfiler</h1><ol>
-<li><p>enrichKEGG</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">enrichKEGG(gene, organism = <span class="string">&quot;hsa&quot;</span>, keyType = <span class="string">&quot;kegg&quot;</span>, pvalueCutoff = <span class="number">0.05</span>,</span><br><span class="line">  pAdjustMethod = <span class="string">&quot;BH&quot;</span>, universe, minGSSize = <span class="number">10</span>, maxGSSize = <span class="number">500</span>,</span><br><span class="line">  qvalueCutoff = <span class="number">0.2</span>, use_internal_data = <span class="literal">FALSE</span>)</span><br><span class="line"><span class="comment">#gene： 基因名，要和keyType对应</span></span><br><span class="line"><span class="comment">#organism: 需要参考 http://www.genome.jp/kegg/catalog/org_list.html</span></span><br><span class="line"><span class="comment">#keyType: 基因的命名方式， “kegg”, ‘ncbi-geneid’, ‘ncib-proteinid’ and ‘uniprot’选择其一</span></span><br><span class="line"><span class="comment">#enrichKEGG的一个关键在于理解它是如何获取数据的。在线爬取数据库，相当于在KEGG上手动输入基因名查询。</span></span><br><span class="line"><span class="comment">#所以，把enrichKEGG当做浏览器，试出合适的keytypes。</span></span><br></pre></td></tr></table></figure></li>
+<h1 id="kegg-enrichmentr-clusterprofiler"><a class="markdownIt-Anchor" href="#kegg-enrichmentr-clusterprofiler"></a> KEGG enrichment：R clusterProfiler</h1>
+<ol>
+<li>
+<p>enrichKEGG</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">enrichKEGG(gene, organism = <span class="string">&quot;hsa&quot;</span>, keyType = <span class="string">&quot;kegg&quot;</span>, pvalueCutoff = <span class="number">0.05</span>,</span><br><span class="line">  pAdjustMethod = <span class="string">&quot;BH&quot;</span>, universe, minGSSize = <span class="number">10</span>, maxGSSize = <span class="number">500</span>,</span><br><span class="line">  qvalueCutoff = <span class="number">0.2</span>, use_internal_data = <span class="literal">FALSE</span>)</span><br><span class="line"><span class="comment">#gene： 基因名，要和keyType对应</span></span><br><span class="line"><span class="comment">#organism: 需要参考 http://www.genome.jp/kegg/catalog/org_list.html</span></span><br><span class="line"><span class="comment">#keyType: 基因的命名方式， “kegg”, ‘ncbi-geneid’, ‘ncib-proteinid’ and ‘uniprot’选择其一</span></span><br><span class="line"><span class="comment">#enrichKEGG的一个关键在于理解它是如何获取数据的。在线爬取数据库，相当于在KEGG上手动输入基因名查询。</span></span><br><span class="line"><span class="comment">#所以，把enrichKEGG当做浏览器，试出合适的keytypes。</span></span><br></pre></td></tr></table></figure>
+</li>
 <li></li>
 </ol>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">library(clusterProfiler)</span><br><span class="line"><span class="comment"># 对于GID</span></span><br><span class="line">kk &lt;- enrichkegg(gid_list,organism=<span class="string">&#x27;osa&#x27;</span>,keyType = <span class="string">&#x27;kegg&#x27;</span>,pvalueCutoff=<span class="number">0.05</span>, pAdjustMethod=<span class="string">&#x27;BH&#x27;</span>,qvalueCutoff=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对于RAP_ID</span></span><br><span class="line">kk &lt;- enrichkegg(rap_list,organism=<span class="string">&#x27;dosa&#x27;</span>,keyType = <span class="string">&#x27;kegg&#x27;</span>,pvalueCutoff=<span class="number">0.05</span>, pAdjustMethod=<span class="string">&#x27;BH&#x27;</span>,qvalueCutoff=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">write.table(ekk,<span class="string">&quot;kegg.txt&quot;</span>,sep = <span class="string">&quot;\t&quot;</span>,<span class="built_in">quote</span> = <span class="built_in">F</span>,row.names = <span class="built_in">F</span>)</span><br><span class="line">barplot(ekk,showCategory = <span class="number">15</span>,title = <span class="string">&quot;EnrichmentKEGG&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
 <ol start="3">
 <li>若差异基因集（如500个）本身确实没有生物学功能偏好性，非常有可能无显著富集的kegg通路。</li>
 </ol>
 <p>修改代码，比如：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kk.down &lt;- enrichKEGG(gene = gene_down,</span><br><span class="line">                        organism = <span class="string">&#x27;hsa&#x27;</span>, </span><br><span class="line">                        pvalueCutoff = <span class="number">0.9</span>,</span><br><span class="line">                        qvalueCutoff =<span class="number">0.9</span>)</span><br><span class="line"><span class="comment"># 需要自己差异分析筛选得到 gene_down 基因集 ，然后进行超几何分布检验</span></span><br><span class="line"><span class="comment">#再调整阈值</span></span><br></pre></td></tr></table></figure>
-
 <ol start="4">
-<li><p>或可去MSigDB（Molecular Signatures Database<a target="_blank" rel="noopener" href="https://www.gsea-msigdb.org/gsea/msigdb%EF%BC%89%E7%9C%8B%E5%85%B6%E5%AE%83%E5%8A%9F%E8%83%BD%E5%9F%BA%E5%9B%A0%E9%9B%86%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%AF%8C%E9%9B%86%EF%BC%8CMSigDB%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AE%9A%E4%B9%89%E4%BA%86%E5%B7%B2%E7%9F%A5%E7%9A%84%E5%9F%BA%E5%9B%A0%E9%9B%86%E5%90%88%EF%BC%9A%E5%8C%85%E6%8B%ACH%E5%92%8CC1-C7%E5%85%AB%E4%B8%AA%E7%B3%BB%E5%88%97%EF%BC%88Collection%EF%BC%89%EF%BC%8C%E6%A4%8D%E7%89%A9%E9%80%82%E7%94%A8%EF%BC%9F">https://www.gsea-msigdb.org/gsea/msigdb）看其它功能基因集是否可以富集，MSigDB数据库中定义了已知的基因集合：包括H和C1-C7八个系列（Collection），植物适用？</a></p>
+<li>
+<p>或可去MSigDB（Molecular Signatures Databasehttps://www.gsea-msigdb.org/gsea/msigdb）看其它功能基因集是否可以富集，MSigDB数据库中定义了已知的基因集合：包括H和C1-C7八个系列（Collection），植物适用？</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150744437">GSEA分析</a>，不依赖于差异分析本身,植物适用？</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150744437">GSEA分析</a>，不依赖于差异分析本身,植物适用？</p>
 </li>
 </ol>
 <hr>
-<h1 id="KEGG数据库不会下载？了解下API！"><a href="#KEGG数据库不会下载？了解下API！" class="headerlink" title="KEGG数据库不会下载？了解下API！"></a>KEGG数据库不会下载？了解下API！</h1><ol>
-<li><p>KEGG数据库并不提供免费、批量蛋白序列下载，其官方提供在线分析工具BlastKOALA（<a href="https://link.zhihu.com/?target=https://www.kegg.jp/blastkoala/">https://www.kegg.jp/blastkoala/</a>）等可用于KEGG数据库的注释分析。此外还有其他一些在线分析工具例如很常用的KAAS（<a href="https://link.zhihu.com/?target=https://www.genome.jp/tools/kaas/">https://www.genome.jp/tools/kaas/</a>）等。在线工具内部参数未知。</p>
+<h1 id="kegg数据库不会下载了解下api"><a class="markdownIt-Anchor" href="#kegg数据库不会下载了解下api"></a> KEGG数据库不会下载？了解下API！</h1>
+<ol>
+<li>
+<p>KEGG数据库并不提供免费、批量蛋白序列下载，其官方提供在线分析工具BlastKOALA（<a href="https://link.zhihu.com/?target=https%3A//www.kegg.jp/blastkoala/">https://www.kegg.jp/blastkoala/</a>）等可用于KEGG数据库的注释分析。此外还有其他一些在线分析工具例如很常用的KAAS（<a href="https://link.zhihu.com/?target=https%3A//www.genome.jp/tools/kaas/">https://www.genome.jp/tools/kaas/</a>）等。在线工具内部参数未知。</p>
 </li>
-<li><p>KEGG API（<a target="_blank" rel="noopener" href="https://www.kegg.jp/kegg/rest/keggapi.html%EF%BC%89%E6%98%AF%E5%92%8CKEGG%E5%86%85%E6%A0%B8%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9B%E8%A1%8C%E4%BA%A4%E4%BA%92%E7%9A%84%E7%A8%8B%E5%BA%8F%E7%95%8C%E9%9D%A2%EF%BC%8C%E5%85%81%E8%AE%B8%E7%94%A8%E6%88%B7%E5%9F%BA%E4%BA%8E%E8%AF%A5%E7%95%8C%E9%9D%A2%E6%A3%80%E7%B4%A2KEGG%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8C[%E4%B8%8B%E8%BD%BD](https://zhuanlan.zhihu.com/p/76195765)">https://www.kegg.jp/kegg/rest/keggapi.html）是和KEGG内核数据库进行交互的程序界面，允许用户基于该界面检索KEGG数据库，[下载](https://zhuanlan.zhihu.com/p/76195765)</a></p>
+<li>
+<p>KEGG API（<a target="_blank" rel="noopener" href="https://www.kegg.jp/kegg/rest/keggapi.html%EF%BC%89%E6%98%AF%E5%92%8CKEGG%E5%86%85%E6%A0%B8%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9B%E8%A1%8C%E4%BA%A4%E4%BA%92%E7%9A%84%E7%A8%8B%E5%BA%8F%E7%95%8C%E9%9D%A2%EF%BC%8C%E5%85%81%E8%AE%B8%E7%94%A8%E6%88%B7%E5%9F%BA%E4%BA%8E%E8%AF%A5%E7%95%8C%E9%9D%A2%E6%A3%80%E7%B4%A2KEGG%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8C">https://www.kegg.jp/kegg/rest/keggapi.html）是和KEGG内核数据库进行交互的程序界面，允许用户基于该界面检索KEGG数据库，</a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/76195765">下载</a></p>
 <p>(1)<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/YlJbkIg9It9On5HWRPPgmQ">https://mp.weixin.qq.com/s/YlJbkIg9It9On5HWRPPgmQ</a></p>
 <p>(2)<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/F3dRgHBI4a2atvz0O_pukA">https://mp.weixin.qq.com/s/F3dRgHBI4a2atvz0O_pukA</a></p>
 <p>(3)<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/oDDIlWXsLyTCh18bEEysmQ">https://mp.weixin.qq.com/s/oDDIlWXsLyTCh18bEEysmQ</a></p>
@@ -446,7 +452,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Oryza-Sativa-%E3%80%90Gene-ID%E3%80%91%E3%80%90GO%E3%80%91%E3%80%90KEGG%E3%80%91"><span class="nav-number">1.</span> <span class="nav-text">Oryza Sativa 【Gene ID】【GO】【KEGG】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#O-sativa-ID-%E5%8C%BA%E5%88%86"><span class="nav-number"></span> <span class="nav-text">O_sativa ID 区分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E5%8C%96id"><span class="nav-number">1.</span> <span class="nav-text">转化id</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="nav-number"></span> <span class="nav-text">超几何分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GO-enrichment%EF%BC%9Aweb"><span class="nav-number"></span> <span class="nav-text">GO enrichment：web</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GO-enrichment%EF%BC%9AR-clusterProfiler"><span class="nav-number"></span> <span class="nav-text">GO enrichment：R clusterProfiler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Orgdb%EF%BC%8C"><span class="nav-number">1.</span> <span class="nav-text">获取Orgdb，</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KEGG-enrichment%EF%BC%9AR-clusterProfiler"><span class="nav-number"></span> <span class="nav-text">KEGG enrichment：R clusterProfiler</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KEGG%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8D%E4%BC%9A%E4%B8%8B%E8%BD%BD%EF%BC%9F%E4%BA%86%E8%A7%A3%E4%B8%8BAPI%EF%BC%81"><span class="nav-number"></span> <span class="nav-text">KEGG数据库不会下载？了解下API！</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#oryza-sativa-gene-idgokegg"><span class="nav-number">1.</span> <span class="nav-text"> Oryza Sativa 【Gene ID】【GO】【KEGG】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#o_sativa-id-%E5%8C%BA%E5%88%86"><span class="nav-number"></span> <span class="nav-text"> O_sativa ID 区分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E5%8C%96id"><span class="nav-number">1.</span> <span class="nav-text"> 转化id</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="nav-number"></span> <span class="nav-text"> 超几何分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#go-enrichmentweb"><span class="nav-number"></span> <span class="nav-text"> GO enrichment：web</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#go-enrichmentr-clusterprofiler"><span class="nav-number"></span> <span class="nav-text"> GO enrichment：R clusterProfiler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96orgdb"><span class="nav-number">1.</span> <span class="nav-text"> 获取Orgdb，</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kegg-enrichmentr-clusterprofiler"><span class="nav-number"></span> <span class="nav-text"> KEGG enrichment：R clusterProfiler</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kegg%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8D%E4%BC%9A%E4%B8%8B%E8%BD%BD%E4%BA%86%E8%A7%A3%E4%B8%8Bapi"><span class="nav-number"></span> <span class="nav-text"> KEGG数据库不会下载？了解下API！</span></a></div>
       </div>
       <!--/noindex-->
 
@@ -461,20 +467,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

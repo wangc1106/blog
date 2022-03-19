@@ -1,13 +1,14 @@
-<hr>
-<p>title: [mapping][minimap2]<br>tags:</p>
+<hr />
+<p>title: [mapping][minimap2]<br />
+tags:</p>
 <ul>
-<li>denovo-III<br>categories:</li>
+<li>denovo-III<br />
+categories:</li>
 <li>Software</li>
 </ul>
-<hr>
-<p>Minimap2 is a versatile sequence alignment program that aligns DNA or mRNA sequences against a large reference database. </p>
+<hr />
+<p>Minimap2 is a versatile sequence alignment program that aligns DNA or mRNA sequences against a large reference database.</p>
 <!-- more -->
-
 <p><a href="https://github.com/lh3/minimap2">https://github.com/lh3/minimap2</a></p>
 <ul>
 <li>将PacBio或OXford Nanopore的read和已有参考基因组（如人类）进行比对(<strong>long reads mapping</strong>)</li>
@@ -17,41 +18,46 @@
 <li><strong>组装之间</strong>的比对</li>
 <li><strong>临近物种</strong>的全基因组比对</li>
 </ul>
-<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><pre><code class="sh">git clone https://github.com/lh3/minimap2
-cd minimap2 &amp;&amp; make
-# long sequences against a reference genome
-./minimap2 -a test/MT-human.fa test/MT-orang.fa &gt; test.sam
-# create an index first and then map
-./minimap2 -x map-ont -d MT-human-ont.mmi test/MT-human.fa
-./minimap2 -a MT-human-ont.mmi test/MT-orang.fa &gt; test.sam
-# use presets (no test data)
-./minimap2 -ax map-pb ref.fa pacbio.fq.gz &gt; aln.sam       # PacBio CLR genomic reads
-./minimap2 -ax map-ont ref.fa ont.fq.gz &gt; aln.sam         # Oxford Nanopore genomic reads
-./minimap2 -ax map-hifi ref.fa pacbio-ccs.fq.gz &gt; aln.sam &#39;PacBio HiFi/CCS genomic reads (v2.19 or later)&#39;
-./minimap2 -ax asm20 ref.fa pacbio-ccs.fq.gz &gt; aln.sam    &#39;PacBio HiFi/CCS genomic reads (v2.18 or earlier)&#39;
-./minimap2 -ax sr ref.fa read1.fa read2.fa &gt; aln.sam      # short genomic paired-end reads
-./minimap2 -ax splice ref.fa rna-reads.fa &gt; aln.sam       # spliced long reads (strand unknown)
-./minimap2 -ax splice -uf -k14 ref.fa reads.fa &gt; aln.sam  # noisy Nanopore Direct RNA-seq
-./minimap2 -ax splice:hq -uf ref.fa query.fa &gt; aln.sam    # Final PacBio Iso-seq or traditional cDNA
-./minimap2 -ax splice --junc-bed anno.bed12 ref.fa query.fa &gt; aln.sam  # prioritize on annotated junctions
-./minimap2 -cx asm5 asm1.fa asm2.fa &gt; aln.paf             &#39;intra-species asm-to-asm alignment&#39;
-./minimap2 -x ava-pb reads.fa reads.fa &gt; overlaps.paf     # PacBio read overlap
-./minimap2 -x ava-ont reads.fa reads.fa &gt; overlaps.paf    # Nanopore read overlap
-# man page for detailed command line options
+<h2 id="getting-started"><a class="markdownIt-Anchor" href="#getting-started"></a> Getting Started</h2>
+<pre class="highlight"><code class="sh">git <span class="hljs-built_in">clone</span> https://github.com/lh3/minimap2
+<span class="hljs-built_in">cd</span> minimap2 &amp;&amp; make
+<span class="hljs-comment"># long sequences against a reference genome</span>
+./minimap2 -a <span class="hljs-built_in">test</span>/MT-human.fa <span class="hljs-built_in">test</span>/MT-orang.fa &gt; test.sam
+<span class="hljs-comment"># create an index first and then map</span>
+./minimap2 -x map-ont -d MT-human-ont.mmi <span class="hljs-built_in">test</span>/MT-human.fa
+./minimap2 -a MT-human-ont.mmi <span class="hljs-built_in">test</span>/MT-orang.fa &gt; test.sam
+<span class="hljs-comment"># use presets (no test data)</span>
+./minimap2 -ax map-pb ref.fa pacbio.fq.gz &gt; aln.sam       <span class="hljs-comment"># PacBio CLR genomic reads</span>
+./minimap2 -ax map-ont ref.fa ont.fq.gz &gt; aln.sam         <span class="hljs-comment"># Oxford Nanopore genomic reads</span>
+./minimap2 -ax map-hifi ref.fa pacbio-ccs.fq.gz &gt; aln.sam <span class="hljs-string">'PacBio HiFi/CCS genomic reads (v2.19 or later)'</span>
+./minimap2 -ax asm20 ref.fa pacbio-ccs.fq.gz &gt; aln.sam    <span class="hljs-string">'PacBio HiFi/CCS genomic reads (v2.18 or earlier)'</span>
+./minimap2 -ax sr ref.fa read1.fa read2.fa &gt; aln.sam      <span class="hljs-comment"># short genomic paired-end reads</span>
+./minimap2 -ax splice ref.fa rna-reads.fa &gt; aln.sam       <span class="hljs-comment"># spliced long reads (strand unknown)</span>
+./minimap2 -ax splice -uf -k14 ref.fa reads.fa &gt; aln.sam  <span class="hljs-comment"># noisy Nanopore Direct RNA-seq</span>
+./minimap2 -ax splice:hq -uf ref.fa query.fa &gt; aln.sam    <span class="hljs-comment"># Final PacBio Iso-seq or traditional cDNA</span>
+./minimap2 -ax splice --junc-bed anno.bed12 ref.fa query.fa &gt; aln.sam  <span class="hljs-comment"># prioritize on annotated junctions</span>
+./minimap2 -cx asm5 asm1.fa asm2.fa &gt; aln.paf             <span class="hljs-string">'intra-species asm-to-asm alignment'</span>
+./minimap2 -x ava-pb reads.fa reads.fa &gt; overlaps.paf     <span class="hljs-comment"># PacBio read overlap</span>
+./minimap2 -x ava-ont reads.fa reads.fa &gt; overlaps.paf    <span class="hljs-comment"># Nanopore read overlap</span>
+<span class="hljs-comment"># man page for detailed command line options</span>
 man ./minimap2.1
 </code></pre>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="Users’-Guide"><a href="#Users’-Guide" class="headerlink" title="Users’ Guide"></a>Users’ Guide</h2><p>Minimap2 is a versatile sequence alignment program that aligns <strong>DNA or mRNA</strong> sequences <strong>against</strong> a large <strong>reference</strong> database. </p>
-<p>Typical use cases include: </p>
+<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
+<h2 id="users-guide"><a class="markdownIt-Anchor" href="#users-guide"></a> Users’ Guide</h2>
+<p>Minimap2 is a versatile sequence alignment program that aligns <strong>DNA or mRNA</strong> sequences <strong>against</strong> a large <strong>reference</strong> database.</p>
+<p>Typical use cases include:</p>
 <p>(1) <strong>mapping PacBio</strong> or Oxford <strong>Nanopore</strong> genomic <strong>reads</strong> to the human genome;</p>
 <p>(2) <strong>finding overlaps between long read</strong>s with <strong>error rate</strong> up to ~15%;</p>
 <p>(3) <strong>splice-aware alignment</strong> of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads <strong>against</strong> a <strong>reference</strong> genome;</p>
-<p>(4) aligning <strong>Illumina</strong> single- or paired-end reads; </p>
-<p>(5) <strong>assembly-to-assembly alignment</strong>; </p>
+<p>(4) aligning <strong>Illumina</strong> single- or paired-end reads;</p>
+<p>(5) <strong>assembly-to-assembly alignment</strong>;</p>
 <p>(6) <strong>full-genome alignment</strong> between <strong>two closely related species</strong> with <strong>divergence below ~15%</strong>.</p>
 <p>For ~10kb noisy reads sequences, minimap2 is <strong>tens of times faster</strong> than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP. It is <strong>more accurate</strong> on simulated long reads and produces biologically meaningful alignment ready for downstream analyses. For &gt;100bp <strong>Illumina short reads</strong>, minimap2 is <strong>three times</strong> as fast as <strong>BWA-MEM</strong> and <strong>Bowtie2</strong>, and as accurate on simulated data. Detailed evaluations are available from the <a href="https://doi.org/10.1093/bioinformatics/bty191">minimap2 paper</a> or the <a href="https://arxiv.org/abs/1708.01492">preprint</a>.</p>
-<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><pre><code>cd minimap2 &amp;&amp; make
+<h3 id="installation"><a class="markdownIt-Anchor" href="#installation"></a> Installation</h3>
+<pre class="highlight"><code class="">cd minimap2 &amp;&amp; make
 </code></pre>
-<h3 id="PAF-a-Pairwise-mApping-Format"><a href="#PAF-a-Pairwise-mApping-Format" class="headerlink" title="PAF: a Pairwise mApping Format"></a>PAF: a Pairwise mApping Format</h3><p>PAF is a text format describing the <strong>approximate mapping positions</strong> between two set of sequences. PAF is TAB-delimited with each line consisting of the following predefined fields:</p>
+<h3 id="paf-a-pairwise-mapping-format"><a class="markdownIt-Anchor" href="#paf-a-pairwise-mapping-format"></a> PAF: a Pairwise mApping Format</h3>
+<p>PAF is a text format describing the <strong>approximate mapping positions</strong> between two set of sequences. PAF is TAB-delimited with each line consisting of the following predefined fields:</p>
 <table>
 <thead>
 <tr>
@@ -60,7 +66,8 @@ man ./minimap2.1
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>string</td>
 <td>Query sequence name</td>
@@ -83,7 +90,7 @@ man ./minimap2.1
 <tr>
 <td>5</td>
 <td>char</td>
-<td>Relative strand: “+” or “-“</td>
+<td>Relative strand: “+” or “-”</td>
 </tr>
 <tr>
 <td>6</td>
@@ -120,30 +127,35 @@ man ./minimap2.1
 <td>int</td>
 <td>Mapping quality (0-255; 255 for missing)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>If PAF is generated from an alignment, <strong>column 10 equals the number of sequence matches</strong>, and <strong>column 11 equals the total number of sequence matches, mismatches, insertions and deletions in the alignment</strong>. If alignment is not available, column 10 and 11 are still required but may be highly inaccurate.</p>
 <p>A PAF file may optionally contain SAM-like typed key-value pairs at the end of each line.</p>
-<h3 id="General-usage"><a href="#General-usage" class="headerlink" title="General usage"></a>General usage</h3><p>Without any options, minimap2 takes a <strong>reference</strong> database and a <strong>query sequence</strong> file as input and produce approximate mapping, without base-level alignment (i.e. coordinates are only approximate and no CIGAR in output), in the PAF format:</p>
-<pre><code>minimap2 ref.fa query.fq &gt; approx-mapping.paf
+<h3 id="general-usage"><a class="markdownIt-Anchor" href="#general-usage"></a> General usage</h3>
+<p>Without any options, minimap2 takes a <strong>reference</strong> database and a <strong>query sequence</strong> file as input and produce approximate mapping, without base-level alignment (i.e. coordinates are only approximate and no CIGAR in output), in the PAF format:</p>
+<pre class="highlight"><code class="">minimap2 ref.fa query.fq &gt; approx-mapping.paf
 </code></pre>
 <p>You can ask minimap2 to generate CIGAR at the <code>cg</code> tag of PAF with:</p>
-<pre><code>minimap2 -c ref.fa query.fq &gt; alignment.paf
+<pre class="highlight"><code class="">minimap2 -c ref.fa query.fq &gt; alignment.paf
 </code></pre>
 <p>or to output alignments in the <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM format</a>:</p>
-<pre><code>minimap2 -a ref.fa query.fq &gt; alignment.sam
+<pre class="highlight"><code class="">minimap2 -a ref.fa query.fq &gt; alignment.sam
 </code></pre>
 <p>Minimap2 seamlessly works with <strong>gzip’d FASTA</strong> and <strong>FASTQ</strong> formats as input. You <strong>don’t need to convert</strong> between FASTA and FASTQ or decompress gzip’d files first.</p>
 <p>For the human reference genome, minimap2 takes a few minutes to generate a minimizer index for the reference before mapping. To <strong>reduce indexing time</strong>, you can optionally save the index with option <strong>-d</strong> and <strong>replace the reference sequence file with the index file</strong> on the minimap2 command line:</p>
-<pre><code>minimap2 -d ref.mmi ref.fa                     # indexing
+<pre class="highlight"><code class="">minimap2 -d ref.mmi ref.fa                     # indexing
 minimap2 -a ref.mmi reads.fq &gt; alignment.sam   # alignment
 </code></pre>
 <p><em><strong>Importantly</strong></em>, it should be noted that once you build the index, indexing parameters such as <strong>-k</strong>, <strong>-w</strong>, <strong>-H</strong> and <strong>-I</strong> can’t be changed during mapping. If you are running minimap2 for <strong>different data types</strong>, you will probably need to keep <strong>multiple indexes generated</strong> with different parameters. This makes minimap2 different from BWA which always uses the same index regardless of query data types.</p>
-<h3 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h3><p>Minimap2 uses the same base algorithm for all applications. However, due to the different data types it supports (e.g. short vs long reads; DNA vs mRNA reads), minimap2 needs to be tuned for optimal performance and accuracy. It is usually recommended to choose a preset with option <strong>-x</strong>, which <strong>sets multiple parameters</strong> at the same time. The default setting is the same as <code>map-ont</code>.</p>
-<h4 id="Map-long-noisy-genomic-reads"><a href="#Map-long-noisy-genomic-reads" class="headerlink" title="Map long noisy genomic reads"></a>Map long noisy genomic reads</h4><pre><code class="sh">minimap2 -ax map-pb  ref.fa pacbio-reads.fq &gt; aln.sam   # for 【PacBio CLR】 reads
-minimap2 -ax map-ont ref.fa ont-reads.fq &gt; aln.sam      # for 【Oxford Nanopore】 reads
+<h3 id="use-cases"><a class="markdownIt-Anchor" href="#use-cases"></a> Use cases</h3>
+<p>Minimap2 uses the same base algorithm for all applications. However, due to the different data types it supports (e.g. short vs long reads; DNA vs mRNA reads), minimap2 needs to be tuned for optimal performance and accuracy. It is usually recommended to choose a preset with option <strong>-x</strong>, which <strong>sets multiple parameters</strong> at the same time. The default setting is the same as <code>map-ont</code>.</p>
+<h4 id="map-long-noisy-genomic-reads"><a class="markdownIt-Anchor" href="#map-long-noisy-genomic-reads"></a> Map long noisy genomic reads</h4>
+<pre class="highlight"><code class="sh">minimap2 -ax map-pb  ref.fa pacbio-reads.fq &gt; aln.sam   <span class="hljs-comment"># for 【PacBio CLR】 reads</span>
+minimap2 -ax map-ont ref.fa ont-reads.fq &gt; aln.sam      <span class="hljs-comment"># for 【Oxford Nanopore】 reads</span>
 </code></pre>
 <p>The difference between <code>map-pb</code> and <code>map-ont</code> is that <code>map-pb</code> uses homopolymer-compressed (HPC) minimizers as <strong>seeds</strong>, while <code>map-ont</code> uses ordinary minimizers as seeds. Emperical evaluation suggests HPC minimizers improve performance and sensitivity when aligning PacBio CLR reads, but hurt when aligning Nanopore reads.</p>
-<h4 id="Map-long-mRNA-cDNA-reads"><a href="#Map-long-mRNA-cDNA-reads" class="headerlink" title="Map long mRNA/cDNA reads"></a>Map long mRNA/cDNA reads</h4><pre><code>minimap2 -ax splice:hq -uf ref.fa iso-seq.fq &gt; aln.sam       # PacBio Iso-seq/traditional cDNA
+<h4 id="map-long-mrnacdna-reads"><a class="markdownIt-Anchor" href="#map-long-mrnacdna-reads"></a> Map long mRNA/cDNA reads</h4>
+<pre class="highlight"><code class="">minimap2 -ax splice:hq -uf ref.fa iso-seq.fq &gt; aln.sam       # PacBio Iso-seq/traditional cDNA
 minimap2 -ax splice ref.fa nanopore-cdna.fa &gt; aln.sam        # Nanopore 2D cDNA-seq
 minimap2 -ax splice -uf -k14 ref.fa direct-rna.fq &gt; aln.sam  # Nanopore Direct RNA-seq
 minimap2 -ax splice --splice-flank=no SIRV.fa SIRV-seq.fa    # mapping against SIRV control
@@ -151,38 +163,46 @@ minimap2 -ax splice --splice-flank=no SIRV.fa SIRV-seq.fa    # mapping against S
 <p>There are different long-read RNA-seq technologies, including tranditional full-length cDNA, EST, PacBio Iso-seq, Nanopore 2D cDNA-seq and Direct RNA-seq. They produce data of varying quality and properties. By default, <code>-x splice</code> <strong>assumes the read orientation relative to the transcript strand is unknown</strong>. It tries two rounds of alignment to infer the orientation and write the strand to the <code>ts</code> SAM/PAF tag if possible. For <strong>Iso-seq, Direct RNA-seq</strong> and tranditional full-length <strong>cDNAs</strong>, it would be desired to apply <code>-u f</code> to force minimap2 to <strong>consider the forward transcript strand only</strong>. This speeds up alignment with slight improvement to accuracy. For <strong>noisy Nanopore Direct RNA-seq reads</strong>, it is recommended to use a smaller k-mer size for increased sensitivity to the first or the last exons.</p>
 <p>Minimap2 rates an alignment by the score of the max-scoring sub-segment, <em>excluding</em> introns, and marks the best alignment as primary in SAM. When a <strong>spliced gene also has unspliced pseudogenes</strong>, minimap2 does not intentionally prefer spliced alignment, though in practice it more often marks the spliced alignment as the primary. By default, minimap2 outputs up to five secondary alignments (i.e. likely pseudogenes in the context of RNA-seq mapping). This can be tuned with option <strong>-N</strong>.</p>
 <p>For <strong>long RNA-seq reads</strong>, minimap2 may produce chimeric alignments potentially caused by gene fusions/structural variations or by an intron longer than the max intron length <strong>-G</strong> (200k by default). For now, it is not recommended to apply an excessively large <strong>-G</strong> as this slows down minimap2 and sometimes leads to false alignments.</p>
-<p>It is worth noting that by default <code>-x splice</code> prefers GT[A/G]..[C/T]AG over GT[C/T]..[A/G]AG, and then over other splicing signals. Considering one additional base improves the junction accuracy for noisy reads, but reduces the accuracy when aligning against the widely used SIRV control data. This is because SIRV does not honor the evolutionarily conservative splicing signal. If you are studying <strong>SIRV</strong>, you may apply <code>--splice-flank=no</code> to let minimap2 only model GT..AG, ignoring the additional base.</p>
+<p>It is worth noting that by default <code>-x splice</code> prefers GT[A/G]…[C/T]AG over GT[C/T]…[A/G]AG, and then over other splicing signals. Considering one additional base improves the junction accuracy for noisy reads, but reduces the accuracy when aligning against the widely used SIRV control data. This is because SIRV does not honor the evolutionarily conservative splicing signal. If you are studying <strong>SIRV</strong>, you may apply <code>--splice-flank=no</code> to let minimap2 only model GT…AG, ignoring the additional base.</p>
 <p>Since v2.17, minimap2 can optionally <strong>take annotated genes as input</strong> and prioritize on annotated splice junctions. To use this feature, you can</p>
-<pre><code>paftools.js gff2bed anno.gff &gt; anno.bed
+<pre class="highlight"><code class="">paftools.js gff2bed anno.gff &gt; anno.bed
 minimap2 -ax splice --junc-bed anno.bed ref.fa query.fa &gt; aln.sam
 </code></pre>
 <p>Here, <code>anno.gff</code> is the gene annotation in the GTF or GFF3 format (<code>gff2bed</code> automatically tests the format). The output of <code>gff2bed</code> is in the 12-column BED format, or the BED12 format. With the <code>--junc-bed</code> option, minimap2 adds a bonus score (tuned by <code>--junc-bonus</code>) if an aligned junction matches a junction in the annotation. Option <code>--junc-bed</code> also takes 5-column BED, including the strand field. In this case, each line indicates an oriented junction.</p>
-<h4 id="Find-overlaps-between-long-reads"><a href="#Find-overlaps-between-long-reads" class="headerlink" title="Find overlaps between long reads"></a>Find overlaps between long reads</h4><pre><code>minimap2 -x ava-pb  reads.fq reads.fq &gt; ovlp.paf    # PacBio 【CLR read】 overlap
+<h4 id="find-overlaps-between-long-reads"><a class="markdownIt-Anchor" href="#find-overlaps-between-long-reads"></a> Find overlaps between long reads</h4>
+<pre class="highlight"><code class="">minimap2 -x ava-pb  reads.fq reads.fq &gt; ovlp.paf    # PacBio 【CLR read】 overlap
 minimap2 -x ava-ont reads.fq reads.fq &gt; ovlp.paf    # Oxford 【Nanopore read】 overlap
 </code></pre>
 <p>Similarly, <code>ava-pb</code> uses HPC minimizers while <code>ava-ont</code> uses ordinary minimizers. It is usually not recommended to perform base-level alignment in the overlapping mode because it is slow and may produce false positive overlaps. However, if performance is not a concern, you may try to add <code>-a</code> or <code>-c</code> anyway.</p>
-<h4 id="Map-short-accurate-genomic-reads"><a href="#Map-short-accurate-genomic-reads" class="headerlink" title="Map short accurate genomic reads"></a>Map short accurate genomic reads</h4><pre><code>minimap2 -ax sr ref.fa reads-se.fq &gt; aln.sam           # single-end alignment
+<h4 id="map-short-accurate-genomic-reads"><a class="markdownIt-Anchor" href="#map-short-accurate-genomic-reads"></a> Map short accurate genomic reads</h4>
+<pre class="highlight"><code class="">minimap2 -ax sr ref.fa reads-se.fq &gt; aln.sam           # single-end alignment
 minimap2 -ax sr ref.fa read1.fq read2.fq &gt; aln.sam     # paired-end alignment
 minimap2 -ax sr ref.fa reads-interleaved.fq &gt; aln.sam  # paired-end alignment
 </code></pre>
 <p>When two read files are specified, minimap2 reads from each file in turn and merge them into an interleaved stream internally. Two reads are considered to be paired if they are adjacent in the input stream and have the same name (with the <code>/[0-9]</code> suffix trimmed if present). Single- and paired-end reads can be mixed.</p>
 <p>Minimap2 <strong>does not work well with short spliced reads</strong>. There are many capable RNA-seq mappers for short reads.</p>
-<h4 id="Full-genome-assembly-alignment"><a href="#Full-genome-assembly-alignment" class="headerlink" title="Full genome/assembly alignment"></a><font color="blue">Full genome/assembly alignment</font></h4><pre><code>minimap2 -ax asm5 ref.fa asm.fa &gt; aln.sam       # assembly to assembly/ref alignment
+<h4 id="font-colorbluefull-genomeassembly-alignmentfont"><a class="markdownIt-Anchor" href="#font-colorbluefull-genomeassembly-alignmentfont"></a> <font color="blue">Full genome/assembly alignment</font></h4>
+<pre class="highlight"><code class="">minimap2 -ax asm5 ref.fa asm.fa &gt; aln.sam       # assembly to assembly/ref alignment
 </code></pre>
 <p>For <strong>cross-species</strong> full-genome alignment, the scoring system needs to be tuned according to the sequence divergence.</p>
-<h3 id="Advanced-features"><a href="#Advanced-features" class="headerlink" title="Advanced features"></a>Advanced features</h3><h4 id="Working-with-gt-65535-CIGAR-operations"><a href="#Working-with-gt-65535-CIGAR-operations" class="headerlink" title="Working with &gt;65535 CIGAR operations"></a>Working with &gt;65535 CIGAR operations</h4><p>Due to a design flaw, BAM does not work with CIGAR strings with &gt;65535 operations (SAM and CRAM work). However, for <strong>ultra-long nanopore reads</strong> minimap2 may align ~1% of read bases with long CIGARs beyond the capability of BAM. If you convert such SAM/CRAM to BAM, Picard and recent samtools will throw an error and abort. Older samtools and other tools may create corrupted BAM.</p>
+<h3 id="advanced-features"><a class="markdownIt-Anchor" href="#advanced-features"></a> Advanced features</h3>
+<h4 id="working-with-65535-cigar-operations"><a class="markdownIt-Anchor" href="#working-with-65535-cigar-operations"></a> Working with &gt;65535 CIGAR operations</h4>
+<p>Due to a design flaw, BAM does not work with CIGAR strings with &gt;65535 operations (SAM and CRAM work). However, for <strong>ultra-long nanopore reads</strong> minimap2 may align ~1% of read bases with long CIGARs beyond the capability of BAM. If you convert such SAM/CRAM to BAM, Picard and recent samtools will throw an error and abort. Older samtools and other tools may create corrupted BAM.</p>
 <p>To avoid this issue, you can add option <code>-L</code> at the minimap2 command line. This option moves a long CIGAR to the <code>CG</code> tag and leaves a fully clipped CIGAR at the SAM CIGAR column. Current tools that don’t read CIGAR (e.g. merging and sorting) still work with such BAM records; tools that read CIGAR will effectively ignore these records. It has been decided that future tools will seamlessly recognize long-cigar records generated by option <code>-L</code>.</p>
 <p><strong>TL;DR</strong>: if you work with ultra-long reads and use tools that only process BAM files, please add option <code>-L</code>.</p>
-<h4 id="The-cs-optional-tag"><a href="#The-cs-optional-tag" class="headerlink" title="The cs optional tag"></a>The cs optional tag</h4><p>The <code>cs</code> SAM/PAF tag encodes bases at mismatches and INDELs. It matches regular expression <code>/(:[0-9]+|\*[a-z][a-z]|[=\+\-][A-Za-z]+)+/</code>. Like CIGAR, <code>cs</code> consists of series of operations. Each leading character specifies the operation; the following sequence is the one involved in the operation.</p>
+<h4 id="the-cs-optional-tag"><a class="markdownIt-Anchor" href="#the-cs-optional-tag"></a> The cs optional tag</h4>
+<p>The <code>cs</code> SAM/PAF tag encodes bases at mismatches and INDELs. It matches regular expression <code>/(:[0-9]+|\*[a-z][a-z]|[=\+\-][A-Za-z]+)+/</code>. Like CIGAR, <code>cs</code> consists of series of operations. Each leading character specifies the operation; the following sequence is the one involved in the operation.</p>
 <p>The <code>cs</code> tag is enabled by command line option <code>--cs</code>. The following alignment, for example:</p>
-<pre><code>CGATCGATAAATAGAGTAG---GAATAGCA
+<pre class="highlight"><code class="">CGATCGATAAATAGAGTAG---GAATAGCA
 ||||||   ||||||||||   |||| |||
 CGATCG---AATAGAGTAGGTCGAATtGCA
 </code></pre>
 <p>is represented as <code>:6-ata:10+gtc:4*at:3</code>, where <code>:[0-9]+</code> represents an identical block, <code>-ata</code> represents a deletion, <code>+gtc</code> an insertion and <code>*at</code> indicates reference base <code>a</code> is substituted with a query base <code>t</code>. It is similar to the <code>MD</code> SAM tag but is standalone and easier to parse.</p>
 <p>If <code>--cs=long</code> is used, the <code>cs</code> string also contains identical sequences in the alignment. The above example will become <code>=CGATCG-ata=AATAGAGTAG+gtc=GAAT*at=GCA</code>. The long form of <code>cs</code> <strong>encodes both reference and query sequences in one string</strong>. The <code>cs</code> tag also encodes <strong>intron positions</strong> and <strong>splicing signals</strong> (see the <a href="https://lh3.github.io/minimap2/minimap2.html#10">minimap2 manpage</a> for details).</p>
-<h4 id="Working-with-the-PAF-format"><a href="#Working-with-the-PAF-format" class="headerlink" title="Working with the PAF format"></a><font color="red">Working with the PAF format</font></h4><p>Minimap2 also comes with a (java)script <a href="https://github.com/lh3/minimap2/blob/master/misc/paftools.js">paftools.js</a> that processes alignments in the PAF format. It calls variants from assembly-to-reference alignment, lifts over BED files based on alignment, converts between formats and provides utilities for various evaluations. For details, please see <a href="https://github.com/lh3/minimap2/blob/master/misc/README.md">misc/README.md</a>.</p>
-<h3 id="Algorithm-overview"><a href="#Algorithm-overview" class="headerlink" title="Algorithm overview"></a>Algorithm overview</h3><p>In the following, minimap2 command line options have a dash ahead and are highlighted in bold. The description may help to tune minimap2 parameters.</p>
+<h4 id="font-colorredworking-with-the-paf-formatfont"><a class="markdownIt-Anchor" href="#font-colorredworking-with-the-paf-formatfont"></a> <font color="red">Working with the PAF format</font></h4>
+<p>Minimap2 also comes with a (java)script <a href="https://github.com/lh3/minimap2/blob/master/misc/paftools.js">paftools.js</a> that processes alignments in the PAF format. It calls variants from assembly-to-reference alignment, lifts over BED files based on alignment, converts between formats and provides utilities for various evaluations. For details, please see <a href="https://github.com/lh3/minimap2/blob/master/misc/README.md">misc/README.md</a>.</p>
+<h3 id="algorithm-overview"><a class="markdownIt-Anchor" href="#algorithm-overview"></a> Algorithm overview</h3>
+<p>In the following, minimap2 command line options have a dash ahead and are highlighted in bold. The description may help to tune minimap2 parameters.</p>
 <ol>
 <li>Read <strong>-I</strong> [=<em>4G</em>] reference bases, extract (<strong>-k</strong>,<strong>-w</strong>)-minimizers and index them in a hash table.</li>
 <li>Read <strong>-K</strong> [=<em>200M</em>] query bases. For each query sequence, do step 3 through 7:</li>
@@ -194,39 +214,45 @@ CGATCG---AATAGAGTAGGTCGAATtGCA
 <li>If there are more query sequences in the input, go to step 2 until no more queries are left.</li>
 <li>If there are more reference sequences, reopen the query file from the start and go to step 1; otherwise stop.</li>
 </ol>
-<h3 id="Getting-help"><a href="#Getting-help" class="headerlink" title="Getting help"></a>Getting help</h3><p>Manpage <a href="https://lh3.github.io/minimap2/minimap2.html">minimap2.1</a> provides detailed description of minimap2 command line options and optional tags. The <a href="https://github.com/lh3/minimap2/blob/master/FAQ.md">FAQ</a>page answers several frequently asked questions. If you encounter bugs or have further questions or requests, you can raise an issue at the <a href="https://github.com/lh3/minimap2/issues">issue page</a>. There is not a specific mailing list for the time being.</p>
-<h2 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h2><ul>
+<h3 id="getting-help"><a class="markdownIt-Anchor" href="#getting-help"></a> Getting help</h3>
+<p>Manpage <a href="https://lh3.github.io/minimap2/minimap2.html">minimap2.1</a> provides detailed description of minimap2 command line options and optional tags. The <a href="https://github.com/lh3/minimap2/blob/master/FAQ.md">FAQ</a>page answers several frequently asked questions. If you encounter bugs or have further questions or requests, you can raise an issue at the <a href="https://github.com/lh3/minimap2/issues">issue page</a>. There is not a specific mailing list for the time being.</p>
+<h2 id="limitations"><a class="markdownIt-Anchor" href="#limitations"></a> Limitations</h2>
+<ul>
 <li>Minimap2 may produce <strong>suboptimal alignments</strong> through <strong>long low-complexity regions</strong> where seed positions may be suboptimal. This should not be a big concern because even the optimal alignment may be wrong in such regions.</li>
 <li>Minimap2 requires SSE2 instructions on x86 CPUs or NEON on ARM CPUs. It is possible to add non-SIMD support, but it would make minimap2 slower by several times.</li>
 <li>Minimap2 <strong>does not work</strong> with a single query or database sequence ~<strong>2 billion bases or longer</strong> (2,147,483,647 to be exact). The total length of all sequences can well exceed this threshold.</li>
 <li>Minimap2 often <strong>misses small exons</strong>.</li>
 </ul>
-<h2 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h2><p>Minimap2 follows a typical <strong>seed-chain-align procedure</strong> as is used by most full-genome aligners. It <strong>collects minimizers</strong> (Roberts <em>et al</em>., 2004) of the <strong>reference sequences</strong> and <strong>indexes them in a hash table</strong>, with the <strong>key</strong> being the hash of a minimizer and the <strong>value</strong> being a list of locations of the minimizer copies. Then for <strong>each query sequence</strong>, minimap2 takes query minimizers as <em>seeds</em>, finds exact matches (i.e. <em>anchors</em>) to the reference, and identifies sets of colinear anchors as <em>chains</em>. If base-level alignment is requested, minimap2 applies <strong>dynamic programming</strong> (DP) to extend from the ends of chains and to close regions between adjacent anchors in chains.</p>
+<h2 id="methods"><a class="markdownIt-Anchor" href="#methods"></a> methods</h2>
+<p>Minimap2 follows a typical <strong>seed-chain-align procedure</strong> as is used by most full-genome aligners. It <strong>collects minimizers</strong> (Roberts <em>et al</em>., 2004) of the <strong>reference sequences</strong> and <strong>indexes them in a hash table</strong>, with the <strong>key</strong> being the hash of a minimizer and the <strong>value</strong> being a list of locations of the minimizer copies. Then for <strong>each query sequence</strong>, minimap2 takes query minimizers as <em>seeds</em>, finds exact matches (i.e. <em>anchors</em>) to the reference, and identifies sets of colinear anchors as <em>chains</em>. If base-level alignment is requested, minimap2 applies <strong>dynamic programming</strong> (DP) to extend from the ends of chains and to close regions between adjacent anchors in chains.</p>
 <p>Minimap2 uses indexing and seeding algorithms similar to minimap (Li, 2016), and furthers the predecessor with more accurate chaining, the ability to produce base-level alignment and the support of spliced alignment.</p>
-<h1 id="asm-vs-asm"><a href="#asm-vs-asm" class="headerlink" title="asm vs asm"></a>asm vs asm</h1><h2 id="Difference-of-SNP-amp-indel-between-asm-vs-asm"><a href="#Difference-of-SNP-amp-indel-between-asm-vs-asm" class="headerlink" title="Difference of SNP&amp;indel between asm vs asm"></a>Difference of SNP&amp;indel between asm vs asm</h2><p><a href="https://bleepcoder.com/cn/minimap2/296555096/a-best-practices-document-for-assembly-to-assembly">ref</a></p>
+<h1 id="asm-vs-asm"><a class="markdownIt-Anchor" href="#asm-vs-asm"></a> asm vs asm</h1>
+<h2 id="difference-of-snpindel-between-asm-vs-asm"><a class="markdownIt-Anchor" href="#difference-of-snpindel-between-asm-vs-asm"></a> Difference of SNP&amp;indel between asm vs asm</h2>
+<p><a href="https://bleepcoder.com/cn/minimap2/296555096/a-best-practices-document-for-assembly-to-assembly">ref</a></p>
 <p><code>paftools.js call</code>现在支持 VCF 输出。 要使用它，请将<code>-f ref.fa</code>加到命令行中：</p>
 <p>对同一物种的asm使用<code>asm5</code> 。 如果略有不同，请使用<code>asm10</code> 。 如果序列差异很大，请使用<code>-a</code> 。</p>
 <p>variant calling</p>
-<pre><code class="sh">git clone https://github.com/lh3/minimap2   # you need the latest version; not from conda
-cd minimap2 &amp;&amp; make
+<pre class="highlight"><code class="sh">git <span class="hljs-built_in">clone</span> https://github.com/lh3/minimap2   <span class="hljs-comment"># you need the latest version; not from conda</span>
+<span class="hljs-built_in">cd</span> minimap2 &amp;&amp; make
 
 curl -L https://github.com/attractivechaos/k8/releases/download/v0.2.4/k8-0.2.4.tar.bz2 | tar -jxf -
-cp k8-0.2.4/k8-`uname -s` k8   # or copy it to a directory on you $PATH
+cp k8-0.2.4/k8-`uname -s` k8   <span class="hljs-comment"># or copy it to a directory on you $PATH</span>
 
 ./minimap2 -c --cs ref.fa query.fa \
   | sort -k6,6 -k8,8n \
   | ./k8 misc/paftools.js call -f ref.fa -L20000 - &gt; var.vcf
 </code></pre>
 <p>两asm差异太大。 可以先尝试：</p>
-<pre><code class="sh">./minimap2 -c --cs ref.fa query.fa | sort -k6,6 -k8,8n | ./k8 misc/paftools.js call -L20000 - &gt; var.txt
+<pre class="highlight"><code class="sh">./minimap2 -c --cs ref.fa query.fa | sort -k6,6 -k8,8n | ./k8 misc/paftools.js call -L20000 - &gt; var.txt
 </code></pre>
 <p>生成vcf方法</p>
-<pre><code class="sh">git clone https://github.com/lh3/htsbox
-(cd htsbox &amp;&amp; make)
+<pre class="highlight"><code class="sh">git <span class="hljs-built_in">clone</span> https://github.com/lh3/htsbox
+(<span class="hljs-built_in">cd</span> htsbox &amp;&amp; make)
 minimap2 -axasm5 wt_minion.fasta wt_pacbio.fasta | samtool sort - &gt; sorted.bam
 htsbox/htsbox pileup -q5 -S10000 -vcf wt_minion.fasta sorted.bam &gt; diff.vcf
 </code></pre>
-<h2 id="convert-sam-asm-vs-asm-to-paf"><a href="#convert-sam-asm-vs-asm-to-paf" class="headerlink" title="convert sam(asm vs asm) to paf"></a>convert sam(asm vs asm) to paf</h2><p><a href="https://www.biostars.org/p/479287/">ref</a></p>
+<h2 id="convert-samasm-vs-asm-to-paf"><a class="markdownIt-Anchor" href="#convert-samasm-vs-asm-to-paf"></a> convert sam(asm vs asm) to paf</h2>
+<p><a href="https://www.biostars.org/p/479287/">ref</a></p>
 <p>Looks like no one has actually read the question correctly. <font color="blue"><strong>PAF is missing lots of information compared to SAM</strong></font>, because it is <font color="blue"><strong>a summary of alignment</strong></font>, but it also has <font color="blue">easy access to the <strong>alignment start</strong> and <strong>stop coordinates</strong>, <strong>sequences length</strong></font>, etc. Since <font color="blue">PAF is less information-dense you <strong>cannot convert in both directions</strong></font>.</p>
 <p>There are several options:</p>
 <ol>
@@ -234,106 +260,107 @@ htsbox/htsbox pileup -q5 -S10000 -vcf wt_minion.fasta sorted.bam &gt; diff.vcf
 <li>Use <font color="green"><strong>paftools.js sam2paf</strong></font>: <a href="https://github.com/lh3/minimap2/blob/master/misc/README.md#introduction">https://github.com/lh3/minimap2/blob/master/misc/README.md#introduction</a></li>
 <li>Use this <font color="blue">python</font> library: <a href="https://bioconvert.readthedocs.io/en/master/_modules/bioconvert/sam2paf.html">https://bioconvert.readthedocs.io/en/master/_modules/bioconvert/sam2paf.html</a></li>
 </ol>
-<h2 id="visualization-of-PAF-file-obtained-from-asm-vs-asm-in-minimap2"><a href="#visualization-of-PAF-file-obtained-from-asm-vs-asm-in-minimap2" class="headerlink" title="visualization of PAF file obtained from asm_vs_asm in minimap2"></a>visualization of PAF file obtained from asm_vs_asm in minimap2</h2><p><a href="https://www.jianshu.com/p/befb3a440aed">Ref</a></p>
-<pre><code class="r">source(&quot;.paf.R&quot;)
-df &lt;- read.paf(&quot;./asm_vs_ref.paf&quot;)
+<h2 id="visualization-of-paf-file-obtained-from-asm_vs_asm-in-minimap2"><a class="markdownIt-Anchor" href="#visualization-of-paf-file-obtained-from-asm_vs_asm-in-minimap2"></a> visualization of PAF file obtained from asm_vs_asm in minimap2</h2>
+<p><a href="https://www.jianshu.com/p/befb3a440aed">Ref</a></p>
+<pre class="highlight"><code class="r"><span class="hljs-keyword">source</span>(<span class="hljs-string">".paf.R"</span>)
+df &lt;- read.paf(<span class="hljs-string">"./asm_vs_ref.paf"</span>)
 plot_synteny(df)
 </code></pre>
 <blockquote>
 <p>grid系统里面的视图(viewport)可以继续分为多个图层，每个图层可有不同的坐标系统。</p>
 </blockquote>
-<pre><code class="r">read.paf &lt;- function(file, sep = &quot;\t&quot;,
-                     header = FALSE,
-                     MQ = 10,
-                     ...){
+<pre class="highlight"><code class="r">read.paf &lt;- <span class="hljs-keyword">function</span>(file, sep = <span class="hljs-string">"\t"</span>,
+                     header = <span class="hljs-literal">FALSE</span>,
+                     MQ = <span class="hljs-number">10</span>,
+                     <span class="hljs-keyword">...</span>){
   data &lt;- readLines(file)
   
   dataSize &lt;- length(data)
-  # initialize 
-  qName   &lt;- vector(&quot;character&quot;, dataSize)
-  qLength &lt;- vector(&quot;integer&quot;, dataSize)
-  qStart  &lt;- vector(&quot;integer&quot;, dataSize)
-  qEnd    &lt;- vector(&quot;integer&quot;, dataSize)
-  strand  &lt;- vector(&quot;character&quot;, dataSize)
-  tName   &lt;- vector(&quot;character&quot;, dataSize)
-  tLength &lt;- vector(&quot;integer&quot;, dataSize)
-  tStart  &lt;- vector(&quot;integer&quot;, dataSize)
-  tEnd    &lt;- vector(&quot;integer&quot;, dataSize)
-  reMatch &lt;- vector(&quot;integer&quot;, dataSize)
-  bLength &lt;- vector(&quot;integer&quot;, dataSize)
-  mQuality&lt;- vector(&quot;integer&quot;, dataSize)
+  <span class="hljs-comment"># initialize </span>
+  qName   &lt;- vector(<span class="hljs-string">"character"</span>, dataSize)
+  qLength &lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
+  qStart  &lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
+  qEnd    &lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
+  strand  &lt;- vector(<span class="hljs-string">"character"</span>, dataSize)
+  tName   &lt;- vector(<span class="hljs-string">"character"</span>, dataSize)
+  tLength &lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
+  tStart  &lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
+  tEnd    &lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
+  reMatch &lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
+  bLength &lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
+  mQuality&lt;- vector(<span class="hljs-string">"integer"</span>, dataSize)
 
-  i &lt;- 1
-  j &lt;- 0
-  for (i in seq(dataSize)){
-    items   &lt;- strsplit(data[i], split = sep)[[1]]
+  i &lt;- <span class="hljs-number">1</span>
+  j &lt;- <span class="hljs-number">0</span>
+  <span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> seq(dataSize)){
+    items   &lt;- strsplit(data[i], split = sep)[[<span class="hljs-number">1</span>]]
     
-    quality &lt;- as.numeric(items[12]) #Mapping Quality 0-255
-    if (quality &lt; MQ)
-      next
-    j &lt;- j + 1
-    qName[j]   &lt;- items[1] # Query sequence name
-    qLength[j] &lt;- as.integer(items[2])
-    qStart[j]  &lt;- as.integer(items[3]) + 1L
-    qEnd[j]    &lt;- as.integer(items[4]) + 1L # convert 0-based to 1-based
-    strand[j]  &lt;- items[5] # Relative strand: &quot;+&quot; or &quot;-&quot;
-    tName[j]   &lt;- items[6] # Target sequence name
-    tLength[j] &lt;- as.integer(items[7])
-    tStart[j]  &lt;- as.integer(items[8]) + 1L
-    tEnd[j]    &lt;- as.integer(items[9]) + 1L
-    reMatch[j] &lt;- as.integer(items[10])  #Number of residue matches
-    bLength[j] &lt;- as.integer(items[11]) #Alignment block length
-    mQuality[j]&lt;- as.integer(items[12]) #Alignment block length
+    quality &lt;- as.numeric(items[<span class="hljs-number">12</span>]) <span class="hljs-comment">#Mapping Quality 0-255</span>
+    <span class="hljs-keyword">if</span> (quality &lt; MQ)
+      <span class="hljs-keyword">next</span>
+    j &lt;- j + <span class="hljs-number">1</span>
+    qName[j]   &lt;- items[<span class="hljs-number">1</span>] <span class="hljs-comment"># Query sequence name</span>
+    qLength[j] &lt;- as.integer(items[<span class="hljs-number">2</span>])
+    qStart[j]  &lt;- as.integer(items[<span class="hljs-number">3</span>]) + <span class="hljs-number">1L</span>
+    qEnd[j]    &lt;- as.integer(items[<span class="hljs-number">4</span>]) + <span class="hljs-number">1L</span> <span class="hljs-comment"># convert 0-based to 1-based</span>
+    strand[j]  &lt;- items[<span class="hljs-number">5</span>] <span class="hljs-comment"># Relative strand: "+" or "-"</span>
+    tName[j]   &lt;- items[<span class="hljs-number">6</span>] <span class="hljs-comment"># Target sequence name</span>
+    tLength[j] &lt;- as.integer(items[<span class="hljs-number">7</span>])
+    tStart[j]  &lt;- as.integer(items[<span class="hljs-number">8</span>]) + <span class="hljs-number">1L</span>
+    tEnd[j]    &lt;- as.integer(items[<span class="hljs-number">9</span>]) + <span class="hljs-number">1L</span>
+    reMatch[j] &lt;- as.integer(items[<span class="hljs-number">10</span>])  <span class="hljs-comment">#Number of residue matches</span>
+    bLength[j] &lt;- as.integer(items[<span class="hljs-number">11</span>]) <span class="hljs-comment">#Alignment block length</span>
+    mQuality[j]&lt;- as.integer(items[<span class="hljs-number">12</span>]) <span class="hljs-comment">#Alignment block length</span>
   } 
-    pafDataframe &lt;- data.frame(qName = qName[1:j], qStart = qStart[1:j], qEnd = qEnd[1:j],
-                               tName = tName[1:j], tStart = tStart[1:j], tEnd = tEnd[1:j],
-                               qLength = qLength[1:j], tLength = tLength[1:j], 
-                               strand  = strand[1:j],
-                               reMatch = reMatch[1:j], bLength = bLength[1:j],
-                               mQuality = mQuality[1:j],
-                               stringsAsFactors = FALSE)
-  return(pafDataframe) 
+    pafDataframe &lt;- data.frame(qName = qName[<span class="hljs-number">1</span>:j], qStart = qStart[<span class="hljs-number">1</span>:j], qEnd = qEnd[<span class="hljs-number">1</span>:j],
+                               tName = tName[<span class="hljs-number">1</span>:j], tStart = tStart[<span class="hljs-number">1</span>:j], tEnd = tEnd[<span class="hljs-number">1</span>:j],
+                               qLength = qLength[<span class="hljs-number">1</span>:j], tLength = tLength[<span class="hljs-number">1</span>:j], 
+                               strand  = strand[<span class="hljs-number">1</span>:j],
+                               reMatch = reMatch[<span class="hljs-number">1</span>:j], bLength = bLength[<span class="hljs-number">1</span>:j],
+                               mQuality = mQuality[<span class="hljs-number">1</span>:j],
+                               stringsAsFactors = <span class="hljs-literal">FALSE</span>)
+  <span class="hljs-keyword">return</span>(pafDataframe) 
 }
 
 
-plot_synteny &lt;- function(df, contigs = 20,
-                         lineSize = 3,
-                         borderCol = &quot;#5496ff&quot;,... ){
+plot_synteny &lt;- <span class="hljs-keyword">function</span>(df, contigs = <span class="hljs-number">20</span>,
+                         lineSize = <span class="hljs-number">3</span>,
+                         borderCol = <span class="hljs-string">"#5496ff"</span>,<span class="hljs-keyword">...</span> ){
   
-  # select the top N contig
-  x &lt;- df[,c(&quot;qName&quot;,&quot;qLength&quot;)]
+  <span class="hljs-comment"># select the top N contig</span>
+  x &lt;- df[,c(<span class="hljs-string">"qName"</span>,<span class="hljs-string">"qLength"</span>)]
   x &lt;- x[!duplicated(x$qName),]
-  x &lt;- x[order(x$qLength, decreasing = TRUE),][1:contigs,]
+  x &lt;- x[order(x$qLength, decreasing = <span class="hljs-literal">TRUE</span>),][<span class="hljs-number">1</span>:contigs,]
 
-  y &lt;- df[,c(&quot;tName&quot;,&quot;tLength&quot;)]
+  y &lt;- df[,c(<span class="hljs-string">"tName"</span>,<span class="hljs-string">"tLength"</span>)]
   y &lt;- y[!duplicated(y$tName),]
-  y &lt;- y[order(y$tLength, decreasing = TRUE),][1:contigs,]
+  y &lt;- y[order(y$tLength, decreasing = <span class="hljs-literal">TRUE</span>),][<span class="hljs-number">1</span>:contigs,]
   
-  # make new page for ploting
+  <span class="hljs-comment"># make new page for ploting</span>
   grid::grid.newpage()
   
-  # allot the ratio of each contig
+  <span class="hljs-comment"># allot the ratio of each contig</span>
   x_frac &lt;- x$qLength / sum(x$qLength)
   y_frac &lt;- y$tLength / sum(y$tLength)
   
-  # draw the contig name
-  grid::pushViewport(grid::viewport(height = 0.7,
-                        width =  0.7,
-                        gp = grid::gpar(cex = 0.75),
-                        name = &quot;contigName&quot;))
-  x_pos &lt;- c(0, cumsum(x_frac)[1:(contigs-1)])
-  y_pos &lt;- 1- c(0, cumsum(y_frac)[1:(contigs-1)])
-  for (i in seq.int(1,contigs)){
-    grid::grid.text(label = x[i,1], 
-              x = grid::unit(x_pos[i], &quot;npc&quot;),
-              y = grid::unit(1, &quot;npc&quot;),
-              just = c(&quot;left&quot;,&quot;bottom&quot;),
-              rot = 35
+  <span class="hljs-comment"># draw the contig name</span>
+  grid::pushViewport(grid::viewport(height = <span class="hljs-number">0.7</span>,
+                        width =  <span class="hljs-number">0.7</span>,
+                        gp = grid::gpar(cex = <span class="hljs-number">0.75</span>),
+                        name = <span class="hljs-string">"contigName"</span>))
+  x_pos &lt;- c(<span class="hljs-number">0</span>, cumsum(x_frac)[<span class="hljs-number">1</span>:(contigs-<span class="hljs-number">1</span>)])
+  y_pos &lt;- <span class="hljs-number">1</span>- c(<span class="hljs-number">0</span>, cumsum(y_frac)[<span class="hljs-number">1</span>:(contigs-<span class="hljs-number">1</span>)])
+  <span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> seq.int(<span class="hljs-number">1</span>,contigs)){
+    grid::grid.text(label = x[i,<span class="hljs-number">1</span>], 
+              x = grid::unit(x_pos[i], <span class="hljs-string">"npc"</span>),
+              y = grid::unit(<span class="hljs-number">1</span>, <span class="hljs-string">"npc"</span>),
+              just = c(<span class="hljs-string">"left"</span>,<span class="hljs-string">"bottom"</span>),
+              rot = <span class="hljs-number">35</span>
               )
-    grid::grid.text(label = y[i, 1],
-              x = grid::unit(1, &quot;npc&quot;),
-              y = grid::unit(y_pos[i], &quot;npc&quot;),
-              just = c(&quot;left&quot;)
+    grid::grid.text(label = y[i, <span class="hljs-number">1</span>],
+              x = grid::unit(<span class="hljs-number">1</span>, <span class="hljs-string">"npc"</span>),
+              y = grid::unit(y_pos[i], <span class="hljs-string">"npc"</span>),
+              just = c(<span class="hljs-string">"left"</span>)
               )
     
   }
@@ -342,49 +369,49 @@ plot_synteny &lt;- function(df, contigs = 20,
                        widths  = x_frac,
                        heights = y_frac)
   grid::pushViewport(grid::viewport(layout = vplay,
-                        name = &quot;vplay&quot;))
+                        name = <span class="hljs-string">"vplay"</span>))
   
   
-  # line represent the synteny
-  for ( i in seq(1, contigs)){
-    for (j in seq(1, contigs)){
+  <span class="hljs-comment"># line represent the synteny</span>
+  <span class="hljs-keyword">for</span> ( i <span class="hljs-keyword">in</span> seq(<span class="hljs-number">1</span>, contigs)){
+    <span class="hljs-keyword">for</span> (j <span class="hljs-keyword">in</span> seq(<span class="hljs-number">1</span>, contigs)){
       
-      # get the name and length for subsetting
-      xName   &lt;- x[i,1]
-      xLength &lt;- x[i,2]
-      yName   &lt;- y[j,1] 
-      yLength &lt;- y[j,2]
+      <span class="hljs-comment"># get the name and length for subsetting</span>
+      xName   &lt;- x[i,<span class="hljs-number">1</span>]
+      xLength &lt;- x[i,<span class="hljs-number">2</span>]
+      yName   &lt;- y[j,<span class="hljs-number">1</span>] 
+      yLength &lt;- y[j,<span class="hljs-number">2</span>]
       
-      # push view port for plot Collinearity
+      <span class="hljs-comment"># push view port for plot Collinearity</span>
       grid::pushViewport(grid::viewport(layout.pos.col = i,
                             layout.pos.row = j,
-                            xscale = c(1, xLength),
-                            yscale = c(1, yLength),
-                            name = paste0(&quot;pos&quot;,i,j)))
+                            xscale = c(<span class="hljs-number">1</span>, xLength),
+                            yscale = c(<span class="hljs-number">1</span>, yLength),
+                            name = paste0(<span class="hljs-string">"pos"</span>,i,j)))
   
       grid::grid.rect(gp=grid::gpar(col=borderCol))
-      # select the data
+      <span class="hljs-comment"># select the data</span>
       plot_df &lt;- df[df$qName == xName &amp; df$tName == yName,] 
       blocks &lt;- nrow(plot_df)
-      #cat(sprintf(&quot;block size is %d\n&quot;, blocks))
+      <span class="hljs-comment">#cat(sprintf("block size is %d\n", blocks))</span>
       
-      if (blocks == 0) {
+      <span class="hljs-keyword">if</span> (blocks == <span class="hljs-number">0</span>) {
         grid::upViewport() 
-        next
+        <span class="hljs-keyword">next</span>
       }
       
-      # plot the line
-      for (k in seq(1, blocks)){
-        if (plot_df$strand[k] == &quot;+&quot;){
+      <span class="hljs-comment"># plot the line</span>
+      <span class="hljs-keyword">for</span> (k <span class="hljs-keyword">in</span> seq(<span class="hljs-number">1</span>, blocks)){
+        <span class="hljs-keyword">if</span> (plot_df$strand[k] == <span class="hljs-string">"+"</span>){
           grid::grid.lines(x = c(plot_df$qStart[k], plot_df$qEnd[k]),
                      y = c(plot_df$tStart[k], plot_df$tEnd[k]),
                      gp=grid::gpar(lwd = lineSize),
-                     default.units = &quot;native&quot;)
-        } else {
+                     default.units = <span class="hljs-string">"native"</span>)
+        } <span class="hljs-keyword">else</span> {
           grid::grid.lines(x = c(plot_df$qStart[k], plot_df$qEnd[k]),
                      y = c(plot_df$tEnd[k], plot_df$tStart[k]),
                      gp=grid::gpar(lwd = lineSize),
-                     default.units = &quot;native&quot;)
+                     default.units = <span class="hljs-string">"native"</span>)
         }
 
       }
