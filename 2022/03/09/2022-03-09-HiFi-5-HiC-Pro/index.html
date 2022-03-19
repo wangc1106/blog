@@ -28,20 +28,20 @@
 <meta property="og:site_name" content="Banner&#39;s Blog">
 <meta property="og:description" content="HiC-Pro将fq文件处理成互作allValidPairs，再转化成可视化hic文件(for juicer)">
 <meta property="og:locale">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/5.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/6.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/7.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/8.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/1.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/2.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/3.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/4.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/5.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/6.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/7.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/8.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/1.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/2.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/3.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/4.png">
 <meta property="article:published_time" content="2022-03-09T07:39:23.398Z">
 <meta property="article:modified_time" content="2022-03-16T12:28:02.439Z">
 <meta property="article:author" content="Wang C">
 <meta property="article:tag" content="denovo-III">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wangc1106.github.io/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/5.png">
+<meta name="twitter:image" content="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/5.png">
 
 <link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/">
 
@@ -270,106 +270,93 @@
       
         <p>HiC-Pro将fq文件处理成互作allValidPairs，再转化成可视化hic文件(for juicer)</p>
 <span id="more"></span>
-<h1 id="hic简介"><a class="markdownIt-Anchor" href="#hic简介"></a> HiC简介</h1>
-<ul>
-<li>
-<p><strong>1.1 Hi-C技术</strong>高通量染色体构象捕获技术(<code>High-throughput chromosome conformation capture</code>)研究全基因组三维构象及分析染色质片段相互作用的实验技术</p>
+
+<h1 id="HiC简介"><a href="#HiC简介" class="headerlink" title="HiC简介"></a>HiC简介</h1><ul>
+<li><p><strong>1.1 Hi-C技术</strong>高通量染色体构象捕获技术(<code>High-throughput chromosome conformation capture</code>)研究全基因组三维构象及分析染色质片段相互作用的实验技术</p>
 </li>
-<li>
-<p><strong>1.2 Hi-C目的</strong>了解核内染色质的三维构象、获得细胞核内空间位置非常接近或存在相互作用的染色质测序片段更好地研究染色质内或染色质间的互作、基因调控元件在全基因组范围内调控的情况</p>
+<li><p><strong>1.2 Hi-C目的</strong>了解核内染色质的三维构象、获得细胞核内空间位置非常接近或存在相互作用的染色质测序片段更好地研究染色质内或染色质间的互作、基因调控元件在全基因组范围内调控的情况</p>
 </li>
-<li>
-<p><strong>1.3 Hi-C应用方向</strong>辅助基因组组装、揭示空间调控、揭示物种进化、疾病研究、三维结构差异分析、还原染色体三维结构、构建染色体跨度单体型</p>
+<li><p><strong>1.3 Hi-C应用方向</strong>辅助基因组组装、揭示空间调控、揭示物种进化、疾病研究、三维结构差异分析、还原染色体三维结构、构建染色体跨度单体型</p>
 </li>
-<li>
-<p><strong>1.4 互作本质</strong>统计学上基因组两点之间发生空间接触的概率</p>
+<li><p><strong>1.4 互作本质</strong>统计学上基因组两点之间发生空间接触的概率</p>
 </li>
-<li>
-<p><strong>1.5 Hi-C实验原理</strong></p>
+<li><p><strong>1.5 Hi-C实验原理</strong></p>
 </li>
-<li>
-<p><strong>1.6 二代文库构建及测序</strong></p>
+<li><p><strong>1.6 二代文库构建及测序</strong></p>
 </li>
-<li>
-<p><strong>1.7 Hi-C实际文库类型</strong>将HIC数据进行比对是会出现不同的比对情况，需要的是<font color="blue">双端唯一匹配</font>。对单端匹配、多处比对、未比对的reads进行过滤。</p>
-<p><img src="/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/5.png" alt="HiC-Pro的使用"></p>
+<li><p><strong>1.7 Hi-C实际文库类型</strong>将HIC数据进行比对是会出现不同的比对情况，需要的是<font color="blue">双端唯一匹配</font>。对单端匹配、多处比对、未比对的reads进行过滤。</p>
+<p><img src="/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/5.png" alt="HiC-Pro的使用"></p>
 <p>Hi-C文库构建产生多种分子类型，包括 re-ligation、Dangling ends、self circle 、dump reads 及valid pairs reads等类型。 在 Hi-C 分析中，<font color="red">仅valid pair可以反映基因组上位点与位点间的互作</font>。因此，<font color="blue">非重复的valid pair</font>所占比例是评估Hi-C文库质量重要指标</p>
-<p><img src="/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/6.png" alt="三维基因组技术（三）：Hi-C 数据比对及HiC-Pro的使用"></p>
+<p><img src="/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/6.png" alt="三维基因组技术（三）：Hi-C 数据比对及HiC-Pro的使用"></p>
 </li>
-<li>
-<p><strong>互作矩阵的生成</strong>由于计算资源，数据量等因素，<font color="blue">需要确定一个互作单位：bin</font>。将基因组按照一定大小分成bin。<font color="red">将过滤后的有效序列分配到这些bin中</font></p>
-<p><img src="/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/7.png" alt="三维基因组技术（三）：Hi-C 数据比对及HiC-Pro的使用"></p>
+<li><p><strong>互作矩阵的生成</strong>由于计算资源，数据量等因素，<font color="blue">需要确定一个互作单位：bin</font>。将基因组按照一定大小分成bin。<font color="red">将过滤后的有效序列分配到这些bin中</font></p>
+<p><img src="/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/7.png" alt="三维基因组技术（三）：Hi-C 数据比对及HiC-Pro的使用"></p>
 </li>
-<li>
-<p><strong>互作矩阵的矫正</strong>Hi-C数据中由于<font color="blue">内切酶偏好性、基因组本身质量、基因组序列特异性</font> 导致其在基因组不同位置间存在偏差。因此，<font color="red">对互作矩阵校正，使其数据在基因组上每个位点的覆盖度一致</font>。常用矫正方式有<font color="red"><strong>迭代矫正、归一化</strong></font>等</p>
-<p><img src="/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/8.png" alt="三维基因组技术（三）：Hi-C 数据比对及HiC-Pro的使用"></p>
+<li><p><strong>互作矩阵的矫正</strong>Hi-C数据中由于<font color="blue">内切酶偏好性、基因组本身质量、基因组序列特异性</font> 导致其在基因组不同位置间存在偏差。因此，<font color="red">对互作矩阵校正，使其数据在基因组上每个位点的覆盖度一致</font>。常用矫正方式有<font color="red"><strong>迭代矫正、归一化</strong></font>等</p>
+<p><img src="/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/8.png" alt="三维基因组技术（三）：Hi-C 数据比对及HiC-Pro的使用"></p>
 </li>
 </ul>
-<h2 id="hic常规软件"><a class="markdownIt-Anchor" href="#hic常规软件"></a> HiC常规软件</h2>
-<table>
+<h2 id="HiC常规软件"><a href="#HiC常规软件" class="headerlink" title="HiC常规软件"></a>HiC常规软件</h2><table>
 <thead>
 <tr>
-<th style="text-align:left">软件名</th>
-<th style="text-align:left">hiclib</th>
-<th style="text-align:left">HiC-Pro</th>
-<th style="text-align:left">HICUP</th>
-<th style="text-align:left">Juice</th>
+<th align="left">软件名</th>
+<th align="left">hiclib</th>
+<th align="left">HiC-Pro</th>
+<th align="left">HICUP</th>
+<th align="left">Juice</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">比对软件</td>
-<td style="text-align:left">Bowtie2</td>
-<td style="text-align:left">Bowtie2</td>
-<td style="text-align:left">Bowtie2</td>
-<td style="text-align:left">BWA-mem</td>
+<tbody><tr>
+<td align="left">比对软件</td>
+<td align="left">Bowtie2</td>
+<td align="left">Bowtie2</td>
+<td align="left">Bowtie2</td>
+<td align="left">BWA-mem</td>
 </tr>
 <tr>
-<td style="text-align:left">比对策略</td>
-<td style="text-align:left">迭代比对</td>
-<td style="text-align:left">全局、局部比对</td>
-<td style="text-align:left">先截短后比对</td>
-<td style="text-align:left">Pair-end，嵌合reads过滤</td>
+<td align="left">比对策略</td>
+<td align="left">迭代比对</td>
+<td align="left">全局、局部比对</td>
+<td align="left">先截短后比对</td>
+<td align="left">Pair-end，嵌合reads过滤</td>
 </tr>
 <tr>
-<td style="text-align:left">嵌合reads处理</td>
-<td style="text-align:left">√</td>
-<td style="text-align:left">√</td>
-<td style="text-align:left">√</td>
-<td style="text-align:left">√</td>
+<td align="left">嵌合reads处理</td>
+<td align="left">√</td>
+<td align="left">√</td>
+<td align="left">√</td>
+<td align="left">√</td>
 </tr>
 <tr>
-<td style="text-align:left">构建矩阵</td>
-<td style="text-align:left">√</td>
-<td style="text-align:left">√</td>
-<td style="text-align:left">×</td>
-<td style="text-align:left">√</td>
+<td align="left">构建矩阵</td>
+<td align="left">√</td>
+<td align="left">√</td>
+<td align="left">×</td>
+<td align="left">√</td>
 </tr>
 <tr>
-<td style="text-align:left">标准化</td>
-<td style="text-align:left">ICE</td>
-<td style="text-align:left">ICE</td>
-<td style="text-align:left">×</td>
-<td style="text-align:left">KR</td>
+<td align="left">标准化</td>
+<td align="left">ICE</td>
+<td align="left">ICE</td>
+<td align="left">×</td>
+<td align="left">KR</td>
 </tr>
 <tr>
-<td style="text-align:left">结果文件</td>
-<td style="text-align:left">hdf5、hm、bychr(HDF5)</td>
-<td style="text-align:left">SAM、validpair</td>
-<td style="text-align:left">SAM</td>
-<td style="text-align:left">SAM、MND、.hic</td>
+<td align="left">结果文件</td>
+<td align="left">hdf5、hm、bychr(HDF5)</td>
+<td align="left">SAM、validpair</td>
+<td align="left">SAM</td>
+<td align="left">SAM、MND、.hic</td>
 </tr>
 <tr>
-<td style="text-align:left">特点</td>
-<td style="text-align:left">比对结果可靠，存储消耗小</td>
-<td style="text-align:left">简单易用，输出结果可读</td>
-<td style="text-align:left">过滤非常严格</td>
-<td style="text-align:left">后续分析接口多，juicebox可视化</td>
+<td align="left">特点</td>
+<td align="left">比对结果可靠，存储消耗小</td>
+<td align="left">简单易用，输出结果可读</td>
+<td align="left">过滤非常严格</td>
+<td align="left">后续分析接口多，juicebox可视化</td>
 </tr>
-</tbody>
-</table>
-<h1 id="案例"><a class="markdownIt-Anchor" href="#案例"></a> 案例</h1>
-<p>HiFi助力同源四倍体紫花苜蓿基因组组装，NC</p>
+</tbody></table>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>HiFi助力同源四倍体紫花苜蓿基因组组装，NC</p>
 <blockquote>
 <p>Allele-aware chromosome-level genome assembly and efficient transgene-free genome editing for the autotetraploid cultivated alfalfa</p>
 </blockquote>
@@ -385,7 +372,7 @@
 <blockquote>
 <p>Contigs were annotated with a <font color="red"><strong>solely homology-based strategy</strong></font>, using annotated Medicago truncatula proteins as references. 138,729 homologous genes were structurally annotated. <font color="red"><strong>MCscan</strong> in <strong>Jcvi</strong></font> (<a target="_blank" rel="noopener" href="https://zenodo.org/record/31631#.XpkUyTOeask">https://zenodo.org/record/31631#.XpkUyTOeask</a>) was used to identify <font color="red"><strong>synteny blocks</strong></font> between <strong>contigs and the reference</strong> genome. <font color="red"><strong>Contigs syntenic</strong> to M. truncatula were <strong>stacked and aligned</strong> to M. truncatula chromosomes</font>. The syntenic contigs are summarized in Supplementary Table 4.</p>
 </blockquote>
-<p><img src="/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/1.png" alt="STable4"></p>
+<p><img src="/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/1.png" alt="STable4"></p>
 <p>（4）使用内部脚本处理BAM文件，去除等位基因contigs之间的links。使用ALLHiC软件，<font color="red">提取、聚类和重排Contigs</font> (Contigs syntenic与蒺藜苜蓿染色体一致)，得到原始的scaffolds。</p>
 <blockquote>
 <p>An <strong>in-house script</strong> was used to <font color="red">prune the BAM</font> file and <font color="red">discard links between allelic contigs</font>. Contigs syntenic to one chromosome of M. truncatula, e.g., chr1, were extracted, sub-clustered and reordered using <font color="red">ALLHiC</font>, yielding a raw scaffold set.</p>
@@ -394,247 +381,209 @@
 <blockquote>
 <p>Juicebox45 was used for fine-tuning assembled scaffolds in a graphic and inter-active fashion. Forty scaffolds with a total length of 1800 Mb were cropped (Supplementary Table 5).</p>
 </blockquote>
-<p><img src="/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/2.png" alt="STable5"></p>
+<p><img src="/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/2.png" alt="STable5"></p>
 <p>（6） 基于组装的scaffold，通过Hi-C数据，每个unplaced contig被分配到互作最强的那些contig cluster里。</p>
 <blockquote>
 <p>Based on this scaffold assembly, each unplaced contig was assigned to the contig cluster, to which the contig was most connected by Hi-C data.</p>
 </blockquote>
 <p>（7）使用ALLHiC对那些contig clusters再次进行重排和构建scaffold。</p>
 <blockquote>
-<p>Those contig clusters were reordered and scaffolded using ALLHiC.</p>
+<p>Those contig clusters were reordered and scaffolded using ALLHiC. </p>
 </blockquote>
 <p>（8）使用Juicebox对scaffolds进行微调，并从scaffolds上去除不一致的contigs，产生最终的染色体基因组，其包含32条染色体(8个同源组，每个组中有4个等位基因染色体)，总长度为2738Mb，和419Mb未挂载到染色体水平的序列。</p>
 <blockquote>
 <p>Using Juicebox, scaffolds were fine-tuned and discordant contigs were removed from scaffolds, and the final chromosome assembly was generated, containing 32 chromosomes with a total length of 2738 Mb (Supplementary Table 6).</p>
 </blockquote>
-<p><img src="/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/3.png" alt="STable6"></p>
-<h1 id="hic-pro-install"><a class="markdownIt-Anchor" href="#hic-pro-install"></a> HiC-Pro install</h1>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f ./HiC-Pro/environment.yml -p ///software/HiC_Pro_ENV</span><br><span class="line"><span class="comment">#【install env in my software dir】</span></span><br><span class="line">conda activate env</span><br><span class="line"></span><br><span class="line">tar -zxvf HiC-Pro-master.tar.gz</span><br><span class="line"><span class="built_in">cd</span> HiC-Pro-master</span><br><span class="line"><span class="comment">## Edit config-install.txt file if necessary</span></span><br><span class="line">make configure</span><br><span class="line">make install<span class="comment"># failed </span></span><br><span class="line"><span class="comment">#(g++ -Wall -O2 -std=c++0x -o build_matrix /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0/scripts/src/build_matrix.cpp; mv build_matrix /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0/scripts)</span></span><br><span class="line"><span class="comment">#(g++ -Wall -O2 -std=c++0x -o cutsite_trimming /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0/scripts/src/cutsite_trimming.cpp; mv cutsite_trimming /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0/scripts)</span></span><br><span class="line"><span class="comment">#cp -Ri /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0 /usr/local/bin//HiC-Pro_3.1.0</span></span><br><span class="line"><span class="comment">#cp: cannot create directory ‘/usr/local/bin//HiC-Pro_3.1.0’: Permission denied</span></span><br><span class="line"><span class="comment">#make: *** [Makefile:78: cp] Error 1</span></span><br><span class="line"></span><br><span class="line">but <span class="keyword">in</span> the bin file,it can be use?</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/3.png" alt="STable6"></p>
+<h1 id="HiC-Pro-install"><a href="#HiC-Pro-install" class="headerlink" title="HiC-Pro install"></a>HiC-Pro install</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f ./HiC-Pro/environment.yml -p ///software/HiC_Pro_ENV</span><br><span class="line"><span class="comment">#【install env in my software dir】</span></span><br><span class="line">conda activate env</span><br><span class="line"></span><br><span class="line">tar -zxvf HiC-Pro-master.tar.gz</span><br><span class="line"><span class="built_in">cd</span> HiC-Pro-master</span><br><span class="line"><span class="comment">## Edit config-install.txt file if necessary</span></span><br><span class="line">make configure</span><br><span class="line">make install<span class="comment"># failed </span></span><br><span class="line"><span class="comment">#(g++ -Wall -O2 -std=c++0x -o build_matrix /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0/scripts/src/build_matrix.cpp; mv build_matrix /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0/scripts)</span></span><br><span class="line"><span class="comment">#(g++ -Wall -O2 -std=c++0x -o cutsite_trimming /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0/scripts/src/cutsite_trimming.cpp; mv cutsite_trimming /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0/scripts)</span></span><br><span class="line"><span class="comment">#cp -Ri /xtdisk/xueyb_group/wangchenA/software/HiC-Pro-3.1.0 /usr/local/bin//HiC-Pro_3.1.0</span></span><br><span class="line"><span class="comment">#cp: cannot create directory ‘/usr/local/bin//HiC-Pro_3.1.0’: Permission denied</span></span><br><span class="line"><span class="comment">#make: *** [Makefile:78: cp] Error 1</span></span><br><span class="line"></span><br><span class="line">but <span class="keyword">in</span> the bin file,it can be use?</span><br></pre></td></tr></table></figure>
+
 <p>Make configure and make install, whats the function of those two steps?</p>
-<h1 id="hic-pro-github"><a class="markdownIt-Anchor" href="#hic-pro-github"></a> <a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro">HiC-Pro-GitHub</a></h1>
-<p><a target="_blank" rel="noopener" href="https://doi.org/10.1186/s13059-015-0831-x">Genome Biology 2015</a></p>
-<p>HiC-Pro was designed to process Hi-C data, from <font color="red"><strong>raw fastq files</strong></font> (paired-end Illumina data) to <font color="red"><strong>normalized contact maps</strong></font>. It supports the main Hi-C protocols, including digestion protocols as well as protocols that do not require restriction enzymes such as DNase Hi-C. In practice, HiC-Pro was successfully <font color="blue"><strong>applied to many data-sets</strong></font> including dilution Hi-C, in situ Hi-C, DNase Hi-C, Micro-C, capture-C, capture Hi-C or HiChip data.<br>
-The pipeline is flexible, scalable and optimized. It can operate either on a single laptop or on a computational cluster. HiC-Pro is sequential and each step of the workflow can be run independantly.<br>
-HiC-Pro includes a fast implementatation of the iterative correction method (see the <a target="_blank" rel="noopener" href="https://github.com/hiclib/iced">iced python package</a> for more information). Finally, HiC-Pro can use phasing data to build <a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/blob/master/doc/AS.md">allele-specific contact maps</a>.</p>
-<h2 id="hic-pro-annotation-files"><a class="markdownIt-Anchor" href="#hic-pro-annotation-files"></a> HiC-Pro annotation files</h2>
-<p>In order to process the raw data, HiC-Pro requires three annotation files. Note that the pipeline is provided with some Human and Mouse annotation files.<br>
-<strong>Please be sure that the chromosome names are the same than the ones used in your bowtie indexes !</strong></p>
+<h1 id="HiC-Pro-GitHub"><a href="#HiC-Pro-GitHub" class="headerlink" title="HiC-Pro-GitHub"></a><a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro">HiC-Pro-GitHub</a></h1><p><a target="_blank" rel="noopener" href="https://doi.org/10.1186/s13059-015-0831-x">Genome Biology 2015</a></p>
+<p>HiC-Pro was designed to process Hi-C data, from <font color="red"><strong>raw fastq files</strong></font> (paired-end Illumina data) to <font color="red"><strong>normalized contact maps</strong></font>. It supports the main Hi-C protocols, including digestion protocols as well as protocols that do not require restriction enzymes such as DNase Hi-C. In practice, HiC-Pro was successfully <font color="blue"><strong>applied to many data-sets</strong></font> including dilution Hi-C, in situ Hi-C, DNase Hi-C, Micro-C, capture-C, capture Hi-C or HiChip data.<br>The pipeline is flexible, scalable and optimized. It can operate either on a single laptop or on a computational cluster. HiC-Pro is sequential and each step of the workflow can be run independantly.<br>HiC-Pro includes a fast implementatation of the iterative correction method (see the <a target="_blank" rel="noopener" href="https://github.com/hiclib/iced">iced python package</a> for more information). Finally, HiC-Pro can use phasing data to build <a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/blob/master/doc/AS.md">allele-specific contact maps</a>.</p>
+<h2 id="HiC-Pro-annotation-files"><a href="#HiC-Pro-annotation-files" class="headerlink" title="HiC-Pro annotation files"></a>HiC-Pro annotation files</h2><p>In order to process the raw data, HiC-Pro requires three annotation files. Note that the pipeline is provided with some Human and Mouse annotation files.<br><strong>Please be sure that the chromosome names are the same than the ones used in your bowtie indexes !</strong></p>
 <ul>
 <li><strong>A BED file</strong> of the <font color="blue"><strong>restriction fragments after digestion</strong></font>. This file <font color="blue">depends</font> both of the <font color="blue"><strong>restriction enzyme</strong></font> and the <font color="blue"><strong>reference genome</strong></font>. See the <a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/blob/master/doc/FAQ.md">FAQ</a> and the <a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/blob/master/doc/UTILS.md">HiC-Pro utilities</a> for details about <font color="blue"><strong>how to generate</strong></font> this file. A few annotation files are provided with the HiC-Pro sources as examples. 根据限制性内切酶消化的参考基因组信息 .bed文件。酶切图谱</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#example：/PATH/TO/HiC-Pro_2.11.1/annotation</span></span><br><span class="line"> head HindIII_resfrag_hg19.bed</span><br><span class="line"> chr1   0       16007   HIC_chr1_1    0   +</span><br><span class="line"> chr1   16007   24571   HIC_chr1_2    0   +</span><br><span class="line"> chr1   24571   27981   HIC_chr1_3    0   +</span><br><span class="line"> (...)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#GENOME_FRAGMENT = # 储存消化碎片位置信息的bed文件，一般在HiC-Pro的annotation文件夹下</span></span><br><span class="line"><span class="comment">#LIGATION_SITE = # 酶切位点重连接后的序列</span></span><br><span class="line"><span class="comment">#注：GENOME_FRAGMENT 和 LIGATION_SITE 完全取决于使用了什么酶，一般HiC建库的酶是Hind III，所以要仔细检查数据来源的说明。 </span></span><br><span class="line">digest_genome.py -r A^AGCTT -o HindIII_resfrag_hg19.bed hg19_rCRSchrm.fa  </span><br></pre></td></tr></table></figure>
+
 <p>通过软件脚本产生基因组酶切图谱，输入内切酶名称或者酶切位点序列都可以，用法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">digest_genome.py -r A^AGCTT -o mm9_hindiii.bed mm9.fasta</span><br><span class="line">digest_genome.py -r hindiii -o mm9_hindiii.bed mm9.fasta</span><br></pre></td></tr></table></figure>
+
 <p>NcoI、BamHI、EcoRI、HindIII、NdeI、XhoI, 参考：<a target="_blank" rel="noopener" href="https://www.biomart.cn/experiment/430/457/741/43956.htm"><font color="red"><strong>常见限制性内切酶识别序列(酶切位点)</strong></font></a></p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">限制性内切酶</th>
-<th style="text-align:left">酶切位点，<code>^</code>为切割位点</th>
+<th align="left">限制性内切酶</th>
+<th align="left">酶切位点，<code>^</code>为切割位点</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">MboI</td>
-<td style="text-align:left">^GATC</td>
+<tbody><tr>
+<td align="left">MboI</td>
+<td align="left">^GATC</td>
 </tr>
 <tr>
-<td style="text-align:left">DpnII</td>
-<td style="text-align:left">^GATC</td>
+<td align="left">DpnII</td>
+<td align="left">^GATC</td>
 </tr>
 <tr>
-<td style="text-align:left">BglII</td>
-<td style="text-align:left">A^GATCT</td>
+<td align="left">BglII</td>
+<td align="left">A^GATCT</td>
 </tr>
 <tr>
-<td style="text-align:left">HindIII</td>
-<td style="text-align:left">A^AGCTT</td>
+<td align="left">HindIII</td>
+<td align="left">A^AGCTT</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li><strong>A table file</strong> of chromosomes’ size. This file can be easily find on the <font color="blue">UCSC genome browser</font>. Of note, pay attention to the contigs or scaffolds, and be aware that HiC-pro will generate a map per chromosomes pair. For model organisms such as Human or Mouse, which are well annotated, we usually recommand to remove all scaffolds. 染色体大小的表格文件。从UCSC下载染色体长度文件，或自己根据fasta序列统计长度</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#example：/PATH/TO/HiC-Pro_2.11.1/annotation</span><br><span class="line">head chrom_hg19.sizes</span><br><span class="line">   chr1    249250621</span><br><span class="line">   chr2    243199373</span><br><span class="line">   chr3    198022430</span><br><span class="line">   chr4    191154276</span><br><span class="line">   chr5    180915260</span><br><span class="line">   chr6    171115067</span><br><span class="line">   chr7    159138663</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
-<p><font color="green"><strong>how?</strong></font></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">samtools faidx genome.fa</span><br><span class="line">awk ‘&#123;print $1 &quot;t&quot; $2&#125;‘ genome.fa.fai &gt; genome_sizes.bed</span><br></pre></td></tr></table></figure>
-<ul>
-<li>
-<p><strong>The bowtie2 indexes</strong>. See the <a target="_blank" rel="noopener" href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">bowtie2 manual page</a> for details about how to create such indexes.</p>
-</li>
-<li>
-<pre class="highlight"><code class="sh">bowtie2-build hg19.fasta hg19
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## how to use</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">  HiC-Pro --help</span><br><span class="line">  usage : HiC-Pro -i INPUT -o OUTPUT -c CONFIG [-s ANALYSIS_STEP] [-p] [-h] [-v]</span><br><span class="line">  Use option -h|--help for more information</span><br><span class="line"></span><br><span class="line">  HiC-Pro 3.1.0</span><br><span class="line">  ---------------</span><br><span class="line">  OPTIONS</span><br><span class="line"></span><br><span class="line">   -i|--input INPUT : &#x27;input data folder&#x27;; contains a folder per sample with input files</span><br><span class="line">   -o|--output OUTPUT : &#x27;output folder&#x27;</span><br><span class="line">   -c|--conf CONFIG : &#x27;configuration file&#x27; for Hi-C processing</span><br><span class="line">   [-p|--parallel] : if specified run HiC-Pro on a cluster&#x27;?&#x27;</span><br><span class="line">   [-s|--step ANALYSIS_STEP] : run only a subset of the HiC-Pro workflow; &#x27;if not specified the complete workflow is run&#x27;</span><br><span class="line">      mapping: perform reads &#x27;alignment&#x27; - require fast files</span><br><span class="line">      proc_hic: perform Hi-C &#x27;filtering&#x27; - require BAM files</span><br><span class="line">      quality_checks: run Hi-C &#x27;quality control&#x27; plots</span><br><span class="line">      merge_persample: &#x27;merge&#x27; multiple inputs and remove duplicates if specified - require .validPairs files</span><br><span class="line">      build_contact_maps: &#x27;Build raw inter/intrachromosomal contact maps&#x27; - require .allValidPairs files</span><br><span class="line">      ice_norm : run ICE &#x27;normalization&#x27; on contact maps - require .matrix files</span><br><span class="line">   [-h|--help]: help</span><br><span class="line">   [-v|--version]: version</span><br></pre></td></tr></table></figure>
 
-</code></pre>
+<p><font color="green"><strong>how?</strong></font> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">samtools faidx genome.fa</span><br><span class="line">awk ‘&#123;print $1 &quot;t&quot; $2&#125;‘ genome.fa.fai &gt; genome_sizes.bed</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>The bowtie2 indexes</strong>. See the <a target="_blank" rel="noopener" href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">bowtie2 manual page</a> for details about how to create such indexes.</p>
 </li>
-<li>
-<p><font color="blue"><strong>Copy and edit</strong></font> the configuration file <font color="blue"><strong>’config-hicpro.txt’</strong> </font> in your <font color="blue"><strong>local folder</strong></font>. See the <a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/blob/master/doc/MANUAL.md">manual</a> for details about the configuration file</p>
+<li><p>```sh<br>bowtie2-build hg19.fasta hg19</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## how to use</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">  HiC-Pro --help</span><br><span class="line">  usage : HiC-Pro -i INPUT -o OUTPUT -c CONFIG [-s ANALYSIS_STEP] [-p] [-h] [-v]</span><br><span class="line">  Use option -h|--help for more information</span><br><span class="line"></span><br><span class="line">  HiC-Pro 3.1.0</span><br><span class="line">  ---------------</span><br><span class="line">  OPTIONS</span><br><span class="line"></span><br><span class="line">   -i|--input INPUT : &#x27;input data folder&#x27;; contains a folder per sample with input files</span><br><span class="line">   -o|--output OUTPUT : &#x27;output folder&#x27;</span><br><span class="line">   -c|--conf CONFIG : &#x27;configuration file&#x27; for Hi-C processing</span><br><span class="line">   [-p|--parallel] : if specified run HiC-Pro on a cluster&#x27;?&#x27;</span><br><span class="line">   [-s|--step ANALYSIS_STEP] : run only a subset of the HiC-Pro workflow; &#x27;if not specified the complete workflow is run&#x27;</span><br><span class="line">      mapping: perform reads &#x27;alignment&#x27; - require fast files</span><br><span class="line">      proc_hic: perform Hi-C &#x27;filtering&#x27; - require BAM files</span><br><span class="line">      quality_checks: run Hi-C &#x27;quality control&#x27; plots</span><br><span class="line">      merge_persample: &#x27;merge&#x27; multiple inputs and remove duplicates if specified - require .validPairs files</span><br><span class="line">      build_contact_maps: &#x27;Build raw inter/intrachromosomal contact maps&#x27; - require .allValidPairs files</span><br><span class="line">      ice_norm : run ICE &#x27;normalization&#x27; on contact maps - require .matrix files</span><br><span class="line">   [-h|--help]: help</span><br><span class="line">   [-v|--version]: version</span><br></pre></td></tr></table></figure></li>
+<li><p><font color="blue"><strong>Copy and edit</strong></font> the configuration file <font color="blue"><strong>‘config-hicpro.txt’</strong> </font> in your <font color="blue"><strong>local folder</strong></font>. See the <a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/blob/master/doc/MANUAL.md">manual</a> for details about the configuration file</p>
 </li>
-<li>
-<p>Put <font color="blue"><strong>all input files in a rawdata folder</strong></font>. The input files have to be organized with <font color="blue"><strong>one folder per sample</strong></font>, such as;</p>
+<li><p>Put <font color="blue"><strong>all input files in a rawdata folder</strong></font>. The input files have to be organized with <font color="blue"><strong>one folder per sample</strong></font>, such as;</p>
 </li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ PATH_TO_MY_DATA</span><br><span class="line">  + sample1</span><br><span class="line">    ++ file1_R1.fastq.gz</span><br><span class="line">    ++ file1_R2.fastq.gz</span><br><span class="line">    ++ ...</span><br><span class="line">  + sample2</span><br><span class="line">    ++ file1_R1.fastq.gz</span><br><span class="line">    ++ file1_R2.fastq.gz</span><br><span class="line">  *...</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>Run HiC-Pro on your <font color="blue"><strong>laptop</strong></font> in standalone model</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MY_INSTALL_PATH/bin/HiC-Pro -i <span class="string">&#x27;FULL&#x27;</span>_PATH_TO_DATA_FOLDER -o FULL_PATH_TO_OUTPUTS -c MY_LOCAL_CONFIG_FILE</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>Run HiC-Pro on a <font color="blue"><strong>cluster</strong></font> (TORQUE/SGE/SLURM/LSF)</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MY_INSTALL_PATH/bin/HiC-Pro -i FULL_PATH_TO_DATA_FOLDER -o FULL_PATH_TO_OUTPUTS -c MY_LOCAL_CONFIG_FILE -p</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>In the latter <font color="blue">case[cluster]</font>, you will have the following message :</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Please run HiC-Pro in two steps :</span><br><span class="line"> 1- The following command will launch the parallel workflow through 12 torque jobs:</span><br><span class="line"> qsub HiCPro_step1.sh</span><br><span class="line"> 2- The second command will merge all outputs to generate the contact maps:</span><br><span class="line"> qsub HiCPro_step2.sh</span><br></pre></td></tr></table></figure>
+
 <p>Execute the displayed command from the <font color="blue"><strong>output folder</strong></font>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qsub HiCPro_step1.sh</span><br></pre></td></tr></table></figure>
+
 <p>Once executed succesfully (may take several hours), run the step using:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qsub HiCPro_step2.sh</span><br></pre></td></tr></table></figure>
-<h2 id="config-editing"><a class="markdownIt-Anchor" href="#config-editing"></a> config editing</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#######################################################################</span></span><br><span class="line"><span class="comment">## SYSTEM AND SCHEDULER - Start Editing Here !!</span></span><br><span class="line"><span class="comment">#######################################################################</span></span><br><span class="line">N_CPU = 2</span><br><span class="line">LOGFILE = hicpro.log</span><br><span class="line">JOB_NAME =</span><br><span class="line">JOB_MEM =</span><br><span class="line">JOB_WALLTIME =</span><br><span class="line">JOB_QUEUE =</span><br><span class="line">JOB_MAIL =</span><br></pre></td></tr></table></figure>
+
+<h2 id="config-editing"><a href="#config-editing" class="headerlink" title="config editing"></a>config editing</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#######################################################################</span></span><br><span class="line"><span class="comment">## SYSTEM AND SCHEDULER - Start Editing Here !!</span></span><br><span class="line"><span class="comment">#######################################################################</span></span><br><span class="line">N_CPU = 2</span><br><span class="line">LOGFILE = hicpro.log</span><br><span class="line">JOB_NAME =</span><br><span class="line">JOB_MEM =</span><br><span class="line">JOB_WALLTIME =</span><br><span class="line">JOB_QUEUE =</span><br><span class="line">JOB_MAIL =</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BOWTIE2_IDX_PATH =</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#######################################################################</span></span><br><span class="line"><span class="comment">## Digestion Hi-C</span></span><br><span class="line"><span class="comment">#######################################################################</span></span><br><span class="line">GENOME_FRAGMENT = HindIII_resfrag_hg19.bed</span><br><span class="line">LIGATION_SITE = AAGCTAGCTT</span><br><span class="line">MIN_FRAG_SIZE =</span><br><span class="line">MAX_FRAG_SIZE =</span><br><span class="line">MIN_INSERT_SIZE =</span><br><span class="line">MAX_INSERT_SIZE =</span><br><span class="line">MIN_MAPQ: 最低的质量分数，用于筛选，表示低于该MAPQ值会被过滤</span><br><span class="line">BOWTIE2_IDX_PATH: 基因组bowtie2索引路径，eg:/path/hg19</span><br><span class="line">BOWTIE2_GLOBAL_OPTIONS: 默认GLOBAL比对设置</span><br><span class="line">BOWTIE2_LOCAL_OPTIONS: 默认LOCAL比对设置</span><br><span class="line">REFERENCE_GENOME： Bowtie2索引前缀</span><br><span class="line">GENOME_SIZE： 基因组sizes bed文件</span><br><span class="line">GENOME_FRAGMENT: 基因组酶切文件,eg. /path/hg19_HindIII.bed</span><br><span class="line">LIGATION_SITE: 酶切位点末端补平再次连接后形成的嵌合序列，eg. AAGCTAGCTT</span><br><span class="line">MIN_FRAG_SIZE: 最小的理论酶切片段大小,eg. 100</span><br><span class="line">MAX_FRAG_SIZE: 最大的理论酶切片段大小,eg. 100000</span><br><span class="line">MIN_INSERT_SIZE: 最小的文库片段大小,eg.100</span><br><span class="line">MAX_INSERT_SIZE: 最大的文库片段大小,eg.1000</span><br><span class="line"><span class="string">&#x27;BIN_SIZE:需要生成的矩阵分辨率（bp)&#x27;</span></span><br><span class="line">MATRIX_FORMAT：矩阵的形式，upper表示保留上半部分</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOWTIE2_IDX_PATH = <span class="comment"># bowtie2索引文件目录，索引文件提前下载或用bowtie2-build生成</span></span><br><span class="line">REFERENCE_GENOME = <span class="comment"># bowtie2索引的文件名</span></span><br><span class="line">GENOME_SIZE = <span class="comment"># 染色体大小文件，可从http://hgdownload.cse.ucsc.edu/goldenPath/ 下载</span></span><br><span class="line">GENOME_FRAGMENT = <span class="comment"># 储存消化碎片位置信息的bed文件，一般在HiC-Pro的annotation文件夹下</span></span><br><span class="line">LIGATION_SITE = AAGCTAGCTT<span class="comment"># 酶切位点重连接后的序列</span></span><br><span class="line"><span class="comment"># 注：GENOME_FRAGMENT 和 LIGATION_SITE 完全取决于使用了什么酶，一般来说是Hind III，所以要仔细检查数据来源的说明。 </span></span><br><span class="line">PAIR2_EXT = <span class="comment"># 根据文件名称，分别输入双端数据文件名称，不用输入后缀</span></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#???GENOME_SIZE = 在建立的索引目录下新建一个txt文件：</span></span><br><span class="line">cat &gt;chrom_bacteria.sizes  <span class="comment">#创建一个新的文件cat &gt; filename，文件名我是参考hicpro的配置示例 </span></span><br><span class="line">Chromosome 4016942  <span class="comment">#在文件中写入内容，表明这个参考基因的大小是4016942bp,1bp即为1个碱基对（base pair）</span></span><br></pre></td></tr></table></figure>
-<h2 id="test"><a class="markdownIt-Anchor" href="#test"></a> test</h2>
-<p>The test dataset and associated results are available <a target="_blank" rel="noopener" href="https://zerkalo.curie.fr/partage/HiC-Pro/">here</a>. Small fastq files (2M reads) extracted from the Dixon et al. 2012 paper are available for test.</p>
+
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p>The test dataset and associated results are available <a target="_blank" rel="noopener" href="https://zerkalo.curie.fr/partage/HiC-Pro/">here</a>. Small fastq files (2M reads) extracted from the Dixon et al. 2012 paper are available for test.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Get the data. Will download a test_data folder and a configuration file</span></span><br><span class="line"> wget https://zerkalo.curie.fr/partage/HiC-Pro/HiCPro_testdata.tar.gz &amp;&amp; tar -zxvf HiCPro_testdata.tar.gz</span><br><span class="line"></span><br><span class="line"> <span class="comment">## Edit the configuration file and set the path to Human bowtie2 indexes</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">## Run HiC-Pro</span></span><br><span class="line"> time HICPRO_INSTALL_DIR/bin/HiC-Pro -c config_test_latest.txt -i test_data -o hicpro_latest_test</span><br></pre></td></tr></table></figure>
-<h1 id="hic-pros-doc"><a class="markdownIt-Anchor" href="#hic-pros-doc"></a> <a target="_blank" rel="noopener" href="http://nservant.github.io/HiC-Pro/">HIC-PRO’S DOC</a></h1>
-<h1 id="分步原理"><a class="markdownIt-Anchor" href="#分步原理"></a> 分步原理</h1>
-<p>ref：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/76533e6d6152">https://www.jianshu.com/p/76533e6d6152</a></p>
-<p><img src="/blog/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/4.png" alt="img"></p>
+
+<h1 id="HIC-PRO’S-DOC"><a href="#HIC-PRO’S-DOC" class="headerlink" title="HIC-PRO’S DOC"></a><a target="_blank" rel="noopener" href="http://nservant.github.io/HiC-Pro/">HIC-PRO’S DOC</a></h1><h1 id="分步原理"><a href="#分步原理" class="headerlink" title="分步原理"></a>分步原理</h1><p>ref：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/76533e6d6152">https://www.jianshu.com/p/76533e6d6152</a></p>
+<p><img src="/blog/2022/03/09/2022-03-09-HiFi-5-HiC-Pro/4.png" alt="img"></p>
 <ul>
-<li>
-<p><font color="red"><strong>比对、过滤HiC比对结果、检测有效HiC序列、结果合并、构建HiC关联图谱、关联图谱标准化。</strong></font></p>
+<li><p><font color="red"><strong>比对、过滤HiC比对结果、检测有效HiC序列、结果合并、构建HiC关联图谱、关联图谱标准化。</strong></font></p>
 </li>
-<li>
-<p>HiC-Pro可输出各个尺度的HiC<font color="red">标准化互作图谱</font>，从每个<font color="red">窗口5Kb到1Mb</font>，窗口越大，生成互作关系越少，计算时间就越少，反之越多。同时HiC-Pro能与下游可视化软件<font color="red"><strong>HiCPlotter</strong></font>等兼容，输出文件可直接用于可视化分析。</p>
+<li><p>HiC-Pro可输出各个尺度的HiC<font color="red">标准化互作图谱</font>，从每个<font color="red">窗口5Kb到1Mb</font>，窗口越大，生成互作关系越少，计算时间就越少，反之越多。同时HiC-Pro能与下游可视化软件<font color="red"><strong>HiCPlotter</strong></font>等兼容，输出文件可直接用于可视化分析。</p>
 </li>
-<li>
-<p>HiC-Pro<font color="red">自动化比对，标准化和构建相互作用矩阵</font>，在处理多样化的测序数据时，HiC-Pro能够<strong>检测和自动过滤</strong>测序数量差的reads和无效片段。</p>
+<li><p>HiC-Pro<font color="red">自动化比对，标准化和构建相互作用矩阵</font>，在处理多样化的测序数据时，HiC-Pro能够<strong>检测和自动过滤</strong>测序数量差的reads和无效片段。</p>
 </li>
 </ul>
-<h2 id="1reads-mapping"><a class="markdownIt-Anchor" href="#1reads-mapping"></a> 1.Reads Mapping</h2>
-<p>将fastq文件用bowtie2 mapping一次，查看log：</p>
+<h2 id="1-Reads-Mapping"><a href="#1-Reads-Mapping" class="headerlink" title="1.Reads Mapping"></a>1.Reads Mapping</h2><p>将fastq文件用bowtie2 mapping一次，查看log：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat mapping_step1.log</span><br><span class="line"><span class="comment">###mapping fastq to reference genome , 将unmapping的read 另存为 unmap.fastq</span></span><br><span class="line">/PATH/TO/bowtie2/bowtie2-2.3.3.1/bowtie2 --very-sensitive -L 30 --score-min L,-0.6,-0.2 --end-to-end --reorder --un bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap.fastq --rg-id BMG --rg SM:SRR400264_00_R2 -p 20 -x /PATH/TO/HiC-Pro_2.11.1/Bowtie2Index/hg19 -U rawdata/dixon_2M/SRR400264_00_R2.fastq.gz 2&gt;&gt; logs/dixon_2M/SRR400264_00_R2_bowtie2.log| /PATH/TO/samtools/samtools-1.6/bin/samtools view -F 4 -bS - &gt; bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.bam</span><br><span class="line"></span><br><span class="line">/PATH/TO/bowtie2/bowtie2-2.3.3.1/bowtie2 --very-sensitive -L 30 --score-min L,-0.6,-0.2 --end-to-end --reorder --un bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap.fastq --rg-id BMG --rg SM:SRR400264_00_R1 -p 20 -x /PATH/TO/HiC-Pro_2.11.1/Bowtie2Index/hg19 -U rawdata/dixon_2M/SRR400264_00_R1.fastq.gz 2&gt;&gt; logs/dixon_2M/SRR400264_00_R1_bowtie2.log| /PATH/TO/samtools/samtools-1.6/bin/samtools view -F 4 -bS - &gt; bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.bam</span><br></pre></td></tr></table></figure>
+
 <p>结果文件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">|   |-- bwt2_global</span><br><span class="line">|   |   |-- dixon_2M</span><br><span class="line">|   |   |   |-- SRR400264_00_R1_hg19.bwt2glob.bam</span><br><span class="line">|   |   |   |-- SRR400264_00_R1_hg19.bwt2glob.unmap.fastq</span><br><span class="line">|   |   |   |-- SRR400264_00_R2_hg19.bwt2glob.bam</span><br><span class="line">|   |   |   |-- SRR400264_00_R2_hg19.bwt2glob.unmap.fastq</span><br><span class="line">|   |   `-- dixon_2M_2</span><br><span class="line">|   |       |-- SRR400264_01_R1_hg19.bwt2glob.bam</span><br><span class="line">|   |       |-- SRR400264_01_R1_hg19.bwt2glob.unmap.fastq</span><br><span class="line">|   |       |-- SRR400264_01_R2_hg19.bwt2glob.bam</span><br><span class="line">|   |       |-- SRR400264_01_R2_hg19.bwt2glob.unmap.fastq</span><br></pre></td></tr></table></figure>
+
 <p>有mapping和unmapping。因为read是嵌合基因。mapping上的是背景基因组。<font color="blue">unmapping需要下一步处理</font>。</p>
-<h2 id="2-片段分配和过滤"><a class="markdownIt-Anchor" href="#2-片段分配和过滤"></a> 2. 片段分配和过滤</h2>
-<p>查看log</p>
+<h2 id="2-片段分配和过滤"><a href="#2-片段分配和过滤" class="headerlink" title="2. 片段分配和过滤"></a>2. 片段分配和过滤</h2><p>查看log</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat mapping_step2.log</span><br><span class="line"><span class="comment">### 酶切</span></span><br><span class="line">/PATH/TO/HiC-Pro/HiC-Pro_2.11.1/scripts/cutsite_trimming --fastq bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap.fastq --cutsite AAGCTAGCTT --out bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap_trimmed.fastq &gt; logs/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap_readsTrimming.log 2&gt;&amp;1</span><br><span class="line">/PATH/TO/HiC-Pro/HiC-Pro_2.11.1/scripts/cutsite_trimming --fastq bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap.fastq --cutsite AAGCTAGCTT --out bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap_trimmed.fastq &gt; logs/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap_readsTrimming.log 2&gt;&amp;1</span><br><span class="line"><span class="comment">### 再用bowtie2 mapping一次</span></span><br><span class="line">/PATH/TO/bowtie2/bowtie2-2.3.3.1/bowtie2 --very-sensitive -L 20 --score-min L,-0.6,-0.2 --end-to-end --reorder --rg-id BML --rg SM:SRR400264_00_R1_hg19.bwt2glob.unmap -p 20 -x /PATH/TO/HiC-Pro/HiC-Pro_2.11.1/Bowtie2Index/hg19 -U bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap_trimmed.fastq 2&gt;&gt; logs/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap_bowtie2.log | /PATH/TO/samtools/samtools-1.6/bin/samtools view -bS - &gt; bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line">/PATH/TO/bowtie2/bowtie2-2.3.3.1/bowtie2 --very-sensitive -L 20 --score-min L,-0.6,-0.2 --end-to-end --reorder --rg-id BML --rg SM:SRR400264_00_R2_hg19.bwt2glob.unmap -p 20 -x /PATH/TO/HiC-Pro/HiC-Pro_2.11.1/Bowtie2Index/hg19 -U bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap_trimmed.fastq 2&gt;&gt; logs/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap_bowtie2.log | /PATH/TO/samtools/samtools-1.6/bin/samtools view -bS - &gt; bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap_bwt2loc.bam</span><br></pre></td></tr></table></figure>
+
 <p>这一步将unmapping结果，用酶切位点分割，然后将分割结果，再mapping一次。得到结果</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">|   |-- bwt2_local</span><br><span class="line">|       |-- dixon_2M</span><br><span class="line">|       |   |-- SRR400264_00_R1_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line">|       |   |-- SRR400264_00_R1_hg19.bwt2glob.unmap_trimmed.fastq</span><br><span class="line">|       |   |-- SRR400264_00_R2_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line">|       |   |-- SRR400264_00_R2_hg19.bwt2glob.unmap_trimmed.fastq</span><br><span class="line">|       |-- dixon_2M_2</span><br><span class="line">|           |-- SRR400264_01_R1_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line">|           |-- SRR400264_01_R1_hg19.bwt2glob.unmap_trimmed.fastq</span><br><span class="line">|           |-- SRR400264_01_R2_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line">|           |-- SRR400264_01_R2_hg19.bwt2glob.unmap_trimmed.fastq</span><br></pre></td></tr></table></figure>
-<h2 id="3-mapping_combinelog"><a class="markdownIt-Anchor" href="#3-mapping_combinelog"></a> 3. mapping_combine.log</h2>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat mapping_combine.log</span><br><span class="line"></span><br><span class="line"><span class="comment">### 将global的bam与local的bam用samtools merge</span></span><br><span class="line">/PATH/TO/samtools/samtools-1.6/bin/samtools merge -@ 20 -n -f bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.bam bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line">/PATH/TO/samtools/samtools-1.6/bin/samtools merge -@ 20 -n -f bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.bam bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line"></span><br><span class="line"><span class="comment">### sort</span></span><br><span class="line">/PATH/TO/samtools/samtools-1.6/bin/samtools sort -@ 20 -n -T tmp/SRR400264_00_R2_hg19 -o bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.sorted.bam bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam</span><br><span class="line">/PATH/TO/samtools/samtools-1.6/bin/samtools sort -@ 20 -n -T tmp/SRR400264_00_R1_hg19 -o bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.sorted.bam bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam</span><br><span class="line"></span><br><span class="line">[bam_sort_core] merging from 0 files and 20 in-memory blocks...</span><br><span class="line">[bam_sort_core] merging from 0 files and 20 in-memory blocks...</span><br><span class="line"></span><br><span class="line"><span class="comment">### 改名</span></span><br><span class="line">mv bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.sorted.bam bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam</span><br><span class="line">mv bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.sorted.bam bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam</span><br></pre></td></tr></table></figure>
-<h2 id="4-merge"><a class="markdownIt-Anchor" href="#4-merge"></a> 4、merge</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 将R1与R2 merge为一个文件。</span></span><br><span class="line">cat mergeSAM.log</span><br><span class="line">/PATH/TO/python/python-2.7.10/bin/python /PATH/TO/HiC-Pro/HiC-Pro_2.11.1/scripts/mergeSAM.py -q 0 -t -v -f bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam -r bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam -o bowtie_results/bwt2/dixon_2M/SRR400264_00_hg19.bwt2pairs.bam</span><br><span class="line"><span class="comment">## mergeBAM.py</span></span><br><span class="line"><span class="comment">## forward= bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam</span></span><br><span class="line"><span class="comment">## reverse= bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam</span></span><br><span class="line"><span class="comment">## output= bowtie_results/bwt2/dixon_2M/SRR400264_00_hg19.bwt2pairs.bam</span></span><br><span class="line"><span class="comment">## min mapq= 0</span></span><br><span class="line"><span class="comment">## report_single= False</span></span><br><span class="line"><span class="comment">## report_multi= False</span></span><br><span class="line"><span class="comment">## verbose= True</span></span><br><span class="line"><span class="comment">## Merging forward and reverse tags ...</span></span><br></pre></td></tr></table></figure>
-<h2 id="5-利用hicpro的mapped_2hic_fragmentspy程序将比对结果转化为hi-c片段信息"><a class="markdownIt-Anchor" href="#5-利用hicpro的mapped_2hic_fragmentspy程序将比对结果转化为hi-c片段信息"></a> 5、利用HiCPro的mapped_2hic_fragments.py程序将比对结果转化为Hi-C片段信息</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat mapped_2hic_fragments.log</span><br><span class="line">/PATH/TO/python /PATH/TO/HiC-Pro/HiC-Pro_2.11.1/scripts/mapped_2hic_fragments.py -v -S -t 100 -m 100000 -s 100 -l 600 -a -f /PATH/TO/HiC-Pro_2.11.1/annotation/HindIII_resfrag_hg19.bed -r bowtie_results/bwt2/dixon_2M/SRR400264_00_hg19.bwt2pairs.bam -o hic_results/data/dixon_2M</span><br><span class="line"><span class="comment">## overlapMapped2HiCFragments.py</span></span><br><span class="line"><span class="comment">## mappedReadsFile= bowtie_results/bwt2/dixon_2M/SRR400264_00_hg19.bwt2pairs.bam</span></span><br><span class="line"><span class="comment">## fragmentFile= /PATH/TO/HiC-Pro/HiC-Pro_2.11.1/annotation/HindIII_resfrag_hg19.bed</span></span><br><span class="line"><span class="comment">## minInsertSize= 100</span></span><br><span class="line"><span class="comment">## maxInsertSize= 600</span></span><br><span class="line"><span class="comment">## minFragSize= 100</span></span><br><span class="line"><span class="comment">## maxFragSize= 100000</span></span><br><span class="line"><span class="comment">## allOuput= True</span></span><br><span class="line"><span class="comment">## SAM ouput= True</span></span><br><span class="line"><span class="comment">## verbose= True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-mapping-combine-log"><a href="#3-mapping-combine-log" class="headerlink" title="3. mapping_combine.log"></a>3. mapping_combine.log</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat mapping_combine.log</span><br><span class="line"></span><br><span class="line"><span class="comment">### 将global的bam与local的bam用samtools merge</span></span><br><span class="line">/PATH/TO/samtools/samtools-1.6/bin/samtools merge -@ 20 -n -f bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.bam bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R1_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line">/PATH/TO/samtools/samtools-1.6/bin/samtools merge -@ 20 -n -f bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam bowtie_results/bwt2_global/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.bam bowtie_results/bwt2_local/dixon_2M/SRR400264_00_R2_hg19.bwt2glob.unmap_bwt2loc.bam</span><br><span class="line"></span><br><span class="line"><span class="comment">### sort</span></span><br><span class="line">/PATH/TO/samtools/samtools-1.6/bin/samtools sort -@ 20 -n -T tmp/SRR400264_00_R2_hg19 -o bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.sorted.bam bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam</span><br><span class="line">/PATH/TO/samtools/samtools-1.6/bin/samtools sort -@ 20 -n -T tmp/SRR400264_00_R1_hg19 -o bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.sorted.bam bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam</span><br><span class="line"></span><br><span class="line">[bam_sort_core] merging from 0 files and 20 in-memory blocks...</span><br><span class="line">[bam_sort_core] merging from 0 files and 20 in-memory blocks...</span><br><span class="line"></span><br><span class="line"><span class="comment">### 改名</span></span><br><span class="line">mv bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.sorted.bam bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam</span><br><span class="line">mv bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.sorted.bam bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、merge"><a href="#4、merge" class="headerlink" title="4、merge"></a>4、merge</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 将R1与R2 merge为一个文件。</span></span><br><span class="line">cat mergeSAM.log</span><br><span class="line">/PATH/TO/python/python-2.7.10/bin/python /PATH/TO/HiC-Pro/HiC-Pro_2.11.1/scripts/mergeSAM.py -q 0 -t -v -f bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam -r bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam -o bowtie_results/bwt2/dixon_2M/SRR400264_00_hg19.bwt2pairs.bam</span><br><span class="line"><span class="comment">## mergeBAM.py</span></span><br><span class="line"><span class="comment">## forward= bowtie_results/bwt2/dixon_2M/SRR400264_00_R1_hg19.bwt2merged.bam</span></span><br><span class="line"><span class="comment">## reverse= bowtie_results/bwt2/dixon_2M/SRR400264_00_R2_hg19.bwt2merged.bam</span></span><br><span class="line"><span class="comment">## output= bowtie_results/bwt2/dixon_2M/SRR400264_00_hg19.bwt2pairs.bam</span></span><br><span class="line"><span class="comment">## min mapq= 0</span></span><br><span class="line"><span class="comment">## report_single= False</span></span><br><span class="line"><span class="comment">## report_multi= False</span></span><br><span class="line"><span class="comment">## verbose= True</span></span><br><span class="line"><span class="comment">## Merging forward and reverse tags ...</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5、利用HiCPro的mapped-2hic-fragments-py程序将比对结果转化为Hi-C片段信息"><a href="#5、利用HiCPro的mapped-2hic-fragments-py程序将比对结果转化为Hi-C片段信息" class="headerlink" title="5、利用HiCPro的mapped_2hic_fragments.py程序将比对结果转化为Hi-C片段信息"></a>5、利用HiCPro的mapped_2hic_fragments.py程序将比对结果转化为Hi-C片段信息</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat mapped_2hic_fragments.log</span><br><span class="line">/PATH/TO/python /PATH/TO/HiC-Pro/HiC-Pro_2.11.1/scripts/mapped_2hic_fragments.py -v -S -t 100 -m 100000 -s 100 -l 600 -a -f /PATH/TO/HiC-Pro_2.11.1/annotation/HindIII_resfrag_hg19.bed -r bowtie_results/bwt2/dixon_2M/SRR400264_00_hg19.bwt2pairs.bam -o hic_results/data/dixon_2M</span><br><span class="line"><span class="comment">## overlapMapped2HiCFragments.py</span></span><br><span class="line"><span class="comment">## mappedReadsFile= bowtie_results/bwt2/dixon_2M/SRR400264_00_hg19.bwt2pairs.bam</span></span><br><span class="line"><span class="comment">## fragmentFile= /PATH/TO/HiC-Pro/HiC-Pro_2.11.1/annotation/HindIII_resfrag_hg19.bed</span></span><br><span class="line"><span class="comment">## minInsertSize= 100</span></span><br><span class="line"><span class="comment">## maxInsertSize= 600</span></span><br><span class="line"><span class="comment">## minFragSize= 100</span></span><br><span class="line"><span class="comment">## maxFragSize= 100000</span></span><br><span class="line"><span class="comment">## allOuput= True</span></span><br><span class="line"><span class="comment">## SAM ouput= True</span></span><br><span class="line"><span class="comment">## verbose= True</span></span><br></pre></td></tr></table></figure>
+
 <p>再对输出的valid pairs文件排序：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en; sort -T tmp -k2,2V -k3,3n -k5,5V -k6,6n -o hic_results/data/sample/sample_sample_genome_ref.bwt2pairs.validPairs hic_results/data/sample/sample_sample_genome_ref.bwt2pairs.validPairs</span><br></pre></td></tr></table></figure>
-<h2 id="6-对所有的valid-pairs进行合并"><a class="markdownIt-Anchor" href="#6-对所有的valid-pairs进行合并"></a> 6 对所有的valid pairs进行合并</h2>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en; sort -T tmp -S <span class="number">50</span>% -k2,<span class="number">2</span>V -k3,<span class="number">3</span>n -k5,<span class="number">5</span>V -k6,<span class="number">6</span>n -m hic_results/data/dixon_2M_2/SRR400264_01_hg19.bwt2pairs.validPairs | awk -F<span class="string">&quot;\t&quot;</span> <span class="string">&#x27;BEGIN&#123;c1=0;c2=0;s1=0;s2=0&#125;(c1!=<span class="subst">$2</span> || c2!=<span class="subst">$5</span> || s1!=<span class="subst">$3</span> || s2!=<span class="subst">$6</span>)&#123;print;c1=<span class="subst">$2</span>;c2=<span class="subst">$5</span>;s1=<span class="subst">$3</span>;s2=<span class="subst">$6</span>&#125;&#x27;</span> &gt; hic_results/data/dixon_2M_2/dixon_2M_2.allValidPairs</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-对所有的valid-pairs进行合并"><a href="#6-对所有的valid-pairs进行合并" class="headerlink" title="6 对所有的valid pairs进行合并"></a>6 对所有的valid pairs进行合并</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en; sort -T tmp -S <span class="number">50</span>% -k2,<span class="number">2</span>V -k3,<span class="number">3</span>n -k5,<span class="number">5</span>V -k6,<span class="number">6</span>n -m hic_results/data/dixon_2M_2/SRR400264_01_hg19.bwt2pairs.validPairs | awk -F<span class="string">&quot;\t&quot;</span> <span class="string">&#x27;BEGIN&#123;c1=0;c2=0;s1=0;s2=0&#125;(c1!=<span class="subst">$2</span> || c2!=<span class="subst">$5</span> || s1!=<span class="subst">$3</span> || s2!=<span class="subst">$6</span>)&#123;print;c1=<span class="subst">$2</span>;c2=<span class="subst">$5</span>;s1=<span class="subst">$3</span>;s2=<span class="subst">$6</span>&#125;&#x27;</span> &gt; hic_results/data/dixon_2M_2/dixon_2M_2.allValidPairs</span><br></pre></td></tr></table></figure>
+
 <p>生成最终文件dixon_2M_2.allValidPairs。</p>
 <p>这个文件还不能可视化，如果要可视化，一般在jucebox里面查看。需要用配套的hicpro2juicebox.sh来转化：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## e.g.1</span></span><br><span class="line">HICPRO_PATH/bin/utils/hicpro2juicebox.sh -i hicpro_res/hic_results/data/dixon_2M/dixon_2M_allValidPairs -g hg19 -j /usr/<span class="built_in">local</span>/juicebox/juicebox_clt_1.4.jar</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-j jar</span><br><span class="line">/PATH/TO/juicer/juicer/UGER/scripts/juicer_tools.jar</span><br></pre></td></tr></table></figure>
-<h1 id="hic-pro-输出"><a class="markdownIt-Anchor" href="#hic-pro-输出"></a> HiC-Pro 输出</h1>
-<p>共有<strong>bowtie_results</strong>和<strong>hic_results</strong>两个结果文件夹。</p>
+
+<h1 id="HiC-Pro-输出"><a href="#HiC-Pro-输出" class="headerlink" title="HiC-Pro 输出"></a>HiC-Pro 输出</h1><p>共有<strong>bowtie_results</strong>和<strong>hic_results</strong>两个结果文件夹。</p>
 <p>其中<strong>bowtie_results</strong>下三个文件夹：bwt2、bwt2_global和bwt2_local，分别是序列比对结果、<font color="blue">染色体间</font>关联比对结果和<font color="blue">染色体内</font>部关联比对结果。bwt2文件夹有数据统计结果输出文件，如mpairstat文件。</p>
 <p><strong>hic_results</strong>文件夹下共有data、matrix以及pic三个文件夹。</p>
 <ul>
-<li>
-<p>data文件夹下是比对上的有效序列对，文件末尾为_allValidPairs合并后的pairs数据</p>
+<li><p>data文件夹下是比对上的有效序列对，文件末尾为_allValidPairs合并后的pairs数据</p>
 <p><code>DEPairs</code>:Dangling end pairs数据</p>
 <p><code>DumpPairs</code>:实际片段长度和理论片段长度不同的数据</p>
 <p><code>REPairs</code>：酶切片段重新连接的pairs</p>
 <p><code>FiltePairs</code>:MAPQ过低的pairs</p>
 <p><code>SCPairs</code>：片段自连的pairs</p>
 </li>
-<li>
-<p>pic文件夹下是各类结果数据统计；存放统计分析图片</p>
+<li><p>pic文件夹下是各类结果数据统计；存放统计分析图片</p>
 <p>HiC文库片段分布文件</p>
 <p>双端比对过滤质控图</p>
 <p>有效数据过滤质控图</p>
 <p>配对数据不同类型数据比例展示图</p>
 </li>
-<li>
-<p>matrix文件夹下分为 iced(标准化) 和 raw(原始) 两个文件夹，分别标准化后的关联矩阵和初始的关联矩阵。存放不同分辨率矩阵文件</p>
+<li><p>matrix文件夹下分为 iced(标准化) 和 raw(原始) 两个文件夹，分别标准化后的关联矩阵和初始的关联矩阵。存放不同分辨率矩阵文件</p>
 </li>
 </ul>
 <p>后续compartment，TAD和loop？</p>
-<h1 id="可视化"><a class="markdownIt-Anchor" href="#可视化"></a> 可视化</h1>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzUyMTk4ODM0OQ==&amp;mid=2247483678&amp;idx=1&amp;sn=a1aa97892723f6fb51bd3b01a6441e6c&amp;chksm=f9d3f08ccea4799af0a4401e938307a3f6e860239e905deb6963a82a8fc799a4af504e96bc10&amp;scene=178&amp;cur_album_id=1399424041152528385#rd">微信公众号</a></p>
-<p><a target="_blank" rel="noopener" href="https://weixin.sogou.com/weixin?type=2&amp;query=%E6%9F%93%E8%89%B2%E8%B4%A8%E9%AB%98%E7%BA%A7%E7%BB%93%E6%9E%84%E7%A0%94%E7%A9%B6%E4%B9%8BHi-C%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%8B%E7%AF%87%EF%BC%89%E2%80%94%E2%80%94%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AE%9E%E6%88%98&amp;ie=utf8&amp;s_from=input&amp;_sug_=n&amp;_sug_type_=&amp;w=01019900&amp;sut=935&amp;sst0=1646835948011&amp;lkt=2%2C1646835946980%2C1646835947908">染色质高级结构研究之Hi-C技术（下篇）——可视化实战</a></p>
-<h1 id="error-debug"><a class="markdownIt-Anchor" href="#error-debug"></a> Error debug</h1>
-<blockquote>
-<p>HIC-PRO DOES NOT GENERATE ANY MAPS<br>
-HiC-Pro is using the chrom.sizes files to build the map.<br>
-Be sure that your chromosome names are the same in all annotations files (bowtie2 indexes, restriction fragments, chromosome sizes, etc.)</p>
+<h1 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzUyMTk4ODM0OQ==&mid=2247483678&idx=1&sn=a1aa97892723f6fb51bd3b01a6441e6c&chksm=f9d3f08ccea4799af0a4401e938307a3f6e860239e905deb6963a82a8fc799a4af504e96bc10&scene=178&cur_album_id=1399424041152528385#rd">微信公众号</a></p>
+<p><a target="_blank" rel="noopener" href="https://weixin.sogou.com/weixin?type=2&query=%E6%9F%93%E8%89%B2%E8%B4%A8%E9%AB%98%E7%BA%A7%E7%BB%93%E6%9E%84%E7%A0%94%E7%A9%B6%E4%B9%8BHi-C%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%8B%E7%AF%87%EF%BC%89%E2%80%94%E2%80%94%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AE%9E%E6%88%98&ie=utf8&s_from=input&_sug_=n&_sug_type_=&w=01019900&sut=935&sst0=1646835948011&lkt=2,1646835946980,1646835947908">染色质高级结构研究之Hi-C技术（下篇）——可视化实战</a></p>
+<h1 id="Error-debug"><a href="#Error-debug" class="headerlink" title="Error debug"></a>Error debug</h1><blockquote>
+<p>HIC-PRO DOES NOT GENERATE ANY MAPS<br>HiC-Pro is using the chrom.sizes files to build the map.<br>Be sure that your chromosome names are the same in all annotations files (bowtie2 indexes, restriction fragments, chromosome sizes, etc.)</p>
 </blockquote>
 <blockquote>
 <p>hiclib and mirnylib are not compatible with python 2.5 and 3.x, but work fine with py 2.6, 2.7</p>
 <p>hiclib主要用于数据标准化，hicpro可以，为什么还要安装hiclib? 或者是想比较两者分析的结果？</p>
 <p>HiC-Pro需要python版本&gt;=3.7, 安装3.9</p>
 </blockquote>
-<p><strong>Error1</strong>：directly use hicpro on the cluster,  —qual 多一个-无法解决，自己安装<br>
-/software/biosoft/software/bowtie2-2.2.9/bowtie2-align-s: <font color="red"><strong>unrecognized option '—quals’</strong></font><br>
-Bowtie 2 version 2.2.9 by Ben Langmead (<a href="mailto:langmea@cs.jhu.edu">langmea@cs.jhu.edu</a>, <a target="_blank" rel="noopener" href="http://www.cs.jhu.edu/~langmea">www.cs.jhu.edu/~langmea</a>)<br>
-Usage:<br>
-bowtie2 [options]* -x <bt2-idx> {-1 <m1> -2 <m2> | -U <r>} [-S <sam>]</sam></r></m2></m1></bt2-idx></p>
-<p>Encountered internal Bowtie 2 exception (#1)<br>
-Command: /software/biosoft/software/bowtie2-2.2.9/bowtie2-align-s --wrapper basic-0 --very-sensitive -L 30 --score-min L,-0.6,-0.2 --end-to-end --reorder --rg-id BMG --rg SM:L3_R1 <font color="red"><strong>—quals</strong></font> -p 10 -x /xtdisk/xueyb_group/wangchenA/Petunia_denovo/HiFi/02.bwa_mapping/primary//HiFi.p_ctg --passthrough -U /tmp/34683.unp<br>
-(ERR): bowtie2-align exited with value 1</p>
-<p>自己安装时，先创建conda环境，再tar xzvf，然后<font color="red"><strong>编辑config-install.txt的prefix 再make configure &amp;&amp; make install</strong></font><br>
-<strong>Error2</strong>在错误产生output文件夹时再次运行直接报错stat: <font color="red"><strong>Bad file descriptor，先删除output_dir</strong></font><br>
-设置config-install.txt 的prefix时设置成///software/HiC-Pro<font color="red"><strong>/</strong></font><br>
-报错：<br>
-<strong>Error3</strong>：install in another dir HiC-Pro， PREFIX = /xtdisk/xueyb_group/wangchenA/software/HiC-Pro/<br>
-/xtdisk/xueyb_group/wangchenA/software/HiC-Pro/HiC-Pro-3.1.0/bin/…/scripts//Makefile:48: /xtdisk/xueyb_group/wangchenA/software/HiC-Pro<font color="red"><strong>//</strong></font>config-system.txt: No such file or directory<br>
-make:  No rule to make target ‘/xtdisk/xueyb_group/wangchenA/software/HiC-Pro<font color="red"><strong>//</strong></font>config-system.txt’.  Stop.<br>
-The config-system.txt file is a file which should be within the installation folder.<br>
-检查config-system.txt 发现多了//<br>
-设置config-install.txt 的prefix时设置成///software/HiC-Pro时会<font color="red"><strong>自动产生软件名文件夹</strong></font>，后面<font color="red">多加斜杠/直接报错</font></p>
-<p><strong>successfully installed</strong></p>
+<p><strong>Error1</strong>：directly use hicpro on the cluster,  —qual 多一个-无法解决，自己安装<br>/software/biosoft/software/bowtie2-2.2.9/bowtie2-align-s: <font color="red"><strong>unrecognized option ‘—quals’</strong></font><br>Bowtie 2 version 2.2.9 by Ben Langmead (<a href="mailto:&#108;&#x61;&#110;&#103;&#109;&#x65;&#x61;&#64;&#99;&#115;&#x2e;&#x6a;&#x68;&#117;&#x2e;&#101;&#100;&#117;">&#108;&#x61;&#110;&#103;&#109;&#x65;&#x61;&#64;&#99;&#115;&#x2e;&#x6a;&#x68;&#117;&#x2e;&#101;&#100;&#117;</a>, <a target="_blank" rel="noopener" href="http://www.cs.jhu.edu/~langmea">www.cs.jhu.edu/~langmea</a>)<br>Usage:<br>  bowtie2 [options]* -x <bt2-idx> {-1 <m1> -2 <m2> | -U <r>} [-S <sam>]</sam></r></m2></m1></bt2-idx></p>
+<p>Encountered internal Bowtie 2 exception (#1)<br>Command: /software/biosoft/software/bowtie2-2.2.9/bowtie2-align-s –wrapper basic-0 –very-sensitive -L 30 –score-min L,-0.6,-0.2 –end-to-end –reorder –rg-id BMG –rg SM:L3_R1 <font color="red"><strong>—quals</strong></font> -p 10 -x /xtdisk/xueyb_group/wangchenA/Petunia_denovo/HiFi/02.bwa_mapping/primary//HiFi.p_ctg –passthrough -U /tmp/34683.unp<br>(ERR): bowtie2-align exited with value 1</p>
+<p>自己安装时，先创建conda环境，再tar xzvf，然后<font color="red"><strong>编辑config-install.txt的prefix 再make configure &amp;&amp; make install</strong></font><br><strong>Error2</strong>在错误产生output文件夹时再次运行直接报错stat: <font color="red"><strong>Bad file descriptor，先删除output_dir</strong></font><br>设置config-install.txt 的prefix时设置成///software/HiC-Pro<font color="red"><strong>/</strong></font><br>报错：<br><strong>Error3</strong>：install in another dir HiC-Pro， PREFIX = /xtdisk/xueyb_group/wangchenA/software/HiC-Pro/<br>/xtdisk/xueyb_group/wangchenA/software/HiC-Pro/HiC-Pro-3.1.0/bin/../scripts//Makefile:48: /xtdisk/xueyb_group/wangchenA/software/HiC-Pro<font color="red"><strong>//</strong></font>config-system.txt: No such file or directory<br>make:  No rule to make target ‘/xtdisk/xueyb_group/wangchenA/software/HiC-Pro<font color="red"><strong>//</strong></font>config-system.txt’.  Stop.<br>The config-system.txt file is a file which should be within the installation folder.<br>检查config-system.txt 发现多了//<br>设置config-install.txt 的prefix时设置成///software/HiC-Pro时会<font color="red"><strong>自动产生软件名文件夹</strong></font>，后面<font color="red">多加斜杠/直接报错</font></p>
+<p><strong>successfully installed</strong>  </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(HiC_Pro_ENV) [HiC-Pro-3.1.0]$ vi config-install.txt </span><br><span class="line">PREFIX = ////software</span><br><span class="line">(HiC_Pro_ENV) [HiC-Pro-3.1.0]$ make configure</span><br><span class="line">make -f ./scripts/install/Makefile CONFIG_SYS=./config-install.txt</span><br><span class="line">make[1]: Entering directory <span class="string">&#x27;/xtdisk/group/wangchenA/HiC-Pro-3.1.0&#x27;</span></span><br><span class="line">./scripts/install/install_dependencies.sh -c ./config-install.txt -p /xtdisk/group/wangchenA/software -o /xtdisk/group/wangchenA/software/HiC-Pro_3.1.0 -q</span><br><span class="line">Make sure internet connection works <span class="keyword">for</span> your shell prompt under current user<span class="string">&#x27;s privilege ...</span></span><br><span class="line"><span class="string">Starting HiC-Pro installation !</span></span><br><span class="line"><span class="string">Checking dependencies</span></span><br><span class="line"><span class="string">- Python libraries ...OK</span></span><br><span class="line"><span class="string">- R installation ...OK</span></span><br><span class="line"><span class="string">- Bowtie2 installation ...OK</span></span><br><span class="line"><span class="string">- Samtools installation ...OK</span></span><br><span class="line"><span class="string">Checking HiC-Pro configuration</span></span><br><span class="line"><span class="string">- Configuration for TORQUE/PBS system ...OK</span></span><br><span class="line"><span class="string">done !</span></span><br><span class="line"><span class="string">make[1]: Leaving directory &#x27;</span>/xtdisk/group/wangchenA/HiC-Pro-3.1.0<span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">(/HiC_Pro_ENV) [HiC-Pro-3.1.0]$ make install</span></span><br><span class="line"><span class="string">(g++ -Wall -O2 -std=c++0x -o build_matrix /xtdisk/group/wangchenA/HiC-Pro-3.1.0/scripts/src/build_matrix.cpp; mv build_matrix /xtdisk/group/wangchenA/HiC-Pro-3.1.0/scripts)</span></span><br><span class="line"><span class="string">(g++ -Wall -O2 -std=c++0x -o cutsite_trimming /xtdisk/group/wangchenA/HiC-Pro-3.1.0/scripts/src/cutsite_trimming.cpp; mv cutsite_trimming /xtdisk/group/wangchenA/HiC-Pro-3.1.0/scripts)</span></span><br><span class="line"><span class="string">cp -Ri /xtdisk/group/wangchenA/HiC-Pro-3.1.0 /xtdisk/group/wangchenA/software/HiC-Pro_3.1.0</span></span><br><span class="line"><span class="string">HiC-Pro installed in /xtdisk/group/wangchenA/software/HiC-Pro_3.1.0 !</span></span><br></pre></td></tr></table></figure>
+
 <p>Issue from: <a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/issues/289">https://github.com/nservant/HiC-Pro/issues/289</a></p>
 <blockquote>
-<p>you <font color="green"><strong>do not have the rigths</strong></font> to install HiC-Pro in <font color="green"><strong>/usr/local/bin</strong></font><br>
-Update the <font color="green"><strong>PREFIX= in the config-install.txt</strong></font> file before running the installation</p>
+<p>you <font color="green"><strong>do not have the rigths</strong></font> to install HiC-Pro in <font color="green"><strong>/usr/local/bin</strong></font><br>Update the <font color="green"><strong>PREFIX= in the config-install.txt</strong></font> file before running the installation</p>
 <p>You <font color="green"><strong>cannot install it in the path where you have downloaded it</strong> </font>!Please <font color="green"><strong>set another prefix</strong></font>.Note that it will <font color="green"><strong>create the HiC-Pro_3.0.0 folder by itself</strong></font></p>
 </blockquote>
 <p><font color="red"><strong>NOTICE</strong></font></p>
 <ul>
-<li>./configure --prefix=  &amp;&amp;  make  &amp;&amp;  make install</li>
+<li>./configure –prefix=  &amp;&amp;  make  &amp;&amp;  make install</li>
 <li>Vim config-install.txt PREFIX  &amp;&amp;  make configure  &amp;&amp;  make install</li>
 </ul>
 <hr>
-<p><strong>bowtie_pairing] Error 1</strong><br>
-<a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/issues/482">https://github.com/nservant/HiC-Pro/issues/482</a></p>
-<p>Thu Sep 23 04:23:58 CST 2021<br>
-Pairing of R1 and R2 tags …<br>
-Logs: logs/sample1/mergeSAM.log<br>
-make: *** [bowtie_pairing] Error 1</p>
-<p>the mergeSAM.log<br>
-~/miniconda3/envs/hic-pro_env/bin/python ~/02_software/hic-pro/HiC-Pro-3.1.0/scripts/mergeSAM.py -q 10 -t -v -f bowtie_results/bwt2/sample1/XB_R1_merged_canu_asm.fasta.bwt2merged.bam -r bowtie_results/bwt2/sample1/XB_R2_merged_canu_asm.fasta.bwt2merged.bam -o bowtie_results/bwt2/sample1/XB_merged_canu_asm.fasta.bwt2pairs.bam<br>
-[E::idx_find_and_load] Could not retrieve index file for ‘bowtie_results/bwt2/sample1/XB_R1_merged_canu_asm.fasta.bwt2merged.bam’<br>
-[E::idx_find_and_load] Could not retrieve index file for ‘bowtie_results/bwt2/sample1/XB_R2_merged_canu_asm.fasta.bwt2merged.bam’</p>
-<p>mapping_combine.log:<br>
-[bam_sort_core] merging from 6120 files and 36 in-memory blocks…<br>
-[E::hts_open_format] Failed to open file “tmp/XB_R1_merged_canu_asm.fasta.1018.bam” : Too many open files<br>
-samtools sort: fail to open “tmp/XB_R1_merged_canu_asm.fasta.1018.bam”: Too many open files</p>
-<p>yes well done ! So the samtools sort failed.<br>
-If you look at your command, -@ 36 -m 21M, means that it only has 21Mo to sort the file which is too few.<br>
-So it has to swap a lot, and generate too many tmp files.<br>
-This memory parameter is in your configuration file SORT_RAM. By default, it is set to 768M</p>
-<p>Actually, the SORT_RAM parameter is divided by the number of CPUs<br>
-For instance, using 1000M with 4 CPUs means that samtools sort is run with 250M of RAM.<br>
-So it makes sense … you have 1000M / 36 CPU = 27M of RAM.<br>
-I would suggest to decrease the number of CPU to 8 for instance … this is enough ! or to increase again the SORT_RAM parameter.</p>
+<p><strong>bowtie_pairing] Error 1</strong><br><a target="_blank" rel="noopener" href="https://github.com/nservant/HiC-Pro/issues/482">https://github.com/nservant/HiC-Pro/issues/482</a></p>
+<p>Thu Sep 23 04:23:58 CST 2021<br>Pairing of R1 and R2 tags …<br>Logs: logs/sample1/mergeSAM.log<br>make: *** [bowtie_pairing] Error 1</p>
+<p>the mergeSAM.log<br>~/miniconda3/envs/hic-pro_env/bin/python ~/02_software/hic-pro/HiC-Pro-3.1.0/scripts/mergeSAM.py -q 10 -t -v -f bowtie_results/bwt2/sample1/XB_R1_merged_canu_asm.fasta.bwt2merged.bam -r bowtie_results/bwt2/sample1/XB_R2_merged_canu_asm.fasta.bwt2merged.bam -o bowtie_results/bwt2/sample1/XB_merged_canu_asm.fasta.bwt2pairs.bam<br>[E::idx_find_and_load] Could not retrieve index file for ‘bowtie_results/bwt2/sample1/XB_R1_merged_canu_asm.fasta.bwt2merged.bam’<br>[E::idx_find_and_load] Could not retrieve index file for ‘bowtie_results/bwt2/sample1/XB_R2_merged_canu_asm.fasta.bwt2merged.bam’</p>
+<p>mapping_combine.log:<br>[bam_sort_core] merging from 6120 files and 36 in-memory blocks…<br>[E::hts_open_format] Failed to open file “tmp/XB_R1_merged_canu_asm.fasta.1018.bam” : Too many open files<br>samtools sort: fail to open “tmp/XB_R1_merged_canu_asm.fasta.1018.bam”: Too many open files</p>
+<p>yes well done ! So the samtools sort failed.<br>If you look at your command, -@ 36 -m 21M, means that it only has 21Mo to sort the file which is too few.<br>So it has to swap a lot, and generate too many tmp files.<br>This memory parameter is in your configuration file SORT_RAM. By default, it is set to 768M</p>
+<p>Actually, the SORT_RAM parameter is divided by the number of CPUs<br>For instance, using 1000M with 4 CPUs means that samtools sort is run with 250M of RAM.<br>So it makes sense … you have 1000M / 36 CPU = 27M of RAM.<br>I would suggest to decrease the number of CPU to 8 for instance … this is enough ! or to increase again the SORT_RAM parameter.</p>
 <hr>
 <p>ref</p>
 <p><a target="_blank" rel="noopener" href="https://www.plob.org/article/24873.html">https://www.plob.org/article/24873.html</a></p>
@@ -738,7 +687,7 @@ I would suggest to decrease the number of CPU to 8 for instance … this is enou
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hic%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text"> HiC简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hic%E5%B8%B8%E8%A7%84%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text"> HiC常规软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text"> 案例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hic-pro-install"><span class="nav-number">3.</span> <span class="nav-text"> HiC-Pro install</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hic-pro-github"><span class="nav-number">4.</span> <span class="nav-text"> HiC-Pro-GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hic-pro-annotation-files"><span class="nav-number">4.1.</span> <span class="nav-text"> HiC-Pro annotation files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-editing"><span class="nav-number">4.2.</span> <span class="nav-text"> config editing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test"><span class="nav-number">4.3.</span> <span class="nav-text"> test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hic-pros-doc"><span class="nav-number">5.</span> <span class="nav-text"> HIC-PRO’S DOC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%AD%A5%E5%8E%9F%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text"> 分步原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1reads-mapping"><span class="nav-number">6.1.</span> <span class="nav-text"> 1.Reads Mapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%89%87%E6%AE%B5%E5%88%86%E9%85%8D%E5%92%8C%E8%BF%87%E6%BB%A4"><span class="nav-number">6.2.</span> <span class="nav-text"> 2. 片段分配和过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-mapping_combinelog"><span class="nav-number">6.3.</span> <span class="nav-text"> 3. mapping_combine.log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-merge"><span class="nav-number">6.4.</span> <span class="nav-text"> 4、merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%88%A9%E7%94%A8hicpro%E7%9A%84mapped_2hic_fragmentspy%E7%A8%8B%E5%BA%8F%E5%B0%86%E6%AF%94%E5%AF%B9%E7%BB%93%E6%9E%9C%E8%BD%AC%E5%8C%96%E4%B8%BAhi-c%E7%89%87%E6%AE%B5%E4%BF%A1%E6%81%AF"><span class="nav-number">6.5.</span> <span class="nav-text"> 5、利用HiCPro的mapped_2hic_fragments.py程序将比对结果转化为Hi-C片段信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%AF%B9%E6%89%80%E6%9C%89%E7%9A%84valid-pairs%E8%BF%9B%E8%A1%8C%E5%90%88%E5%B9%B6"><span class="nav-number">6.6.</span> <span class="nav-text"> 6 对所有的valid pairs进行合并</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hic-pro-%E8%BE%93%E5%87%BA"><span class="nav-number">7.</span> <span class="nav-text"> HiC-Pro 输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">8.</span> <span class="nav-text"> 可视化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#error-debug"><span class="nav-number">9.</span> <span class="nav-text"> Error debug</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HiC%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">HiC简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HiC%E5%B8%B8%E8%A7%84%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">HiC常规软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HiC-Pro-install"><span class="nav-number">3.</span> <span class="nav-text">HiC-Pro install</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HiC-Pro-GitHub"><span class="nav-number">4.</span> <span class="nav-text">HiC-Pro-GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HiC-Pro-annotation-files"><span class="nav-number">4.1.</span> <span class="nav-text">HiC-Pro annotation files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-editing"><span class="nav-number">4.2.</span> <span class="nav-text">config editing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test"><span class="nav-number">4.3.</span> <span class="nav-text">test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HIC-PRO%E2%80%99S-DOC"><span class="nav-number">5.</span> <span class="nav-text">HIC-PRO’S DOC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%AD%A5%E5%8E%9F%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">分步原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Reads-Mapping"><span class="nav-number">6.1.</span> <span class="nav-text">1.Reads Mapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%89%87%E6%AE%B5%E5%88%86%E9%85%8D%E5%92%8C%E8%BF%87%E6%BB%A4"><span class="nav-number">6.2.</span> <span class="nav-text">2. 片段分配和过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-mapping-combine-log"><span class="nav-number">6.3.</span> <span class="nav-text">3. mapping_combine.log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81merge"><span class="nav-number">6.4.</span> <span class="nav-text">4、merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%88%A9%E7%94%A8HiCPro%E7%9A%84mapped-2hic-fragments-py%E7%A8%8B%E5%BA%8F%E5%B0%86%E6%AF%94%E5%AF%B9%E7%BB%93%E6%9E%9C%E8%BD%AC%E5%8C%96%E4%B8%BAHi-C%E7%89%87%E6%AE%B5%E4%BF%A1%E6%81%AF"><span class="nav-number">6.5.</span> <span class="nav-text">5、利用HiCPro的mapped_2hic_fragments.py程序将比对结果转化为Hi-C片段信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%AF%B9%E6%89%80%E6%9C%89%E7%9A%84valid-pairs%E8%BF%9B%E8%A1%8C%E5%90%88%E5%B9%B6"><span class="nav-number">6.6.</span> <span class="nav-text">6 对所有的valid pairs进行合并</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HiC-Pro-%E8%BE%93%E5%87%BA"><span class="nav-number">7.</span> <span class="nav-text">HiC-Pro 输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">8.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-debug"><span class="nav-number">9.</span> <span class="nav-text">Error debug</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
