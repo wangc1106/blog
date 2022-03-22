@@ -29,9 +29,9 @@
 <meta property="og:description" content="Juicer is a platform for analyzing kilobase resolution Hi-C data. In this distribution, we include the pipeline for generating Hi-C maps from fastq raw data files and command line tools for feature an">
 <meta property="og:locale">
 <meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/1.png">
-<meta property="og:image" content="https://wangc1106.github.io/blog/%E3%80%82/2.png">
+<meta property="og:image" content="https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/2.png">
 <meta property="article:published_time" content="2022-03-16T14:06:04.197Z">
-<meta property="article:modified_time" content="2022-03-19T14:15:48.167Z">
+<meta property="article:modified_time" content="2022-03-20T07:13:28.792Z">
 <meta property="article:author" content="Wang C">
 <meta property="article:tag" content="denovo-III">
 <meta name="twitter:card" content="summary">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-19 22:15:48" itemprop="dateModified" datetime="2022-03-19T22:15:48+08:00">2022-03-19</time>
+                <time title="Modified: 2022-03-20 15:13:28" itemprop="dateModified" datetime="2022-03-20T15:13:28+08:00">2022-03-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -356,7 +356,7 @@
 <h1 id="脚本原理（juicer-sh）"><a href="#脚本原理（juicer-sh）" class="headerlink" title="脚本原理（juicer.sh）"></a>脚本原理（juicer.sh）</h1><p>fastq等文件输入 —》bwa比对 —》排序 —》合并 —》去PCR重复 —》生成 hic文件</p>
 <p>Juicer的工作流程见下图，输入<strong>原始</strong>fastq文件，处理得到<strong>中间</strong>文件.hic, 之后对.hic文件用于<strong>下游</strong>分析，包括</p>
 <p>Arrowhead: 寻找存在关联的区域<br>HiCCUPS: 分析局部富集peaks<br>MotifFinder: 用于锚定peaks<br>Persons: 计算观测/期望的皮尔森相关系数矩阵<br>Eigenvector: 确定分隔</p>
-<p><img src="/blog/%E3%80%82/2.png" alt="juicer工作流程"></p>
+<p><img src="/blog/2022/03/16/2022-03-16-juicer/2.png" alt="juicer工作流程"></p>
 <h1 id="结果文件"><a href="#结果文件" class="headerlink" title="结果文件"></a>结果文件</h1><p>结果文件都在 aligned 中，主要文件是 .hic 文件，其中inter_30.hic 是设置了 mapq threshold &gt;30 的结果。如果 GPU （cudd）可用，软件会自动使用自带 <strong>HiCCUPS</strong> 算法计算 contact domains 并保存在 inter_30_contact_domains 文件夹。如果GPU不可用，可手动用自带的 <strong>CPU HiCCUPS</strong> 算法来计算，后面章节有介绍。</p>
 <p>hic文件格式请看 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://github.com/theaidenlab/juicebox/blob/master/HiC_format_v8.docx">https://github.com/theaidenlab/juicebox/blob/master/HiC_format_v8.docx</a></p>
 <h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">juicer.sh \</span><br><span class="line">-z references/hg19.fa \</span><br><span class="line">-p restriction_sites/hg19.chrom.sizes \</span><br><span class="line">-y restriction_sites/hg19_HindIII.txt \</span><br><span class="line">-d /home/pub/software/juicer/work/HIC003/ \</span><br><span class="line">-D /home/pub/software/juicer \</span><br><span class="line">-t 5</span><br><span class="line"></span><br><span class="line">-d: juicer的目录 安装在/soft/，设置为/soft/juicer</span><br><span class="line">-D: juicer scripts的目录，安装在/soft/，设置为/soft/juicer/CPU</span><br></pre></td></tr></table></figure>
@@ -500,14 +500,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">

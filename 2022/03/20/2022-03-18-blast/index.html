@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="1osTo_gOe1SW9Hevqtz8vl8HfSgTO4DSMZ0DiMPMX6w">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangc1106.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":"ture"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Short introduction to using NCBI blast tools from the command line">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【blast+】">
+<meta property="og:url" content="https://wangc1106.github.io/blog/2022/03/20/2022-03-18-blast/index.html">
+<meta property="og:site_name" content="Banner&#39;s Blog">
+<meta property="og:description" content="Short introduction to using NCBI blast tools from the command line">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-03-20T01:31:10.922Z">
+<meta property="article:modified_time" content="2022-03-20T10:43:20.394Z">
+<meta property="article:author" content="Wang C">
+<meta property="article:tag" content="alignment">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://wangc1106.github.io/blog/2022/03/20/2022-03-18-blast/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>【blast+】 | Banner's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Banner's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream big work hard</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://wangc1106.github.io/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://wangc1106.github.io/blog/2022/03/20/2022-03-18-blast/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/banner.png">
+      <meta itemprop="name" content="Wang C">
+      <meta itemprop="description" content="Make more time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Banner's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【blast+】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-20 09:31:10 / Modified: 18:43:20" itemprop="dateCreated datePublished" datetime="2022-03-20T09:31:10+08:00">2022-03-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/blog/2022/03/20/2022-03-18-blast/" class="post-meta-item leancloud_visitors" data-flag-title="【blast+】" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>9.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Short introduction to using NCBI blast tools from the command line</p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/books/NBK279690/">BLAST® Command Line Applications User Manual</a></p>
+<h2 id="Exercise-2-performing-a-basic-BLASTp-search"><a href="#Exercise-2-performing-a-basic-BLASTp-search" class="headerlink" title="Exercise 2: performing a basic BLASTp search"></a>Exercise 2: performing a basic BLASTp search</h2><p>BLAST+ search strategies are run by typing the type you want on the command line followed by the input options. This includes <strong>blastn, blastp, blastx, tblastn and tblastx</strong>. Ensure you know which search strategy is appropriate for your data and database type. You can find an extensive overview of these <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/books/NBK1734/">here</a>.</p>
+<p>We will now search a few <strong>protein sequences against the database</strong> and <strong>retrieve the results</strong>. You can get download sample protein sequences for this tutorial <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/conmeehan/conmeehan.github.io/master/proteins.fasta">here</a>. Save this page as proteins.fasta and put in the same directory as the pdbaa folder we downloaded earlier. We will perform a default BLASTp search on these to find out what proteins they are. The advantage of BLAST+ is that we can run BLASTp once using this file as an input and it will <strong>perform a search on all sequences within</strong>, meaning we <strong>do not have to do each sequence individually</strong>.</p>
+<p>Navigate to the folder containing proteins.fasta. The <strong>pdbaa folder</strong> should be <strong>in this folder too.</strong> Type the following on the command line:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastp -query proteins.fasta -db pdbaa/pdbaa -out proteins_blastp.txt</span><br></pre></td></tr></table></figure>
+
+<p>This will perform a blastp search, using all the sequences in proteins.fasta as queries, using the pdbaa database and output the results to proteins_blastp.txt. You will see the output looks quite like the website output with the overview first and the individual alignments next.</p>
+<p>Q. Look at the file proteins_blastp.txt. What sequences do we appear to have?</p>
+<p>There are many ways to modify how this is run. Type</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastp -help</span><br></pre></td></tr></table></figure>
+
+<p>This will print to the screen a large amount of text, <strong>detailing all the flags (options) we can change during the BLAST search</strong>. We will modify some of these now.</p>
+<h2 id="Exercise-3-modifying-the-defaults-and-output-types"><a href="#Exercise-3-modifying-the-defaults-and-output-types" class="headerlink" title="Exercise 3: modifying the defaults and output types"></a>Exercise 3: modifying the defaults and output types</h2><p>Often if we are working with <strong>many sequences</strong> we want to make it easier to <strong>get the best results</strong> in an easy to read format. We can do this by <strong>limiting the number of results returned</strong>. Often this is performed by changing the number of alignments displayed and/or the <strong>e-value cut-off</strong>.</p>
+<p>Lets run BLASTp, keeping all the overviews but only displaying the top hit alignment. We change the number of alignments displayed with the <strong>-num_alignments</strong> flag. To <strong>keep only the top hit alignment</strong> we can use</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastp -query proteins.fasta -db db/pdbaa -out proteins_blastp_1align.txt -num_alignments 1</span><br></pre></td></tr></table></figure>
+
+<p>If you look in this file we can see that all the descriptions are retained but <strong>now we only have 1 alignment per query sequence</strong>. Another way to limit the results is to set an <strong>e-value cut-off</strong>. In the help output of each program you can see the default e-value (listed under ‘general search options’). You can see it is quite high (10). We will retain only those hits with an e-value of <strong>1e-30 or higher.</strong> We use the <strong>-evalue</strong> flag for this. Lets combines the above alignment display restriction with an <strong>evalue restriction</strong>. This done by typing:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastp -query proteins.fasta -db db/pdbaa -out proteins_blastp_1align_1e-30.txt -num_alignments 1 -evalue 1e-30</span><br></pre></td></tr></table></figure>
+
+<p>You can see now that we have a smaller number of hits, hopefully including only those we are certain are likely to be correct.</p>
+<p>Often we <strong>dont need</strong> the output <strong>alignments</strong> but <strong>want all the details of each hit</strong> (e-value, bit score, percent identity etc) on 1 line. This is achieved by changing the <strong>output type</strong>. So far we have used the default output type but we can change this with the <strong>-outfmt</strong> flag. There are 11 output types (listed in the help output) but we <font color="blue"><strong>shall use type 6</strong></font>: tabular output. This gives you <strong>a line per hit with 12 columns</strong>:</p>
+<ul>
+<li>Query id</li>
+<li><strong>Subject id</strong></li>
+<li><strong>% identity</strong></li>
+<li><strong>alignment length</strong></li>
+<li><strong>mismatches</strong></li>
+<li><strong>gap</strong> openings</li>
+<li><strong>query start</strong></li>
+<li><strong>query end</strong></li>
+<li><strong>subject start</strong></li>
+<li><strong>subject end</strong></li>
+<li>e-value</li>
+<li>bit score</li>
+</ul>
+<p>This saves a lot of space in the output but does not separate queries into separate sections. We no longer need to limit the number of alignments with this output format (as none are displayed) but we may still want to limit the e-value. We can do this by typing:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastp -query proteins.fasta -db db/pdbaa -out proteins_blastp_1e-30_table.txt -evalue 1e-30 -outfmt 6</span><br></pre></td></tr></table></figure>
+
+<p>We can see the output is much more compressed with queries all together, only separated by the name in the first column. You may notice however that the subject name (column 2) is truncated, with the information we want having been cut off. This is a known problem in the tabular output that supposedly NCBI are working on. You can see we do happen to have the GI included in the description which we can search the NCBI website for. When we create our own database we may wish to try have short names so that this is less of a problem. There is a way to switch between some output types even after you have run the analysis which I will outline briefly later.</p>
+<p>A small note ( we will not do an exercise on this): There are different types of BLAST searches within the basic types. For example in blastn you can perform standard blastn, megablast or discontiguous megablast. These options are changed with the <strong>-task</strong> flag. Note that megablast is the default for blastn, not standard blastn.</p>
+<h2 id="Excerise-4-Extracting-the-sequences-from-a-BLAST-database"><a href="#Excerise-4-Extracting-the-sequences-from-a-BLAST-database" class="headerlink" title="Excerise 4: Extracting the sequences from a BLAST database"></a>Excerise 4: Extracting the sequences from a BLAST database</h2><p>If you want to extract the sequences that are contained in a BLAST database, you can use the <strong>blastdbcmd</strong> command to do this. Lets extract all the sequences from the pdb database we have downloaded. Navigate to the folder that contains the database file (pdbaa in the above examples) and run:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastdbcmd -entry all -db pdbaa -out pdbaa.fasta</span><br></pre></td></tr></table></figure>
+
+<p>This will extract all the sequences from the database named pdbaa and place them into a Fasta file named pdbaa.fasta.</p>
+<h2 id="Exercise-5-creating-a-custom-database"><a href="#Exercise-5-creating-a-custom-database" class="headerlink" title="Exercise 5: creating a custom database"></a>Exercise 5: <font color="blue">creating a custom database</font></h2><p>Often we <strong>do not want to use all of NR</strong> or any of the pre-made databases supplied by NCBI. We may want to use <strong>a custom database of only species or genes we are interested in</strong>. If we have a fasta format file (unaligned) of these sequences we can create a database from this with the <strong>makeblastdb</strong> command. Lets create the pdb amino acid database from a fasta file, resulting in the database we already used.</p>
+<p>Create a new folder called db2. Copy the file pdbaa.fasta you just created from the pdbaa folder to the db2 folder. Navigate into the db2 folder and create a protein database by typing:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">makeblastdb -in pdbaa.fasta -title pdbaa -dbtype prot -out pdbaa -parse_seqids</span><br></pre></td></tr></table></figure>
+
+<p>The <strong>-in</strong> flag states the fasta file to create the database from, the <strong>-title</strong> flag gives the database a title, <strong>-dbtype</strong> says whether it is protein (prot) or nucleotide (nucl), <strong>-out</strong> is the name of the database and <strong>-parse_seqids</strong> states we want to <strong>retain the full names of each sequence</strong>. You will now see in db2 we have exactly the same files as in the db folder. We can use this as our database in exactly the same way we did for the original pdbaa database, just remember to use db2/pdbaa for the database instead of pdbaa/pdbaa.</p>
+<h2 id="Exercise-6-BLASTing-against-a-remote-database"><a href="#Exercise-6-BLASTing-against-a-remote-database" class="headerlink" title="Exercise 6: BLASTing against a remote database"></a>Exercise 6: BLASTing against a remote database</h2><p>Instead of having to download the entirety of NR or other NCBI databases, we can BLAST against the version held on the website. This ensures we have the most up to date version but is also significantly slower. We use the <strong>-remote</strong>command to do this. Lets BLAST our sequences against NR held on the NCBI website by typing:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastp -query proteins.fasta -remote -db nr -out proteins_nr.txt -outfmt 6 -evalue 1e-30</span><br></pre></td></tr></table></figure>
+
+<p>Q. Did weget the same sequences back from the nr database as we did from the pdb database?</p>
+<h2 id="Exercise-7-Extracting-hits-from-the-BLAST-database"><a href="#Exercise-7-Extracting-hits-from-the-BLAST-database" class="headerlink" title="Exercise 7: Extracting hits from the BLAST database"></a>Exercise 7: Extracting hits from the BLAST database</h2><p>Once we have our BLAST results we may wish to go back and get the sequences for the hits from the database. For this we require a file of the sequence names of the hits (or parts of it, such as the section output from type 6 output) and the database used for the original BLAST (which must have been created with the -parse_seqids flag). Lets take 2 sequences from our hits against the pdbaa database. Copy the following into a file called hits.txt</p>
+<table>
+<thead>
+<tr>
+<th>gi</th>
+<th>1942986</th>
+<th>pdb</th>
+<th>1OCC</th>
+<th>A</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>gi</td>
+<td>40889823</td>
+<td>pdb</td>
+<td>1V54</td>
+<td>A</td>
+</tr>
+</tbody></table>
+<p>This is portions of 2 names of sequences we found to be good hits to our first query sequence. We will use the <strong>blastdbcmd</strong> program to get these sequences from the pdbaa database. Type:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastdbcmd -db db/pdbaa -dbtype prot -entry_batch hits.txt -outfmt %f -out hits.fasta </span><br></pre></td></tr></table></figure>
+
+<p>This command is similar to in excerise 4 but instead of getting all the sequences in the database, we are <strong>getting a subselection</strong>. The <strong>-db</strong>, <strong>-dbtype</strong> and <strong>-out</strong> we have seen before, <strong>-entry_batch</strong> is the file containing the sequence names and <strong>-outfmt</strong> here says we want <strong>fasta formatted sequences (%f)</strong>. If you now open hits.fasta you should see the 2 sequences we requested.</p>
+<h2 id="Exercise-8-Converting-output-format-types"><a href="#Exercise-8-Converting-output-format-types" class="headerlink" title="Exercise 8: Converting output format types"></a>Exercise 8: Converting output format types</h2><p>If you wish to change output formats after you have run a BLAST search we can use <strong>blast_formatter</strong>. This requires that the original run used <strong>-outfmt 11</strong> (archive type) and the database was made with the <strong>-parse_seqids</strong> flag. If we ran a BLAST such as</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastp -query proteins.fasta -db db/pdbaa -out protein_archive.txt -outfmt 11</span><br></pre></td></tr></table></figure>
+
+<p>We could retrieve the results in out format 6 by typing</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blast_formatter -archive protein_archive.txt -outfmt 6 -out proteins_tabular.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Thus a good way to run BLAST+ is to use -outfmt 11 and then after that use blast_formatter to change the output to different formats as needed.</strong></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://github.com/enormandeau/ncbi_blast_tutorial">https://github.com/enormandeau/ncbi_blast_tutorial</a></p>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><p>Get the compiled executables from this URL:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/</span><br></pre></td></tr></table></figure>
+
+<p>Decompress the archive. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvfz ncbi-blast-2.9.0+-x64-linux.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>Add the <code>bin</code> folder from the extracted archive to your path.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;/PATH/TO/ncbi-blast-2.9.0+/bin&quot;:$PATH</span><br></pre></td></tr></table></figure>
+
+<h2 id="Example-sequences-to-use-with-the-tutorial"><a href="#Example-sequences-to-use-with-the-tutorial" class="headerlink" title="Example sequences to use with the tutorial"></a>Example sequences to use with the tutorial</h2><p>In order to test blast, you need a test fasta file. Use the following files that come with the tutorial:</p>
+<ul>
+<li><code>sequences.fasta</code></li>
+<li><code>reference.fasta</code></li>
+</ul>
+<h2 id="Create-blast-database"><a href="#Create-blast-database" class="headerlink" title="Create blast database"></a>Create blast database</h2><p>The different blast tools require a formatted database to search against. In order to create the database, we use the <code>makeblastdb</code> tool:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">makeblastdb -in reference.fasta -title reference -dbtype nucl -out databases/reference</span><br></pre></td></tr></table></figure>
+
+<p>This will create a list of files in the <code>databases</code> folder. These are all part of the blast database.</p>
+<h2 id="Blast"><a href="#Blast" class="headerlink" title="Blast"></a>Blast</h2><p>We can now <font color="blue"><strong>blast our sequences against the database</strong></font>. In this case, both our query sequences and database sequences are DNA sequences, so we use the <code>blastn</code> tool:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blastn -db databases/reference -query sequences.fasta -evalue 1e-3 -word_size 11 -outfmt 0 &gt; sequences.reference</span><br></pre></td></tr></table></figure>
+
+<p>You can use different output formats with the <code>outmft</code> option:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-outfmt &lt;String&gt;</span><br><span class="line">  alignment view options:</span><br><span class="line">    0 = pairwise,</span><br><span class="line">    1 = query-anchored showing identities,</span><br><span class="line">    2 = query-anchored no identities,</span><br><span class="line">    3 = flat query-anchored, show identities,</span><br><span class="line">    4 = flat query-anchored, no identities,</span><br><span class="line">    5 = XML Blast output,</span><br><span class="line">    6 = tabular,</span><br><span class="line">    7 = tabular with comment lines,</span><br><span class="line">    8 = Text ASN.1,</span><br><span class="line">    9 = Binary ASN.1,</span><br><span class="line">   10 = Comma-separated values,</span><br><span class="line">   11 = BLAST archive format (ASN.1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Blast-with-parallel"><a href="#Blast-with-parallel" class="headerlink" title="Blast with parallel"></a>Blast with parallel</h2><p>If you need to run your blasts faster (and who doesn’t?), you can maximise CPU usage with <code>gnu parallel</code>. You will find it <a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2">at this link</a>.</p>
+<p>Download the archive, extract it (with <code>tar xvfB parallel-latest.tar.bz2</code>) and install it with the following commands:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<p>We can now use <code>parallel</code> to speed up blast:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time cat sequences.fasta | parallel -k --block 1k --recstart &#x27;&gt;&#x27; --pipe &#x27;blastn -db databases/reference -query - -evalue 1e-3 -word_size 11 -outfmt 0&#x27; &gt; sequences.reference</span><br></pre></td></tr></table></figure>
+
+<h2 id="blast-distribution"><a href="#blast-distribution" class="headerlink" title="blast+ distribution"></a>blast+ distribution</h2><p>An exhaustive list of the programs that come with the blast+ distribution</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">blastdb_aliastool</span><br><span class="line">blastdbcheck</span><br><span class="line">blastdbcmd</span><br><span class="line">blast_formatter</span><br><span class="line">blastn</span><br><span class="line">blastp</span><br><span class="line">blastx</span><br><span class="line">convert2blastmask</span><br><span class="line">deltablast</span><br><span class="line">dustmasker</span><br><span class="line">legacy_blast.pl</span><br><span class="line">makeblastdb</span><br><span class="line">makembindex</span><br><span class="line">makeprofiledb</span><br><span class="line">psiblast</span><br><span class="line">rpsblast</span><br><span class="line">rpstblastn</span><br><span class="line">segmasker</span><br><span class="line">tblastn</span><br><span class="line">tblastx</span><br><span class="line">update_blastdb.pl</span><br><span class="line">windowmasker</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><a target="_blank" rel="noopener" href="https://ncbi.github.io/magicblast/cook/blastdb.html">https://ncbi.github.io/magicblast/cook/blastdb.html</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Wang C
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://wangc1106.github.io/blog/2022/03/20/2022-03-18-blast/" title="【blast+】">https://wangc1106.github.io/blog/2022/03/20/2022-03-18-blast/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/alignment/" rel="tag"># alignment</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2022/03/18/2022-03-19-CUT-Tag/" rel="prev" title="【CUT-Tag】【ATAC-seq】">
+      <i class="fa fa-chevron-left"></i> 【CUT-Tag】【ATAC-seq】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/2022/03/20/2022-03-20-bowtie2/" rel="next" title="【bowtie2】">
+      【bowtie2】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise-2-performing-a-basic-BLASTp-search"><span class="nav-number">1.</span> <span class="nav-text">Exercise 2: performing a basic BLASTp search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise-3-modifying-the-defaults-and-output-types"><span class="nav-number">2.</span> <span class="nav-text">Exercise 3: modifying the defaults and output types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excerise-4-Extracting-the-sequences-from-a-BLAST-database"><span class="nav-number">3.</span> <span class="nav-text">Excerise 4: Extracting the sequences from a BLAST database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise-5-creating-a-custom-database"><span class="nav-number">4.</span> <span class="nav-text">Exercise 5: creating a custom database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise-6-BLASTing-against-a-remote-database"><span class="nav-number">5.</span> <span class="nav-text">Exercise 6: BLASTing against a remote database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise-7-Extracting-hits-from-the-BLAST-database"><span class="nav-number">6.</span> <span class="nav-text">Exercise 7: Extracting hits from the BLAST database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise-8-Converting-output-format-types"><span class="nav-number">7.</span> <span class="nav-text">Exercise 8: Converting output format types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">8.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-sequences-to-use-with-the-tutorial"><span class="nav-number">9.</span> <span class="nav-text">Example sequences to use with the tutorial</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-blast-database"><span class="nav-number">10.</span> <span class="nav-text">Create blast database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blast"><span class="nav-number">11.</span> <span class="nav-text">Blast</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blast-with-parallel"><span class="nav-number">12.</span> <span class="nav-text">Blast with parallel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blast-distribution"><span class="nav-number">13.</span> <span class="nav-text">blast+ distribution</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang C"
+      src="/blog/images/banner.png">
+  <p class="site-author-name" itemprop="name">Wang C</p>
+  <div class="site-description" itemprop="description">Make more time</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangc1106" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangc1106" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangchen116@126.com" title="E-Mail → mailto:wangchen116@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-dna"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang C</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"UqIYufmNk2sE8MiBKKWc4Kja-gzGzoHsz","app_key":"iYpeWQcmNqpHwr2uVlnJYVji","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+      <div style="height: 200px">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5knf34gs07t&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

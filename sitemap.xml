@@ -2,14 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wangc1106.github.io/blog/2022/03/16/2022-03-06-Linux-grid/2022-03-16-minimap2/</loc>
+    <loc>https://wangc1106.github.io/blog/2022/03/21/2022-03-21-CUTTag/</loc>
     
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-21</lastmod>
     
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/2022/03/18/2022-03-19-CUT-Tag/</loc>
+    
+    <lastmod>2022-03-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/20/2022-03-20-ATAC-seq-6/</loc>
+    
+    <lastmod>2022-03-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/20/2022-03-20-bowtie2/</loc>
+    
+    <lastmod>2022-03-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/20/2022-03-18-blast/</loc>
+    
+    <lastmod>2022-03-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/</loc>
+    
+    <lastmod>2022-03-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/2022/03/16/2022-03-06-Linux-grid/2022-03-16-minimap2/</loc>
     
     <lastmod>2022-03-19</lastmod>
     
@@ -24,13 +59,6 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/2022/03/17/2022-03-17-3D-DNA/</loc>
-    
-    <lastmod>2022-03-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/2022/03/16/2022-03-16-juicer/</loc>
     
     <lastmod>2022-03-19</lastmod>
     
@@ -319,7 +347,7 @@
 
   <url>
     <loc>https://wangc1106.github.io/blog</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -327,133 +355,133 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/algorithm/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/O-Sativa/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Linux/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/paper/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/technique/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/survey/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/sequence-tool/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/pipeline/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/SOAPdenovo2/</loc>
-    <lastmod>2022-03-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/tags/biology/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/fastq/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/denovo-III/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <loc>https://wangc1106.github.io/blog/tags/biology/</loc>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/petunia/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/tags/denovo-III/</loc>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/technology/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/tags/CUT-Tag/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <loc>https://wangc1106.github.io/blog/tags/alignment/</loc>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/ATAC-seq/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Debug/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/software/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/tags/Assemble/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -462,84 +490,91 @@
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/algorithm/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/GO/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Linux/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/biology/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/assemble/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/KEGG/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/software/</loc>
-    <lastmod>2022-03-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/paper/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangc1106.github.io/blog/categories/technology/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <loc>https://wangc1106.github.io/blog/categories/Software/</loc>
+    <lastmod>2022-03-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/CUT-Tag/</loc>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/ATAC-seq/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangc1106.github.io/blog/categories/CUT-Tag/</loc>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wangc1106.github.io/blog/categories/Papers/</loc>
-    <lastmod>2022-03-19</lastmod>
+    <lastmod>2022-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
