@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-Allow: /tags/
-Allow: /categories/
-
-Disallow: /js/
-Disallow: /css/
-Disallow: /fonts/
-Sitemap: https://wangc1106.github.io/blog/sitemap.xml
